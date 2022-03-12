@@ -13,33 +13,20 @@
 // limitations under the License.
 
 import {
-    Camera,
-    Loader,
-    FileLoader,
-    RawShaderMaterial,
-    RepeatWrapping,
-    TextureLoader,
-    Vector3,
     Vector4,
-    Clock,
-    Mesh,
-    Material,
-    LoadingManager
 } from "three";
-import {
-    GLTFParser,
-    GLTF
-} from "three/examples/jsm/loaders/GLTFLoader";
-import { TiltShaderLoader } from '../helpers.js';
+
+import { TiltShaderLoader } from '../TiltShaderLoader.js';
 
 export class GLTFGoogleTiltBrushMaterialExtension {
 
-    constructor(parser, brushPath, sceneCamera, clock) {
+    constructor(parser, brushPath, clock) {
         this.name = "GOOGLE_tilt_brush_material";
         this.parser = parser;
         this.tiltShaderLoader = new TiltShaderLoader(parser.options.manager);
         this.tiltShaderLoader.setPath(brushPath);
         this.updateableMeshes = [];
+        this.clock = clock;
     }
 
     afterRoot(glTF) {
@@ -82,8 +69,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
     }
 
     async replaceMaterial(mesh, guid) {
-        const material = mesh.material;
         let shader;
+        let updateTime = false;
+        let updateCamera = false;
 
         switch(guid) {
             case "0e87b49c-6546-3a34-3a44-8a556d7d6c3e":
@@ -173,7 +161,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_ChromaticWave";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "1161af82-50cf-47db-9706-0c3576d43c43":
@@ -205,7 +193,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Comet";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "c8313697-2563-47fc-832e-290f4c04b901":
@@ -221,7 +209,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_DiamondHull";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "4391aaaa-df73-4396-9e33-31e4e4930b27":
@@ -237,7 +225,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Disco";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "d1d991f2-e7a0-4cf1-b328-f57e915e6260":
@@ -328,7 +316,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("Electricity");
                 mesh.material = shader;
                 mesh.material.name = "material_Electricity";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "02ffb866-7fb2-4d15-b761-1012cefb1360":
@@ -342,7 +330,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("Embers");
                 mesh.material = shader;
                 mesh.material.name = "material_Embers";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "0ad58bbd-42bc-484e-ad9a-b61036ff4ce7":
@@ -388,7 +376,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Fire";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "2d35bcf0-e4d8-452c-97b1-3311be063130":
@@ -437,7 +425,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Hypercolor";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "6a1cf9f9-032c-45ec-9b6e-a6680bee32e9":
@@ -532,7 +520,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_LightWire";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "d381e0f5-3def-4a0d-8853-31e9200bcbda":
@@ -592,7 +580,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_NeonPulse";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "f72ec0e7-a844-4e38-82e3-140c44772699":
@@ -685,7 +673,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Plasma";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "ad1ad437-76e2-450d-a23a-e17f8310b960":
@@ -701,7 +689,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Rainbow";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "faaa4d44-fcfb-4177-96be-753ac0421ba3":
@@ -745,7 +733,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("Snow");
                 mesh.material = shader;
                 mesh.material.name = "material_Snow";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "accb32f5-4509-454f-93f8-1df3fd31df1b":
@@ -808,7 +796,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Stars";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "44bb800a-fbc3-4592-8426-94ecb05ddec3":
@@ -824,7 +812,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Streamers";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "0077f88c-d93a-42f3-b59b-b31c50cdb414":
@@ -840,7 +828,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_DiamondHull";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
+                updateCamera = true;
                 break;
 
             case "b468c1fb-f254-41ed-8ec9-57030bc5660c":
@@ -944,7 +933,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Waveform";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "b67c0e81-ce6d-40a8-aeb0-ef036b081aa3":
@@ -977,7 +966,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_WigglyGraphite";
-                this.updateableMeshes.push(mesh);
+                updateTime = true;
                 break;
 
             case "4391385a-cf83-4396-9e33-31e4e4930b27":
@@ -992,6 +981,20 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
             default:
                 console.warn(`Could not find brush with guid ${guid}!`);
+        }
+
+        // Check for any dynamic uniforms set.
+        if(updateTime || updateCamera) {
+            mesh.onBeforeRender = (object, scene, camera, geometry, material, group) => {
+                const elapsedTime = this.clock.getElapsedTime();
+                const time = new Vector4(elapsedTime/20, elapsedTime, elapsedTime*2, elapsedTime*3);
+                if (updateTime) {
+                    material.uniforms["u_time"].value = time;
+                }
+                if (updateCamera) {
+                    material.uniforms["cameraPosition"].value = camera.position;
+                }
+            };
         }
     }
 }
