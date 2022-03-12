@@ -177,6 +177,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "1161af82-50cf-47db-9706-0c3576d43c43":
+            case "79168f10-6961-464a-8be1-57ed364c5600":
                 mesh.geometry.name = "geometry_CoarseBristles";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -301,6 +302,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "d0262945-853c-4481-9cbd-88586bed93cb":
+            case "3ca16e2f-bdcd-4da2-8631-dcef342f40f1":
                 mesh.geometry.name = "geometry_DuctTape";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -390,6 +392,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "2d35bcf0-e4d8-452c-97b1-3311be063130":
+            case "280c0a7a-aad8-416c-a7d2-df63d129ca70":
+            case "55303bc4-c749-4a72-98d9-d23e68e76e18":
                 mesh.geometry.name = "geometry_Flat";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -420,6 +424,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "dce872c2-7b49-4684-b59b-c45387949c5c":
+            case "e8ef32b1-baa8-460a-9c2c-9cf8506794f5":
                 mesh.geometry.name = "geometry_Hypercolor";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -468,6 +473,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "f5c336cf-5108-4b40-ade9-c687504385ab":
+            case "c0012095-3ffd-4040-8ee1-fc180d346eaa":
                 mesh.geometry.name = "geometry_Ink";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -482,6 +488,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.material.name = "material_Ink";
                 break;
 
+            case "4a76a27a-44d8-4bfe-9a8c-713749a499b0":
             case "ea19de07-d0c0-4484-9198-18489a3c1487":
                 mesh.geometry.name = "geometry_Leaves";
 
@@ -589,6 +596,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "f72ec0e7-a844-4e38-82e3-140c44772699":
+            case "c515dad7-4393-4681-81ad-162ef052241b":
                 mesh.geometry.name = "geometry_OilPaint";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -604,6 +612,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "f1114e2e-eb8d-4fde-915a-6e653b54e9f5":
+            case "759f1ebd-20cd-4720-8d41-234e0da63716":
                 mesh.geometry.name = "geometry_Paper";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -770,6 +779,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "8dc4a70c-d558-4efd-a5ed-d4e860f40dc3":
+            case "7a1c8107-50c5-4b70-9a39-421576d6617e":
                 mesh.geometry.name = "geometry_Splatter";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -834,6 +844,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "b468c1fb-f254-41ed-8ec9-57030bc5660c":
+            case "c8ccb53d-ae13-45ef-8afb-b730d81394eb":
                 mesh.geometry.name = "geometry_TaperedFlat";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -849,6 +860,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c":
+            case "1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0":
                 mesh.geometry.name = "geometry_TaperedMarker";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -863,22 +875,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.material.name = "material_TaperedMarker";
                 break;
 
-            case "1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0":
-                mesh.geometry.name = "geometry_Flat";
-
-                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
-                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
-                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
-                mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
-                shader = await this.tiltShaderLoader.loadAsync("Flat");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
-                shader.uniformsNeedUpdate = true;
-                mesh.material = shader;
-                mesh.material.name = "material_Flat";
-                break;
-
             case "75b32cf0-fdd6-4d89-a64b-e2a00b247b0f":
+            case "fdf0326a-c0d1-4fed-b101-9db0ff6d071f":
                 mesh.geometry.name = "geometry_ThickPaint";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -950,6 +948,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "b67c0e81-ce6d-40a8-aeb0-ef036b081aa3":
+            case "dea67637-cd1a-27e4-c9b1-52f4bbcb84e5":
                 mesh.geometry.name = "geometry_WetPaint";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -965,6 +964,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "5347acf0-a8e2-47b6-8346-30c70719d763":
+            case "e814fef1-97fd-7194-4a2f-50c2bb918be2":
                 mesh.geometry.name = "geometry_WigglyGraphite";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
@@ -991,7 +991,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.material.name = "material_Wire";
                 break;
             default:
-                console.warn(`could not find brush with guid ${guid}`);
+                console.warn(`Could not find brush with guid ${guid}!`);
         }
     }
 }
