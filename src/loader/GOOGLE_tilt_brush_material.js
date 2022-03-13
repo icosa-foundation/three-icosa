@@ -210,6 +210,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.material = shader;
                 mesh.material.name = "material_DiamondHull";
                 updateTime = true;
+                updateCamera = true;
                 break;
 
             case "4391aaaa-df73-4396-9e33-31e4e4930b27":
@@ -822,14 +823,13 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
-                shader = await this.tiltShaderLoader.loadAsync("DiamondHull");
+                shader = await this.tiltShaderLoader.loadAsync("Taffy");
                 //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
                 //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
-                mesh.material.name = "material_DiamondHull";
+                mesh.material.name = "material_Taffy";
                 updateTime = true;
-                updateCamera = true;
                 break;
 
             case "b468c1fb-f254-41ed-8ec9-57030bc5660c":
