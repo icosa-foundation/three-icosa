@@ -124,7 +124,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("_tb_unity_normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
-                mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));
+                mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));
                 shader = await this.tiltShaderLoader.loadAsync("Bubbles");
                 //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
                 //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
@@ -250,7 +250,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("_tb_unity_normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
-                mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));
+                mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));
                 shader = await this.tiltShaderLoader.loadAsync("Dots");
                 //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
                 //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
