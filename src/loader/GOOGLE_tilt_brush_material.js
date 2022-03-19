@@ -76,6 +76,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             return null;
         }
 
+        const shaderResolves = [];
+
         //const extensionDef = json.exensions[this.name];
         for(const scene of glTF.scenes) {
             scene.traverse(async object => {
@@ -100,11 +102,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 
                 const guid = extensionsDef.GOOGLE_tilt_brush_material.guid;
 
-                await this.replaceMaterial(object, guid);
+                shaderResolves.push(this.replaceMaterial(object, guid));
             });
         }
 
-        return;
+        return Promise.all(shaderResolves);
     }
 
     async replaceMaterial(mesh, guid) {
