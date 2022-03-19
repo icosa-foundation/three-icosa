@@ -624,7 +624,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.material.name = "material_Paper";
                 break;
 
-            case "f86a096c-2f4f-4f9d-ae19-81b99f2944e0/":
+            case "f86a096c-2f4f-4f9d-ae19-81b99f2944e0":
                 mesh.geometry.name = "geometry_PbrTemplate";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
