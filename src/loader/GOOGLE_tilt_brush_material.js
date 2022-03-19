@@ -23,6 +23,14 @@ export class GLTFGoogleTiltBrushMaterialExtension {
     constructor(parser, brushPath, clock) {
         this.name = "GOOGLE_tilt_brush_material";
         this.parser = parser;
+
+        this.brushPath = brushPath;
+
+        // Quick repair of path if required
+        if (this.brushPath.slice(this.brushPath.length - 1) !== "/") {
+            this.brushPath += "/";
+        }
+
         this.tiltShaderLoader = new TiltShaderLoader(parser.options.manager);
         this.tiltShaderLoader.setPath(brushPath);
         this.updateableMeshes = [];
