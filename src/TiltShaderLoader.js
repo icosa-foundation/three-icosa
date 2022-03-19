@@ -78,12 +78,15 @@ export class TiltShaderLoader extends Loader {
             materialParams.uniforms.u_AlphaMask.value = alphaMask;
         }
 
-        loadedMaterials[brushName] = materialParams;
-        onLoad( scope.parse( materialParams ) );
+        let rawMaterial = new RawShaderMaterial(materialParams);
+        loadedMaterials[brushName] = rawMaterial;
+        onLoad( scope.parse( rawMaterial ) );
     }
 
-    parse( materialParams ) {
-        return new RawShaderMaterial( materialParams );
+    parse( rawMaterial ) {
+        return rawMaterial;
+    }
+
     lookupMaterial(nameOrGuid) {
         switch(nameOrGuid) {
             case "BlocksBasic:":
