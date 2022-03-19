@@ -37,6 +37,37 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         this.clock = clock;
     }
 
+    beforeRoot(glTF) {
+        const parser = this.parser;
+        const json = parser.json;
+        if (!json.extensionsUsed || !json.extensionsUsed.includes(this.name)) {
+            return null;
+        }
+
+        json.materials.forEach(material => {
+            const extensionsDef = material.extensions;
+
+            if (!extensionsDef || !extensionsDef[this.name]) {
+                return;
+            }
+
+            const guid = material.extensions.GOOGLE_tilt_brush_material.guid;
+            const materialParams = this.tiltShaderLoader.lookupMaterial(guid);
+
+            //MainTex
+            if(material?.pbrMetallicRoughness?.baseColorTexture) {
+                const mainTex = json.images[material.pbrMetallicRoughness.baseColorTexture.index];
+                mainTex.uri = this.brushPath + materialParams.uniforms.u_MainTex.value;
+            }
+
+            //BumpMap
+            if(material?.normalTexture) {
+                const bumpMap = json.images[material.normalTexture.index];
+                bumpMap.uri = this.brushPath + materialParams.uniforms.u_BumpMap.value;
+            }
+        });
+    }
+
     afterRoot(glTF) {
         const parser = this.parser;
         const json = parser.json;
