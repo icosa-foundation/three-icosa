@@ -14,7 +14,7 @@
 
 import {
     Vector4,
-} from "three";
+} from 'three';
 
 import { TiltShaderLoader } from '../TiltShaderLoader.js';
 

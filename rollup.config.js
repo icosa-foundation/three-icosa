@@ -20,6 +20,9 @@ export default [
 				file: 'dist/three-icosa.js',
 				banner: license,
 				indent: '\t',
+				globals: {
+					three: 'THREE'
+				}
 			},
 			{
 				format: 'es',
@@ -31,10 +34,14 @@ export default [
 	},
 	{
 		input: 'src/index.d.ts',
+		external: [
+			'three',
+			'three/examples/jsm/loaders/GLTFLoader'
+		],
 		output: [
 			{
 				format: 'es',
-				file: 'dist/three-icosa.d.ts'
+				file: 'dist/three-icosa.d.ts',
 			}
 		],
 		plugins: [dts()]
