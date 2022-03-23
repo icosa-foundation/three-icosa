@@ -19,7 +19,8 @@ import {
     RawShaderMaterial,
     Vector3,
     Vector4,
-    RepeatWrapping
+    RepeatWrapping,
+    UniformsLib
 } from 'three';
 
 export class TiltShaderLoader extends Loader {
@@ -76,6 +77,12 @@ export class TiltShaderLoader extends Loader {
             alphaMask.wrapT = RepeatWrapping;
             alphaMask.flipY = false;
             materialParams.uniforms.u_AlphaMask.value = alphaMask;
+        }
+
+        // inject three.js lighting uniforms
+        for(var lightType in UniformsLib.lights)
+        {
+            materialParams.uniforms[lightType] = UniformsLib.lights[lightType];
         }
 
         let rawMaterial = new RawShaderMaterial(materialParams);

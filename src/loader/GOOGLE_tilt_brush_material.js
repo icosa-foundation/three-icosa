@@ -123,8 +123,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 //mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("BlocksBasic");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_BlocksBasic";
@@ -137,8 +136,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 //mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("BlocksGem");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_BlocksGem";
@@ -151,8 +149,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 //mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("BlocksGlass");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_BlocksGlass";
@@ -167,8 +164,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));
                 shader = await this.tiltShaderLoader.loadAsync("Bubbles");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Bubbles";
@@ -182,8 +178,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("CelVinyl");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_CelVinyl";
@@ -197,8 +192,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("ChromaticWave");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_ChromaticWave";
@@ -214,8 +208,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("CoarseBristles");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_CoarseBristles";
@@ -229,8 +222,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Comet");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Comet";
@@ -245,8 +237,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("DiamondHull");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_DiamondHull";
@@ -262,8 +253,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Disco");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Disco";
@@ -278,8 +268,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("DotMarker");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_DotMarker";
@@ -294,8 +283,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));
                 shader = await this.tiltShaderLoader.loadAsync("Dots");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Dots";
@@ -309,8 +297,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("DoubleTaperedFlat");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_DoubleTaperedFlat";
@@ -324,8 +311,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("DoubleTaperedMarker");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_DoubleTaperedMarker";
@@ -340,8 +326,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("DuctTape");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_DuctTape";
@@ -383,8 +368,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("EnvironmentDiffuse");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_EnvironmentDiffuse";
@@ -398,8 +382,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("EnvironmentDiffuseLightMap");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_EnvironmentDiffuseLightMap";
@@ -413,8 +396,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Fire");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Fire";
@@ -431,8 +413,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Flat");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Flat";
@@ -446,8 +427,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Highlighter");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Highlighter";
@@ -462,8 +442,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Hypercolor");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Hypercolor";
@@ -479,8 +458,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));
                 shader = await this.tiltShaderLoader.loadAsync("HyperGrid");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_HyperGrid";
@@ -495,8 +473,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
 
                 shader = await this.tiltShaderLoader.loadAsync("Icing");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Icing";
@@ -511,8 +488,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Ink");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Ink";
@@ -527,8 +503,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Leaves");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Leaves";
@@ -542,8 +517,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Light");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Light";
@@ -557,8 +531,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("LightWire");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_LightWire";
@@ -573,8 +546,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Lofted");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Lofted";
@@ -588,8 +560,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Marker");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Marker";
@@ -602,8 +573,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 shader = await this.tiltShaderLoader.loadAsync("MatteHull");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_MatteHull";
@@ -617,8 +587,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("NeonPulse");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_NeonPulse";
@@ -634,8 +603,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("OilPaint");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_OilPaint";
@@ -650,8 +618,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Paper");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Paper";
@@ -665,8 +632,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("PbrTemplate");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_PbrTemplate";
@@ -680,8 +646,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("PbrTransparentTemplate");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_PbrTransparentTemplate";
@@ -695,8 +660,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Petal");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Petal";
@@ -710,8 +674,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Plasma");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Plasma";
@@ -726,8 +689,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Rainbow");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Rainbow";
@@ -742,8 +704,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("ShinyHull");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_ShinyHull";
@@ -757,8 +718,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));
                 shader = await this.tiltShaderLoader.loadAsync("Smoke");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Smoke";
@@ -786,8 +746,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("SoftHighlighter");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_SoftHighlighter";
@@ -801,8 +760,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Spikes");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Spikes";
@@ -817,8 +775,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Splatter");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Splatter";
@@ -833,8 +790,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));
                 shader = await this.tiltShaderLoader.loadAsync("Stars");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Stars";
@@ -849,8 +805,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Streamers");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Streamers";
@@ -865,8 +820,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Taffy");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Taffy";
@@ -882,8 +836,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("TaperedFlat");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_TaperedFlat";
@@ -898,8 +851,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("TaperedMarker");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_TaperedMarker";
@@ -914,8 +866,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("ThickPaint");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_ThickPaint";
@@ -928,8 +879,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 shader = await this.tiltShaderLoader.loadAsync("Toon");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Toon";
@@ -954,8 +904,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("VelvetInk");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_VelvetInk";
@@ -969,8 +918,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("Waveform");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Waveform";
@@ -986,8 +934,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("WetPaint");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_WetPaint";
@@ -1002,8 +949,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));
                 shader = await this.tiltShaderLoader.loadAsync("WigglyGraphite");
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light0transform;
-                //shader.uniforms["u_SceneLight_0_matrix"]!.value = light1transform;
+                shader.lights = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_WigglyGraphite";
@@ -1037,5 +983,38 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 }
             };
         }
+
+        mesh.onAfterRender = (object, scene, camera, geometry, material, group) => {
+            if(material?.uniforms?.directionalLights?.value) {
+                // Main Light
+                if(material.uniforms.directionalLights.value[0]) {
+                    
+                    // Color
+                    if(material.uniforms.u_SceneLight_0_color) {
+                        const color = material.uniforms.directionalLights.value[0].color;
+                        material.uniforms.u_SceneLight_0_color.value = new Vector4(color.r, color.g, color.b, 1);
+                    }
+
+                }
+
+                // Shadow Light
+                if(material.uniforms.directionalLights.value[1]) {
+    
+                    // Color
+                    if(material.uniforms.u_SceneLight_1_color) {
+                        const color = material.uniforms.directionalLights.value[1].color;
+                        material.uniforms.u_SceneLight_1_color.value = new Vector4(color.r, color.g, color.b, 1);
+                    }
+
+                }
+            }
+            // Ambient Light
+            if(material?.uniforms?.ambientLightColor?.value) {
+                if(material.uniforms.u_ambient_light_color) {
+                    const colorArray = material.uniforms.ambientLightColor.value;
+                    material.uniforms.u_ambient_light_color.value = new Vector4(colorArray[0], colorArray[1], colorArray[2], 1);
+                }
+            }
+        };
     }
 }
