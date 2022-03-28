@@ -969,11 +969,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             default:
                 console.warn(`Could not find brush with guid ${guid}!`);
         }
-
-        // Check for any dynamic uniforms set.
-        if(updateTime || updateCamera) {
-            mesh.onBeforeRender = (object, scene, camera, geometry, material, group) => {
+        
+        mesh.onBeforeRender = (renderer, scene, camera, geometry, material, group) => {
+            // Check for any dynamic uniforms set.
+            if(updateTime || updateCamera) {
                 const elapsedTime = this.clock.getElapsedTime();
+                // _Time from https://docs.unity3d.com/Manual/SL-UnityShaderVariables.html
                 const time = new Vector4(elapsedTime/20, elapsedTime, elapsedTime*2, elapsedTime*3);
                 if (updateTime) {
                     material.uniforms["u_time"].value = time;
@@ -981,10 +982,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 if (updateCamera) {
                     material.uniforms["cameraPosition"].value = camera.position;
                 }
-            };
-        }
+            }
 
-        mesh.onAfterRender = (object, scene, camera, geometry, material, group) => {
             if(material?.uniforms?.directionalLights?.value) {
                 // Main Light
                 if(material.uniforms.directionalLights.value[0]) {
@@ -994,7 +993,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                         const color = material.uniforms.directionalLights.value[0].color;
                         material.uniforms.u_SceneLight_0_color.value = new Vector4(color.r, color.g, color.b, 1);
                     }
-
                 }
 
                 // Shadow Light
@@ -1005,9 +1003,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                         const color = material.uniforms.directionalLights.value[1].color;
                         material.uniforms.u_SceneLight_1_color.value = new Vector4(color.r, color.g, color.b, 1);
                     }
-
                 }
             }
+
             // Ambient Light
             if(material?.uniforms?.ambientLightColor?.value) {
                 if(material.uniforms.u_ambient_light_color) {
