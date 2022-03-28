@@ -1007,12 +1007,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             }
 
             // Ambient Light
-            if(material?.uniforms?.ambientLightColor?.value) {
-                if(material.uniforms.u_ambient_light_color) {
-                    const colorArray = material.uniforms.ambientLightColor.value;
-                    material.uniforms.u_ambient_light_color.value = new Vector4(colorArray[0], colorArray[1], colorArray[2], 1);
-                }
-            }
+            // if(material?.uniforms?.ambientLightColor?.value) {
+            //     if(material.uniforms.u_ambient_light_color) {
+            //         const colorArray = material.uniforms.ambientLightColor.value;
+            //         material.uniforms.u_ambient_light_color.value = new Vector4(colorArray[0], colorArray[1], colorArray[2], 1);
+            //     }
+            // }
         };
     }
 }
