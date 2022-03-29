@@ -36,7 +36,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         this.clock = new Clock();
     }
 
-    beforeRoot(glTF) {
+    beforeRoot() {
         const parser = this.parser;
         const json = parser.json;
         if (!json.extensionsUsed || !json.extensionsUsed.includes(this.name)) {
@@ -67,7 +67,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         });
     }
 
-    afterRoot(glTF) {
+    afterRoot() {
         const parser = this.parser;
         const json = parser.json;
 
