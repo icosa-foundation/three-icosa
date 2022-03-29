@@ -21,7 +21,8 @@ npm install --save three-icosa
 You will also need a copy of the `brushes` directory from this repository. It is not distributed with this package through `npm` to save space. A GitHub hosted copy is available at the path: `https://icosa-gallery.github.io/three-icosa-template/brushes/`.
 ## Usage
 
-Adding a new glTF extension is simple. our `GLTFGoogleTiltBrushMaterialExtension` only requires two special paramaters: a path to your own brushes directory, and a three.js `Clock()`.
+Adding a new glTF extension is simple. our `GLTFGoogleTiltBrushMaterialExtension` only requires a path to a `brushes` directory (see above).
+
 ```js
 import { GLTFGoogleTiltBrushMaterialExtension } from './three-icosa.module.js';
 
@@ -30,10 +31,7 @@ import { GLTFGoogleTiltBrushMaterialExtension } from './three-icosa.module.js';
 const scene = new Scene();
 const gltfLoader = new GLTFLoader();
 
-// We require a clock entity for animated brushes.
-const clock = new Clock();
-
-gltfLoader.register(parser => new GLTFGoogleTiltBrushMaterialExtension(parser, 'path/to/brush/folder/', this.clock));
+gltfLoader.register(parser => new GLTFGoogleTiltBrushMaterialExtension(parser, 'path/to/brush/folder/'));
 
 gltfLoader.load('your_creation.glb' (model) => {
     scene.add(model.scene);

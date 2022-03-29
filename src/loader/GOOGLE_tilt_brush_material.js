@@ -14,16 +14,16 @@
 
 import {
     Vector4,
+    Clock
 } from 'three';
 
 import { TiltShaderLoader } from '../TiltShaderLoader.js';
 
 export class GLTFGoogleTiltBrushMaterialExtension {
 
-    constructor(parser, brushPath, clock) {
+    constructor(parser, brushPath) {
         this.name = "GOOGLE_tilt_brush_material";
         this.parser = parser;
-
         this.brushPath = brushPath;
 
         // Quick repair of path if required
@@ -33,8 +33,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
         this.tiltShaderLoader = new TiltShaderLoader(parser.options.manager);
         this.tiltShaderLoader.setPath(brushPath);
-        this.updateableMeshes = [];
-        this.clock = clock;
+        this.clock = new Clock();
     }
 
     beforeRoot(glTF) {
