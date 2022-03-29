@@ -1,6 +1,6 @@
 {
   "name": "three-icosa",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Implements Tilt Brush/Open Brush related glTF extensions in three.js",
   "scripts": {
     "dev": "rollup --config --watch",
