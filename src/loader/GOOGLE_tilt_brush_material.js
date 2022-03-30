@@ -67,7 +67,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         });
     }
 
-    afterRoot() {
+    afterRoot(glTF) {
         const parser = this.parser;
         const json = parser.json;
 
