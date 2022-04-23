@@ -12,4 +12,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+export { TiltShaderLoader } from './TiltShaderLoader';
 export { GLTFGoogleTiltBrushMaterialExtension } from './loader/GOOGLE_tilt_brush_material';
