@@ -82,26 +82,25 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             scene.traverse(async object => {
                 const association = parser.associations.get(object);
 
-                if (association === undefined || association.type !== "nodes") {
+                if (association === undefined || association.meshes === undefined) {
                     return;
                 }
 
-                const node = json.nodes[association.index];
-                if (node.mesh === undefined) {
-                    return;
-                }
+                const mesh = json.meshes[association.meshes];
+                mesh.primitives.forEach((prim) => {
+                    if(!prim.material) {
+                        return;
+                    }
 
-                const prim = json.meshes[node.mesh].primitives[0];
-                const mat = json.materials[prim.material];
-                const extensionsDef = mat.extensions;
-
-                if (!extensionsDef || !extensionsDef[this.name]) {
-                    return;
-                }
-                
-                const guid = extensionsDef.GOOGLE_tilt_brush_material.guid;
-
-                shaderResolves.push(this.replaceMaterial(object, guid));
+                    const mat = json.materials[prim.material];
+                    if (!mat.extensions || !mat.extensions[this.name]) {
+                        return;
+                    }
+                    
+                    const guid = mat.extensions.GOOGLE_tilt_brush_material.guid;
+                    
+                    shaderResolves.push(this.replaceMaterial(object, guid));
+                });
             });
         }
 
