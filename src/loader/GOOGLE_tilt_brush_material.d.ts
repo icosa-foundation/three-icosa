@@ -3,6 +3,7 @@ import { GLTFLoaderPlugin, GLTFParser } from 'three/examples/jsm/loaders/GLTFLoa
 
 export declare class GLTFGoogleTiltBrushMaterialExtension implements GLTFLoaderPlugin {
     constructor(parser: GLTFParser, brushPath: string);
+    readonly name: string;
     beforeRoot(): Promise<void> | null;
     afterRoot(glTF: Object): Promise<void> | null;
     replaceMaterial(mesh: Object3D, guid: string): void;
