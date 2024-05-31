@@ -51,6 +51,7 @@ export class TiltShaderLoader extends Loader {
 
         const materialParams = tiltBrushMaterialParams[brushName];
 
+        materialParams.glslVersion = GLSL3;
         materialParams.vertexShader = await loader.loadAsync(materialParams.vertexShader);
         materialParams.fragmentShader = await loader.loadAsync(materialParams.fragmentShader);
 
