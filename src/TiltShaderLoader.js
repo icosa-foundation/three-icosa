@@ -20,6 +20,7 @@ import {
     Vector3,
     Vector4,
     RepeatWrapping,
+    GLSL3,
     UniformsLib
 } from 'three';
 

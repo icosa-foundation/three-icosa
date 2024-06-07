@@ -1,26 +1,29 @@
 {
   "name": "three-icosa",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Implements Tilt Brush/Open Brush related glTF extensions in three.js",
   "scripts": {
-    "dev": "rollup --config --watch",
-    "build": "rollup --config && terser dist/three-icosa.js -o dist/three-icosa.min.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "parcel watch",
+    "build": "parcel build"
   },
-  "main": "dist/three-icosa.js",
-  "module": "dist/three-icosa.module.js",
-  "types": "dist/three-icosa.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icosa-foundation/three-icosa.git"
+  },
   "author": "Icosa Gallery",
   "license": "Apache-2.0",
+  "source": "./src/index.d.ts",
+  "main": "./dist/three-icosa.js",
+  "module": "./dist/three-icosa.module.js",
   "bugs": {
-    "url": "https://github.com/icosa-gallery/three-icosa/issues"
+    "url": "https://github.com/icosa-foundation/three-icosa/issues"
   },
-  "homepage": "https://github.com/icosa-gallery/three-icosa#readme",
+  "homepage": "https://github.com/icosa-foundation/three-icosa#readme",
   "devDependencies": {
-    "rollup": "^2.70.1",
-    "rollup-plugin-dts": "^4.2.0",
-    "terser": "^5.12.0",
-    "typescript": "^4.6.2"
+    "@parcel/transformer-typescript-types": "^2.12.0",
+    "@types/three": "^0.164.0",
+    "parcel": "latest",
+    "typescript": "^5.4.5"
   },
   "peerDependencies": {
     "three": ">=0.139.0"
