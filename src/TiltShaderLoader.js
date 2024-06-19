@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import * as THREE from 'three';
 import {
     Loader,
     FileLoader,
@@ -24,7 +25,7 @@ import {
     UniformsLib
 } from 'three';
 
-export class TiltShaderLoader extends Loader {
+export class TiltShaderLoader extends THREE.Loader {
     constructor( manager ) {
         super( manager );
         

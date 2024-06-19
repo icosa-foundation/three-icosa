@@ -14,7 +14,7 @@ import {FileLoader as $a0PbU$FileLoader, TextureLoader as $a0PbU$TextureLoader, 
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-class $cf098bb13503440d$export$bcc22bf437a07d8f extends (0, $a0PbU$Loader) {
+class $cf098bb13503440d$export$bcc22bf437a07d8f extends $a0PbU$Loader {
     constructor(manager){
         super(manager);
         this.loadedMaterials = {};
