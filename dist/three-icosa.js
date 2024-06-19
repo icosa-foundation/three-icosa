@@ -1,4 +1,4 @@
-var $bY3oU$three = require("three");
+var $gXNCa$three = require("three");
 
 
 function $parcel$export(e, n, v, s) {
@@ -20,8 +20,21 @@ $parcel$export(module.exports, "GLTFGoogleTiltBrushMaterialExtension", () => $3f
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+// Copyright 2021-2022 Icosa Gallery
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-class $3c77348c56e0a9b3$export$bcc22bf437a07d8f extends (0, $bY3oU$three.Loader) {
+class $3c77348c56e0a9b3$export$bcc22bf437a07d8f extends $gXNCa$three.Loader {
     constructor(manager){
         super(manager);
         this.loadedMaterials = {};
@@ -33,44 +46,44 @@ class $3c77348c56e0a9b3$export$bcc22bf437a07d8f extends (0, $bY3oU$three.Loader)
             onLoad(scope.parse(isAlreadyLoaded));
             return;
         }
-        const loader = new (0, $bY3oU$three.FileLoader)(this.manager);
+        const loader = new FileLoader(this.manager);
         loader.setPath(this.path);
         loader.setResponseType("text");
         loader.setWithCredentials(this.withCredentials);
-        const textureLoader = new (0, $bY3oU$three.TextureLoader)(this.manager);
+        const textureLoader = new TextureLoader(this.manager);
         textureLoader.setPath(this.path);
         textureLoader.setWithCredentials(this.withCredentials);
         const materialParams = $3c77348c56e0a9b3$var$tiltBrushMaterialParams[brushName];
-        materialParams.glslVersion = (0, $bY3oU$three.GLSL3);
+        materialParams.glslVersion = GLSL3;
         materialParams.vertexShader = await loader.loadAsync(materialParams.vertexShader);
         materialParams.fragmentShader = await loader.loadAsync(materialParams.fragmentShader);
         if (materialParams.uniforms.u_MainTex) {
             const mainTex = await textureLoader.loadAsync(materialParams.uniforms.u_MainTex.value);
             mainTex.name = `${brushName}_MainTex`;
-            mainTex.wrapS = (0, $bY3oU$three.RepeatWrapping);
-            mainTex.wrapT = (0, $bY3oU$three.RepeatWrapping);
+            mainTex.wrapS = RepeatWrapping;
+            mainTex.wrapT = RepeatWrapping;
             mainTex.flipY = false;
             materialParams.uniforms.u_MainTex.value = mainTex;
         }
         if (materialParams.uniforms.u_BumpMap) {
             const bumpMap = await textureLoader.loadAsync(materialParams.uniforms.u_BumpMap.value);
             bumpMap.name = `${brushName}_BumpMap`;
-            bumpMap.wrapS = (0, $bY3oU$three.RepeatWrapping);
-            bumpMap.wrapT = (0, $bY3oU$three.RepeatWrapping);
+            bumpMap.wrapS = RepeatWrapping;
+            bumpMap.wrapT = RepeatWrapping;
             bumpMap.flipY = false;
             materialParams.uniforms.u_BumpMap.value = bumpMap;
         }
         if (materialParams.uniforms.u_AlphaMask) {
             const alphaMask = await textureLoader.loadAsync(materialParams.uniforms.u_AlphaMask.value);
             alphaMask.name = `${brushName}_AlphaMask`;
-            alphaMask.wrapS = (0, $bY3oU$three.RepeatWrapping);
-            alphaMask.wrapT = (0, $bY3oU$three.RepeatWrapping);
+            alphaMask.wrapS = RepeatWrapping;
+            alphaMask.wrapT = RepeatWrapping;
             alphaMask.flipY = false;
             materialParams.uniforms.u_AlphaMask.value = alphaMask;
         }
         // inject three.js lighting uniforms
-        for(var lightType in (0, $bY3oU$three.UniformsLib).lights)materialParams.uniforms[lightType] = (0, $bY3oU$three.UniformsLib).lights[lightType];
-        let rawMaterial = new (0, $bY3oU$three.RawShaderMaterial)(materialParams);
+        for(var lightType in UniformsLib.lights)materialParams.uniforms[lightType] = UniformsLib.lights[lightType];
+        let rawMaterial = new RawShaderMaterial(materialParams);
         this.loadedMaterials[brushName] = rawMaterial;
         onLoad(scope.parse(rawMaterial));
     }
@@ -322,22 +335,22 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_Shininess: {
                 value: 0.2
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.1960784, 0.1960784, 0.1960784)
+                value: new (0, $gXNCa$three.Vector3)(0.1960784, 0.1960784, 0.1960784)
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -395,16 +408,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_Color: {
-                value: new (0, $bY3oU$three.Vector4)(1, 1, 1, 1)
+                value: new (0, $gXNCa$three.Vector4)(1, 1, 1, 1)
             },
             u_Shininess: {
                 value: 0.9
@@ -422,7 +435,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 1
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -480,16 +493,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_Color: {
-                value: new (0, $bY3oU$three.Vector4)(1, 1, 1, 1)
+                value: new (0, $gXNCa$three.Vector4)(1, 1, 1, 1)
             },
             u_Shininess: {
                 value: 0.8
@@ -501,7 +514,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 4
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -620,7 +633,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "CelVinyl-700f3aa8-9a7c-2384-8b8a-ea028905dd8c/CelVinyl-700f3aa8-9a7c-2384-8b8a-ea028905dd8c-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -678,13 +691,13 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_EmissionGain: {
                 value: 0.45
@@ -748,13 +761,13 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_MainTex: {
                 value: "CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43/CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43-v10.0-MainTex.png"
@@ -763,7 +776,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 0.25
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -827,10 +840,10 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Comet-1caa6d7d-f015-3f54-3a4b-8b5354d39f81/Comet-1caa6d7d-f015-3f54-3a4b-8b5354d39f81-v10.0-AlphaMask.png"
             },
             u_AlphaMask_TexelSize: {
-                value: new (0, $bY3oU$three.Vector4)(0.0156, 1, 64, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.0156, 1, 64, 1)
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_Speed: {
                 value: 1
@@ -839,7 +852,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 0.5
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -897,25 +910,25 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_MainTex: {
                 value: "DiamondHull-c8313697-2563-47fc-832e-290f4c04b901/DiamondHull-c8313697-2563-47fc-832e-290f4c04b901-v10.0-MainTex.png"
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             cameraPosition: {
-                value: new (0, $bY3oU$three.Vector3)()
+                value: new (0, $gXNCa$three.Vector3)()
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -979,25 +992,25 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_Shininess: {
                 value: 0.65
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.5147059, 0.5147059, 0.5147059)
+                value: new (0, $gXNCa$three.Vector3)(0.5147059, 0.5147059, 0.5147059)
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1058,7 +1071,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "DotMarker-d1d991f2-e7a0-4cf1-b328-f57e915e6260/DotMarker-d1d991f2-e7a0-4cf1-b328-f57e915e6260-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1119,7 +1132,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Dots-6a1cf9f9-032c-45ec-9b1d-a6680bee30f7/Dots-6a1cf9f9-032c-45ec-9b1d-a6680bee30f7-v10.0-MainTex.png"
             },
             u_TintColor: {
-                value: new (0, $bY3oU$three.Vector4)(1, 1, 1, 1)
+                value: new (0, $gXNCa$three.Vector4)(1, 1, 1, 1)
             },
             u_EmissionGain: {
                 value: 300
@@ -1180,22 +1193,22 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0, 0, 0)
+                value: new (0, $gXNCa$three.Vector3)(0, 0, 0)
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1253,7 +1266,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1311,16 +1324,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.5372549, 0.5372549, 0.5372549)
+                value: new (0, $gXNCa$three.Vector3)(0.5372549, 0.5372549, 0.5372549)
             },
             u_Shininess: {
                 value: 0.414
@@ -1332,7 +1345,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 0.2
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1341,7 +1354,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1/DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $bY3oU$three.Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new (0, $gXNCa$three.Vector4)(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "DuctTape-d0262945-853c-4481-9cbd-88586bed93cb/DuctTape-d0262945-853c-4481-9cbd-88586bed93cb-v10.0-vertex.glsl",
@@ -1356,7 +1369,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
     "Electricity": {
         uniforms: {
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_DisplacementIntensity: {
                 value: 2.0
@@ -1377,13 +1390,13 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
     "Embers": {
         uniforms: {
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_ScrollRate: {
                 value: 0.6
             },
             u_ScrollDistance: {
-                value: new (0, $bY3oU$three.Vector3)(-0.2, 0.6, 0)
+                value: new (0, $gXNCa$three.Vector3)(-0.2, 0.6, 0)
             },
             u_ScrollJitterIntensity: {
                 value: 0.03
@@ -1392,7 +1405,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 5
             },
             u_TintColor: {
-                value: new (0, $bY3oU$three.Vector4)(1, 1, 1, 1)
+                value: new (0, $gXNCa$three.Vector4)(1, 1, 1, 1)
             },
             u_MainTex: {
                 value: "Embers-02ffb866-7fb2-4d15-b761-1012cefb1360/Embers-02ffb866-7fb2-4d15-b761-1012cefb1360-v10.0-MainTex.png"
@@ -1453,22 +1466,22 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0, 0, 0)
+                value: new (0, $gXNCa$three.Vector3)(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1529,22 +1542,22 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0, 0, 0)
+                value: new (0, $gXNCa$three.Vector3)(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1608,7 +1621,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Fire-cb92b597-94ca-4255-b017-0e3f42f12f9e/Fire-cb92b597-94ca-4255-b017-0e3f42f12f9e-v10.0-MainTex.png"
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_EmissionGain: {
                 value: 0.5
@@ -1672,16 +1685,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1806,31 +1819,31 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_Shininess: {
                 value: 0.5
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.2745098, 0.2745098, 0.2745098)
+                value: new (0, $gXNCa$three.Vector3)(0.2745098, 0.2745098, 0.2745098)
             },
             u_MainTex: {
                 value: "Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c/Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c-v10.0-MainTex.png"
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_Cutoff: {
                 value: 0.5
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1839,7 +1852,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c/Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $bY3oU$three.Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new (0, $gXNCa$three.Vector4)(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c/Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c-v10.0-vertex.glsl",
@@ -1894,7 +1907,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_TintColor: {
-                value: new (0, $bY3oU$three.Vector4)(1, 1, 1, 1)
+                value: new (0, $gXNCa$three.Vector4)(1, 1, 1, 1)
             },
             u_MainTex: {
                 value: "HyperGrid-6a1cf9f9-032c-45ec-9b6e-a6680bee32e9/HyperGrid-6a1cf9f9-032c-45ec-9b6e-a6680bee32e9-v10.0-MainTex.png"
@@ -1952,16 +1965,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.2352941, 0.2352941, 0.2352941)
+                value: new (0, $gXNCa$three.Vector3)(0.2352941, 0.2352941, 0.2352941)
             },
             u_Shininess: {
                 value: 0.1500
@@ -1973,7 +1986,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37/Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-BumpMap.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1982,7 +1995,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37/Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $bY3oU$three.Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new (0, $gXNCa$three.Vector4)(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37/Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-vertex.glsl",
@@ -2037,16 +2050,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.2352941, 0.2352941, 0.2352941)
+                value: new (0, $gXNCa$three.Vector3)(0.2352941, 0.2352941, 0.2352941)
             },
             u_Shininess: {
                 value: 0.4
@@ -2058,7 +2071,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2067,7 +2080,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $bY3oU$three.Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new (0, $gXNCa$three.Vector4)(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "Ink-f5c336cf-5108-4b40-ade9-c687504385ab/Ink-f5c336cf-5108-4b40-ade9-c687504385ab-v10.0-vertex.glsl",
@@ -2122,16 +2135,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0, 0, 0)
+                value: new (0, $gXNCa$three.Vector3)(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.395
@@ -2143,7 +2156,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Leaves-ea19de07-d0c0-4484-9198-18489a3c1487/Leaves-ea19de07-d0c0-4484-9198-18489a3c1487-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2152,7 +2165,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Leaves-ea19de07-d0c0-4484-9198-18489a3c1487/Leaves-ea19de07-d0c0-4484-9198-18489a3c1487-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $bY3oU$three.Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new (0, $gXNCa$three.Vector4)(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "Leaves-ea19de07-d0c0-4484-9198-18489a3c1487/Leaves-ea19de07-d0c0-4484-9198-18489a3c1487-v10.0-vertex.glsl",
@@ -2271,25 +2284,25 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_Shininess: {
                 value: 0.81
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.3455882, 0.3455882, 0.3455882)
+                value: new (0, $gXNCa$three.Vector3)(0.3455882, 0.3455882, 0.3455882)
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2350,16 +2363,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2423,7 +2436,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 0.067
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2481,16 +2494,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2548,13 +2561,13 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_EmissionGain: {
                 value: 0.5
@@ -2618,16 +2631,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.2352941, 0.2352941, 0.2352941)
+                value: new (0, $gXNCa$three.Vector3)(0.2352941, 0.2352941, 0.2352941)
             },
             u_Shininess: {
                 value: 0.4
@@ -2639,7 +2652,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699/OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2648,7 +2661,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699/OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $bY3oU$three.Vector4)(0.0020, 0.0020, 512, 512)
+                value: new (0, $gXNCa$three.Vector4)(0.0020, 0.0020, 512, 512)
             }
         },
         vertexShader: "OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699/OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699-v10.0-vertex.glsl",
@@ -2703,16 +2716,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0, 0, 0)
+                value: new (0, $gXNCa$three.Vector3)(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.145
@@ -2724,7 +2737,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Paper-759f1ebd-20cd-4720-8d41-234e0da63716/Paper-759f1ebd-20cd-4720-8d41-234e0da63716-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2733,7 +2746,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Paper-759f1ebd-20cd-4720-8d41-234e0da63716/Paper-759f1ebd-20cd-4720-8d41-234e0da63716-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $bY3oU$three.Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new (0, $gXNCa$three.Vector4)(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5/Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5-v10.0-vertex.glsl",
@@ -2788,22 +2801,22 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0, 0, 0)
+                value: new (0, $gXNCa$three.Vector3)(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2864,22 +2877,22 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0, 0, 0)
+                value: new (0, $gXNCa$three.Vector3)(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2940,22 +2953,22 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0, 0, 0)
+                value: new (0, $gXNCa$three.Vector3)(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.01
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3017,7 +3030,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336/Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336-v10.0-MainTex.png"
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             }
         },
         vertexShader: "Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336/Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336-v10.0-vertex.glsl",
@@ -3072,7 +3085,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_EmissionGain: {
                 value: 0.65
@@ -3136,16 +3149,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.1985294, 0.1985294, 0.1985294)
+                value: new (0, $gXNCa$three.Vector3)(0.1985294, 0.1985294, 0.1985294)
             },
             u_Shininess: {
                 value: 0.7430
@@ -3154,7 +3167,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 0.5
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3212,7 +3225,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_TintColor: {
-                value: new (0, $bY3oU$three.Vector4)(1, 1, 1, 1)
+                value: new (0, $gXNCa$three.Vector4)(1, 1, 1, 1)
             },
             u_MainTex: {
                 value: "Smoke-70d79cca-b159-4f35-990c-f02193947fe8/Smoke-70d79cca-b159-4f35-990c-f02193947fe8-v10.0-MainTex.png"
@@ -3230,13 +3243,13 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
     "Snow": {
         uniforms: {
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_ScrollRate: {
                 value: 0.2
             },
             u_ScrollDistance: {
-                value: new (0, $bY3oU$three.Vector3)(0, -0.3, 0)
+                value: new (0, $gXNCa$three.Vector3)(0, -0.3, 0)
             },
             u_ScrollJitterIntensity: {
                 value: 0.01
@@ -3245,7 +3258,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 12
             },
             u_TintColor: {
-                value: new (0, $bY3oU$three.Vector4)(1, 1, 1, 1)
+                value: new (0, $gXNCa$three.Vector4)(1, 1, 1, 1)
             },
             u_MainTex: {
                 value: "Snow-d902ed8b-d0d1-476c-a8de-878a79e3a34c/Snow-d902ed8b-d0d1-476c-a8de-878a79e3a34c-v10.0-MainTex.png"
@@ -3364,16 +3377,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3431,13 +3444,13 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_MainTex: {
                 value: "Splatter-7a1c8107-50c5-4b70-9a39-421576d6617e/Splatter-7a1c8107-50c5-4b70-9a39-421576d6617e-v10.0-MainTex.png"
@@ -3446,7 +3459,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 0.2
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3504,7 +3517,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_SparkleRate: {
                 value: 5.3
@@ -3571,7 +3584,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 0.4
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             }
         },
         vertexShader: "Streamers-44bb800a-fbc3-4592-8426-94ecb05ddec3/Streamers-44bb800a-fbc3-4592-8426-94ecb05ddec3-v10.0-vertex.glsl",
@@ -3629,7 +3642,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "Taffy-0077f88c-d93a-42f3-b59b-b31c50cdb414/Taffy-0077f88c-d93a-42f3-b59b-b31c50cdb414-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3687,13 +3700,13 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_MainTex: {
                 value: "TaperedFlat-b468c1fb-f254-41ed-8ec9-57030bc5660c/TaperedFlat-b468c1fb-f254-41ed-8ec9-57030bc5660c-v10.0-MainTex.png"
@@ -3702,7 +3715,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 0.067
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3763,7 +3776,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c/TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3821,22 +3834,22 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0, 0, 0)
+                value: new (0, $gXNCa$three.Vector3)(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3900,16 +3913,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.2352941, 0.2352941, 0.2352941)
+                value: new (0, $gXNCa$three.Vector3)(0.2352941, 0.2352941, 0.2352941)
             },
             u_Shininess: {
                 value: 0.4
@@ -3921,7 +3934,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f/ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3930,7 +3943,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f/ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $bY3oU$three.Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new (0, $gXNCa$three.Vector4)(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f/ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f-v10.0-vertex.glsl",
@@ -3985,7 +3998,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4043,7 +4056,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4104,7 +4117,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "VelvetInk-d229d335-c334-495a-a801-660ac8a87360/VelvetInk-d229d335-c334-495a-a801-660ac8a87360-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4165,7 +4178,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: 0.5178571
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_MainTex: {
                 value: "Waveform-10201aa3-ebc2-42d8-84b7-2e63f6eeb8ab/Waveform-10201aa3-ebc2-42d8-84b7-2e63f6eeb8ab-v10.0-MainTex.png"
@@ -4223,16 +4236,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.1397059, 0.1397059, 0.1397059)
+                value: new (0, $gXNCa$three.Vector3)(0.1397059, 0.1397059, 0.1397059)
             },
             u_Shininess: {
                 value: 0.85
@@ -4244,7 +4257,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3/WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4253,7 +4266,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3/WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $bY3oU$three.Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new (0, $gXNCa$three.Vector4)(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3/WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3-v10.0-vertex.glsl",
@@ -4308,16 +4321,16 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_time: {
-                value: new (0, $bY3oU$three.Vector4)()
+                value: new (0, $gXNCa$three.Vector4)()
             },
             u_ambient_light_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $bY3oU$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new (0, $gXNCa$three.Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -4326,7 +4339,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 value: "WigglyGraphite-5347acf0-a8e2-47b6-8346-30c70719d763/WigglyGraphite-5347acf0-a8e2-47b6-8346-30c70719d763-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4384,7 +4397,7 @@ const $3c77348c56e0a9b3$var$tiltBrushMaterialParams = {
                 ]
             },
             u_fogColor: {
-                value: new (0, $bY3oU$three.Vector3)(0.0196, 0.0196, 0.0196)
+                value: new (0, $gXNCa$three.Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4426,7 +4439,7 @@ class $3fcbdf82ec781a4e$export$2b011a5b12963d65 {
         if (this.brushPath.slice(this.brushPath.length - 1) !== "/") this.brushPath += "/";
         this.tiltShaderLoader = new (0, $3c77348c56e0a9b3$export$bcc22bf437a07d8f)(parser.options.manager);
         this.tiltShaderLoader.setPath(brushPath);
-        this.clock = new (0, $bY3oU$three.Clock)();
+        this.clock = new (0, $gXNCa$three.Clock)();
     }
     beforeRoot() {
         const parser = this.parser;
@@ -5196,7 +5209,7 @@ class $3fcbdf82ec781a4e$export$2b011a5b12963d65 {
             if (material.uniforms["u_time"]) {
                 const elapsedTime = this.clock.getElapsedTime();
                 // _Time from https://docs.unity3d.com/Manual/SL-UnityShaderVariables.html
-                const time = new (0, $bY3oU$three.Vector4)(elapsedTime / 20, elapsedTime, elapsedTime * 2, elapsedTime * 3);
+                const time = new (0, $gXNCa$three.Vector4)(elapsedTime / 20, elapsedTime, elapsedTime * 2, elapsedTime * 3);
                 material.uniforms["u_time"].value = time;
             }
             if (material.uniforms["cameraPosition"]) material.uniforms["cameraPosition"].value = camera.position;
@@ -5206,7 +5219,7 @@ class $3fcbdf82ec781a4e$export$2b011a5b12963d65 {
                 {
                     if (material.uniforms.u_SceneLight_0_color) {
                         const color = material.uniforms.directionalLights.value[0].color;
-                        material.uniforms.u_SceneLight_0_color.value = new (0, $bY3oU$three.Vector4)(color.r, color.g, color.b, 1);
+                        material.uniforms.u_SceneLight_0_color.value = new (0, $gXNCa$three.Vector4)(color.r, color.g, color.b, 1);
                     }
                 }
                 // Shadow Light
@@ -5214,7 +5227,7 @@ class $3fcbdf82ec781a4e$export$2b011a5b12963d65 {
                 {
                     if (material.uniforms.u_SceneLight_1_color) {
                         const color = material.uniforms.directionalLights.value[1].color;
-                        material.uniforms.u_SceneLight_1_color.value = new (0, $bY3oU$three.Vector4)(color.r, color.g, color.b, 1);
+                        material.uniforms.u_SceneLight_1_color.value = new (0, $gXNCa$three.Vector4)(color.r, color.g, color.b, 1);
                     }
                 }
             }

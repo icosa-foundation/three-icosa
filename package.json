@@ -4,24 +4,24 @@
   "description": "Implements Tilt Brush/Open Brush related glTF extensions in three.js",
   "scripts": {
     "watch": "parcel watch",
-    "build": "parcel build"
+    "build": "parcel build --no-cache"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/icosa-foundation/three-icosa.git"
+    "url": "https://github.com/icosa-gallery/three-icosa.git"
   },
-  "author": "Icosa Gallery",
+  "author": "Icosa Foundation",
   "license": "Apache-2.0",
-  "source": "./src/index.d.ts",
-  "main": "./dist/three-icosa.js",
-  "module": "./dist/three-icosa.module.js",
+  "module": "dist/three-icosa.module.js",
+  "default": "dist/three-icosa.js",
+  "source": "src/index.d.ts",
   "bugs": {
     "url": "https://github.com/icosa-foundation/three-icosa/issues"
   },
   "homepage": "https://github.com/icosa-foundation/three-icosa#readme",
   "devDependencies": {
     "@parcel/transformer-typescript-types": "^2.12.0",
-    "@types/three": "^0.164.0",
+    "@types/three": "^0.164.1",
     "parcel": "latest",
     "typescript": "^5.4.5"
   },

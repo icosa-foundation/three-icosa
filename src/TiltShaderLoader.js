@@ -355,7 +355,7 @@ export class TiltShaderLoader extends Loader {
             case "wire":
             case "4391385a-cf83-4396-9e33-31e4e4930b27":
                 return "Wire";
-        };
+        }
     }
 }
 

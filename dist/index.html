@@ -1,0 +1,56 @@
+<!doctype html>
+<meta charset="utf-8">
+<html>
+<head>
+    <title>.gltf/.glb Viewer | Icosa Viewer</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+    </style>
+    <script type="importmap" class="es6_modules_map">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.164.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.0/examples/jsm/",
+                "three/examples/": "https://cdn.jsdelivr.net/npm/three@0.164.0/examples/"
+            }
+        }
+    </script>
+</head>
+<body>
+<script type="module">
+
+    import { GLTFGoogleTiltBrushMaterialExtension } from './three-icosa.module.js';
+    import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+    import { Euler, PerspectiveCamera, Scene, WebGLRenderer } from "three";
+
+    const scene = new Scene();
+    const gltfLoader = new GLTFLoader();
+
+    let assetUrl = 'https://icosa-foundation.github.io/icosa-sketch-assets/brushes/';
+    gltfLoader.register(parser => new GLTFGoogleTiltBrushMaterialExtension(parser, assetUrl));
+
+    gltfLoader.load('formats/gltf2/all_brushes.glb', (model) => {
+        scene.add(model.scene);
+    });
+
+    const camera = new PerspectiveCamera(75, 2, 0.1, 1000);
+    scene.add(camera);
+    camera.position.set(1, 1, 1);
+    camera.setRotationFromEuler(new Euler(0.2, 1, -0.25));
+    const renderer = new WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+    function animate() {
+        requestAnimationFrame( animate );
+        renderer.render( scene, camera );
+    }
+    animate();
+
+</script>
+<div id="icosa-viewer"></div>
+</body>
+</html>

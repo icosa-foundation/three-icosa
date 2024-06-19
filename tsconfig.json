@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
     "baseUrl": "src",
     "outDir": "./dist",
     "target": "es6",
