@@ -84,10 +84,14 @@ export class TiltShaderLoader extends THREE.Loader {
             materialParams.uniforms.u_AlphaMask.value = alphaMask;
         }
 
-        // inject three.js lighting uniforms
+        // inject three.js lighting and fog uniforms
         for(var lightType in UniformsLib.lights)
         {
             materialParams.uniforms[lightType] = UniformsLib.lights[lightType];
+        }
+        for(var fogType in UniformsLib.fog)
+        {
+            materialParams.uniforms[lightType] = UniformsLib.lights[fogType];
         }
 
         let rawMaterial = new RawShaderMaterial(materialParams);
