@@ -61,8 +61,9 @@ class $cf098bb13503440d$export$bcc22bf437a07d8f extends $a0PbU$Loader {
             alphaMask.flipY = false;
             materialParams.uniforms.u_AlphaMask.value = alphaMask;
         }
-        // inject three.js lighting uniforms
+        // inject three.js lighting and fog uniforms
         for(var lightType in (0, $a0PbU$UniformsLib).lights)materialParams.uniforms[lightType] = (0, $a0PbU$UniformsLib).lights[lightType];
+        for(var fogType in (0, $a0PbU$UniformsLib).fog)materialParams.uniforms[lightType] = (0, $a0PbU$UniformsLib).lights[fogType];
         let rawMaterial = new (0, $a0PbU$RawShaderMaterial)(materialParams);
         this.loadedMaterials[brushName] = rawMaterial;
         onLoad(scope.parse(rawMaterial));
