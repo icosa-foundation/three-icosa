@@ -5211,13 +5211,13 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                     }
                 }
             }
-        // Ambient Light
-        // if(material?.uniforms?.ambientLightColor?.value) {
-        //     if(material.uniforms.u_ambient_light_color) {
-        //         const colorArray = material.uniforms.ambientLightColor.value;
-        //         material.uniforms.u_ambient_light_color.value = new Vector4(colorArray[0], colorArray[1], colorArray[2], 1);
-        //     }
-        // }
+            // Ambient Light
+            if (material?.uniforms?.ambientLightColor?.value) {
+                if (material.uniforms.u_ambient_light_color) {
+                    const colorArray = material.uniforms.ambientLightColor.value;
+                    material.uniforms.u_ambient_light_color.value = new (0, $a0PbU$Vector4)(colorArray[0], colorArray[1], colorArray[2], 1);
+                }
+            }
         };
     }
 }
