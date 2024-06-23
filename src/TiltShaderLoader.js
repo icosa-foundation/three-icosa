@@ -85,13 +85,13 @@ export class TiltShaderLoader extends THREE.Loader {
         }
 
         // inject three.js lighting and fog uniforms
-        for(var lightType in UniformsLib.lights)
+        for (var lightType in UniformsLib.lights)
         {
             materialParams.uniforms[lightType] = UniformsLib.lights[lightType];
         }
-        for(var fogType in UniformsLib.fog)
+        for (var fogType in UniformsLib.fog)
         {
-            materialParams.uniforms[lightType] = UniformsLib.lights[fogType];
+            materialParams.uniforms[fogType] = UniformsLib.fog[fogType];
         }
 
         let rawMaterial = new RawShaderMaterial(materialParams);
