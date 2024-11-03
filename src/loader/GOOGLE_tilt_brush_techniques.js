@@ -807,9 +807,7 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
             json.extensionsUsed.push("GOOGLE_tilt_brush_material");
         }
 
-        let count = 0;
-
-        json.materials.forEach(material => {
+        json.materials = json.materials.map((material, index) => {
             const extensionsDef = material.extensions;
 
             if (!extensionsDef || !extensionsDef[this.name]) {
@@ -817,21 +815,19 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
             }
 
             const guid = material.name.replace("material_", "")
-            json.materials[count] = this.materialDefs[guid];
+            json.materials[index] = this.materialDefs[guid];
 
             //MainTex
             let mainTexIndex = extensionsDef.GOOGLE_tilt_brush_techniques.values.MainTex;
             if(mainTexIndex !== undefined) {
-                json.materials[count].pbrMetallicRoughness.baseColorTexture.index = mainTexIndex;
+                json.materials[index].pbrMetallicRoughness.baseColorTexture.index = mainTexIndex;
             }
 
             //BumpMap
             let bumpMapIndex = extensionsDef.GOOGLE_tilt_brush_techniques.values.BumpMap;
             if(bumpMapIndex !== undefined) {
-                json.materials[count].pbrMetallicRoughness.normalTexture.index = bumpMapIndex;
+                json.materials[index].pbrMetallicRoughness.normalTexture.index = bumpMapIndex;
             }
-            count++;
-
         });
 
     }
