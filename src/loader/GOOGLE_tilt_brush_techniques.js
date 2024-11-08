@@ -34,14 +34,12 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 0,
                         "texCoord": 0
                     },
                     "metallicFactor": 0,
                     "roughnessFactor": 0.600000024
                 },
                 "normalTexture": {
-                    "index": 1,
                     "texCoord": 0
                 },
                 "name": "brush_OilPaint",
@@ -58,14 +56,12 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 2,
                         "texCoord": 0
                     },
                     "metallicFactor": 0,
                     "roughnessFactor": 0.600000024
                 },
                 "normalTexture": {
-                    "index": 3,
                     "texCoord": 0
                 },
                 "name": "brush_Ink",
@@ -81,14 +77,12 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 4,
                         "texCoord": 0
                     },
                     "metallicFactor": 0,
                     "roughnessFactor": 0.600000024
                 },
                 "normalTexture": {
-                    "index": 5,
                     "texCoord": 0
                 },
                 "name": "brush_ThickPaint",
@@ -104,14 +98,12 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 6,
                         "texCoord": 0
                     },
                     "metallicFactor": 0,
                     "roughnessFactor": 0.149999976
                 },
                 "normalTexture": {
-                    "index": 7,
                     "texCoord": 0
                 },
                 "name": "brush_WetPaint",
@@ -127,7 +119,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 8,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -145,7 +136,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 9,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -173,7 +163,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 10,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -201,7 +190,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 11,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -228,7 +216,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 12,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -245,7 +232,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 13,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -262,7 +248,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 14,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -279,7 +264,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 15,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -296,7 +280,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 16,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -323,7 +306,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 17,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -340,7 +322,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 18,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -357,7 +338,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 19,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -375,7 +355,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 20,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -393,14 +372,12 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 21,
                         "texCoord": 0
                     },
                     "metallicFactor": 0,
                     "roughnessFactor": 0.585999966
                 },
                 "normalTexture": {
-                    "index": 22,
                     "texCoord": 0
                 },
                 "name": "brush_DuctTape",
@@ -416,14 +393,12 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 23,
                         "texCoord": 0
                     },
                     "metallicFactor": 0,
                     "roughnessFactor": 0.855000019
                 },
                 "normalTexture": {
-                    "index": 24,
                     "texCoord": 0
                 },
                 "name": "brush_Paper",
@@ -438,7 +413,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 25,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -456,7 +430,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 26,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -474,7 +447,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 27,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -501,7 +473,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 28,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -519,14 +490,12 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 29,
                         "texCoord": 0
                     },
                     "metallicFactor": 0,
                     "roughnessFactor": 0.5
                 },
                 "normalTexture": {
-                    "index": 30,
                     "texCoord": 0
                 },
                 "name": "brush_Hypercolor",
@@ -541,7 +510,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 31,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -569,7 +537,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 32,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -586,7 +553,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 33,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -602,7 +568,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "alphaMode": "OPAQUE",
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 34,
                         "texCoord": 0
                     },
                     "metallicFactor": 0,
@@ -630,7 +595,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 35,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -660,7 +624,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                     "roughnessFactor": 0.850000024
                 },
                 "normalTexture": {
-                    "index": 36,
                     "texCoord": 0
                 },
                 "name": "brush_Icing",
@@ -722,7 +685,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 37,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
@@ -772,7 +734,6 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 "doubleSided": true,
                 "pbrMetallicRoughness": {
                     "baseColorTexture": {
-                        "index": 38,
                         "texCoord": 0
                     },
                     "metallicFactor": 0
