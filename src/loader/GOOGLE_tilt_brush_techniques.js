@@ -806,15 +806,15 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
         if (!json.extensionsUsed.includes("GOOGLE_tilt_brush_material")) {
             json.extensionsUsed.push("GOOGLE_tilt_brush_material");
         }
-
-        json.materials = json.materials.map((material, index) => {
+        
+        json.materials.map((material, index) => {
             const extensionsDef = material.extensions;
 
             if (!extensionsDef || !extensionsDef[this.name]) {
                 return;
             }
 
-            const guid = material.name.replace("material_", "")
+            const guid = material.name.replace("material_", "");
             json.materials[index] = this.materialDefs[guid];
 
             //MainTex
@@ -829,6 +829,5 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                 json.materials[index].pbrMetallicRoughness.normalTexture.index = bumpMapIndex;
             }
         });
-
     }
 }
