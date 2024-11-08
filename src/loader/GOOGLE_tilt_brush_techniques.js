@@ -787,7 +787,7 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
             //BumpMap
             let bumpMapIndex = extensionsDef.GOOGLE_tilt_brush_techniques.values.BumpMap;
             if(bumpMapIndex !== undefined) {
-                json.materials[index].pbrMetallicRoughness.normalTexture.index = bumpMapIndex;
+                json.materials[index].normalTexture.index = bumpMapIndex;
             }
         });
     }
