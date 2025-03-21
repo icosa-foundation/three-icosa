@@ -23,6 +23,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
     constructor(parser, brushPath) {
         this.name = "GOOGLE_tilt_brush_material";
+        this.altName = "GOOGLE_tilt_brush_techniques"
         this.parser = parser;
         this.brushPath = brushPath;
 
@@ -39,18 +40,28 @@ export class GLTFGoogleTiltBrushMaterialExtension {
     beforeRoot() {
         const parser = this.parser;
         const json = parser.json;
-        if (!json.extensionsUsed || !json.extensionsUsed.includes(this.name)) {
+        if (!this.isTiltGltf(json)) {
             return null;
         }
 
         json.materials.forEach(material => {
+
             const extensionsDef = material.extensions;
 
-            if (!extensionsDef || !extensionsDef[this.name]) {
+            if (!extensionsDef || !(extensionsDef[this.name] || extensionsDef[this.altName])) {
+                console.log("No extension found", this.name);
                 return;
             }
 
-            const guid = material.extensions.GOOGLE_tilt_brush_material.guid;
+            let guid;
+            if (extensionsDef[this.name])
+            {
+                guid = extensionsDef[this.name].guid;
+            }
+            else
+            {
+                guid = material.name.replace('material_', '');
+            }
             const materialParams = this.tiltShaderLoader.lookupMaterial(guid);
 
             //MainTex
@@ -70,14 +81,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
     afterRoot(glTF) {
         const parser = this.parser;
         const json = parser.json;
-
-        if (!json.extensionsUsed || !json.extensionsUsed.includes(this.name)) {
+        if (!this.isTiltGltf(json)) {
             return null;
         }
 
         const shaderResolves = [];
 
-        //const extensionDef = json.exensions[this.name];
         for(const scene of glTF.scenes) {
             scene.traverse(async object => {
                 const association = parser.associations.get(object);
@@ -92,19 +101,40 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                         return;
                     }
 
-                    const mat = json.materials[prim.material];
-                    if (!mat.extensions || !mat.extensions[this.name]) {
+                    const material = json.materials[prim.material];
+
+                    const extensionsDef = material.extensions;
+
+                    if (!extensionsDef || !(extensionsDef[this.name] || extensionsDef[this.altName])) {
+                        console.log("No extension found", this.name);
                         return;
                     }
-                    
-                    const guid = mat.extensions.GOOGLE_tilt_brush_material.guid;
-                    
+
+                    let guid;
+                    if (extensionsDef[this.name])
+                    {
+                        guid = extensionsDef[this.name].guid;
+                    }
+                    else
+                    {
+                        guid = material.name.replace('material_', '');
+                    }
+
                     shaderResolves.push(this.replaceMaterial(object, guid));
                 });
             });
         }
 
         return Promise.all(shaderResolves);
+    }
+
+    isTiltGltf(json) {
+        let isTiltGltf = false;
+        isTiltGltf ||= (json.extensionsUsed && json.extensionsUsed.includes(this.name));
+        isTiltGltf ||= (json.extensionsUsed && json.extensionsUsed.includes(this.altName));
+        isTiltGltf ||= ('extensions' in json && this.name in json['extensions']);
+        isTiltGltf ||= ('extensions' in json && this.altName in json['extensions']);
+        return isTiltGltf;
     }
 
     async replaceMaterial(mesh, guid) {
@@ -159,9 +189,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 if (mesh.geometry.getAttribute("_tb_unity_normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("_tb_unity_normal"));}
+                if (mesh.geometry.getAttribute("normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));}
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));}
+                if (mesh.geometry.getAttribute("texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("texcoord_1"));}
                 shader = await this.tiltShaderLoader.loadAsync("Bubbles");
                 shader.lights = true;
                 shader.fog = true;
@@ -177,6 +210,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("CelVinyl");
                 shader.lights = true;
                 shader.fog = true;
@@ -192,6 +226,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("ChromaticWave");
                 shader.lights = true;
                 shader.fog = true;
@@ -208,6 +243,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("CoarseBristles");
                 shader.lights = true;
                 shader.fog = true;
@@ -223,6 +259,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Comet");
                 shader.lights = true;
                 shader.fog = true;
@@ -238,6 +275,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("DiamondHull");
                 shader.lights = true;
                 shader.fog = true;
@@ -253,6 +291,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Disco");
                 shader.lights = true;
                 shader.fog = true;
@@ -268,6 +307,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("DotMarker");
                 shader.lights = true;
                 shader.fog = true;
@@ -281,9 +321,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 if (mesh.geometry.getAttribute("_tb_unity_normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("_tb_unity_normal"));}
+                if (mesh.geometry.getAttribute("normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));}
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));}
+                if (mesh.geometry.getAttribute("texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("texcoord_1"));}
                 shader = await this.tiltShaderLoader.loadAsync("Dots");
                 shader.lights = true;
                 shader.fog = true;
@@ -299,6 +342,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("DoubleTaperedFlat");
                 shader.lights = true;
                 shader.fog = true;
@@ -314,6 +358,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("DoubleTaperedMarker");
                 shader.lights = true;
                 shader.fog = true;
@@ -330,6 +375,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("DuctTape");
                 shader.lights = true;
                 shader.fog = true;
@@ -345,7 +391,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));}
+                if (mesh.geometry.getAttribute("texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("texcoord_1"));}
                 shader = await this.tiltShaderLoader.loadAsync("Electricity");
                 mesh.material = shader;
                 mesh.material.name = "material_Electricity";
@@ -356,9 +404,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 if (mesh.geometry.getAttribute("_tb_unity_normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("_tb_unity_normal"));}
+                if (mesh.geometry.getAttribute("normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));}
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));}
+                if (mesh.geometry.getAttribute("texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("texcoord_1"));}
                 shader = await this.tiltShaderLoader.loadAsync("Embers");
                 mesh.material = shader;
                 mesh.material.name = "material_Embers";
@@ -371,6 +422,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("EnvironmentDiffuse");
                 shader.lights = true;
                 shader.fog = true;
@@ -386,6 +438,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("EnvironmentDiffuseLightMap");
                 shader.lights = true;
                 shader.fog = true;
@@ -401,6 +454,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Fire");
                 shader.lights = true;
                 shader.fog = true;
@@ -418,6 +472,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Flat");
                 shader.lights = true;
                 shader.fog = true;
@@ -433,6 +488,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Highlighter");
                 shader.lights = true;
                 shader.fog = true;
@@ -449,6 +505,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Hypercolor");
                 shader.lights = true;
                 shader.fog = true;
@@ -464,7 +521,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));}
+                if (mesh.geometry.getAttribute("texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("texcoord_1"));}
                 shader = await this.tiltShaderLoader.loadAsync("HyperGrid");
                 shader.lights = true;
                 shader.fog = true;
@@ -480,6 +539,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
 
                 shader = await this.tiltShaderLoader.loadAsync("Icing");
                 shader.lights = true;
@@ -497,6 +557,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Ink");
                 shader.lights = true;
                 shader.fog = true;
@@ -513,6 +574,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Leaves");
                 shader.lights = true;
                 shader.fog = true;
@@ -528,6 +590,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Light");
                 shader.lights = true;
                 shader.fog = true;
@@ -543,6 +606,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("LightWire");
                 shader.lights = true;
                 shader.fog = true;
@@ -558,6 +622,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Lofted");
                 shader.lights = true;
                 shader.fog = true;
@@ -573,6 +638,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Marker");
                 shader.lights = true;
                 shader.fog = true;
@@ -602,6 +668,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("NeonPulse");
                 shader.lights = true;
                 shader.fog = true;
@@ -618,6 +685,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("OilPaint");
                 shader.lights = true;
                 shader.fog = true;
@@ -634,6 +702,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Paper");
                 shader.lights = true;
                 shader.fog = true;
@@ -649,6 +718,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("PbrTemplate");
                 shader.lights = true;
                 shader.fog = true;
@@ -664,6 +734,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("PbrTransparentTemplate");
                 shader.lights = true;
                 shader.fog = true;
@@ -679,6 +750,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Petal");
                 shader.lights = true;
                 shader.fog = true;
@@ -694,6 +766,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Plasma");
                 shader.lights = true;
                 shader.fog = true;
@@ -709,6 +782,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Rainbow");
                 shader.lights = true;
                 shader.fog = true;
@@ -724,6 +798,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("ShinyHull");
                 shader.lights = true;
                 shader.fog = true;
@@ -736,9 +811,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.name = "geometry_Smoke";
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 if (mesh.geometry.getAttribute("_tb_unity_normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("_tb_unity_normal"));}
+                if (mesh.geometry.getAttribute("normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));}
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));}
+                if (mesh.geometry.getAttribute("texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("texcoord_1"));}
                 shader = await this.tiltShaderLoader.loadAsync("Smoke");
                 shader.lights = true;
                 shader.fog = true;
@@ -752,9 +830,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 if (mesh.geometry.getAttribute("_tb_unity_normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("_tb_unity_normal"));}
+                if (mesh.geometry.getAttribute("normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));}
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));}
+                if (mesh.geometry.getAttribute("texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("texcoord_1"));}
                 shader = await this.tiltShaderLoader.loadAsync("Snow");
                 mesh.material = shader;
                 mesh.material.name = "material_Snow";
@@ -767,6 +848,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("SoftHighlighter");
                 shader.lights = true;
                 shader.fog = true;
@@ -782,6 +864,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Spikes");
                 shader.lights = true;
                 shader.fog = true;
@@ -798,6 +881,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Splatter");
                 shader.lights = true;
                 shader.fog = true;
@@ -811,9 +895,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 if (mesh.geometry.getAttribute("_tb_unity_normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("_tb_unity_normal"));}
+                if (mesh.geometry.getAttribute("normal")) { mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));}
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("_tb_unity_texcoord_1"));}
+                if (mesh.geometry.getAttribute("texcoord_1")) { mesh.geometry.setAttribute("a_texcoord1", mesh.geometry.getAttribute("texcoord_1"));}
                 shader = await this.tiltShaderLoader.loadAsync("Stars");
                 shader.lights = true;
                 shader.fog = true;
@@ -829,6 +916,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Streamers");
                 shader.lights = true;
                 shader.fog = true;
@@ -844,6 +932,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Taffy");
                 shader.lights = true;
                 shader.fog = true;
@@ -860,6 +949,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("TaperedFlat");
                 shader.lights = true;
                 shader.fog = true;
@@ -876,6 +966,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("TaperedMarker");
                 shader.lights = true;
                 shader.fog = true;
@@ -892,6 +983,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("ThickPaint");
                 shader.lights = true;
                 shader.fog = true;
@@ -921,6 +1013,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 shader = await this.tiltShaderLoader.loadAsync("UnlitHull");
+                shader.fog = true;
                 mesh.material = shader;
                 mesh.material.name = "material_UnlitHull";
                 break;
@@ -932,6 +1025,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("VelvetInk");
                 shader.lights = true;
                 shader.fog = true;
@@ -947,6 +1041,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("Waveform");
                 shader.lights = true;
                 shader.fog = true;
@@ -963,6 +1058,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("WetPaint");
                 shader.lights = true;
                 shader.fog = true;
@@ -979,6 +1075,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 if (mesh.geometry.getAttribute("_tb_unity_texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("_tb_unity_texcoord_0"));}
+                if (mesh.geometry.getAttribute("texcoord_0")) { mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("texcoord_0"));}
                 shader = await this.tiltShaderLoader.loadAsync("WigglyGraphite");
                 shader.lights = true;
                 shader.fog = true;
