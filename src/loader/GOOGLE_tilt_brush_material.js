@@ -97,7 +97,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 const mesh = json.meshes[association.meshes];
                 mesh.primitives.forEach((prim) => {
-                    if(!prim.material) {
+                    if(prim.material === null || prim.material === undefined) {
                         return;
                     }
 
