@@ -4459,7 +4459,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
             if (association === undefined || association.meshes === undefined) return;
             const mesh = json.meshes[association.meshes];
             mesh.primitives.forEach((prim)=>{
-                if (!prim.material) return;
+                if (prim.material === null || prim.material === undefined) return;
                 const material = json.materials[prim.material];
                 const extensionsDef = material.extensions;
                 if (!extensionsDef || !(extensionsDef[this.name] || extensionsDef[this.altName])) {
