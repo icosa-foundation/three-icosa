@@ -109,6 +109,11 @@ export class TiltShaderLoader extends THREE.Loader {
     }
 
     lookupMaterialName(nameOrGuid) {
+
+        // Open Brush "new glb" exports prefix the material names
+        if (nameOrGuid.startsWith("ob-")) {
+            nameOrGuid = nameOrGuid.substring(3);
+        }
         switch(nameOrGuid) {
             case "BlocksBasic:":
             case "0e87b49c-6546-3a34-3a44-8a556d7d6c3e":
