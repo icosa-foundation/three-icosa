@@ -50,30 +50,32 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             const extensionsDef = material.extensions;
 
-            if (!extensionsDef || !(extensionsDef[this.name] || extensionsDef[this.altName])) {
-                console.log("No extension found", this.name);
+            let nameOrGuid;
+            // Try a guid first
+            if (extensionsDef?.[this.name]) {
+                nameOrGuid = extensionsDef[this.name].guid;
+            }
+            else if (material.name.startsWith("material_")) {
+                nameOrGuid = material.name.replace('material_', '');
+            } else if (material.name.startsWith('ob-')) {
+                nameOrGuid = material.name.replace('ob-', '');
+            }
+
+            const materialParams = this.tiltShaderLoader.lookupMaterial(nameOrGuid);
+
+            if (materialParams === undefined) {
+                console.log("No material params found", nameOrGuid);
                 return;
             }
 
-            let guid;
-            if (extensionsDef[this.name])
-            {
-                guid = extensionsDef[this.name].guid;
-            }
-            else
-            {
-                guid = material.name.replace('material_', '');
-            }
-            const materialParams = this.tiltShaderLoader.lookupMaterial(guid);
-
-            //MainTex
-            if(material?.pbrMetallicRoughness?.baseColorTexture) {
+            // MainTex
+            if(material?.pbrMetallicRoughness?.baseColorTexture && materialParams.uniforms?.u_MainTex) {
                 const mainTex = json.images[material.pbrMetallicRoughness.baseColorTexture.index];
-                mainTex.uri = this.brushPath + materialParams.uniforms.u_MainTex.value;
+                mainTex.uri = this.brushPath + materialParams.uniforms?.u_MainTex.value;
             }
 
-            //BumpMap
-            if(material?.normalTexture) {
+            // BumpMap
+            if(material?.normalTexture && materialParams.uniforms.u_BumpMap) {
                 const bumpMap = json.images[material.normalTexture.index];
                 bumpMap.uri = this.brushPath + materialParams.uniforms.u_BumpMap.value;
             }
@@ -107,32 +109,25 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                     const extensionsDef = material.extensions;
 
-                    if (!extensionsDef || !(extensionsDef[this.name] || extensionsDef[this.altName])) {
-                        console.log("No extension found", this.name);
-                        return;
-                    }
-
                     let brushName;
-                    if (extensionsDef[this.name])
-                    {
-                        brushName = extensionsDef[this.name].guid;
-                    }
-                    else if (material.name.startsWith('ob-'))
-                    {
+                    if (material.name.startsWith('ob-')) {
                         // New glb naming convention
                         brushName = material.name.replace('ob-', '');
                     }
-                    else if (material.name.startsWith('material_'))
-                    {
+                    else if (material.name.startsWith('material_')) {
                         // Some legacy poly files
                         // TODO - risk of name collision with non-tilt materials
                         // Maybe we should pass in a flag when a tilt gltf is detected?
                         // Do names in this format use guids or english names?
                         brushName = material.name.replace('material_', '');
+                    } else {
+                        brushName = extensionsDef[this.name].guid;
                     }
 
-                    if (!brushName === undefined) {
+                    if (brushName !== undefined) {
                         shaderResolves.push(this.replaceMaterial(object, brushName));
+                    } else {
+                        console.warn("No brush name found for material", material.name, brushName);
                     }
                 });
             });
@@ -1800,7 +1795,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.name = "geometry_3D Printing Brush";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
-                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
                 shader = await this.tiltShaderLoader.loadAsync("3D Printing Brush");
                 mesh.material = shader;
