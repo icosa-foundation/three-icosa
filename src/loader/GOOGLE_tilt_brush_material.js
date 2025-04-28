@@ -1099,7 +1099,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         }
         
         mesh.onBeforeRender = (renderer, scene, camera, geometry, material, group) => {
-            if (material.uniforms["u_time"]) {
+            if (material?.uniforms?.u_time) {
                 const elapsedTime = this.clock.getElapsedTime();
                 // _Time from https://docs.unity3d.com/Manual/SL-UnityShaderVariables.html
                 const time = new Vector4(elapsedTime/20, elapsedTime, elapsedTime*2, elapsedTime*3);
@@ -1107,7 +1107,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 material.uniforms["u_time"].value = time;
             }
 
-            if (material.uniforms["cameraPosition"]) {
+            if (material?.uniforms?.cameraPosition) {
                 material.uniforms["cameraPosition"].value = camera.position;
             }
 
