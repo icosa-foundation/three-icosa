@@ -110,17 +110,28 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                         return;
                     }
 
-                    let guid;
+                    let brushName;
                     if (extensionsDef[this.name])
                     {
-                        guid = extensionsDef[this.name].guid;
+                        brushName = extensionsDef[this.name].guid;
                     }
-                    else
+                    else if (material.name.startsWith('ob-'))
                     {
-                        guid = material.name.replace('material_', '');
+                        // New glb naming convention
+                        brushName = material.name.replace('ob-', '');
+                    }
+                    else if (material.name.startsWith('material_'))
+                    {
+                        // Some legacy poly files
+                        // TODO - risk of name collision with non-tilt materials
+                        // Maybe we should pass in a flag when a tilt gltf is detected?
+                        // Do names in this format use guids or english names?
+                        brushName = material.name.replace('material_', '');
                     }
 
-                    shaderResolves.push(this.replaceMaterial(object, guid));
+                    if (!brushName === undefined) {
+                        shaderResolves.push(this.replaceMaterial(object, brushName));
+                    }
                 });
             });
         }
