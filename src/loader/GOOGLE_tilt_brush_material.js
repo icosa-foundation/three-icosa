@@ -40,7 +40,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
     beforeRoot() {
         const parser = this.parser;
         const json = parser.json;
-        if (!this.isTiltGltf(json)) {
+        let isTilt = this.isTiltGltf(json);
+        if (!isTilt) {
+            console.error("Not TiltGltf Error", json);
             return null;
         }
 
