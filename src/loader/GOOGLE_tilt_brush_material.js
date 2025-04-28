@@ -1164,6 +1164,661 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.material = shader;
                 mesh.material.name = "material_Wire";
                 break;
+
+            // Experimental brushes
+
+
+            case "cf3401b3-4ada-4877-995a-1aa64e7b604a":
+            case "SvgTemplate":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_SvgTemplate";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("SvgTemplate");
+                mesh.material = shader;
+                mesh.material.name = "material_SvgTemplate";
+                break;
+
+            case "4465b5ef-3605-bec4-2b3e-6b04508ddb6b":
+            case "Gouache":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Gouache";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Gouache");
+                mesh.material = shader;
+                mesh.material.name = "material_Gouache";
+                break;
+
+            case "8e58ceea-7830-49b4-aba9-6215104ab52a":
+            case "MylarTube":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_MylarTube";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("MylarTube");
+                mesh.material = shader;
+                mesh.material.name = "material_MylarTube";
+                break;
+
+            case "03a529e1-f519-3dd4-582d-2d5cd92c3f4f":
+            case "Rain":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Rain";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Rain");
+                mesh.material = shader;
+                mesh.material.name = "material_Rain";
+                break;
+
+            case "725f4c6a-6427-6524-29ab-da371924adab":
+            case "DryBrush":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_DryBrush";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("DryBrush");
+                mesh.material = shader;
+                mesh.material.name = "material_DryBrush";
+                break;
+
+            case "ddda8745-4bb5-ac54-88b6-d1480370583e":
+            case "LeakyPen":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_LeakyPen";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("LeakyPen");
+                mesh.material = shader;
+                mesh.material.name = "material_LeakyPen";
+                break;
+
+            case "50e99447-3861-05f4-697d-a1b96e771b98":
+            case "Sparks":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Sparks";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Sparks");
+                mesh.material = shader;
+                mesh.material.name = "material_Sparks";
+                break;
+
+            case "7136a729-1aab-bd24-f8b2-ca88b6adfb67":
+            case "Wind":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Wind";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Wind");
+                mesh.material = shader;
+                mesh.material.name = "material_Wind";
+                break;
+
+            case "a8147ce1-005e-abe4-88e8-09a1eaadcc89":
+            case "Rising Bubbles":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Rising Bubbles";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Rising Bubbles");
+                mesh.material = shader;
+                mesh.material.name = "material_Rising Bubbles";
+                break;
+
+            case "9568870f-8594-60f4-1b20-dfbc8a5eac0e":
+            case "TaperedWire":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_TaperedWire";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("TaperedWire");
+                mesh.material = shader;
+                mesh.material.name = "material_TaperedWire";
+                break;
+
+            case "2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa":
+            case "SquarePaper":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_SquarePaper";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("SquarePaper");
+                mesh.material = shader;
+                mesh.material.name = "material_SquarePaper";
+                break;
+
+            case "39ee7377-7a9e-47a7-a0f8-0c77712f75d3":
+            case "ThickGeometry":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_ThickGeometry";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("ThickGeometry");
+                mesh.material = shader;
+                mesh.material.name = "material_ThickGeometry";
+                break;
+
+            case "2c1a6a63-6552-4d23-86d7-58f6fba8581b":
+            case "Wireframe":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Wireframe";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Wireframe");
+                mesh.material = shader;
+                mesh.material.name = "material_Wireframe";
+                break;
+
+            case "61d2ef63-ed60-49b3-85fb-7267b7d234f2":
+            case "CandyCane":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_CandyCane";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("CandyCane");
+                mesh.material = shader;
+                mesh.material.name = "material_CandyCane";
+                break;
+
+            case "20a0bf1a-a96e-44e5-84ac-9823d2d65023":
+            case "HolidayTree":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_HolidayTree";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("HolidayTree");
+                mesh.material = shader;
+                mesh.material.name = "material_HolidayTree";
+                break;
+
+            case "2b65cd94-9259-4f10-99d2-d54b6664ac33":
+            case "Snowflake":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Snowflake";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Snowflake");
+                mesh.material = shader;
+                mesh.material.name = "material_Snowflake";
+                break;
+
+            case "22d4f434-23e4-49d9-a9bd-05798aa21e58":
+            case "Braid3":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Braid3";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Braid3");
+                mesh.material = shader;
+                mesh.material.name = "material_Braid3";
+                break;
+
+            case "f28c395c-a57d-464b-8f0b-558c59478fa3":
+            case "Muscle":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Muscle";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Muscle");
+                mesh.material = shader;
+                mesh.material.name = "material_Muscle";
+                break;
+
+            case "99aafe96-1645-44cd-99bd-979bc6ef37c5":
+            case "Guts":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Guts";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Guts");
+                mesh.material = shader;
+                mesh.material.name = "material_Guts";
+                break;
+
+            case "53d753ef-083c-45e1-98e7-4459b4471219":
+            case "Fire2":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Fire2";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Fire2");
+                mesh.material = shader;
+                mesh.material.name = "material_Fire2";
+                break;
+
+            case "9871385a-df73-4396-9e33-31e4e4930b27":
+            case "TubeToonInverted":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_TubeToonInverted";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("TubeToonInverted");
+                mesh.material = shader;
+                mesh.material.name = "material_TubeToonInverted";
+                break;
+
+            case "4391ffaa-df73-4396-9e33-31e4e4930b27":
+            case "FacetedTube":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_FacetedTube";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("FacetedTube");
+                mesh.material = shader;
+                mesh.material.name = "material_FacetedTube";
+                break;
+
+            case "6a1cf9f9-032c-45ec-9b6e-a6680bee30f7":
+            case "WaveformParticles":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_WaveformParticles";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("WaveformParticles");
+                mesh.material = shader;
+                mesh.material.name = "material_WaveformParticles";
+                break;
+
+            case "eba3f993-f9a1-4d35-b84e-bb08f48981a4":
+            case "BubbleWand":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_BubbleWand";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("BubbleWand");
+                mesh.material = shader;
+                mesh.material.name = "material_BubbleWand";
+                break;
+
+            case "6a1cf9f9-032c-45ec-311e-a6680bee32e9":
+            case "DanceFloor":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_DanceFloor";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("DanceFloor");
+                mesh.material = shader;
+                mesh.material.name = "material_DanceFloor";
+                break;
+
+            case "0f5820df-cb6b-4a6c-960e-56e4c8000eda":
+            case "WaveformTube":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_WaveformTube";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("WaveformTube");
+                mesh.material = shader;
+                mesh.material.name = "material_WaveformTube";
+                break;
+
+            case "492b36ff-b337-436a-ba5f-1e87ee86747e":
+            case "Drafting":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Drafting";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Drafting");
+                mesh.material = shader;
+                mesh.material.name = "material_Drafting";
+                break;
+
+            case "f0a2298a-be80-432c-9fee-a86dcc06f4f9":
+            case "SingleSided":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_SingleSided";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("SingleSided");
+                mesh.material = shader;
+                mesh.material.name = "material_SingleSided";
+                break;
+
+            case "f4a0550c-332a-4e1a-9793-b71508f4a454":
+            case "DoubleFlat":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_DoubleFlat";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("DoubleFlat");
+                mesh.material = shader;
+                mesh.material.name = "material_DoubleFlat";
+                break;
+
+            case "c1c9b26d-673a-4dc6-b373-51715654ab96":
+            case "TubeAdditive":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_TubeAdditive";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("TubeAdditive");
+                mesh.material = shader;
+                mesh.material.name = "material_TubeAdditive";
+                break;
+
+            case "a555b809-2017-46cb-ac26-e63173d8f45e":
+            case "Feather":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Feather";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Feather");
+                mesh.material = shader;
+                mesh.material.name = "material_Feather";
+                break;
+
+            case "84d5bbb2-6634-8434-f8a7-681b576b4664":
+            case "DuctTapeGeometry":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_DuctTapeGeometry";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("DuctTapeGeometry");
+                mesh.material = shader;
+                mesh.material.name = "material_DuctTapeGeometry";
+                break;
+
+            case "3d9755da-56c7-7294-9b1d-5ec349975f52":
+            case "TaperedHueShift":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_TaperedHueShift";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("TaperedHueShift");
+                mesh.material = shader;
+                mesh.material.name = "material_TaperedHueShift";
+                break;
+
+            case "1cf94f63-f57a-4a1a-ad14-295af4f5ab5c":
+            case "Lacewing":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Lacewing";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Lacewing");
+                mesh.material = shader;
+                mesh.material.name = "material_Lacewing";
+                break;
+
+            case "c86c058d-1bda-2e94-08db-f3d6a96ac4a1":
+            case "Marbled Rainbow":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Marbled Rainbow";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Marbled Rainbow");
+                mesh.material = shader;
+                mesh.material.name = "material_Marbled Rainbow";
+                break;
+
+            case "fde6e778-0f7a-e584-38d6-89d44cee59f6":
+            case "Charcoal":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Charcoal";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Charcoal");
+                mesh.material = shader;
+                mesh.material.name = "material_Charcoal";
+                break;
+
+            case "f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf":
+            case "KeijiroTube":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_KeijiroTube";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("KeijiroTube");
+                mesh.material = shader;
+                mesh.material.name = "material_KeijiroTube";
+                break;
+
+            case "c5da2e70-a6e4-63a4-898c-5cfedef09c97":
+            case "Lofted (Hue Shift)":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Lofted (Hue Shift)";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Lofted (Hue Shift)");
+                mesh.material = shader;
+                mesh.material.name = "material_Lofted (Hue Shift)";
+                break;
+
+            case "62fef968-e842-3224-4a0e-1fdb7cfb745c":
+            case "Wire (Lit)":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Wire (Lit)";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Wire (Lit)");
+                mesh.material = shader;
+                mesh.material.name = "material_Wire (Lit)";
+                break;
+
+            case "d120944d-772f-4062-99c6-46a6f219eeaf":
+            case "WaveformFFT":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_WaveformFFT";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("WaveformFFT");
+                mesh.material = shader;
+                mesh.material.name = "material_WaveformFFT";
+                break;
+
+            case "d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc":
+            case "Fairy":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Fairy";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Fairy");
+                mesh.material = shader;
+                mesh.material.name = "material_Fairy";
+                break;
+
+            case "bdf65db2-1fb7-4202-b5e0-c6b5e3ea851e":
+            case "Space":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Space";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Space");
+                mesh.material = shader;
+                mesh.material.name = "material_Space";
+                break;
+
+            case "30cb9af6-be41-4872-8f3e-cbff63fe3db8":
+            case "Digital":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Digital";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Digital");
+                mesh.material = shader;
+                mesh.material.name = "material_Digital";
+                break;
+
+            case "abfbb2aa-70b4-4a5c-8126-8eedda2b3628":
+            case "Race":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Race";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Race");
+                mesh.material = shader;
+                mesh.material.name = "material_Race";
+                break;
+
+            case "355b3579-bf1d-4ff5-a200-704437fe684b":
+            case "SmoothHull":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_SmoothHull";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("SmoothHull");
+                mesh.material = shader;
+                mesh.material.name = "material_SmoothHull";
+                break;
+
+            case "7259cce5-41c1-ec74-c885-78af28a31d95":
+            case "Leaves2":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_Leaves2";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("Leaves2");
+                mesh.material = shader;
+                mesh.material.name = "material_Leaves2";
+                break;
+
+            case "7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb":
+            case "InkGeometry":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_InkGeometry";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("InkGeometry");
+                mesh.material = shader;
+                mesh.material.name = "material_InkGeometry";
+                break;
+
+            case "7ae1f880-a517-44a0-99f9-1cab654498c6":
+            case "ConcaveHull":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_ConcaveHull";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("ConcaveHull");
+                mesh.material = shader;
+                mesh.material.name = "material_ConcaveHull";
+                break;
+
+            case "d3f3b18a-da03-f694-b838-28ba8e749a98":
+            case "3D Printing Brush":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_3D Printing Brush";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("3D Printing Brush");
+                mesh.material = shader;
+                mesh.material.name = "material_3D Printing Brush";
+                break;
+
+            case "cc131ff8-0d17-4677-93e0-d7cd19fea9ac":
+            case "PassthroughHull":
+                // TODO Set uniforms
+                mesh.geometry.name = "geometry_PassthroughHull";
+
+                mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
+                mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+                shader = await this.tiltShaderLoader.loadAsync("PassthroughHull");
+                mesh.material = shader;
+                mesh.material.name = "material_PassthroughHull";
+                break;
+
+
             default:
                 console.warn(`Could not find brush with guid ${guid}!`);
         }
