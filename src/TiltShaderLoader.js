@@ -111,6 +111,9 @@ export class TiltShaderLoader extends THREE.Loader {
         }
 
         switch(nameOrGuid) {
+
+            // Standard brushes
+
             case "BlocksBasic:":
             case "0e87b49c-6546-3a34-3a44-8a556d7d6c3e":
                 return "BlocksBasic";
@@ -200,6 +203,7 @@ export class TiltShaderLoader extends THREE.Loader {
                 return "Flat";
             
             case "cf019139-d41c-4eb0-a1d0-5cf54b0a42f3":
+            case "Highlighter":
             case "geometry_Highlighter":
                 return "Highlighter";
             
@@ -358,9 +362,212 @@ export class TiltShaderLoader extends THREE.Loader {
             case "e814fef1-97fd-7194-4a2f-50c2bb918be2":
                 return "WigglyGraphite";
 
-            case "wire":
+            case "Wire":
             case "4391385a-cf83-4396-9e33-31e4e4930b27":
                 return "Wire";
+
+            // Experimental brushes
+
+            case "cf3401b3-4ada-4877-995a-1aa64e7b604a":
+            case "SvgTemplate":
+                return "SvgTemplate";
+
+            case "1b897b7e-9b76-425a-b031-a867c48df409":
+            case "4465b5ef-3605-bec4-2b3e-6b04508ddb6b":
+            case "Gouache":
+                return "Gouache";
+
+            case "8e58ceea-7830-49b4-aba9-6215104ab52a":
+            case "MylarTube":
+                return "MylarTube";
+
+            case "03a529e1-f519-3dd4-582d-2d5cd92c3f4f":
+            case "Rain":
+                return "Rain";
+
+            case "725f4c6a-6427-6524-29ab-da371924adab":
+            case "DryBrush":
+                return "DryBrush";
+
+            case "ddda8745-4bb5-ac54-88b6-d1480370583e":
+            case "LeakyPen":
+                return "LeakyPen";
+
+            case "50e99447-3861-05f4-697d-a1b96e771b98":
+            case "Sparks":
+                return "Sparks";
+
+            case "7136a729-1aab-bd24-f8b2-ca88b6adfb67":
+            case "Wind":
+                return "Wind";
+
+            case "a8147ce1-005e-abe4-88e8-09a1eaadcc89":
+            case "Rising Bubbles":
+                return "Rising Bubbles";
+
+            case "9568870f-8594-60f4-1b20-dfbc8a5eac0e":
+            case "TaperedWire":
+                return "TaperedWire";
+
+            case "2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa":
+            case "SquarePaper":
+                return "SquarePaper";
+
+            case "39ee7377-7a9e-47a7-a0f8-0c77712f75d3":
+            case "ThickGeometry":
+                return "ThickGeometry";
+
+            case "2c1a6a63-6552-4d23-86d7-58f6fba8581b":
+            case "Wireframe":
+                return "Wireframe";
+
+            case "61d2ef63-ed60-49b3-85fb-7267b7d234f2":
+            case "CandyCane":
+                return "CandyCane";
+
+            case "20a0bf1a-a96e-44e5-84ac-9823d2d65023":
+            case "HolidayTree":
+                return "HolidayTree";
+
+            case "2b65cd94-9259-4f10-99d2-d54b6664ac33":
+            case "Snowflake":
+                return "Snowflake";
+
+            case "22d4f434-23e4-49d9-a9bd-05798aa21e58":
+            case "Braid3":
+                return "Braid3";
+
+            case "f28c395c-a57d-464b-8f0b-558c59478fa3":
+            case "Muscle":
+                return "Muscle";
+
+            case "99aafe96-1645-44cd-99bd-979bc6ef37c5":
+            case "Guts":
+                return "Guts";
+
+            case "53d753ef-083c-45e1-98e7-4459b4471219":
+            case "Fire2":
+                return "Fire2";
+
+            case "9871385a-df73-4396-9e33-31e4e4930b27":
+            case "TubeToonInverted":
+                return "TubeToonInverted";
+
+            case "4391ffaa-df73-4396-9e33-31e4e4930b27":
+            case "FacetedTube":
+                return "FacetedTube";
+
+            case "6a1cf9f9-032c-45ec-9b6e-a6680bee30f7":
+            case "WaveformParticles":
+                return "WaveformParticles";
+
+            case "eba3f993-f9a1-4d35-b84e-bb08f48981a4":
+            case "BubbleWand":
+                return "BubbleWand";
+
+            case "6a1cf9f9-032c-45ec-311e-a6680bee32e9":
+            case "DanceFloor":
+                return "DanceFloor";
+
+            case "0f5820df-cb6b-4a6c-960e-56e4c8000eda":
+            case "WaveformTube":
+                return "WaveformTube";
+
+            case "492b36ff-b337-436a-ba5f-1e87ee86747e":
+            case "Drafting":
+                return "Drafting";
+
+            case "f0a2298a-be80-432c-9fee-a86dcc06f4f9":
+            case "SingleSided":
+                return "SingleSided";
+
+            case "f4a0550c-332a-4e1a-9793-b71508f4a454":
+            case "DoubleFlat":
+                return "DoubleFlat";
+
+            case "c1c9b26d-673a-4dc6-b373-51715654ab96":
+            case "TubeAdditive":
+                return "TubeAdditive";
+
+            case "a555b809-2017-46cb-ac26-e63173d8f45e":
+            case "Feather":
+                return "Feather";
+
+            case "84d5bbb2-6634-8434-f8a7-681b576b4664":
+            case "DuctTapeGeometry":
+                return "DuctTapeGeometry";
+
+            case "3d9755da-56c7-7294-9b1d-5ec349975f52":
+            case "TaperedHueShift":
+                return "TaperedHueShift";
+
+            case "1cf94f63-f57a-4a1a-ad14-295af4f5ab5c":
+            case "Lacewing":
+                return "Lacewing";
+
+            case "c86c058d-1bda-2e94-08db-f3d6a96ac4a1":
+            case "Marbled Rainbow":
+                return "Marbled Rainbow";
+
+            case "fde6e778-0f7a-e584-38d6-89d44cee59f6":
+            case "Charcoal":
+                return "Charcoal";
+
+            case "f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf":
+            case "KeijiroTube":
+                return "KeijiroTube";
+
+            case "c5da2e70-a6e4-63a4-898c-5cfedef09c97":
+            case "Lofted (Hue Shift)":
+                return "Lofted (Hue Shift)";
+
+            case "62fef968-e842-3224-4a0e-1fdb7cfb745c":
+            case "Wire (Lit)":
+                return "Wire (Lit)";
+
+            case "d120944d-772f-4062-99c6-46a6f219eeaf":
+            case "WaveformFFT":
+                return "WaveformFFT";
+
+            case "d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc":
+            case "Fairy":
+                return "Fairy";
+
+            case "bdf65db2-1fb7-4202-b5e0-c6b5e3ea851e":
+            case "Space":
+                return "Space";
+
+            case "30cb9af6-be41-4872-8f3e-cbff63fe3db8":
+            case "Digital":
+                return "Digital";
+
+            case "abfbb2aa-70b4-4a5c-8126-8eedda2b3628":
+            case "Race":
+                return "Race";
+
+            case "355b3579-bf1d-4ff5-a200-704437fe684b":
+            case "SmoothHull":
+                return "SmoothHull";
+
+            case "7259cce5-41c1-ec74-c885-78af28a31d95":
+            case "Leaves2":
+                return "Leaves2";
+
+            case "7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb":
+            case "InkGeometry":
+                return "InkGeometry";
+
+            case "7ae1f880-a517-44a0-99f9-1cab654498c6":
+            case "ConcaveHull":
+                return "ConcaveHull";
+
+            case "d3f3b18a-da03-f694-b838-28ba8e749a98":
+            case "3D Printing Brush":
+                return "3D Printing Brush";
+
+            case "cc131ff8-0d17-4677-93e0-d7cd19fea9ac":
+            case "PassthroughHull":
+                return "PassthroughHull";
         }
     }
 }
