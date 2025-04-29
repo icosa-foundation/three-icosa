@@ -7551,7 +7551,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                 mainTex.uri = this.brushPath + materialParams.uniforms?.u_MainTex.value;
             }
             // BumpMap
-            if (material?.normalTexture && materialParams.uniforms.u_BumpMap) {
+            if (material?.normalTexture && materialParams.uniforms?.u_BumpMap) {
                 const bumpMap = json.images[material.normalTexture.index];
                 bumpMap.uri = this.brushPath + materialParams.uniforms.u_BumpMap.value;
             }
