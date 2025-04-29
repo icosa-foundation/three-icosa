@@ -75,7 +75,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             }
 
             // BumpMap
-            if(material?.normalTexture && materialParams.uniforms.u_BumpMap) {
+            if(material?.normalTexture && materialParams.uniforms?.u_BumpMap) {
                 const bumpMap = json.images[material.normalTexture.index];
                 bumpMap.uri = this.brushPath + materialParams.uniforms.u_BumpMap.value;
             }
