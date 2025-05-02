@@ -83,7 +83,7 @@
     const moveState = { forward: false, backward: false, left: false, right: false, up: false, down: false };
 
     initControls();
-    const keyMap = { KeyW: 'forward', KeyA: 'left', KeyS: 'backward', KeyD: 'right', KeyE: 'up', KeyQ: 'down' };
+    const keyMap = { KeyW: 'forward', KeyA: 'left', KeyS: 'backward', KeyD: 'right', KeyQ: 'up', KeyE: 'down' };
     ['keydown', 'keyup'].forEach(eventType => {
         document.addEventListener(eventType, (event) => {
             const key = keyMap[event.code];
