@@ -1,0 +1,132 @@
+<!doctype html>
+<meta charset="utf-8">
+<html>
+<head>
+    <title>.gltf/.glb Viewer | Icosa Viewer</title>
+    <style>
+        html, body { height: 100%; width: 100%; margin: 0; overflow: hidden; }
+        #instructions { position: absolute; top: 50%; width: 100%; text-align: center; color: #ffffff; background-color: rgba(0, 0, 0, 0.5); padding: 10px; z-index: 100; font-family: Arial, sans-serif; }
+        #instructions.hidden { display: none; }
+    </style>
+    <script type="importmap" class="es6_modules_map">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.164.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.0/examples/jsm/",
+                "three/examples/": "https://cdn.jsdelivr.net/npm/three@0.164.0/examples/"
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="instructions">
+    <h1>Icosa Viewer</h1>
+    <p>Click to enable controls</p>
+    <p>WASD = Move, QA = Up/Down, Mouse = Look, ESC = Exit controls</p>
+</div>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { GLTFGoogleTiltBrushMaterialExtension } from './three-icosa.module.js';
+    import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+    import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
+    import { PerspectiveCamera, Scene, WebGLRenderer } from "three";
+
+    const scene = new Scene();
+    const gltfLoader = new GLTFLoader();
+
+    let assetUrl = 'https://icosa-foundation.github.io/icosa-sketch-assets/brushes/';
+    gltfLoader.register(parser => new GLTFGoogleTiltBrushMaterialExtension(parser, assetUrl));
+
+    const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    scene.add(camera);
+
+    function frameScene(object) {
+        const boundingBox = new THREE.Box3().setFromObject(object);
+        const center = boundingBox.getCenter(new THREE.Vector3());
+        const size = boundingBox.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const fov = camera.fov * (Math.PI / 180);
+        const cameraDistance = Math.abs(maxDim / (2 * Math.tan(fov / 2)));
+        const direction = new THREE.Vector3(1, 0.5, 1).normalize();
+        if (controls) {
+            controls.getObject().position.copy(center).add(direction.multiplyScalar(cameraDistance * 1.2));
+        } else {
+            camera.position.copy(center).add(direction.multiplyScalar(cameraDistance * 1.2));
+        }
+    }
+
+    gltfLoader.load('all_brushes.glb', (model) => {
+        scene.add(model.scene);
+        frameScene(model.scene);
+    });
+
+    const renderer = new WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    let controls;
+    function initControls() {
+        controls = new PointerLockControls(camera, renderer.domElement);
+        controls.minPolarAngle = 0.01;
+        controls.maxPolarAngle = Math.PI - 0.01;
+        controls.pointerSpeed = 0.01;
+        const instructions = document.getElementById('instructions');
+        controls.addEventListener('lock', () => instructions.classList.add('hidden'));
+        controls.addEventListener('unlock', () => instructions.classList.remove('hidden'));
+        renderer.domElement.addEventListener('click', () => {
+            if (document.pointerLockElement !== renderer.domElement) controls.lock();
+        });
+    }
+
+    const movementSpeed = 5.0;
+    const moveState = { forward: false, backward: false, left: false, right: false, up: false, down: false };
+
+    initControls();
+    const keyMap = { KeyW: 'forward', KeyA: 'left', KeyS: 'backward', KeyD: 'right', KeyQ: 'up', KeyE: 'down' };
+    ['keydown', 'keyup'].forEach(eventType => {
+        document.addEventListener(eventType, (event) => {
+            const key = keyMap[event.code];
+            if (key) moveState[key] = (eventType === 'keydown');
+        });
+    });
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    const clock = new THREE.Clock();
+    function animate() {
+        requestAnimationFrame(animate);
+        if (controls && controls.isLocked) {
+            const delta = clock.getDelta();
+            const speed = movementSpeed * delta;
+            const z = Number(moveState.forward) - Number(moveState.backward);
+            const x = Number(moveState.right) - Number(moveState.left);
+            const y = Number(moveState.up) - Number(moveState.down);
+
+            if (z !== 0 || x !== 0 || y !== 0) {
+                const horizontalLength = z !== 0 && x !== 0 ? Math.SQRT1_2 : 1;
+                const forward = new THREE.Vector3();
+                controls.getObject().getWorldDirection(forward);
+                forward.y = 0;
+                forward.normalize();
+                const right = new THREE.Vector3();
+                right.crossVectors(forward, new THREE.Vector3(0, 1, 0)).normalize();
+                const movement = new THREE.Vector3();
+                movement.addScaledVector(forward, z * speed * horizontalLength);
+                movement.addScaledVector(right, x * speed * horizontalLength);
+                movement.y += y * speed;
+                controls.getObject().position.add(movement);
+            }
+        }
+        renderer.render(scene, camera);
+    }
+    animate();
+
+</script>
+<div id="icosa-viewer"></div>
+</body>
+</html>
