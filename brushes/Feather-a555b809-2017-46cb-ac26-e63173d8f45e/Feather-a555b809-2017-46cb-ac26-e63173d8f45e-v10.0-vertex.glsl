@@ -13,18 +13,18 @@
 // limitations under the License.
 
 // DefaultVS.glsl
-attribute vec4 a_position;
-attribute vec3 a_normal;
-attribute vec4 a_color;
-attribute vec2 a_texcoord0;
+in vec4 a_position;
+in vec3 a_normal;
+in vec4 a_color;
+in vec2 a_texcoord0;
 
-varying vec4 v_color;
-varying vec3 v_normal;  // Camera-space normal.
-varying vec3 v_position;  // Camera-space position.
-varying vec2 v_texcoord0;
-varying vec3 v_light_dir_0;  // Camera-space light direction, main light.
-varying vec3 v_light_dir_1;  // Camera-space light direction, other light.
-varying float f_fog_coord;
+out vec4 v_color;
+out vec3 v_normal;  // Camera-space normal.
+out vec3 v_position;  // Camera-space position.
+out vec2 v_texcoord0;
+out vec3 v_light_dir_0;  // Camera-space light direction, main light.
+out vec3 v_light_dir_1;  // Camera-space light direction, other light.
+out float f_fog_coord;
 
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;

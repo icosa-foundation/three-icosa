@@ -1,5 +1,6 @@
-#define TB_EMISSION_GAIN 0.5
+
 // Copyright 2020 The Tilt Brush Authors
+// Updated to OpenGL ES 3.0 by the Icosa Gallery Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,13 +14,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Additive.glsl
+// Brush-specific shader for GlTF web preview, based on EmissiveAlpha generator.
+
 precision mediump float;
 
-uniform sampler2D u_MainTex;
+out vec4 fragColor;
 
-varying vec4 v_color;
-varying vec2 v_texcoord0;
+uniform sampler2D u_MainTex;
+uniform vec4 u_time;
+uniform float u_EmissionGain;
+
+in vec4 v_color;
+in vec2 v_texcoord0;
+
 
 vec4 bloomColor(vec4 color, float gain) {
   // Guarantee that there's at least a little bit of all 3 channels.
@@ -38,7 +45,17 @@ vec4 bloomColor(vec4 color, float gain) {
 }
 
 void main() {
-  const float emission_gain = TB_EMISSION_GAIN;
-  float brush_mask = texture2D(u_MainTex, v_texcoord0).w;
-  gl_FragColor = brush_mask * bloomColor(v_color, emission_gain);
+  float _Scroll1 = 20.0;
+  float _Scroll2 = 0.0;
+  vec4 _Time = u_time;
+  float _DisplacementIntensity = 0.1;
+
+  // Should be done in vertex shader
+  vec4 bloomed_v_color = bloomColor(v_color, u_EmissionGain);
+
+  float displacement = texture(u_MainTex, v_texcoord0.xy + vec2(-_Time.x * _Scroll1, 0.0)  ).a;
+  vec4 tex = texture(u_MainTex, v_texcoord0.xy + vec2(-_Time.x * _Scroll2, 0) - displacement * _DisplacementIntensity);
+
+  fragColor = bloomed_v_color * tex;
+  // fragColor = vec4(fragColor.rgb * fragColor.a * 5.0, tex.a);
 }

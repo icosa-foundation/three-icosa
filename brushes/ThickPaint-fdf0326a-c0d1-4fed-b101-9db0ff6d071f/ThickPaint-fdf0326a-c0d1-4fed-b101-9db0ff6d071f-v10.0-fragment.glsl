@@ -27,12 +27,12 @@ uniform float u_Shininess;
 uniform float u_Cutoff;
 uniform sampler2D u_MainTex;
 
-varying vec4 v_color;
-varying vec3 v_normal;
-varying vec3 v_position;
-varying vec3 v_light_dir_0;
-varying vec3 v_light_dir_1;
-varying vec2 v_texcoord0;
+out vec4 v_color;
+out vec3 v_normal;
+out vec3 v_position;
+out vec3 v_light_dir_0;
+out vec3 v_light_dir_1;
+out vec2 v_texcoord0;
 
 float dispAmount = .0015;
 
@@ -53,7 +53,7 @@ float dispAmount = .0015;
 // Fogging support
 uniform vec3 u_fogColor;
 uniform float u_fogDensity;
-varying float f_fog_coord;
+out float f_fog_coord;
 
 // This fog function emulates the exponential fog used in Tilt Brush
 //
@@ -149,9 +149,9 @@ vec3 PerturbNormal(vec3 position, vec3 normal, vec2 uv)
   vec2 STlr = uv + d * texDx;
   vec2 STul = uv + d * texDy;
 
-  highp float Hll = texture2D(u_BumpMap, STll).x;
-  highp float Hlr = texture2D(u_BumpMap, STlr).x;
-  highp float Hul = texture2D(u_BumpMap, STul).x;
+  highp float Hll = texture(u_BumpMap, STll).x;
+  highp float Hlr = texture(u_BumpMap, STlr).x;
+  highp float Hul = texture(u_BumpMap, STul).x;
 
   Hll = mix(Hll, 1. - Hll, float(!gl_FrontFacing)) * dispAmount;
   Hlr = mix(Hlr, 1. - Hlr, float(!gl_FrontFacing)) * dispAmount;
@@ -362,7 +362,7 @@ vec3 computeLighting(vec3 normal) {
 }
 
 void main() {
-  float brush_mask = texture2D(u_MainTex, v_texcoord0).w;
+  float brush_mask = texture(u_MainTex, v_texcoord0).w;
   brush_mask *= v_color.w;
 
   // WARNING: PerturbNormal uses derivatives and must not be called conditionally.
@@ -370,8 +370,8 @@ void main() {
 
   // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below, 
   // causing issues on some hardware/drivers. So we compute lighting just to discard it later.
-  gl_FragColor.rgb = ApplyFog(computeLighting(normal));
-  gl_FragColor.a = 1.0;
+  v_color.rgb = ApplyFog(computeLighting(normal));
+  v_color.a = 1.0;
 
   // This must come last to ensure PerturbNormal is called uniformly for all invocations.
   if (brush_mask <= u_Cutoff) {
