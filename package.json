@@ -1,6 +1,6 @@
 {
   "name": "three-icosa",
-  "version": "0.4.2-alpha.16",
+  "version": "0.4.2-alpha.17",
   "description": "Implements Tilt Brush/Open Brush related glTF extensions in three.js",
   "scripts": {
     "watch": "parcel watch",
