@@ -71,12 +71,16 @@ class $cf098bb13503440d$export$bcc22bf437a07d8f extends $a0PbU$Loader {
     parse(rawMaterial) {
         return rawMaterial;
     }
-    lookupMaterial(nameOrGuid) {
+    lookupMaterialParams(materialName) {
+        return $cf098bb13503440d$var$tiltBrushMaterialParams[materialName] || null;
+    }
+    lookupMaterialName(nameOrGuid) {
         // Open Brush "new glb" exports prefix the material names
-        if (nameOrGuid.startsWith("ob-")) nameOrGuid = nameOrGuid.substring(3);
+        if (nameOrGuid?.startsWith("ob-")) nameOrGuid = nameOrGuid.substring(3);
         switch(nameOrGuid){
             // Standard brushes
             case "BlocksBasic:":
+            case "BlocksPaper":
             case "0e87b49c-6546-3a34-3a44-8a556d7d6c3e":
                 return "BlocksBasic";
             case "BlocksGem":
@@ -7540,9 +7544,14 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
             if (extensionsDef?.[this.name]) nameOrGuid = extensionsDef[this.name].guid;
             else if (material.name.startsWith("material_")) nameOrGuid = material.name.replace("material_", "");
             else if (material.name.startsWith("ob-")) nameOrGuid = material.name.replace("ob-", "");
-            const materialParams = this.tiltShaderLoader.lookupMaterial(nameOrGuid);
+            else {
+                let newName = this.tryReplaceBlocksName(material.name);
+                if (newName !== undefined) nameOrGuid = newName;
+            }
+            const materialName = this.tiltShaderLoader.lookupMaterialName(nameOrGuid);
+            const materialParams = this.tiltShaderLoader.lookupMaterialParams(materialName);
             if (materialParams === undefined) {
-                console.log("No material params found", nameOrGuid);
+                console.log(`No material params found: ${nameOrGuid} (${materialName})`);
                 return;
             }
             // MainTex
@@ -7578,12 +7587,26 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                 // Maybe we should pass in a flag when a tilt gltf is detected?
                 // Do names in this format use guids or english names?
                 brushName = material.name.replace("material_", "");
-                else brushName = extensionsDef[this.name].guid;
+                else if (extensionsDef) {
+                    let exDef = extensionsDef[this.name];
+                    if (exDef !== undefined) brushName = exDef.guid;
+                }
+                let newName = this.tryReplaceBlocksName(material.name);
+                if (newName !== undefined) brushName = newName;
+                console.log(`newName: ${newName} brushName: ${brushName} material.name: ${material.name}`);
                 if (brushName !== undefined) shaderResolves.push(this.replaceMaterial(object, brushName));
                 else console.warn("No brush name found for material", material.name, brushName);
             });
         });
         return Promise.all(shaderResolves);
+    }
+    tryReplaceBlocksName(originalName) {
+        // Handle naming embedded models exported from newer Open Brush versions
+        let newName;
+        if (originalName.includes("_BlocksPaper ")) newName = "BlocksPaper";
+        else if (originalName.includes("_BlocksGlass ")) newName = "BlocksGlass";
+        else if (originalName.includes("_BlocksGem ")) newName = "BlocksGem";
+        return newName;
     }
     isTiltGltf(json) {
         let isTiltGltf = false;
@@ -7598,6 +7621,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
         switch(guid){
             case "0e87b49c-6546-3a34-3a44-8a556d7d6c3e":
             case "BlocksBasic":
+            case "BlocksPaper":
                 mesh.geometry.name = "geometry_BlocksBasic";
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));

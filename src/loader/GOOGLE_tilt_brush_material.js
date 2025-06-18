@@ -60,11 +60,19 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             } else if (material.name.startsWith('ob-')) {
                 nameOrGuid = material.name.replace('ob-', '');
             }
+            else
+            {
+                let newName = this.tryReplaceBlocksName(material.name);
+                if (newName !== undefined) {
+                    nameOrGuid = newName;
+                }
+            }
 
-            const materialParams = this.tiltShaderLoader.lookupMaterial(nameOrGuid);
+            const materialName = this.tiltShaderLoader.lookupMaterialName(nameOrGuid);
+            const materialParams = this.tiltShaderLoader.lookupMaterialParams(materialName);
 
             if (materialParams === undefined) {
-                console.log("No material params found", nameOrGuid);
+                console.warn(`No material params found: ${nameOrGuid} (${materialName})`);
                 return;
             }
 
@@ -120,8 +128,16 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                         // Maybe we should pass in a flag when a tilt gltf is detected?
                         // Do names in this format use guids or english names?
                         brushName = material.name.replace('material_', '');
-                    } else {
-                        brushName = extensionsDef[this.name].guid;
+                    } else if (extensionsDef) {
+                        let exDef = extensionsDef[this.name];
+                        if (exDef !== undefined) {
+                            brushName = exDef.guid;
+                        }
+                    }
+
+                    let newName = this.tryReplaceBlocksName(material.name);
+                    if (newName !== undefined) {
+                        brushName = newName;
                     }
 
                     if (brushName !== undefined) {
@@ -134,6 +150,19 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         }
 
         return Promise.all(shaderResolves);
+    }
+
+    tryReplaceBlocksName(originalName) {
+        // Handle naming embedded models exported from newer Open Brush versions
+        let newName;
+        if (originalName.includes('_BlocksPaper ')) {
+            newName = ('BlocksPaper');
+        } else if (originalName.includes('_BlocksGlass ')) {
+            newName = ('BlocksGlass');
+        } else if (originalName.includes('_BlocksGem ')) {
+            newName = ('BlocksGem');
+        }
+        return newName;
     }
 
     isTiltGltf(json) {
@@ -151,6 +180,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         switch(guid) {
             case "0e87b49c-6546-3a34-3a44-8a556d7d6c3e":
             case "BlocksBasic":
+            case "BlocksPaper":
                 mesh.geometry.name = "geometry_BlocksBasic";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
