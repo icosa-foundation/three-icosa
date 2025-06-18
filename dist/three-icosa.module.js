@@ -7551,7 +7551,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
             const materialName = this.tiltShaderLoader.lookupMaterialName(nameOrGuid);
             const materialParams = this.tiltShaderLoader.lookupMaterialParams(materialName);
             if (materialParams === undefined) {
-                console.log(`No material params found: ${nameOrGuid} (${materialName})`);
+                console.warn(`No material params found: ${nameOrGuid} (${materialName})`);
                 return;
             }
             // MainTex
@@ -7593,7 +7593,6 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                 }
                 let newName = this.tryReplaceBlocksName(material.name);
                 if (newName !== undefined) brushName = newName;
-                console.log(`newName: ${newName} brushName: ${brushName} material.name: ${material.name}`);
                 if (brushName !== undefined) shaderResolves.push(this.replaceMaterial(object, brushName));
                 else console.warn("No brush name found for material", material.name, brushName);
             });
