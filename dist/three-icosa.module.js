@@ -7550,7 +7550,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
             }
             const materialName = this.tiltShaderLoader.lookupMaterialName(nameOrGuid);
             const materialParams = this.tiltShaderLoader.lookupMaterialParams(materialName);
-            if (materialParams === undefined) {
+            if (!materialParams) {
                 console.warn(`No material params found: ${nameOrGuid} (${materialName})`);
                 return;
             }
