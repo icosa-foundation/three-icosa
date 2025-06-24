@@ -209,6 +209,10 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 colorAttribute = new THREE.BufferAttribute(normalizedColors, itemSize, true);
                 mesh.geometry.setAttribute("a_color", colorAttribute);
             }
+            else
+            {
+                mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
+            }
         }
 
         let shader;

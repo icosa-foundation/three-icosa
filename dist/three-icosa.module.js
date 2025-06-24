@@ -72,7 +72,6 @@ class $cf098bb13503440d$export$bcc22bf437a07d8f extends $a0PbU$Loader {
         return rawMaterial;
     }
     lookupMaterialParams(materialName) {
-        console.log(`material Name: ${materialName} params: ${$cf098bb13503440d$var$tiltBrushMaterialParams[materialName] || null}`);
         return $cf098bb13503440d$var$tiltBrushMaterialParams[materialName] || null;
     }
     lookupMaterialName(nameOrGuid) {
@@ -7578,7 +7577,6 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
             mesh.primitives.forEach((prim)=>{
                 if (prim.material === null || prim.material === undefined) return;
                 const material = json.materials[prim.material];
-                console.log(`Processing material ${material.name} on ${object.name}`);
                 const extensionsDef = material.extensions;
                 let brushName;
                 if (material.name.startsWith("ob-")) // New glb naming convention
@@ -7594,11 +7592,8 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                 }
                 let newName = this.tryReplaceBlocksName(material.name);
                 if (newName !== undefined) brushName = newName;
-                console.log(`Replacing material on ${material.name} brush ${brushName}`);
-                if (brushName !== undefined) {
-                    console.log(`Before: ${object.material.name}`);
-                    shaderResolves.push(this.replaceMaterial(object, brushName));
-                } else console.warn("No brush name found for material", material.name, brushName);
+                if (brushName !== undefined) shaderResolves.push(this.replaceMaterial(object, brushName));
+                else console.warn("No brush name found for material", material.name, brushName);
             });
         });
         return Promise.all(shaderResolves);
@@ -7642,7 +7637,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                 }
                 colorAttribute = new THREE.BufferAttribute(normalizedColors, itemSize, true);
                 mesh.geometry.setAttribute("a_color", colorAttribute);
-            }
+            } else mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
         };
         let shader;
         switch(guidOrName){
