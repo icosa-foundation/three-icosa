@@ -1015,13 +1015,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true,
         depthTest: true,
-        blending: 5,
-        blendDstAlpha: 201,
-        blendDst: 201,
-        blendEquationAlpha: 100,
-        blendEquation: 100,
-        blendSrcAlpha: 201,
-        blendSrc: 201,
+        blending: 0,
     },
     "Highlighter" : {
         uniforms: {
