@@ -1,4 +1,4 @@
-import {FileLoader as $a0PbU$FileLoader, TextureLoader as $a0PbU$TextureLoader, GLSL3 as $a0PbU$GLSL3, RepeatWrapping as $a0PbU$RepeatWrapping, UniformsLib as $a0PbU$UniformsLib, RawShaderMaterial as $a0PbU$RawShaderMaterial, Loader as $a0PbU$Loader, Vector4 as $a0PbU$Vector4, Vector3 as $a0PbU$Vector3, Clock as $a0PbU$Clock} from "three";
+import {FileLoader as $a0PbU$FileLoader, TextureLoader as $a0PbU$TextureLoader, GLSL3 as $a0PbU$GLSL3, RepeatWrapping as $a0PbU$RepeatWrapping, UniformsLib as $a0PbU$UniformsLib, RawShaderMaterial as $a0PbU$RawShaderMaterial, Loader as $a0PbU$Loader, Vector4 as $a0PbU$Vector4, Vector3 as $a0PbU$Vector3, Clock as $a0PbU$Clock, BufferAttribute as $a0PbU$BufferAttribute} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -7637,7 +7637,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                     normalizedColors[i * itemSize + 2] = Math.round(linearToSRGB(src[i * itemSize + 2]) * 255); // B
                     if (itemSize > 3) normalizedColors[i * itemSize + 3] = Math.round(src[i * itemSize + 3] * 255); // A (linear)
                 }
-                colorAttribute = new THREE.BufferAttribute(normalizedColors, itemSize, true);
+                colorAttribute = new (0, $a0PbU$BufferAttribute)(normalizedColors, itemSize, true);
                 mesh.geometry.setAttribute("a_color", colorAttribute);
             } else mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
         };
