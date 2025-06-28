@@ -7616,8 +7616,10 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
     }
     async replaceMaterial(mesh, guidOrName) {
         let renameAttribute = (mesh, oldName, newName)=>{
-            if (mesh.geometry.getAttribute(oldName)) mesh.geometry.setAttribute(newName, mesh.geometry.getAttribute(oldName));
-            delete mesh.oldName;
+            if (mesh.geometry.getAttribute(oldName)) {
+                mesh.geometry.setAttribute(newName, mesh.geometry.getAttribute(oldName));
+                mesh.geometry.deleteAttribute(oldName);
+            }
         };
         let copyFixColorAttribute = (mesh)=>{
             function linearToSRGB(x) {
