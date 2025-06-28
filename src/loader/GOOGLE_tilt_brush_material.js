@@ -179,8 +179,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         let renameAttribute = (mesh, oldName, newName) => {
             if (mesh.geometry.getAttribute(oldName)) {
                 mesh.geometry.setAttribute(newName, mesh.geometry.getAttribute(oldName));
+                mesh.geometry.deleteAttribute(oldName);
             }
-            delete mesh.oldName;
         };
 
         let copyFixColorAttribute = (mesh) => {
