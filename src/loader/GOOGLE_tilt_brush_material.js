@@ -14,7 +14,8 @@
 
 import {
     Vector4,
-    Clock
+    Clock,
+    BufferAttribute,
 } from 'three';
 
 import { TiltShaderLoader } from '../TiltShaderLoader.js';
@@ -206,7 +207,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                         normalizedColors[i * itemSize + 3] = Math.round(src[i * itemSize + 3] * 255); // A (linear)
                     }
                 }
-                colorAttribute = new THREE.BufferAttribute(normalizedColors, itemSize, true);
+                colorAttribute = new BufferAttribute(normalizedColors, itemSize, true);
                 mesh.geometry.setAttribute("a_color", colorAttribute);
             }
             else
