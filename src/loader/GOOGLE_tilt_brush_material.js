@@ -33,7 +33,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         }
 
         this.tiltShaderLoader = new TiltShaderLoader(parser.options.manager);
-        this.tiltShaderLoader.setPath(brushPath);
+        this.tiltShaderLoader.setPath(this.brushPath);
         this.clock = new Clock();
     }
 

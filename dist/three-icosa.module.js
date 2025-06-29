@@ -7526,7 +7526,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
         // Quick repair of path if required
         if (this.brushPath.slice(this.brushPath.length - 1) !== "/") this.brushPath += "/";
         this.tiltShaderLoader = new (0, $cf098bb13503440d$export$bcc22bf437a07d8f)(parser.options.manager);
-        this.tiltShaderLoader.setPath(brushPath);
+        this.tiltShaderLoader.setPath(this.brushPath);
         this.clock = new (0, $a0PbU$Clock)();
     }
     beforeRoot() {
