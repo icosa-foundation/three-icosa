@@ -1,4 +1,4 @@
-import {FileLoader as $a0PbU$FileLoader, TextureLoader as $a0PbU$TextureLoader, GLSL3 as $a0PbU$GLSL3, RepeatWrapping as $a0PbU$RepeatWrapping, UniformsLib as $a0PbU$UniformsLib, RawShaderMaterial as $a0PbU$RawShaderMaterial, Loader as $a0PbU$Loader, Vector4 as $a0PbU$Vector4, Vector3 as $a0PbU$Vector3, Clock as $a0PbU$Clock} from "three";
+import {FileLoader as $a0PbU$FileLoader, TextureLoader as $a0PbU$TextureLoader, GLSL3 as $a0PbU$GLSL3, RepeatWrapping as $a0PbU$RepeatWrapping, UniformsLib as $a0PbU$UniformsLib, RawShaderMaterial as $a0PbU$RawShaderMaterial, Loader as $a0PbU$Loader, Vector4 as $a0PbU$Vector4, Vector3 as $a0PbU$Vector3, Clock as $a0PbU$Clock, BufferAttribute as $a0PbU$BufferAttribute} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -242,10 +242,10 @@ class $cf098bb13503440d$export$bcc22bf437a07d8f extends $a0PbU$Loader {
             case "b468c1fb-f254-41ed-8ec9-57030bc5660c":
             case "c8ccb53d-ae13-45ef-8afb-b730d81394eb":
                 return "TaperedFlat";
-            case "TaperedMarker":
+            case "TaperedMarker_Flat":
             case "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c":
             case "1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0":
-                return "TaperedMarker";
+                return "TaperedMarker_Flat";
             case "ThickPaint":
             case "75b32cf0-fdd6-4d89-a64b-e2a00b247b0f":
             case "fdf0326a-c0d1-4fed-b101-9db0ff6d071f":
@@ -3867,7 +3867,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
         depthTest: true,
         blending: 0
     },
-    "TaperedMarker": {
+    "TaperedMarker_Flat": {
         uniforms: {
             u_SceneLight_0_matrix: {
                 value: [
@@ -4332,78 +4332,71 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
     },
     "WetPaint": {
         uniforms: {
-            u_SceneLight_0_matrix: {
-                value: [
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                ]
+            u_BumpMap: {
+                value: "WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3/WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3-v10.0-BumpMap.png"
             },
-            u_SceneLight_1_matrix: {
-                value: [
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                ]
+            u_BumpScale: {
+                value: 1.0
             },
-            u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
-            },
-            u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
-            },
-            u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
-            },
-            u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.1397059, 0.1397059, 0.1397059)
-            },
-            u_Shininess: {
-                value: 0.85
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.3
             },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
             u_MainTex: {
                 value: "WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3/WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3-v10.0-MainTex.png"
             },
-            u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+            u_Metallic: {
+                value: 0.0
             },
-            u_fogDensity: {
-                value: 0
+            u_Mode: {
+                value: 0.0
             },
-            u_BumpMap: {
-                value: "WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3/WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3-v10.0-BumpMap.png"
+            u_OcclusionStrength: {
+                value: 1.0
             },
-            u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.85
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.139706, 0.139706, 0.139706)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3/WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3-v10.0-vertex.glsl",
@@ -4592,6 +4585,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
@@ -4651,11 +4653,86 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b/Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b-v10.0-BumpMap.png"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b/Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.01
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b/Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b-v10.0-vertex.glsl",
@@ -4710,11 +4787,77 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DisplacementIntensity: {
+                value: 0.1
+            },
+            u_EmissionGain: {
+                value: 0.25
+            },
+            u_InvFade: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a/MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a-v10.0-MainTex.png"
+            },
+            u_Opacity: {
+                value: 1.0
+            },
+            u_OverrideTime: {
+                value: 0.0
+            },
+            u_Scroll1: {
+                value: 2.0
+            },
+            u_Scroll2: {
+                value: -2
+            },
+            u_ScrollJitterFrequency: {
+                value: 1.0
+            },
+            u_ScrollJitterIntensity: {
+                value: 3.0
+            },
+            u_ScrollRate: {
+                value: -0.54
+            },
+            u_Shininess: {
+                value: 0.68
+            },
+            u_Smoothness: {
+                value: 0.078125
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.75, 0.75, 0.75)
+            },
+            u_SqueezeAmount: {
+                value: 0.873
+            },
+            u_Strength: {
+                value: 0.5
+            },
+            u_TintColor: {
+                value: new (0, $a0PbU$Vector4)(0.617647, 0.617647, 0.617647, 1)
             }
         },
         vertexShader: "MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a/MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a-v10.0-vertex.glsl",
@@ -4769,11 +4912,101 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_AlphaMask: {
+                value: "Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f/Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f-v10.0-MainTex.png"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DisplacementIntensity: {
+                value: 0.1
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_EmissionGain: {
+                value: 1.0
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f/Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_NumSides: {
+                value: 6.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Scroll1: {
+                value: 2.0
+            },
+            u_Scroll2: {
+                value: 3.0
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_Speed: {
+                value: 4.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_StretchDistortionExponent: {
+                value: 3.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f/Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f-v10.0-vertex.glsl",
@@ -4828,11 +5061,86 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "DryBrush-725f4c6a-6427-6524-29ab-da371924adab/DryBrush-725f4c6a-6427-6524-29ab-da371924adab-v10.0-BumpMap.jpg"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.2
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "DryBrush-725f4c6a-6427-6524-29ab-da371924adab/DryBrush-725f4c6a-6427-6524-29ab-da371924adab-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.05
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "DryBrush-725f4c6a-6427-6524-29ab-da371924adab/DryBrush-725f4c6a-6427-6524-29ab-da371924adab-v10.0-vertex.glsl",
@@ -4887,11 +5195,95 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(0.441176, 0.441176, 0.441176, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_LineColor: {
+                value: new (0, $a0PbU$Vector4)(0.151581, 0.62766, 0.941176, 1)
+            },
+            u_MainTex: {
+                value: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Ratio: {
+                value: 0.57
+            },
+            u_SecondaryTex: {
+                value: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-u_SecondaryTex.png"
+            },
+            u_Shininess: {
+                value: 0.01
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SqueezeAmount: {
+                value: 0.9
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-vertex.glsl",
@@ -4946,11 +5338,95 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DisplacementAmount: {
+                value: 1.45
+            },
+            u_DisplacementExponent: {
+                value: 2.84
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_EmissionGain: {
+                value: 0.723
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Sparks-50e99447-3861-05f4-697d-a1b96e771b98/Sparks-50e99447-3861-05f4-697d-a1b96e771b98-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_NumSides: {
+                value: 4.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_Speed: {
+                value: 11.78
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_StretchDistortionExponent: {
+                value: 1.73
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Sparks-50e99447-3861-05f4-697d-a1b96e771b98/Sparks-50e99447-3861-05f4-697d-a1b96e771b98-v10.0-vertex.glsl",
@@ -5005,11 +5481,80 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Wind-7136a729-1aab-bd24-f8b2-ca88b6adfb67/Wind-7136a729-1aab-bd24-f8b2-ca88b6adfb67-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_Speed: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Wind-7136a729-1aab-bd24-f8b2-ca88b6adfb67/Wind-7136a729-1aab-bd24-f8b2-ca88b6adfb67-v10.0-vertex.glsl",
@@ -5064,11 +5609,125 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BaseGain: {
+                value: 0.4
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_EmissionGain: {
+                value: 300.0
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Rising Bubbles-a8147ce1-005e-abe4-88e8-09a1eaadcc89/Rising Bubbles-a8147ce1-005e-abe4-88e8-09a1eaadcc89-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Opacity: {
+                value: 1.0
+            },
+            u_OverrideTime: {
+                value: 0.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_ScrollDistance: {
+                value: new (0, $a0PbU$Vector4)(0.5, 5, 0, 0.5)
+            },
+            u_ScrollJitterFrequency: {
+                value: 5.0
+            },
+            u_ScrollJitterIntensity: {
+                value: 0.2
+            },
+            u_ScrollRate: {
+                value: 0.1
+            },
+            u_Shininess: {
+                value: 0.078125
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SparkleRate: {
+                value: 2.5
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.5, 0.5, 0.5)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SpreadRate: {
+                value: 1.25
+            },
+            u_SpreadSize: {
+                value: 1.25
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_TintColor: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_WaveformFreq: {
+                value: 0.1
+            },
+            u_WaveformIntensity: {
+                value: new (0, $a0PbU$Vector4)(0, 15, 0, 0)
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Rising%20Bubbles-a8147ce1-005e-abe4-88e8-09a1eaadcc89/Rising%20Bubbles-a8147ce1-005e-abe4-88e8-09a1eaadcc89-v10.0-vertex.glsl",
@@ -5123,11 +5782,83 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e/TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.1
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.0955882, 0.0955882, 0.0955882)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e/TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e-v10.0-vertex.glsl",
@@ -5182,11 +5913,86 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa/SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa-v10.0-BumpMap.png"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.16
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa/SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.145
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa/SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa-v10.0-vertex.glsl",
@@ -5241,11 +6047,89 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3/ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3-v10.0-BumpMap.png"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(0.705882, 0.705882, 0.705882, 1)
+            },
+            u_Cutoff: {
+                value: 0.2
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3/ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_SelectionEdging: {
+                value: 1.0
+            },
+            u_Shininess: {
+                value: 0.414
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.537255, 0.537255, 0.537255)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3/ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3-v10.0-vertex.glsl",
@@ -5300,6 +6184,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
@@ -5309,242 +6202,6 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
         },
         vertexShader: "Wireframe-2c1a6a63-6552-4d23-86d7-58f6fba8581b/Wireframe-2c1a6a63-6552-4d23-86d7-58f6fba8581b-v10.0-vertex.glsl",
         fragmentShader: "Wireframe-2c1a6a63-6552-4d23-86d7-58f6fba8581b/Wireframe-2c1a6a63-6552-4d23-86d7-58f6fba8581b-v10.0-fragment.glsl",
-        side: 1,
-        transparent: null,
-        depthFunc: 1,
-        depthWrite: null,
-        depthTest: null,
-        blending: 1
-    },
-    "CandyCane": {
-        // TODO Uniforms: CandyCane
-        uniforms: {
-            u_SceneLight_0_matrix: {
-                value: [
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                ]
-            },
-            u_SceneLight_1_matrix: {
-                value: [
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                ]
-            },
-            u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
-            },
-            u_fogDensity: {
-                value: 0
-            }
-        },
-        vertexShader: "CandyCane-61d2ef63-ed60-49b3-85fb-7267b7d234f2/CandyCane-61d2ef63-ed60-49b3-85fb-7267b7d234f2-v10.0-vertex.glsl",
-        fragmentShader: "CandyCane-61d2ef63-ed60-49b3-85fb-7267b7d234f2/CandyCane-61d2ef63-ed60-49b3-85fb-7267b7d234f2-v10.0-fragment.glsl",
-        side: 1,
-        transparent: null,
-        depthFunc: 1,
-        depthWrite: null,
-        depthTest: null,
-        blending: 1
-    },
-    "HolidayTree": {
-        // TODO Uniforms: HolidayTree
-        uniforms: {
-            u_SceneLight_0_matrix: {
-                value: [
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                ]
-            },
-            u_SceneLight_1_matrix: {
-                value: [
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                ]
-            },
-            u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
-            },
-            u_fogDensity: {
-                value: 0
-            }
-        },
-        vertexShader: "HolidayTree-20a0bf1a-a96e-44e5-84ac-9823d2d65023/HolidayTree-20a0bf1a-a96e-44e5-84ac-9823d2d65023-v10.0-vertex.glsl",
-        fragmentShader: "HolidayTree-20a0bf1a-a96e-44e5-84ac-9823d2d65023/HolidayTree-20a0bf1a-a96e-44e5-84ac-9823d2d65023-v10.0-fragment.glsl",
-        side: 1,
-        transparent: null,
-        depthFunc: 1,
-        depthWrite: null,
-        depthTest: null,
-        blending: 1
-    },
-    "Snowflake": {
-        // TODO Uniforms: Snowflake
-        uniforms: {
-            u_SceneLight_0_matrix: {
-                value: [
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                ]
-            },
-            u_SceneLight_1_matrix: {
-                value: [
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                ]
-            },
-            u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
-            },
-            u_fogDensity: {
-                value: 0
-            }
-        },
-        vertexShader: "Snowflake-2b65cd94-9259-4f10-99d2-d54b6664ac33/Snowflake-2b65cd94-9259-4f10-99d2-d54b6664ac33-v10.0-vertex.glsl",
-        fragmentShader: "Snowflake-2b65cd94-9259-4f10-99d2-d54b6664ac33/Snowflake-2b65cd94-9259-4f10-99d2-d54b6664ac33-v10.0-fragment.glsl",
-        side: 1,
-        transparent: null,
-        depthFunc: 1,
-        depthWrite: null,
-        depthTest: null,
-        blending: 1
-    },
-    "Braid3": {
-        // TODO Uniforms: Braid3
-        uniforms: {
-            u_SceneLight_0_matrix: {
-                value: [
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                ]
-            },
-            u_SceneLight_1_matrix: {
-                value: [
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                ]
-            },
-            u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
-            },
-            u_fogDensity: {
-                value: 0
-            }
-        },
-        vertexShader: "Braid3-22d4f434-23e4-49d9-a9bd-05798aa21e58/Braid3-22d4f434-23e4-49d9-a9bd-05798aa21e58-v10.0-vertex.glsl",
-        fragmentShader: "Braid3-22d4f434-23e4-49d9-a9bd-05798aa21e58/Braid3-22d4f434-23e4-49d9-a9bd-05798aa21e58-v10.0-fragment.glsl",
         side: 1,
         transparent: null,
         depthFunc: 1,
@@ -5595,11 +6252,86 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3/Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3-v10.0-BumpMap.png"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.3
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.305
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3/Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.57
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.0808824, 0.0808824, 0.0808824)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3/Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3-v10.0-vertex.glsl",
@@ -5654,11 +6386,86 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5/Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5-v10.0-BumpMap.png"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.3
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.305
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5/Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.743
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.237457, 0.257941, 0.264706)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5/Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5-v10.0-vertex.glsl",
@@ -5713,11 +6520,56 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_DisplaceTex: {
+                value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-DisplaceTex.png"
+            },
+            u_DisplaceTex2: {
+                value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-DisplaceTex2.png"
+            },
+            u_DisplacementIntensity: {
+                value: 0.04
+            },
+            u_EmissionGain: {
+                value: 0.405
+            },
+            u_FlameFadeMax: {
+                value: 30.0
+            },
+            u_FlameFadeMin: {
+                value: 8.53
+            },
+            u_InvFade: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-MainTex.png"
+            },
+            u_Scroll1: {
+                value: 15.0
+            },
+            u_Scroll2: {
+                value: 8.0
+            },
+            u_TintColor: {
+                value: new (0, $a0PbU$Vector4)(0.617647, 0.617647, 0.617647, 1)
             }
         },
         vertexShader: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-vertex.glsl",
@@ -5771,6 +6623,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
@@ -5831,6 +6692,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
@@ -5889,6 +6759,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
@@ -5949,11 +6828,62 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DisplacementIntensity: {
+                value: 0.1
+            },
+            u_EmissionGain: {
+                value: 0.25
+            },
+            u_InvFade: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4/BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4-v10.0-MainTex.png"
+            },
+            u_Scroll1: {
+                value: 2.0
+            },
+            u_Scroll2: {
+                value: -2
+            },
+            u_ScrollJitterFrequency: {
+                value: 1.0
+            },
+            u_ScrollJitterIntensity: {
+                value: 3.0
+            },
+            u_ScrollRate: {
+                value: -0.54
+            },
+            u_Smoothness: {
+                value: 0.078125
+            },
+            u_Strength: {
+                value: 0.5
+            },
+            u_TintColor: {
+                value: new (0, $a0PbU$Vector4)(0.617647, 0.617647, 0.617647, 1)
             }
         },
         vertexShader: "BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4/BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4-v10.0-vertex.glsl",
@@ -6007,6 +6937,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
@@ -6067,6 +7006,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
@@ -6125,6 +7073,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
@@ -6185,11 +7142,77 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9/SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9/SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9-v10.0-vertex.glsl",
@@ -6244,11 +7267,77 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454/DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454/DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454-v10.0-vertex.glsl",
@@ -6302,6 +7391,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
@@ -6362,11 +7460,80 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_EmissionGain: {
+                value: 0.5
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Feather-a555b809-2017-46cb-ac26-e63173d8f45e/Feather-a555b809-2017-46cb-ac26-e63173d8f45e-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Feather-a555b809-2017-46cb-ac26-e63173d8f45e/Feather-a555b809-2017-46cb-ac26-e63173d8f45e-v10.0-vertex.glsl",
@@ -6420,6 +7587,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
@@ -6480,11 +7656,80 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_EmissionGain: {
+                value: 0.5
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52/TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52/TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52-v10.0-vertex.glsl",
@@ -6539,11 +7784,92 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c/Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c-v10.0-BumpMap.png"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_Cutoff: {
+                value: 0.9
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 0.741
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c/Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 1.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.8
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.147059, 0.147059, 0.147059)
+            },
+            u_SpecGlossMap: {
+                value: "Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c/Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c-v10.0-SpecGlossMap.png"
+            },
+            u_SpecTex: {
+                value: "Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c/Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c-v10.0-SpecTex.png"
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c/Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c-v10.0-vertex.glsl",
@@ -6598,11 +7924,92 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1/Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1-v10.0-BumpMap.png"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 0.741
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1/Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 1.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.8
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.220588, 0.220588, 0.220588)
+            },
+            u_SpecGlossMap: {
+                value: "Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1/Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1-v10.0-SpecGlossMap.png"
+            },
+            u_SpecTex: {
+                value: "Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1/Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1-v10.0-SpecTex.png"
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1/Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1-v10.0-vertex.glsl",
@@ -6657,11 +8064,86 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-BumpMap.png"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.01
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-vertex.glsl",
@@ -6716,11 +8198,80 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.432
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.757353, 0.757353, 0.757353)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf/KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf-v10.0-vertex.glsl",
@@ -6774,6 +8325,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
@@ -6834,11 +8394,80 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.078125
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.5, 0.5, 0.5)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Wire (Lit)-62fef968-e842-3224-4a0e-1fdb7cfb745c/Wire (Lit)-62fef968-e842-3224-4a0e-1fdb7cfb745c-v10.0-vertex.glsl",
@@ -6892,6 +8521,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
@@ -6952,11 +8590,77 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_EmissionGain: {
+                value: 0.5
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Fairy-d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc/Fairy-d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc-v10.0-vertex.glsl",
@@ -7010,6 +8714,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
@@ -7070,6 +8783,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
@@ -7128,6 +8850,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
@@ -7188,11 +8919,98 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_Bottom: {
+                value: "SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b/SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b-v10.0-Bottom.png"
+            },
+            u_BottomScale: {
+                value: 0.3
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.574
+            },
+            u_Side: {
+                value: "SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b/SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b-v10.0-Side.png"
+            },
+            u_SideScale: {
+                value: 5.21
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.294118, 0.294118, 0.294118)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_Top: {
+                value: "SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b/SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b-v10.0-Top.png"
+            },
+            u_TopScale: {
+                value: 0.3
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b/SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b-v10.0-vertex.glsl",
@@ -7247,11 +9065,89 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95/Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95-v10.0-BumpMap.png"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95/Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_SelectionEdging: {
+                value: 1.0
+            },
+            u_Shininess: {
+                value: 0.395
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95/Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95-v10.0-vertex.glsl",
@@ -7306,11 +9202,89 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb/InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb-v10.0-BumpMap.png"
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_MainTex: {
+                value: "InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb/InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb-v10.0-MainTex.png"
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_SelectionEdging: {
+                value: 1.0
+            },
+            u_Shininess: {
+                value: 0.4
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.235294, 0.235294, 0.235294)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb/InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb-v10.0-vertex.glsl",
@@ -7364,6 +9338,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
@@ -7424,6 +9407,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
@@ -7483,11 +9475,98 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+            },
+            u_SceneLight_0_color: {
+                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+            },
+            u_SceneLight_1_color: {
+                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+            },
             u_fogColor: {
                 value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_Bottom: {
+                value: "PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac/PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac-v10.0-Bottom.png"
+            },
+            u_BottomScale: {
+                value: 0.3
+            },
+            u_BumpScale: {
+                value: 1.0
+            },
+            u_Color: {
+                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+            },
+            u_Cutoff: {
+                value: 0.5
+            },
+            u_DetailNormalMapScale: {
+                value: 1.0
+            },
+            u_DstBlend: {
+                value: 0.0
+            },
+            u_EmissionColor: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+            },
+            u_GlossMapScale: {
+                value: 1.0
+            },
+            u_Glossiness: {
+                value: 0.5
+            },
+            u_GlossyReflections: {
+                value: 1.0
+            },
+            u_Metallic: {
+                value: 0.0
+            },
+            u_Mode: {
+                value: 0.0
+            },
+            u_OcclusionStrength: {
+                value: 1.0
+            },
+            u_Parallax: {
+                value: 0.02
+            },
+            u_Shininess: {
+                value: 0.574
+            },
+            u_Side: {
+                value: "PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac/PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac-v10.0-Side.png"
+            },
+            u_SideScale: {
+                value: 5.21
+            },
+            u_SmoothnessTextureChannel: {
+                value: 0.0
+            },
+            u_SpecColor: {
+                value: new (0, $a0PbU$Vector3)(0.294118, 0.294118, 0.294118)
+            },
+            u_SpecularHighlights: {
+                value: 1.0
+            },
+            u_SrcBlend: {
+                value: 1.0
+            },
+            u_Top: {
+                value: "PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac/PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac-v10.0-Top.png"
+            },
+            u_TopScale: {
+                value: 0.3
+            },
+            u_UVSec: {
+                value: 0.0
+            },
+            u_ZWrite: {
+                value: 1.0
             }
         },
         vertexShader: "PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac/PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac-v10.0-vertex.glsl",
@@ -7637,7 +9716,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                     normalizedColors[i * itemSize + 2] = Math.round(linearToSRGB(src[i * itemSize + 2]) * 255); // B
                     if (itemSize > 3) normalizedColors[i * itemSize + 3] = Math.round(src[i * itemSize + 3] * 255); // A (linear)
                 }
-                colorAttribute = new THREE.BufferAttribute(normalizedColors, itemSize, true);
+                colorAttribute = new (0, $a0PbU$BufferAttribute)(normalizedColors, itemSize, true);
                 mesh.geometry.setAttribute("a_color", colorAttribute);
             } else mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
         };
@@ -8463,20 +10542,20 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                 break;
             case "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c":
             case "1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0":
-            case "TaperedMarker":
-                mesh.geometry.name = "geometry_TaperedMarker";
+            case "TaperedMarker_Flat":
+                mesh.geometry.name = "geometry_TaperedMarker_Flat";
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("uv"));
-                shader = await this.tiltShaderLoader.loadAsync("TaperedMarker");
+                shader = await this.tiltShaderLoader.loadAsync("TaperedMarker_Flat");
                 shader.lights = true;
                 shader.fog = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
-                mesh.material.name = "material_TaperedMarker";
+                mesh.material.name = "material_TaperedMarker_Flat";
                 break;
             case "75b32cf0-fdd6-4d89-a64b-e2a00b247b0f":
             case "fdf0326a-c0d1-4fed-b101-9db0ff6d071f":
@@ -8614,7 +10693,13 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("uv"));
                 shader = await this.tiltShaderLoader.loadAsync("Gouache");
+                shader.lights = true;
+                shader.fog = true;
+                shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Gouache";
                 break;
@@ -9328,7 +11413,7 @@ class $d838b23e95c97ee8$export$24723e25468f5bb7 {
                     },
                     "metallicFactor": 0
                 },
-                "name": "brush_TaperedMarker",
+                "name": "brush_TaperedMarker_Flat",
                 "extensions": {
                     "GOOGLE_tilt_brush_material": {
                         "guid": "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c"
