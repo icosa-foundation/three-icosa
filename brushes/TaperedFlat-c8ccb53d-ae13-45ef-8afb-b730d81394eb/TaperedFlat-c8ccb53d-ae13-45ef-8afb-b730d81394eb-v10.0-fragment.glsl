@@ -21,12 +21,14 @@ uniform vec4 u_ambient_light_color;
 uniform vec4 u_SceneLight_0_color;
 uniform vec4 u_SceneLight_1_color;
 
-out vec4 v_color;
-out vec3 v_normal;
-out vec3 v_position;
-out vec3 v_light_dir_0;
-out vec3 v_light_dir_1;
-out vec2 v_texcoord0;
+out vec4 fragColor;
+
+in vec4 v_color;
+in vec3 v_normal;
+in vec3 v_position;
+in vec3 v_light_dir_0;
+in vec3 v_light_dir_1;
+in vec2 v_texcoord0;
 
 uniform sampler2D u_MainTex;
 uniform float u_Cutoff;
@@ -48,7 +50,7 @@ uniform float u_Cutoff;
 // Fogging support
 uniform vec3 u_fogColor;
 uniform float u_fogDensity;
-out float f_fog_coord;
+in float f_fog_coord;
 
 // This fog function emulates the exponential fog used in Tilt Brush
 //
@@ -279,8 +281,8 @@ vec3 computeLighting() {
 void main() {
   float brush_mask = texture(u_MainTex, v_texcoord0).w;
   if (brush_mask > u_Cutoff) {
-    v_color.rgb = ApplyFog(computeLighting());
-    v_color.a = 1.0;
+    fragColor.rgb = ApplyFog(computeLighting());
+    fragColor.a = 1.0;
   } else {
     discard;
   }

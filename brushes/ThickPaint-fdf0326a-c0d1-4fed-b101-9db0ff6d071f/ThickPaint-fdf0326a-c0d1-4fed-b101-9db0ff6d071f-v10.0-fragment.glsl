@@ -27,12 +27,14 @@ uniform float u_Shininess;
 uniform float u_Cutoff;
 uniform sampler2D u_MainTex;
 
-out vec4 v_color;
-out vec3 v_normal;
-out vec3 v_position;
-out vec3 v_light_dir_0;
-out vec3 v_light_dir_1;
-out vec2 v_texcoord0;
+out frag4 fragColor;
+
+in vec4 v_color;
+in vec3 v_normal;
+in vec3 v_position;
+in vec3 v_light_dir_0;
+in vec3 v_light_dir_1;
+in vec2 v_texcoord0;
 
 float dispAmount = .0015;
 
@@ -53,7 +55,7 @@ float dispAmount = .0015;
 // Fogging support
 uniform vec3 u_fogColor;
 uniform float u_fogDensity;
-out float f_fog_coord;
+in float f_fog_coord;
 
 // This fog function emulates the exponential fog used in Tilt Brush
 //
@@ -370,8 +372,8 @@ void main() {
 
   // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below, 
   // causing issues on some hardware/drivers. So we compute lighting just to discard it later.
-  v_color.rgb = ApplyFog(computeLighting(normal));
-  v_color.a = 1.0;
+  fragColor.rgb = ApplyFog(computeLighting(normal));
+  fragColor.a = 1.0;
 
   // This must come last to ensure PerturbNormal is called uniformly for all invocations.
   if (brush_mask <= u_Cutoff) {

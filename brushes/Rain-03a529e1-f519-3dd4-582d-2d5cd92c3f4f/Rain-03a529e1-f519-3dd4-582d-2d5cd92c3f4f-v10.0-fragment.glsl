@@ -1,3 +1,4 @@
+#define TB_EMISSION_GAIN 0.723
 // Copyright 2020 The Tilt Brush Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,8 +18,10 @@ precision mediump float;
 
 uniform sampler2D u_MainTex;
 
-out vec4 v_color;
-out vec2 v_texcoord0;
+in vec4 v_color;
+in vec2 v_texcoord0;
+
+out vec4 fragColor;
 
 vec4 bloomColor(vec4 color, float gain) {
   // Guarantee that there's at least a little bit of all 3 channels.
@@ -39,5 +42,5 @@ vec4 bloomColor(vec4 color, float gain) {
 void main() {
   const float emission_gain = TB_EMISSION_GAIN;
   float brush_mask = texture(u_MainTex, v_texcoord0).w;
-  v_color = brush_mask * bloomColor(v_color, emission_gain);
+  fragColor = brush_mask * bloomColor(v_color, emission_gain);
 }

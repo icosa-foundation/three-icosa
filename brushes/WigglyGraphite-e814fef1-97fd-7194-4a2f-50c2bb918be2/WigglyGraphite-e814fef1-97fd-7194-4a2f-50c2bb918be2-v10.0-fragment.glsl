@@ -31,9 +31,11 @@
 // Unlit.glsl
 precision mediump float;
 
-out vec4 v_color;
-out vec2 v_texcoord0;
-out vec3 v_position;
+out vec4 fragColor;
+
+in vec4 v_color;
+in vec2 v_texcoord0;
+in vec3 v_position;
 
 #if TB_HAS_ALPHA_CUTOFF
 uniform sampler2D u_MainTex;
@@ -56,7 +58,7 @@ uniform sampler2D u_MainTex;
 // Fogging support
 uniform vec3 u_fogColor;
 uniform float u_fogDensity;
-out float f_fog_coord;
+in float f_fog_coord;
 
 // This fog function emulates the exponential fog used in Tilt Brush
 //
@@ -95,13 +97,13 @@ void main() {
   const float alpha_threshold = TB_ALPHA_CUTOFF;
   float brush_mask = texture(u_MainTex, v_texcoord0).w;
   if (brush_mask > alpha_threshold) {
-    v_color.rgb = ApplyFog(computeLighting());
-    v_color.a = 1.0;
+    fragColor.rgb = ApplyFog(computeLighting());
+    fragColor.a = 1.0;
   } else {
     discard;
   }
 #else
-  v_color.rgb = ApplyFog(computeLighting());
-  v_color.a = 1.0;
+  fragColor.rgb = ApplyFog(computeLighting());
+  fragColor.a = 1.0;
 #endif
 }
