@@ -140,7 +140,7 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                     },
                     "metallicFactor": 0
                 },
-                "name": "brush_TaperedMarker",
+                "name": "brush_TaperedMarker_Flat",
                 "extensions": {
                     "GOOGLE_tilt_brush_material": {
                         "guid": "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c"

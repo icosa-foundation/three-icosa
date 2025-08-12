@@ -1137,8 +1137,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c":
             case "1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0":
-            case "TaperedMarker":
-                mesh.geometry.name = "geometry_TaperedMarker";
+            case "TaperedMarker_Flat":
+                mesh.geometry.name = "geometry_TaperedMarker_Flat";
 
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
@@ -1146,12 +1146,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
                 mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("uv"));
-                shader = await this.tiltShaderLoader.loadAsync("TaperedMarker");
+                shader = await this.tiltShaderLoader.loadAsync("TaperedMarker_Flat");
                 shader.lights = true;
                 shader.fog = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
-                mesh.material.name = "material_TaperedMarker";
+                mesh.material.name = "material_TaperedMarker_Flat";
                 break;
 
             case "75b32cf0-fdd6-4d89-a64b-e2a00b247b0f":

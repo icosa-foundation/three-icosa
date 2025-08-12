@@ -331,10 +331,10 @@ export class TiltShaderLoader extends THREE.Loader {
             case "c8ccb53d-ae13-45ef-8afb-b730d81394eb":
                 return "TaperedFlat";
 
-            case "TaperedMarker":
+            case "TaperedMarker_Flat":
             case "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c":
             case "1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0":
-                return "TaperedMarker";
+                return "TaperedMarker_Flat";
 
             case "ThickPaint":
             case "75b32cf0-fdd6-4d89-a64b-e2a00b247b0f":
@@ -1626,7 +1626,7 @@ const tiltBrushMaterialParams = {
         depthTest: true,
         blending: 0
     },
-    "TaperedMarker" : {
+    "TaperedMarker_Flat" : {
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
