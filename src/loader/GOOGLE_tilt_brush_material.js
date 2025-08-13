@@ -1358,6 +1358,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Rain");
                 mesh.material = shader;
                 mesh.material.name = "material_Rain";
@@ -1371,6 +1376,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("DryBrush");
                 mesh.material = shader;
                 mesh.material.name = "material_DryBrush";
@@ -1384,6 +1394,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("LeakyPen");
                 mesh.material = shader;
                 mesh.material.name = "material_LeakyPen";
@@ -1397,6 +1412,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Sparks");
                 mesh.material = shader;
                 mesh.material.name = "material_Sparks";
@@ -1410,6 +1430,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Wind");
                 mesh.material = shader;
                 mesh.material.name = "material_Wind";
@@ -1424,6 +1449,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Rising Bubbles");
                 mesh.material = shader;
                 mesh.material.name = "material_Rising Bubbles";
@@ -1437,6 +1467,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("TaperedWire");
                 mesh.material = shader;
                 mesh.material.name = "material_TaperedWire";
@@ -1450,6 +1485,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("SquarePaper");
                 mesh.material = shader;
                 mesh.material.name = "material_SquarePaper";
@@ -1463,6 +1503,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("ThickGeometry");
                 mesh.material = shader;
                 mesh.material.name = "material_ThickGeometry";
@@ -1481,58 +1526,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.material.name = "material_Wireframe";
                 break;
 
-            case "61d2ef63-ed60-49b3-85fb-7267b7d234f2":
-            case "CandyCane":
-                // TODO Set uniforms
-                mesh.geometry.name = "geometry_CandyCane";
-
-                setAttributeIfExists(mesh, "position", "a_position");
-                setAttributeIfExists(mesh, "normal", "a_normal");
-                copyFixColorAttribute(mesh);
-                shader = await this.tiltShaderLoader.loadAsync("CandyCane");
-                mesh.material = shader;
-                mesh.material.name = "material_CandyCane";
-                break;
-
-            case "20a0bf1a-a96e-44e5-84ac-9823d2d65023":
-            case "HolidayTree":
-                // TODO Set uniforms
-                mesh.geometry.name = "geometry_HolidayTree";
-
-                setAttributeIfExists(mesh, "position", "a_position");
-                setAttributeIfExists(mesh, "normal", "a_normal");
-                copyFixColorAttribute(mesh);
-                shader = await this.tiltShaderLoader.loadAsync("HolidayTree");
-                mesh.material = shader;
-                mesh.material.name = "material_HolidayTree";
-                break;
-
-            case "2b65cd94-9259-4f10-99d2-d54b6664ac33":
-            case "Snowflake":
-                // TODO Set uniforms
-                mesh.geometry.name = "geometry_Snowflake";
-
-                setAttributeIfExists(mesh, "position", "a_position");
-                setAttributeIfExists(mesh, "normal", "a_normal");
-                copyFixColorAttribute(mesh);
-                shader = await this.tiltShaderLoader.loadAsync("Snowflake");
-                mesh.material = shader;
-                mesh.material.name = "material_Snowflake";
-                break;
-
-            case "22d4f434-23e4-49d9-a9bd-05798aa21e58":
-            case "Braid3":
-                // TODO Set uniforms
-                mesh.geometry.name = "geometry_Braid3";
-
-                setAttributeIfExists(mesh, "position", "a_position");
-                setAttributeIfExists(mesh, "normal", "a_normal");
-                copyFixColorAttribute(mesh);
-                shader = await this.tiltShaderLoader.loadAsync("Braid3");
-                mesh.material = shader;
-                mesh.material.name = "material_Braid3";
-                break;
-
             case "f28c395c-a57d-464b-8f0b-558c59478fa3":
             case "Muscle":
                 // TODO Set uniforms
@@ -1541,6 +1534,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Muscle");
                 mesh.material = shader;
                 mesh.material.name = "material_Muscle";
@@ -1554,6 +1552,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Guts");
                 mesh.material = shader;
                 mesh.material.name = "material_Guts";
@@ -1567,6 +1570,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Fire2");
                 mesh.material = shader;
                 mesh.material.name = "material_Fire2";
@@ -1580,6 +1588,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("TubeToonInverted");
                 mesh.material = shader;
                 mesh.material.name = "material_TubeToonInverted";
@@ -1606,6 +1619,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("WaveformParticles");
                 mesh.material = shader;
                 mesh.material.name = "material_WaveformParticles";
@@ -1619,6 +1637,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("BubbleWand");
                 mesh.material = shader;
                 mesh.material.name = "material_BubbleWand";
@@ -1632,6 +1655,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("DanceFloor");
                 mesh.material = shader;
                 mesh.material.name = "material_DanceFloor";
@@ -1645,6 +1673,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("WaveformTube");
                 mesh.material = shader;
                 mesh.material.name = "material_WaveformTube";
@@ -1658,6 +1691,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Drafting");
                 mesh.material = shader;
                 mesh.material.name = "material_Drafting";
@@ -1671,6 +1709,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("SingleSided");
                 mesh.material = shader;
                 mesh.material.name = "material_SingleSided";
@@ -1684,6 +1727,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("DoubleFlat");
                 mesh.material = shader;
                 mesh.material.name = "material_DoubleFlat";
@@ -1697,6 +1745,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("TubeAdditive");
                 mesh.material = shader;
                 mesh.material.name = "material_TubeAdditive";
@@ -1710,6 +1763,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Feather");
                 mesh.material = shader;
                 mesh.material.name = "material_Feather";
@@ -1723,6 +1781,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("DuctTapeGeometry");
                 mesh.material = shader;
                 mesh.material.name = "material_DuctTapeGeometry";
@@ -1736,6 +1799,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("TaperedHueShift");
                 mesh.material = shader;
                 mesh.material.name = "material_TaperedHueShift";
@@ -1749,6 +1817,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Lacewing");
                 mesh.material = shader;
                 mesh.material.name = "material_Lacewing";
@@ -1762,6 +1835,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Marbled Rainbow");
                 mesh.material = shader;
                 mesh.material.name = "material_Marbled Rainbow";
@@ -1775,6 +1853,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Charcoal");
                 mesh.material = shader;
                 mesh.material.name = "material_Charcoal";
@@ -1788,6 +1871,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("KeijiroTube");
                 mesh.material = shader;
                 mesh.material.name = "material_KeijiroTube";
@@ -1801,6 +1889,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Lofted (Hue Shift)");
                 mesh.material = shader;
                 mesh.material.name = "material_Lofted (Hue Shift)";
@@ -1814,6 +1907,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Wire (Lit)");
                 mesh.material = shader;
                 mesh.material.name = "material_Wire (Lit)";
@@ -1827,6 +1925,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("WaveformFFT");
                 mesh.material = shader;
                 mesh.material.name = "material_WaveformFFT";
@@ -1840,48 +1943,14 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Fairy");
                 mesh.material = shader;
                 mesh.material.name = "material_Fairy";
-                break;
-
-            case "bdf65db2-1fb7-4202-b5e0-c6b5e3ea851e":
-            case "Space":
-                // TODO Set uniforms
-                mesh.geometry.name = "geometry_Space";
-
-                setAttributeIfExists(mesh, "position", "a_position");
-                setAttributeIfExists(mesh, "normal", "a_normal");
-                copyFixColorAttribute(mesh);
-                shader = await this.tiltShaderLoader.loadAsync("Space");
-                mesh.material = shader;
-                mesh.material.name = "material_Space";
-                break;
-
-            case "30cb9af6-be41-4872-8f3e-cbff63fe3db8":
-            case "Digital":
-                // TODO Set uniforms
-                mesh.geometry.name = "geometry_Digital";
-
-                setAttributeIfExists(mesh, "position", "a_position");
-                setAttributeIfExists(mesh, "normal", "a_normal");
-                copyFixColorAttribute(mesh);
-                shader = await this.tiltShaderLoader.loadAsync("Digital");
-                mesh.material = shader;
-                mesh.material.name = "material_Digital";
-                break;
-
-            case "abfbb2aa-70b4-4a5c-8126-8eedda2b3628":
-            case "Race":
-                // TODO Set uniforms
-                mesh.geometry.name = "geometry_Race";
-
-                setAttributeIfExists(mesh, "position", "a_position");
-                setAttributeIfExists(mesh, "normal", "a_normal");
-                copyFixColorAttribute(mesh);
-                shader = await this.tiltShaderLoader.loadAsync("Race");
-                mesh.material = shader;
-                mesh.material.name = "material_Race";
                 break;
 
             case "355b3579-bf1d-4ff5-a200-704437fe684b":
@@ -1892,6 +1961,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("SmoothHull");
                 mesh.material = shader;
                 mesh.material.name = "material_SmoothHull";
@@ -1905,6 +1979,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Leaves2");
                 mesh.material = shader;
                 mesh.material.name = "material_Leaves2";
@@ -1918,6 +1997,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("InkGeometry");
                 mesh.material = shader;
                 mesh.material.name = "material_InkGeometry";
@@ -1931,6 +2015,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("ConcaveHull");
                 mesh.material = shader;
                 mesh.material.name = "material_ConcaveHull";
@@ -1943,6 +2032,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 setAttributeIfExists(mesh, "position", "a_position");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("3D Printing Brush");
                 mesh.material = shader;
                 mesh.material.name = "material_3D Printing Brush";
@@ -1956,6 +2050,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("PassthroughHull");
                 mesh.material = shader;
                 mesh.material.name = "material_PassthroughHull";
