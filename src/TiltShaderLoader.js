@@ -1630,23 +1630,6 @@ const tiltBrushMaterialParams = {
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
-            u_MainTex: { value: "TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c/TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c-v10.0-MainTex.png" },
-            u_fogColor: { value: new Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
-        },
-        vertexShader: "TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c/TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c-v10.0-vertex.glsl",
-        fragmentShader: "TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c/TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c-v10.0-fragment.glsl",
-        side: 2,
-        transparent: false,
-        depthFunc: 2,
-        depthWrite: true,
-        depthTest: true,
-        blending: 0
-    },
-    "TaperedMarker_Flat" : {
-        uniforms: {
-            u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
-            u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_ambient_light_color: { value: new Vector4(0.3922, 0.3922, 0.3922, 1) },
             u_SceneLight_0_color: { value: new Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new Vector4(0.4282, 0.4212, 0.3459, 1) },
