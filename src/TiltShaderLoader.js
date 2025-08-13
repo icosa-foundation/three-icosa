@@ -1944,7 +1944,8 @@ const tiltBrushMaterialParams = {
             u_SrcBlend: { value: 1.0 },
             u_StretchDistortionExponent: { value: 3.0 },
             u_UVSec: { value: 0.0 },
-            u_ZWrite: { value: 1.0 }
+            u_ZWrite: { value: 1.0 },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f/Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f-v10.0-vertex.glsl",
         fragmentShader: "Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f/Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f-v10.0-fragment.glsl",
@@ -2077,7 +2078,8 @@ const tiltBrushMaterialParams = {
             u_SrcBlend: { value: 1.0 },
             u_StretchDistortionExponent: { value: 1.73 },
             u_UVSec: { value: 0.0 },
-            u_ZWrite: { value: 1.0 }
+            u_ZWrite: { value: 1.0 },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "Sparks-50e99447-3861-05f4-697d-a1b96e771b98/Sparks-50e99447-3861-05f4-697d-a1b96e771b98-v10.0-vertex.glsl",
         fragmentShader: "Sparks-50e99447-3861-05f4-697d-a1b96e771b98/Sparks-50e99447-3861-05f4-697d-a1b96e771b98-v10.0-fragment.glsl",
@@ -2117,7 +2119,8 @@ const tiltBrushMaterialParams = {
             u_Speed: { value: 1.0 },
             u_SrcBlend: { value: 1.0 },
             u_UVSec: { value: 0.0 },
-            u_ZWrite: { value: 1.0 }
+            u_ZWrite: { value: 1.0 },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "Wind-7136a729-1aab-bd24-f8b2-ca88b6adfb67/Wind-7136a729-1aab-bd24-f8b2-ca88b6adfb67-v10.0-vertex.glsl",
         fragmentShader: "Wind-7136a729-1aab-bd24-f8b2-ca88b6adfb67/Wind-7136a729-1aab-bd24-f8b2-ca88b6adfb67-v10.0-fragment.glsl",
@@ -2172,7 +2175,8 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_WaveformFreq: { value: 0.1 },
             u_WaveformIntensity: { value: new Vector4(0, 15, 0, 0) },
-            u_ZWrite: { value: 1.0 }
+            u_ZWrite: { value: 1.0 },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "Rising%20Bubbles-a8147ce1-005e-abe4-88e8-09a1eaadcc89/Rising%20Bubbles-a8147ce1-005e-abe4-88e8-09a1eaadcc89-v10.0-vertex.glsl",
         fragmentShader: "Rising%20Bubbles-a8147ce1-005e-abe4-88e8-09a1eaadcc89/Rising%20Bubbles-a8147ce1-005e-abe4-88e8-09a1eaadcc89-v10.0-fragment.glsl",
@@ -2438,7 +2442,8 @@ const tiltBrushMaterialParams = {
             u_MainTex: { value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-MainTex.png" },
             u_Scroll1: { value: 15.0 },
             u_Scroll2: { value: 8.0 },
-            u_TintColor: { value: new Vector4(0.617647, 0.617647, 0.617647, 1) }
+            u_TintColor: { value: new Vector4(0.617647, 0.617647, 0.617647, 1) },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-vertex.glsl",
         fragmentShader: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-fragment.glsl",
@@ -2498,7 +2503,8 @@ const tiltBrushMaterialParams = {
             u_SceneLight_0_color: { value: new Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_fogColor: { value: new Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7/WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7-v10.0-vertex.glsl",
         fragmentShader: "WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7/WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7-v10.0-fragment.glsl",
@@ -2532,7 +2538,8 @@ const tiltBrushMaterialParams = {
             u_ScrollRate: { value: -0.54 },
             u_Smoothness: { value: 0.078125 },
             u_Strength: { value: 0.5 },
-            u_TintColor: { value: new Vector4(0.617647, 0.617647, 0.617647, 1) }
+            u_TintColor: { value: new Vector4(0.617647, 0.617647, 0.617647, 1) },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4/BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4-v10.0-vertex.glsl",
         fragmentShader: "BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4/BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4-v10.0-fragment.glsl",
@@ -2552,7 +2559,8 @@ const tiltBrushMaterialParams = {
             u_SceneLight_0_color: { value: new Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_fogColor: { value: new Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9/DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9-v10.0-vertex.glsl",
         fragmentShader: "DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9/DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9-v10.0-fragment.glsl",
@@ -2572,7 +2580,8 @@ const tiltBrushMaterialParams = {
             u_SceneLight_0_color: { value: new Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_fogColor: { value: new Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "WaveformTube-0f5820df-cb6b-4a6c-960e-56e4c8000eda/WaveformTube-0f5820df-cb6b-4a6c-960e-56e4c8000eda-v10.0-vertex.glsl",
         fragmentShader: "WaveformTube-0f5820df-cb6b-4a6c-960e-56e4c8000eda/WaveformTube-0f5820df-cb6b-4a6c-960e-56e4c8000eda-v10.0-fragment.glsl",
@@ -2592,7 +2601,9 @@ const tiltBrushMaterialParams = {
             u_SceneLight_0_color: { value: new Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_fogColor: { value: new Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_Opacity: { value: 1.0 },
+            u_DraftingVisibility01: { value: 1.0 }
         },
         vertexShader: "Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e/Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e-v10.0-vertex.glsl",
         fragmentShader: "Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e/Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e-v10.0-fragment.glsl",
@@ -2963,7 +2974,8 @@ const tiltBrushMaterialParams = {
             u_SpecularHighlights: { value: 1.0 },
             u_SrcBlend: { value: 1.0 },
             u_UVSec: { value: 0.0 },
-            u_ZWrite: { value: 1.0 }
+            u_ZWrite: { value: 1.0 },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf/KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf-v10.0-vertex.glsl",
         fragmentShader: "KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf/KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf-v10.0-fragment.glsl",
@@ -3043,7 +3055,8 @@ const tiltBrushMaterialParams = {
             u_SceneLight_0_color: { value: new Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_fogColor: { value: new Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "WaveformFFT-d120944d-772f-4062-99c6-46a6f219eeaf/WaveformFFT-d120944d-772f-4062-99c6-46a6f219eeaf-v10.0-vertex.glsl",
         fragmentShader: "WaveformFFT-d120944d-772f-4062-99c6-46a6f219eeaf/WaveformFFT-d120944d-772f-4062-99c6-46a6f219eeaf-v10.0-fragment.glsl",
@@ -3082,7 +3095,8 @@ const tiltBrushMaterialParams = {
             u_SpecularHighlights: { value: 1.0 },
             u_SrcBlend: { value: 1.0 },
             u_UVSec: { value: 0.0 },
-            u_ZWrite: { value: 1.0 }
+            u_ZWrite: { value: 1.0 },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "Fairy-d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc/Fairy-d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc-v10.0-vertex.glsl",
         fragmentShader: "Fairy-d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc/Fairy-d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc-v10.0-fragment.glsl",
@@ -3102,50 +3116,11 @@ const tiltBrushMaterialParams = {
             u_SceneLight_0_color: { value: new Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_fogColor: { value: new Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_time: { value: new Vector4() }
         },
         vertexShader: "Space-bdf65db2-1fb7-4202-b5e0-c6b5e3ea851e/Space-bdf65db2-1fb7-4202-b5e0-c6b5e3ea851e-v10.0-vertex.glsl",
         fragmentShader: "Space-bdf65db2-1fb7-4202-b5e0-c6b5e3ea851e/Space-bdf65db2-1fb7-4202-b5e0-c6b5e3ea851e-v10.0-fragment.glsl",
-        side: 2,
-        transparent: true,
-        depthFunc: 2,
-        depthWrite: false,
-        depthTest: true,
-        blending: 2
-    },
-    "Digital" : {
-      // TODO Uniforms: Digital
-        uniforms: {
-            u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
-            u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
-            u_ambient_light_color: { value: new Vector4(0.3922, 0.3922, 0.3922, 1) },
-            u_SceneLight_0_color: { value: new Vector4(0.7780, 0.8157, 0.9914, 1) },
-            u_SceneLight_1_color: { value: new Vector4(0.4282, 0.4212, 0.3459, 1) },
-            u_fogColor: { value: new Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
-        },
-        vertexShader: "Digital-30cb9af6-be41-4872-8f3e-cbff63fe3db8/Digital-30cb9af6-be41-4872-8f3e-cbff63fe3db8-v10.0-vertex.glsl",
-        fragmentShader: "Digital-30cb9af6-be41-4872-8f3e-cbff63fe3db8/Digital-30cb9af6-be41-4872-8f3e-cbff63fe3db8-v10.0-fragment.glsl",
-        side: 2,
-        transparent: true,
-        depthFunc: 2,
-        depthWrite: false,
-        depthTest: true,
-        blending: 2
-    },
-    "Race" : {
-      // TODO Uniforms: Race
-        uniforms: {
-            u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
-            u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
-            u_ambient_light_color: { value: new Vector4(0.3922, 0.3922, 0.3922, 1) },
-            u_SceneLight_0_color: { value: new Vector4(0.7780, 0.8157, 0.9914, 1) },
-            u_SceneLight_1_color: { value: new Vector4(0.4282, 0.4212, 0.3459, 1) },
-            u_fogColor: { value: new Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
-        },
-        vertexShader: "Race-abfbb2aa-70b4-4a5c-8126-8eedda2b3628/Race-abfbb2aa-70b4-4a5c-8126-8eedda2b3628-v10.0-vertex.glsl",
-        fragmentShader: "Race-abfbb2aa-70b4-4a5c-8126-8eedda2b3628/Race-abfbb2aa-70b4-4a5c-8126-8eedda2b3628-v10.0-fragment.glsl",
         side: 2,
         transparent: true,
         depthFunc: 2,

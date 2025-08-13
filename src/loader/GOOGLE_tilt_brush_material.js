@@ -1362,6 +1362,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("Rain");
                 mesh.material = shader;
                 mesh.material.name = "material_Rain";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "725f4c6a-6427-6524-29ab-da371924adab":
@@ -1413,6 +1414,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("Sparks");
                 mesh.material = shader;
                 mesh.material.name = "material_Sparks";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "7136a729-1aab-bd24-f8b2-ca88b6adfb67":
@@ -1430,6 +1432,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("Wind");
                 mesh.material = shader;
                 mesh.material.name = "material_Wind";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "a8147ce1-005e-abe4-88e8-09a1eaadcc89":
@@ -1448,6 +1451,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("Rising Bubbles");
                 mesh.material = shader;
                 mesh.material.name = "material_Rising Bubbles";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "9568870f-8594-60f4-1b20-dfbc8a5eac0e":
@@ -1562,6 +1566,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("Fire2");
                 mesh.material = shader;
                 mesh.material.name = "material_Fire2";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "9871385a-df73-4396-9e33-31e4e4930b27":
@@ -1608,6 +1613,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("WaveformParticles");
                 mesh.material = shader;
                 mesh.material.name = "material_WaveformParticles";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "eba3f993-f9a1-4d35-b84e-bb08f48981a4":
@@ -1625,6 +1631,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("BubbleWand");
                 mesh.material = shader;
                 mesh.material.name = "material_BubbleWand";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "6a1cf9f9-032c-45ec-311e-a6680bee32e9":
@@ -1642,6 +1649,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("DanceFloor");
                 mesh.material = shader;
                 mesh.material.name = "material_DanceFloor";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "0f5820df-cb6b-4a6c-960e-56e4c8000eda":
@@ -1659,6 +1667,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("WaveformTube");
                 mesh.material = shader;
                 mesh.material.name = "material_WaveformTube";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "492b36ff-b337-436a-ba5f-1e87ee86747e":
@@ -1846,6 +1855,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("KeijiroTube");
                 mesh.material = shader;
                 mesh.material.name = "material_KeijiroTube";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "c5da2e70-a6e4-63a4-898c-5cfedef09c97":
@@ -1897,6 +1907,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("WaveformFFT");
                 mesh.material = shader;
                 mesh.material.name = "material_WaveformFFT";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc":
@@ -1914,6 +1925,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("Fairy");
                 mesh.material = shader;
                 mesh.material.name = "material_Fairy";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "bdf65db2-1fb7-4202-b5e0-c6b5e3ea851e":
@@ -1926,6 +1938,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader = await this.tiltShaderLoader.loadAsync("Space");
                 mesh.material = shader;
                 mesh.material.name = "material_Space";
+                shader.uniformsNeedUpdate = true;
                 break;
 
             case "355b3579-bf1d-4ff5-a200-704437fe684b":

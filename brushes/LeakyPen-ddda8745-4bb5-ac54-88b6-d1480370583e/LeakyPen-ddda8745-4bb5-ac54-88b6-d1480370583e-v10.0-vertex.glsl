@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// DefaultVS.glsl
+// LeakyPen vertex shader
 in vec4 a_position;
 in vec3 a_normal;
 in vec4 a_color;
@@ -21,7 +21,8 @@ in vec2 a_texcoord0;
 out vec4 v_color;
 out vec3 v_normal;  // Camera-space normal.
 out vec3 v_position;  // Camera-space position.
-out vec2 v_texcoord0;
+out vec2 v_texcoord0;    // MainTex UV (for alpha mask)
+out vec2 v_texcoord1;    // SecondaryTex UV (for diffuse)
 out vec3 v_light_dir_0;  // Camera-space light direction, main light.
 out vec3 v_light_dir_1;  // Camera-space light direction, other light.
 out float f_fog_coord;
@@ -40,5 +41,6 @@ void main() {
   v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
   v_color = a_color;
-  v_texcoord0 = a_texcoord0;
+  v_texcoord0 = a_texcoord0;  // Alpha mask UV
+  v_texcoord1 = a_texcoord0;  // Use same UV for both (can be different in advanced setup)
 }
