@@ -1303,7 +1303,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "cf3401b3-4ada-4877-995a-1aa64e7b604a":
             case "SvgTemplate":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_SvgTemplate";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1317,7 +1316,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             case "1b897b7e-9b76-425a-b031-a867c48df409":
             case "4465b5ef-3605-bec4-2b3e-6b04508ddb6b":
             case "Gouache":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Gouache";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1336,7 +1334,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "8e58ceea-7830-49b4-aba9-6215104ab52a":
             case "MylarTube":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_MylarTube";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1352,7 +1349,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "03a529e1-f519-3dd4-582d-2d5cd92c3f4f":
             case "Rain":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Rain";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1370,7 +1366,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "725f4c6a-6427-6524-29ab-da371924adab":
             case "DryBrush":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_DryBrush";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1388,7 +1383,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "ddda8745-4bb5-ac54-88b6-d1480370583e":
             case "LeakyPen":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_LeakyPen";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1406,7 +1400,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "50e99447-3861-05f4-697d-a1b96e771b98":
             case "Sparks":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Sparks";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1424,7 +1417,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "7136a729-1aab-bd24-f8b2-ca88b6adfb67":
             case "Wind":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Wind";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1443,7 +1435,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             case "a8147ce1-005e-abe4-88e8-09a1eaadcc89":
             case "Rising Bubbles":
                 console.log("replace material Rising Bubbles");
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Rising Bubbles";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1461,7 +1452,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "9568870f-8594-60f4-1b20-dfbc8a5eac0e":
             case "TaperedWire":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_TaperedWire";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1479,7 +1469,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa":
             case "SquarePaper":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_SquarePaper";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1497,7 +1486,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "39ee7377-7a9e-47a7-a0f8-0c77712f75d3":
             case "ThickGeometry":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_ThickGeometry";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1515,7 +1503,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "2c1a6a63-6552-4d23-86d7-58f6fba8581b":
             case "Wireframe":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Wireframe";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1528,7 +1515,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "f28c395c-a57d-464b-8f0b-558c59478fa3":
             case "Muscle":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Muscle";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1546,7 +1532,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "99aafe96-1645-44cd-99bd-979bc6ef37c5":
             case "Guts":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Guts";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1564,7 +1549,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "53d753ef-083c-45e1-98e7-4459b4471219":
             case "Fire2":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Fire2";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1582,7 +1566,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "9871385a-df73-4396-9e33-31e4e4930b27":
             case "TubeToonInverted":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_TubeToonInverted";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1600,7 +1583,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "4391ffaa-df73-4396-9e33-31e4e4930b27":
             case "FacetedTube":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_FacetedTube";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1613,7 +1595,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "6a1cf9f9-032c-45ec-9b6e-a6680bee30f7":
             case "WaveformParticles":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_WaveformParticles";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1631,7 +1612,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "eba3f993-f9a1-4d35-b84e-bb08f48981a4":
             case "BubbleWand":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_BubbleWand";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1649,7 +1629,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "6a1cf9f9-032c-45ec-311e-a6680bee32e9":
             case "DanceFloor":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_DanceFloor";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1667,7 +1646,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "0f5820df-cb6b-4a6c-960e-56e4c8000eda":
             case "WaveformTube":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_WaveformTube";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1685,7 +1663,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "492b36ff-b337-436a-ba5f-1e87ee86747e":
             case "Drafting":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Drafting";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1703,7 +1680,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "f0a2298a-be80-432c-9fee-a86dcc06f4f9":
             case "SingleSided":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_SingleSided";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1721,7 +1697,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "f4a0550c-332a-4e1a-9793-b71508f4a454":
             case "DoubleFlat":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_DoubleFlat";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1739,7 +1714,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "c1c9b26d-673a-4dc6-b373-51715654ab96":
             case "TubeAdditive":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_TubeAdditive";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1757,7 +1731,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "a555b809-2017-46cb-ac26-e63173d8f45e":
             case "Feather":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Feather";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1775,7 +1748,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "84d5bbb2-6634-8434-f8a7-681b576b4664":
             case "DuctTapeGeometry":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_DuctTapeGeometry";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1793,7 +1765,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "3d9755da-56c7-7294-9b1d-5ec349975f52":
             case "TaperedHueShift":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_TaperedHueShift";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1811,7 +1782,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "1cf94f63-f57a-4a1a-ad14-295af4f5ab5c":
             case "Lacewing":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Lacewing";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1829,7 +1799,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "c86c058d-1bda-2e94-08db-f3d6a96ac4a1":
             case "Marbled Rainbow":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Marbled Rainbow";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1847,7 +1816,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "fde6e778-0f7a-e584-38d6-89d44cee59f6":
             case "Charcoal":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Charcoal";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1865,7 +1833,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf":
             case "KeijiroTube":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_KeijiroTube";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1883,7 +1850,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "c5da2e70-a6e4-63a4-898c-5cfedef09c97":
             case "Lofted (Hue Shift)":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Lofted (Hue Shift)";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1901,7 +1867,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "62fef968-e842-3224-4a0e-1fdb7cfb745c":
             case "Wire (Lit)":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Wire (Lit)";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1919,7 +1884,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "d120944d-772f-4062-99c6-46a6f219eeaf":
             case "WaveformFFT":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_WaveformFFT";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1937,7 +1901,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc":
             case "Fairy":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Fairy";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1953,9 +1916,20 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.material.name = "material_Fairy";
                 break;
 
+            case "bdf65db2-1fb7-4202-b5e0-c6b5e3ea851e":
+            case "Space":
+                mesh.geometry.name = "geometry_Space";
+
+                setAttributeIfExists(mesh, "position", "a_position");
+                setAttributeIfExists(mesh, "normal", "a_normal");
+                copyFixColorAttribute(mesh);
+                shader = await this.tiltShaderLoader.loadAsync("Space");
+                mesh.material = shader;
+                mesh.material.name = "material_Space";
+                break;
+
             case "355b3579-bf1d-4ff5-a200-704437fe684b":
             case "SmoothHull":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_SmoothHull";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1973,7 +1947,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "7259cce5-41c1-ec74-c885-78af28a31d95":
             case "Leaves2":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_Leaves2";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1991,7 +1964,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb":
             case "InkGeometry":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_InkGeometry";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -2009,7 +1981,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "7ae1f880-a517-44a0-99f9-1cab654498c6":
             case "ConcaveHull":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_ConcaveHull";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -2027,7 +1998,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "d3f3b18a-da03-f694-b838-28ba8e749a98":
             case "3D Printing Brush":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_3D Printing Brush";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -2044,7 +2014,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "cc131ff8-0d17-4677-93e0-d7cd19fea9ac":
             case "PassthroughHull":
-                // TODO Set uniforms
                 mesh.geometry.name = "geometry_PassthroughHull";
 
                 setAttributeIfExists(mesh, "position", "a_position");
