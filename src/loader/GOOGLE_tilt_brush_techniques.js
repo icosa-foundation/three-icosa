@@ -744,7 +744,31 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                         "guid": "c8313697-2563-47fc-832e-290f4c04b901"
                     }
                 }
+            },
+
+            "4465b5ef-3605-bec4-2b3e-6b04508ddb6b": {
+                "alphaMode": "MASK",
+                "alphaCutoff": 0.5,
+                "doubleSided": true,
+                "pbrMetallicRoughness": {
+                    "baseColorTexture": {
+                        "texCoord": 0
+                    },
+                    "metallicFactor": 0,
+                    "roughnessFactor": 0.600000024
+                },
+                "normalTexture": {
+                    "texCoord": 0
+                },
+                "name": "brush_Gouache",
+                "extensions": {
+                    "GOOGLE_tilt_brush_material": {
+                        "guid": "4465b5ef-3605-bec4-2b3e-6b04508ddb6b"
+                    }
+                }
             }
+
+
         };
 
         // Quick repair of path if required
