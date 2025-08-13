@@ -1827,12 +1827,12 @@ const tiltBrushMaterialParams = {
         },
         vertexShader: "SvgTemplate-cf3401b3-4ada-4877-995a-1aa64e7b604a/SvgTemplate-cf3401b3-4ada-4877-995a-1aa64e7b604a-v10.0-vertex.glsl",
         fragmentShader: "SvgTemplate-cf3401b3-4ada-4877-995a-1aa64e7b604a/SvgTemplate-cf3401b3-4ada-4877-995a-1aa64e7b604a-v10.0-fragment.glsl",
-        side: 1, // TODO
-        transparent: false, // TODO
+        side: 2,
+        transparent: false,
         depthFunc: 2,
-        depthWrite: true, // TODO
+        depthWrite: true,
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Gouache" : {
       // TODO Uniforms: Gouache
@@ -1912,9 +1912,9 @@ const tiltBrushMaterialParams = {
         side: 1,
         transparent: false,
         depthFunc: 2,
-        depthWrite: true, // TODO
+        depthWrite: true,
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Rain" : {
       // TODO Uniforms: Rain
@@ -1999,12 +1999,12 @@ const tiltBrushMaterialParams = {
         },
         vertexShader: "DryBrush-725f4c6a-6427-6524-29ab-da371924adab/DryBrush-725f4c6a-6427-6524-29ab-da371924adab-v10.0-vertex.glsl",
         fragmentShader: "DryBrush-725f4c6a-6427-6524-29ab-da371924adab/DryBrush-725f4c6a-6427-6524-29ab-da371924adab-v10.0-fragment.glsl",
-        side: 1, // TODO
-        transparent: false, // TODO
+        side: 1,
+        transparent: false,
         depthFunc: 2,
-        depthWrite: true, // TODO
+        depthWrite: true,
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "LeakyPen" : {
       // TODO Uniforms: LeakyPen
@@ -2044,12 +2044,12 @@ const tiltBrushMaterialParams = {
         },
         vertexShader: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-vertex.glsl",
         fragmentShader: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-fragment.glsl",
-        side: 1, // TODO
-        transparent: false, // TODO
+        side: 1,
+        transparent: false,
         depthFunc: 2,
-        depthWrite: true, // TODO
+        depthWrite: true,
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Sparks" : {
       // TODO Uniforms: Sparks
@@ -2230,7 +2230,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "SquarePaper" : {
       // TODO Uniforms: SquarePaper
@@ -2273,7 +2273,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "ThickGeometry" : {
       // TODO Uniforms: ThickGeometry
@@ -2317,7 +2317,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Wireframe" : {
       // TODO Uniforms: Wireframe
@@ -2380,7 +2380,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Guts" : {
       // TODO Uniforms: Guts
@@ -2423,7 +2423,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Fire2" : {
       // TODO Uniforms: Fire2
@@ -2475,7 +2475,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "FacetedTube" : {
       // TODO Uniforms: FacetedTube
@@ -2495,7 +2495,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "WaveformParticles" : {
       // TODO Uniforms: WaveformParticles
@@ -2648,7 +2648,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "DoubleFlat" : {
       // TODO Uniforms: DoubleFlat
@@ -2687,7 +2687,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "TubeAdditive" : {
       // TODO Uniforms: TubeAdditive
@@ -2767,7 +2767,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "TaperedHueShift" : {
       // TODO Uniforms: TaperedHueShift
@@ -2807,7 +2807,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Lacewing" : {
       // TODO Uniforms: Lacewing
@@ -2852,7 +2852,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Marbled Rainbow" : {
       // TODO Uniforms and name fix: Marbled Rainbow
@@ -2897,7 +2897,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Charcoal" : {
       // TODO Uniforms: Charcoal
@@ -2940,7 +2940,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "KeijiroTube" : {
       // TODO Uniforms: KeijiroTube
@@ -2980,7 +2980,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Lofted (Hue Shift)" : {
       // TODO Uniforms and name fix: Lofted (Hue Shift)
@@ -3000,7 +3000,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Wire (Lit)" : {
       // TODO Uniforms and name fix: Wire (Lit)
@@ -3040,7 +3040,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "WaveformFFT" : {
       // TODO Uniforms: WaveformFFT
@@ -3205,7 +3205,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "Leaves2" : {
       // TODO Uniforms: Leaves2
@@ -3249,7 +3249,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "InkGeometry" : {
       // TODO Uniforms: InkGeometry
@@ -3293,7 +3293,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "ConcaveHull" : {
       // TODO Uniforms: ConcaveHull
@@ -3313,7 +3313,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "3D Printing Brush" : {
       // TODO Uniforms and name fix: 3D Printing Brush
@@ -3333,7 +3333,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
     "PassthroughHull" : {
       // TODO Uniforms: PassthroughHull
@@ -3379,6 +3379,6 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0, // TODO
+        blending: 0,
     },
 }
