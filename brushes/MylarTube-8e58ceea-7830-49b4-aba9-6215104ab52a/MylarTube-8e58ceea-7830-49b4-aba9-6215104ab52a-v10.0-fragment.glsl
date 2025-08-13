@@ -28,6 +28,10 @@ uniform vec3 u_SpecColor;
 uniform float u_Shininess;
 uniform float u_Cutoff;
 uniform sampler2D u_MainTex;
+uniform vec4 u_time;
+
+// From three.js
+uniform vec3 cameraPosition;
 
 in vec4 v_color;
 in vec3 v_normal;
@@ -357,19 +361,24 @@ vec3 computeLighting(vec3 normal) {
 }
 
 void main() {
-    float brush_mask = texture(u_MainTex, v_texcoord0).w;
-    brush_mask *= v_color.w;
 
-    // WARNING: PerturbNormal uses derivatives and must not be called conditionally.
-    vec3 normal = PerturbNormal(v_position.xyz, normalize(v_normal), v_texcoord0);
+    vec3 baseColor = v_color.xyz;
+
+    // Rim term in world space
+    vec3 N = normalize(v_normal);
+    vec3 V = normalize(cameraPosition - v_position);
+    float rim = 1.0 - abs(dot(V, N));
+    rim *= (1.0 - pow(rim, 5.0));
+
+    // Thin-slit diffraction ramp lookup
+    vec2 diffUV = vec2(rim + u_time.y + N.y, rim + N.y);
+    vec3 diffraction = texture(u_MainTex, diffUV).rgb;
+
+    // Emission (matches Unity mix)
+    vec3 emission = rim * (0.25 * diffraction * rim + 0.75 * diffraction * v_color.rgb);
 
     // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below,
     // causing issues on some hardware/drivers. So we compute lighting just to discard it later.
-    fragColor.rgb = ApplyFog(computeLighting(normal));
+    fragColor.rgb = ApplyFog(computeLighting(v_normal) + emission);
     fragColor.a = 1.0;
-
-    // This must come last to ensure PerturbNormal is called uniformly for all invocations.
-    if (brush_mask <= u_Cutoff) {
-        discard;
-    }
 }

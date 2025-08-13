@@ -1342,6 +1342,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 shader = await this.tiltShaderLoader.loadAsync("MylarTube");
                 mesh.material = shader;
                 mesh.material.name = "material_MylarTube";

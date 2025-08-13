@@ -16,7 +16,7 @@
 in vec4 a_position;
 in vec3 a_normal;
 in vec4 a_color;
-in vec2 a_texcoord0;
+in vec3 a_texcoord0;
 
 out vec4 v_color;
 out vec3 v_normal;  // Camera-space normal.
@@ -32,13 +32,24 @@ uniform mat3 normalMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
 
+uniform float u_SqueezeAmount;
+
 void main() {
-  gl_Position = projectionMatrix * modelViewMatrix * a_position;
+  float radius = a_texcoord0.z;
+
+  float squeeze = sin(a_texcoord0.x * 3.14159);
+  vec3 squeeze_displacement = radius * a_normal * squeeze;
+  vec4 dispPos = vec4(a_position.xyz - squeeze_displacement * u_SqueezeAmount, 1.0);
+
+  gl_Position = projectionMatrix * modelViewMatrix * dispPos;
+
   f_fog_coord = gl_Position.z;
   v_normal = normalMatrix * a_normal;
+  // Perturb normal
+  v_normal = normalize(v_normal + squeeze_displacement * 2.5);
   v_position = (modelViewMatrix * a_position).xyz;
   v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
   v_color = a_color;
-  v_texcoord0 = a_texcoord0;
+  v_texcoord0 = a_texcoord0.xy;
 }
