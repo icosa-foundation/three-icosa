@@ -1407,11 +1407,11 @@ const tiltBrushMaterialParams = {
         vertexShader: "Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336/Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336-v10.0-vertex.glsl",
         fragmentShader: "Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336/Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336-v10.0-fragment.glsl",
         side: 2,
-        transparent: false,
+        transparent: true,
         depthFunc: 2,
-        depthWrite: true,
+        depthWrite: false,
         depthTest: true,
-        blending: 0
+        blending: 2
     },
     "Rainbow" : {
         uniforms: {
