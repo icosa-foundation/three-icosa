@@ -14,7 +14,6 @@
 
 import * as THREE from 'three';
 import {
-    Loader,
     FileLoader,
     TextureLoader,
     RawShaderMaterial,
