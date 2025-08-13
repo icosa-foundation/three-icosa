@@ -1304,6 +1304,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.material.name = "material_SvgTemplate";
                 break;
 
+            case "1b897b7e-9b76-425a-b031-a867c48df409":
             case "4465b5ef-3605-bec4-2b3e-6b04508ddb6b":
             case "Gouache":
                 // TODO Set uniforms
@@ -1312,7 +1313,13 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("normal"));
                 copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                mesh.geometry.setAttribute("a_texcoord0", mesh.geometry.getAttribute("uv"));
                 shader = await this.tiltShaderLoader.loadAsync("Gouache");
+                shader.lights = true;
+                shader.fog = true;
+                shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
                 mesh.material.name = "material_Gouache";
                 break;
