@@ -357,10 +357,19 @@ vec3 computeLighting(vec3 normal) {
 }
 
 void main() {
-    vec3 normal = normalize(v_normal);
+    float brush_mask = texture(u_MainTex, v_texcoord0).w;
+    brush_mask *= v_color.w;
+
+    // WARNING: PerturbNormal uses derivatives and must not be called conditionally.
+    vec3 normal = PerturbNormal(v_position.xyz, normalize(v_normal), v_texcoord0);
 
     // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below,
     // causing issues on some hardware/drivers. So we compute lighting just to discard it later.
     fragColor.rgb = ApplyFog(computeLighting(normal));
     fragColor.a = 1.0;
+
+    // This must come last to ensure PerturbNormal is called uniformly for all invocations.
+    if (brush_mask <= u_Cutoff) {
+        discard;
+    }
 }
