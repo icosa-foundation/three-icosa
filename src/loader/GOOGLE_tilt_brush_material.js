@@ -43,7 +43,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         const json = parser.json;
         let isTilt = this.isTiltGltf(json);
         if (!isTilt) {
-            console.warn("Not TiltGltf Error", json);
+            console.warn("Not Tilt Brush Extensions found", json);
             // return null;
         }
 
