@@ -541,14 +541,6 @@ export class TiltShaderLoader extends THREE.Loader {
             case "Space":
                 return "Space";
 
-            case "30cb9af6-be41-4872-8f3e-cbff63fe3db8":
-            case "Digital":
-                return "Digital";
-
-            case "abfbb2aa-70b4-4a5c-8126-8eedda2b3628":
-            case "Race":
-                return "Race";
-
             case "355b3579-bf1d-4ff5-a200-704437fe684b":
             case "SmoothHull":
                 return "SmoothHull";
