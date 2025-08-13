@@ -1807,7 +1807,6 @@ const tiltBrushMaterialParams = {
 
 
     "SvgTemplate" : {
-      // TODO Uniforms: SvgTemplate
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -1827,7 +1826,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Gouache" : {
-      // TODO Uniforms: Gouache
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -1870,7 +1868,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "MylarTube" : {
-      // TODO Uniforms: MylarTube
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -1909,7 +1906,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Rain" : {
-      // TODO Uniforms: Rain
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -1957,7 +1953,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "DryBrush" : {
-      // TODO Uniforms: DryBrush
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2000,7 +1995,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "LeakyPen" : {
-      // TODO Uniforms: LeakyPen
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2045,7 +2039,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Sparks" : {
-      // TODO Uniforms: Sparks
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2091,7 +2084,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "Wind" : {
-      // TODO Uniforms: Wind
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2188,7 +2180,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "TaperedWire" : {
-      // TODO Uniforms: TaperedWire
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2229,7 +2220,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "SquarePaper" : {
-      // TODO Uniforms: SquarePaper
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2272,7 +2262,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "ThickGeometry" : {
-      // TODO Uniforms: ThickGeometry
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2316,7 +2305,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Wireframe" : {
-      // TODO Uniforms: Wireframe
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2336,7 +2324,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "Muscle" : {
-      // TODO Uniforms: Muscle
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2379,7 +2366,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Guts" : {
-      // TODO Uniforms: Guts
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2422,7 +2408,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Fire2" : {
-      // TODO Uniforms: Fire2
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2455,7 +2440,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "TubeToonInverted" : {
-      // TODO Uniforms: TubeToonInverted
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2475,7 +2459,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "FacetedTube" : {
-      // TODO Uniforms: FacetedTube
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2495,7 +2478,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "WaveformParticles" : {
-      // TODO Uniforms: WaveformParticles
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2516,7 +2498,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "BubbleWand" : {
-      // TODO Uniforms: BubbleWand
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2551,7 +2532,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "DanceFloor" : {
-      // TODO Uniforms: DanceFloor
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2572,7 +2552,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "WaveformTube" : {
-      // TODO Uniforms: WaveformTube
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2593,7 +2572,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "Drafting" : {
-      // TODO Uniforms: Drafting
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2615,7 +2593,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "SingleSided" : {
-      // TODO Uniforms: SingleSided
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2654,7 +2631,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "DoubleFlat" : {
-      // TODO Uniforms: DoubleFlat
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2693,7 +2669,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "TubeAdditive" : {
-      // TODO Uniforms: TubeAdditive
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2713,7 +2688,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "Feather" : {
-      // TODO Uniforms: Feather
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2753,7 +2727,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "DuctTapeGeometry" : {
-      // TODO Uniforms: DuctTapeGeometry
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2773,7 +2746,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "TaperedHueShift" : {
-      // TODO Uniforms: TaperedHueShift
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2813,7 +2785,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Lacewing" : {
-      // TODO Uniforms: Lacewing
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2903,7 +2874,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Charcoal" : {
-      // TODO Uniforms: Charcoal
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2946,7 +2916,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "KeijiroTube" : {
-      // TODO Uniforms: KeijiroTube
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -3047,7 +3016,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "WaveformFFT" : {
-      // TODO Uniforms: WaveformFFT
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -3068,7 +3036,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "Fairy" : {
-      // TODO Uniforms: Fairy
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -3108,7 +3075,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "Space" : {
-      // TODO Uniforms: Space
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -3129,7 +3095,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "SmoothHull" : {
-      // TODO Uniforms: SmoothHull
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -3175,7 +3140,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Leaves2" : {
-      // TODO Uniforms: Leaves2
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -3219,7 +3183,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "InkGeometry" : {
-      // TODO Uniforms: InkGeometry
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -3263,7 +3226,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "ConcaveHull" : {
-      // TODO Uniforms: ConcaveHull
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -3303,7 +3265,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "PassthroughHull" : {
-      // TODO Uniforms: PassthroughHull
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
