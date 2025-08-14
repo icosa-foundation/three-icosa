@@ -13,9 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Auto-copied from ThickPaint-fdf0326a-c0d1-4fed-b101-9db0ff6d071f-v10.0-fragment.glsl
-// Brush-specific shader for GlTF web preview, based on General generator
-// with parameters lit=1, a=0.5.
+// MarbledRainbow fragment shader with specular texturing
 
 precision mediump float;
 
@@ -29,6 +27,15 @@ uniform vec3 u_SpecColor;
 uniform float u_Shininess;
 uniform float u_Cutoff;
 uniform sampler2D u_MainTex;
+uniform sampler2D u_SpecTex;
+
+// ---------------------------------------------------------------------------------------------- //
+// Tangent-less normal maps (derivative maps)
+// ---------------------------------------------------------------------------------------------- //
+uniform sampler2D u_BumpMap;
+uniform vec4 u_BumpMap_TexelSize;
+
+
 
 in vec4 v_color;
 in vec3 v_normal;
@@ -36,6 +43,7 @@ in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;
+in vec3 v_worldPos;
 
 float dispAmount = .0015;
 
@@ -102,12 +110,6 @@ vec3 ApplyFog(vec3 color) {
 
 // Requires a global constant "float dispAmount"
 // TODO: turn it into a parameter!
-
-// ---------------------------------------------------------------------------------------------- //
-// Tangent-less normal maps (derivative maps)
-// ---------------------------------------------------------------------------------------------- //
-uniform sampler2D u_BumpMap;
-uniform vec4 u_BumpMap_TexelSize;
 
 // HACK: Workaround for GPUs which struggle with vec3/vec2 derivatives.
 vec3 xxx_dFdx3(vec3 v) {
@@ -359,19 +361,37 @@ vec3 computeLighting(vec3 normal) {
 }
 
 void main() {
-    float brush_mask = texture(u_MainTex, v_texcoord0).w;
-    brush_mask *= v_color.w;
-
-    // WARNING: PerturbNormal uses derivatives and must not be called conditionally.
-    vec3 normal = PerturbNormal(v_position.xyz, normalize(v_normal), v_texcoord0);
-
-    // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below,
-    // causing issues on some hardware/drivers. So we compute lighting just to discard it later.
-    fragColor.rgb = ApplyFog(computeLighting(normal));
-    fragColor.a = 1.0;
-
-    // This must come last to ensure PerturbNormal is called uniformly for all invocations.
-    if (brush_mask <= u_Cutoff) {
+    vec4 mainTex = texture(u_MainTex, v_texcoord0);
+    vec4 specTex = texture(u_SpecTex, v_texcoord0);
+    vec3 normal = normalize(v_normal);
+    
+    // Sample bump map and perturb normal
+    vec3 bumpNormal = PerturbNormal(v_position.xyz, normal, v_texcoord0);
+    
+    // Surface properties
+    vec3 albedo = mainTex.rgb * v_color.rgb;
+    vec3 specularColor = u_SpecColor * specTex.rgb;
+    float smoothness = u_Shininess;
+    float alpha = mainTex.a * v_color.a;
+    
+    // Lighting calculation
+    vec3 lightDir0 = normalize(v_light_dir_0);
+    vec3 lightDir1 = normalize(v_light_dir_1);
+    vec3 eyeDir = normalize(-v_position);
+    
+    vec3 lightOut0 = SurfaceShaderSpecularGloss(bumpNormal, lightDir0, eyeDir, 
+                                               u_SceneLight_0_color.rgb,
+                                               albedo, specularColor, smoothness);
+    vec3 lightOut1 = ShShaderWithSpec(bumpNormal, lightDir1, u_SceneLight_1_color.rgb, 
+                                     albedo, specularColor);
+    vec3 ambientOut = albedo * u_ambient_light_color.rgb;
+    
+    vec3 color = lightOut0 + lightOut1 + ambientOut;
+    
+    fragColor = vec4(ApplyFog(color), alpha);
+    
+    // Alpha test
+    if (alpha <= u_Cutoff) {
         discard;
     }
 }

@@ -13,9 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Auto-copied from ThickPaint-fdf0326a-c0d1-4fed-b101-9db0ff6d071f-v10.0-fragment.glsl
-// Brush-specific shader for GlTF web preview, based on General generator
-// with parameters lit=1, a=0.5.
+// Lacewing fragment shader with animated specular effects
 
 precision mediump float;
 
@@ -29,6 +27,8 @@ uniform vec3 u_SpecColor;
 uniform float u_Shininess;
 uniform float u_Cutoff;
 uniform sampler2D u_MainTex;
+uniform sampler2D u_SpecTex;
+uniform vec4 u_time;
 
 in vec4 v_color;
 in vec3 v_normal;
@@ -36,6 +36,7 @@ in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;
+in vec3 v_worldPos;
 
 float dispAmount = .0015;
 
@@ -359,19 +360,45 @@ vec3 computeLighting(vec3 normal) {
 }
 
 void main() {
-    float brush_mask = texture(u_MainTex, v_texcoord0).w;
-    brush_mask *= v_color.w;
-
-    // WARNING: PerturbNormal uses derivatives and must not be called conditionally.
-    vec3 normal = PerturbNormal(v_position.xyz, normalize(v_normal), v_texcoord0);
-
-    // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below,
-    // causing issues on some hardware/drivers. So we compute lighting just to discard it later.
-    fragColor.rgb = ApplyFog(computeLighting(normal));
-    fragColor.a = 1.0;
-
-    // This must come last to ensure PerturbNormal is called uniformly for all invocations.
-    if (brush_mask <= u_Cutoff) {
+    vec4 mainTex = texture(u_MainTex, v_texcoord0);
+    vec4 specTex = texture(u_SpecTex, v_texcoord0);
+    vec3 normal = normalize(v_normal);
+    
+    // Sample bump map and perturb normal
+    vec3 bumpNormal = PerturbNormal(v_position.xyz, normal, v_texcoord0);
+    
+    float scroll = u_time.z;
+    
+    // Animate the spectral effect based on spectex values and time
+    vec3 animatedSpec;
+    animatedSpec.r = (sin(specTex.r * 2.0 + scroll * 0.5 - v_texcoord0.x) + 1.0) * 1.0;
+    animatedSpec.g = (sin(specTex.r * 3.3 + scroll * 1.0 - v_texcoord0.x) + 1.0) * 1.0;
+    animatedSpec.b = (sin(specTex.r * 4.66 + scroll * 0.25 - v_texcoord0.x) + 1.0) * 1.0;
+    
+    // Surface properties
+    vec3 albedo = mainTex.rgb * v_color.rgb;
+    vec3 specularColor = u_SpecColor * animatedSpec;
+    float smoothness = u_Shininess;
+    float alpha = mainTex.a * v_color.a;
+    
+    // Lighting calculation
+    vec3 lightDir0 = normalize(v_light_dir_0);
+    vec3 lightDir1 = normalize(v_light_dir_1);
+    vec3 eyeDir = normalize(-v_position);
+    
+    vec3 lightOut0 = SurfaceShaderSpecularGloss(bumpNormal, lightDir0, eyeDir, 
+                                               u_SceneLight_0_color.rgb,
+                                               albedo, specularColor, smoothness);
+    vec3 lightOut1 = ShShaderWithSpec(bumpNormal, lightDir1, u_SceneLight_1_color.rgb, 
+                                     albedo, specularColor);
+    vec3 ambientOut = albedo * u_ambient_light_color.rgb;
+    
+    vec3 color = lightOut0 + lightOut1 + ambientOut;
+    
+    fragColor = vec4(ApplyFog(color), alpha);
+    
+    // Alpha test
+    if (alpha <= u_Cutoff) {
         discard;
     }
 }

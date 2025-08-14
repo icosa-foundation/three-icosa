@@ -1,4 +1,5 @@
 // Copyright 2020 The Tilt Brush Authors
+// Updated to OpenGL ES 3.0 by the Icosa Gallery Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,11 +13,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// DefaultVS.glsl
+// Lacewing vertex shader
 in vec4 a_position;
 in vec3 a_normal;
 in vec4 a_color;
 in vec2 a_texcoord0;
+in vec4 a_texcoord1;
 
 out vec4 v_color;
 out vec3 v_normal;  // Camera-space normal.
@@ -25,14 +27,18 @@ out vec2 v_texcoord0;
 out vec3 v_light_dir_0;  // Camera-space light direction, main light.
 out vec3 v_light_dir_1;  // Camera-space light direction, other light.
 out float f_fog_coord;
+out vec3 v_worldPos;
 
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
 uniform mat3 normalMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
+uniform mat4 modelMatrix;
 
 void main() {
+  vec4 worldPos = modelMatrix * a_position;
+  
   gl_Position = projectionMatrix * modelViewMatrix * a_position;
   f_fog_coord = gl_Position.z;
   v_normal = normalMatrix * a_normal;
@@ -41,4 +47,5 @@ void main() {
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
   v_color = a_color;
   v_texcoord0 = a_texcoord0;
+  v_worldPos = worldPos.xyz;
 }

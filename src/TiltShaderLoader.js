@@ -83,6 +83,24 @@ export class TiltShaderLoader extends THREE.Loader {
             materialParams.uniforms.u_AlphaMask.value = alphaMask;
         }
 
+        if (materialParams.uniforms.u_DisplaceTex) {
+            const displaceTex = await textureLoader.loadAsync(materialParams.uniforms.u_DisplaceTex.value);
+            displaceTex.name = `${brushName}_DisplaceTex`;
+            displaceTex.wrapS = RepeatWrapping;
+            displaceTex.wrapT = RepeatWrapping;
+            displaceTex.flipY = false;
+            materialParams.uniforms.u_DisplaceTex.value = displaceTex;
+        }
+
+        if (materialParams.uniforms.u_SpecTex) {
+            const specTex = await textureLoader.loadAsync(materialParams.uniforms.u_SpecTex.value);
+            specTex.name = `${brushName}_SpecTex`;
+            specTex.wrapS = RepeatWrapping;
+            specTex.wrapT = RepeatWrapping;
+            specTex.flipY = false;
+            materialParams.uniforms.u_SpecTex.value = specTex;
+        }
+
         // inject three.js lighting and fog uniforms
         for (var lightType in UniformsLib.lights)
         {
@@ -1892,7 +1910,7 @@ const tiltBrushMaterialParams = {
             u_Shininess: { value: 0.68 },
             u_Smoothness: { value: 0.078125 },
             u_SpecColor: { value: new Vector3(0.75, 0.75, 0.75) },
-            u_SqueezeAmount: { value: 0.873 },
+            u_SqueezeAmount: { value: 0.473 },
             u_Strength: { value: 0.5 },
             u_TintColor: { value: new Vector4(0.617647, 0.617647, 0.617647, 1) }
         },
@@ -1927,6 +1945,7 @@ const tiltBrushMaterialParams = {
             u_Glossiness: { value: 0.5 },
             u_GlossyReflections: { value: 1.0 },
             u_MainTex: { value: "Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f/Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f-v10.0-MainTex.png" },
+            u_MainTex_ST: { value: new Vector4(4.0, 1.0, 0.0, 0.0) }, // Unity tiling (4,1) and offset (0,0)
             u_Metallic: { value: 0.0 },
             u_Mode: { value: 0.0 },
             u_NumSides: { value: 6.0 },
@@ -1941,7 +1960,8 @@ const tiltBrushMaterialParams = {
             u_StretchDistortionExponent: { value: 3.0 },
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 },
-            u_time: { value: new Vector4() }
+            u_time: { value: new Vector4() },
+            u_Bulge: { value: 2.25 }
         },
         vertexShader: "Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f/Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f-v10.0-vertex.glsl",
         fragmentShader: "Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f/Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f-v10.0-fragment.glsl",
@@ -2418,7 +2438,6 @@ const tiltBrushMaterialParams = {
             u_fogDensity: { value: 0 },
             u_Color: { value: new Vector4(1, 1, 1, 1) },
             u_DisplaceTex: { value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-DisplaceTex.png" },
-            u_DisplaceTex2: { value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-DisplaceTex2.png" },
             u_DisplacementIntensity: { value: 0.04 },
             u_EmissionGain: { value: 0.405 },
             u_FlameFadeMax: { value: 30.0 },
@@ -2777,10 +2796,10 @@ const tiltBrushMaterialParams = {
         },
         vertexShader: "TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52/TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52-v10.0-vertex.glsl",
         fragmentShader: "TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52/TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52-v10.0-fragment.glsl",
-        side: 1, // TODO
-        transparent: false, // TODO
+        side: 2,
+        transparent: false,
         depthFunc: 2,
-        depthWrite: true, // TODO
+        depthWrite: true,
         depthTest: true,
         blending: 0,
     },

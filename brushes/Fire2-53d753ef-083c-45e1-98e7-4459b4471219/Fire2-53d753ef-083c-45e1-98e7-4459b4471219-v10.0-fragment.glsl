@@ -1,6 +1,5 @@
 
 // Copyright 2020 The Tilt Brush Authors
-// Updated to OpenGL ES 3.0 by the Icosa Gallery Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,48 +13,76 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Brush-specific shader for GlTF web preview, based on EmissiveAlpha generator.
-
+// Fire2 fragment shader
 precision mediump float;
 
 out vec4 fragColor;
 
 uniform sampler2D u_MainTex;
+uniform sampler2D u_DisplaceTex;
 uniform vec4 u_time;
-uniform float u_EmissionGain;
+uniform float u_Scroll1;
+uniform float u_Scroll2;
+uniform float u_DisplacementIntensity;
+uniform float u_FlameFadeMin;
+uniform float u_FlameFadeMax;
 
 in vec4 v_color;
 in vec2 v_texcoord0;
+in vec4 v_worldPos;
 
-
-vec4 bloomColor(vec4 color, float gain) {
-  // Guarantee that there's at least a little bit of all 3 channels.
-  // This makes fully-saturated strokes (which only have 2 non-zero
-  // color channels) eventually clip to white rather than to a secondary.
-  float cmin = length(color.rgb) * .05;
-  color.rgb = max(color.rgb, vec3(cmin, cmin, cmin));
-  // If we try to remove this pow() from .a, it brightens up
-  // pressure-sensitive strokes; looks better as-is.
-  color.r = pow(color.r, 2.2);
-  color.g = pow(color.g, 2.2);
-  color.b = pow(color.b, 2.2);
-  color.a = pow(color.a, 2.2);
-  color.rgb *= 2.0 * exp(gain * 10.0);
-  return color;
+// HDR encoding function from Hdr.cginc
+vec4 encodeHdr(vec3 color) {
+  // Using HDR_EMULATED mode (most common)
+  float m = max(max(color.r, color.g), color.b);
+  float HDR_SCALE = 16.0;
+  float expf = min(log2(max(m, 0.001)), HDR_SCALE);
+  vec4 c = vec4(color, 1.0);
+  
+  if (m > 1.0) {
+    c /= exp2(log2(max(m, 0.001)));
+    c.a = 1.0 - (expf / HDR_SCALE);
+  }
+  
+  return c;
 }
 
 void main() {
-  float _Scroll1 = 20.0;
-  float _Scroll2 = 0.0;
-  vec4 _Time = u_time;
-  float _DisplacementIntensity = 0.1;
+  vec2 displacement;
+  float flame_fade_mix = 0.0;
 
-  // Should be done in vertex shader
-  vec4 bloomed_v_color = bloomColor(v_color, u_EmissionGain);
+  // Sample displacement texture
+  displacement = texture(u_DisplaceTex, v_texcoord0).xy;
+  displacement = displacement * 2.0 - 1.0;
+  displacement *= u_DisplacementIntensity;
 
-  float displacement = texture(u_MainTex, v_texcoord0.xy + vec2(-_Time.x * _Scroll1, 0.0)  ).a;
-  vec4 tex = texture(u_MainTex, v_texcoord0.xy + vec2(-_Time.x * _Scroll2, 0) - displacement * _DisplacementIntensity);
+  // Sample mask from MainTex y channel
+  float mask = texture(u_MainTex, v_texcoord0).y;
 
-  fragColor = bloomed_v_color * tex;
-  // fragColor = vec4(fragColor.rgb * fragColor.a * 5.0, tex.a);
+  // Apply displacement to UV coordinates
+  vec2 uv = v_texcoord0;
+  uv += displacement;
+
+  // Sample flame textures with scrolling animation
+  float flame1 = texture(u_MainTex, uv * 0.7 + vec2(-u_time.x * u_Scroll1, 0.0)).x;
+  float flame2 = texture(u_MainTex, vec2(uv.x, 1.0 - uv.y) + vec2(-u_time.x * u_Scroll2, -u_time.x * u_Scroll2 / 4.0)).x;
+
+  // Combine flames
+  float flames = clamp((flame2 + flame1) / 2.0, 0.0, 1.0);
+  flames = smoothstep(0.0, 0.8, mask * flames);
+  flames *= mask;
+
+  // Create flame texture
+  vec4 tex = vec4(flames, flames, flames, 1.0);
+  float flame_fade = mix(u_FlameFadeMin, u_FlameFadeMax, flame_fade_mix);
+
+  // Apply flame fade along stroke
+  tex.xyz *= pow(1.0 - v_texcoord0.x, flame_fade) * (flame_fade * 2.0);
+
+  // Final color calculation (matches Unity Fire2)
+  vec4 color = v_color * tex;
+  
+  // Make it brighter to match Unity - try direct multiplication first
+  color.rgb *= color.a * 15.0; // Boost brightness
+  fragColor = vec4(color.rgb, 1.0);
 }

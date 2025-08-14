@@ -346,7 +346,7 @@ vec3 diffuseColor) {  // Surface diffuse color, i.e. albedo.
 vec3 computeLighting(vec3 normal) {
     if (!gl_FrontFacing) {
         // Always use front-facing normal for double-sided surfaces.
-        normal *= -1.0;
+        normal *= 1.0;
     }
     vec3 lightDir0 = normalize(v_light_dir_0);
     vec3 lightDir1 = normalize(v_light_dir_1);
@@ -365,7 +365,7 @@ void main() {
     vec3 baseColor = v_color.xyz;
 
     // Rim term in world space
-    vec3 N = normalize(v_normal);
+    vec3 N = normalize(-v_normal);
     vec3 V = normalize(cameraPosition - v_position);
     float rim = 1.0 - abs(dot(V, N));
     rim *= (1.0 - pow(rim, 5.0));
@@ -375,7 +375,8 @@ void main() {
     vec3 diffraction = texture(u_MainTex, diffUV).rgb;
 
     // Emission (matches Unity mix)
-    vec3 emission = rim * (0.25 * diffraction * rim + 0.75 * diffraction * v_color.rgb);
+    //vec3 emission = rim * (0.25 * diffraction * rim + 0.75 * diffraction * v_color.rgb);
+    vec3 emission = vec3(0,0,0);
 
     // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below,
     // causing issues on some hardware/drivers. So we compute lighting just to discard it later.

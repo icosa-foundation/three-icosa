@@ -13,8 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Brush-specific shader for GlTF web preview, based on General generator
-// with parameters lit=1, a=0.5.
+// BubbleWand fragment shader with rim lighting and diffraction effects
 
 precision mediump float;
 
@@ -28,6 +27,7 @@ uniform vec3 u_SpecColor;
 uniform float u_Shininess;
 uniform float u_Cutoff;
 uniform sampler2D u_MainTex;
+uniform vec4 u_time;
 
 in vec4 v_color;
 in vec3 v_normal;
@@ -35,6 +35,7 @@ in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;
+in vec3 v_viewDir;
 
 float dispAmount = .0025;
 
@@ -357,19 +358,34 @@ vec3 computeLighting(vec3 normal) {
 }
 
 void main() {
-  float brush_mask = texture(u_MainTex, v_texcoord0).w;
-  brush_mask *= v_color.w;
+  vec3 normal = normalize(v_normal);
+  vec3 viewDir = normalize(-v_position);
+  
+  // Hardcode some shiny specular values
+  float smoothness = 0.9;
+  vec3 specularColor = 0.6 * v_color.rgb;
+  vec3 albedo = vec3(0.0);
 
-  // WARNING: PerturbNormal uses derivatives and must not be called conditionally.
-  vec3 normal = PerturbNormal(v_position.xyz, normalize(v_normal), v_texcoord0);
+  // Calculate rim effect
+  float rim = 1.0 - abs(dot(viewDir, normal));
+  rim *= 1.0 - pow(rim, 5.0);
 
-  // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below,
-  // causing issues on some hardware/drivers. So we compute lighting just to discard it later.
-  fragColor.rgb = ApplyFog(computeLighting(normal));
-  fragColor.a = 1.0;
+  // Thin slit diffraction texture ramp lookup
+  vec3 diffraction = texture(u_MainTex, vec2(rim + u_time.x + normal.y, rim + normal.y)).xyz;
+  vec3 emission = rim * (0.25 * diffraction * rim + 0.75 * diffraction * v_color.rgb);
 
-  // This must come last to ensure PerturbNormal is called uniformly for all invocations.
-  if (brush_mask <= u_Cutoff) {
-    discard;
-  }
+  // Apply lighting
+  vec3 lightDir0 = normalize(v_light_dir_0);
+  vec3 lightDir1 = normalize(v_light_dir_1);
+  
+  // Specular contribution from main light
+  vec3 halfVector = normalize(lightDir0 + viewDir);
+  float NdotH = max(dot(normal, halfVector), 0.0);
+  float specular = pow(NdotH, smoothness * 128.0);
+  
+  vec3 color = emission;
+  color += specularColor * specular * u_SceneLight_0_color.rgb;
+  color += v_color.rgb * u_ambient_light_color.rgb * 0.1;
+
+  fragColor = vec4(ApplyFog(color), v_color.a);
 }

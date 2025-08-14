@@ -1,5 +1,5 @@
-#define TB_EMISSION_GAIN 0.723
 // Copyright 2020 The Tilt Brush Authors
+// Updated to OpenGL ES 3.0 by the Icosa Gallery Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,34 +13,62 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Additive.glsl
+// Rain fragment shader with animated UV strips
+
 precision mediump float;
 
 uniform sampler2D u_MainTex;
+uniform vec4 u_time;
+uniform float u_NumSides;
+uniform float u_Speed;
+uniform vec4 u_MainTex_ST; // Texture tiling and offset (x=tileX, y=tileY, z=offsetX, w=offsetY)
 
 in vec4 v_color;
 in vec2 v_texcoord0;
+in vec4 v_worldPos;
 
 out vec4 fragColor;
 
-vec4 bloomColor(vec4 color, float gain) {
-  // Guarantee that there's at least a little bit of all 3 channels.
-  // This makes fully-saturated strokes (which only have 2 non-zero
-  // color channels) eventually clip to white rather than to a secondary.
-  float cmin = length(color.rgb) * .05;
-  color.rgb = max(color.rgb, vec3(cmin, cmin, cmin));
-  // If we try to remove this pow() from .a, it brightens up
-  // pressure-sensitive strokes; looks better as-is.
-  color.r = pow(color.r, 2.2);
-  color.g = pow(color.g, 2.2);
-  color.b = pow(color.b, 2.2);
-  color.a = pow(color.a, 2.2);
-  color.rgb *= 2.0 * exp(gain * 10.0);
-  return color;
+float rand_1_05(vec2 uv) {
+  float noise = fract(sin(dot(uv, vec2(12.9898, 78.233) * 2.0)) * 4550.0);
+  return abs(noise) * 0.7;
 }
 
 void main() {
-  const float emission_gain = TB_EMISSION_GAIN;
-  float brush_mask = texture(u_MainTex, v_texcoord0).w;
-  fragColor = brush_mask * bloomColor(v_color, emission_gain);
+  float u_scale = u_Speed;  // Unity: u_scale = _Speed
+  // Fix: our u_time.y advances ~4x faster than Unity's _Time.y  
+  float time_scale = 0.3;  // Adjusted for proper Unity timing
+  float t = mod(u_time.y * time_scale * 4.0 * u_scale, u_scale);
+  
+  // Rescale U coord and animate it
+  vec2 uvs = v_texcoord0;
+  float u = uvs.x * u_scale - t; // Unity: u = uvs.x * u_scale - t
+  
+  // Calculate face ID for randomization
+  float row_id = float(int(uvs.y * u_NumSides));
+  float rand = rand_1_05(vec2(row_id));
+  
+  // Randomize animation by row ID
+  u += rand * u_time.y * time_scale * 2.75 * u_scale;
+  
+  // Wrap U coordinate
+  u = mod(u, u_scale); // Unity: u = fmod(u, u_scale)
+  
+  // Rescale V coord for each strip
+  float v = uvs.y * u_NumSides;
+  
+  // Apply Unity's texture tiling from uniform
+  vec2 tiledUV = vec2(u * u_MainTex_ST.x + u_MainTex_ST.z, v * u_MainTex_ST.y + u_MainTex_ST.w);
+  vec4 tex = texture(u_MainTex, tiledUV);
+  
+  // Clip texture outside 0-1 U range
+  tex = (u < 0.0) ? vec4(0.0) : tex;
+  tex = (u > 1.0) ? vec4(0.0) : tex;
+  
+  // Fade at stroke edges
+  float fade = pow(abs(v_texcoord0.x * 0.25), 9.0);
+  vec4 color = v_color * tex;
+  vec4 finalColor = mix(color, vec4(0.0), clamp(fade, 0.0, 1.0));
+  
+  fragColor = vec4(finalColor.rgb * finalColor.a, finalColor.a);
 }
