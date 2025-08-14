@@ -185,8 +185,15 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         };
 
         let setAttributeIfExists = (mesh, oldName, newName) => {
-            if (mesh.geometry.getAttribute(oldName)) {
-                mesh.geometry.setAttribute(newName, mesh.geometry.getAttribute(oldName));
+            const srcAttr = mesh.geometry.getAttribute(oldName);
+            if (srcAttr) {
+                // Avoid overwriting an attribute that may carry extended components (e.g., radius in texcoord.z)
+                if (!mesh.geometry.getAttribute(newName)) {
+                    mesh.geometry.setAttribute(newName, srcAttr);
+                } else {
+                    // Keep the first-mapped attribute; skip overwriting to preserve itemSize/data
+                    // console.debug(`Skipping overwrite of ${newName}; ${oldName} present on ${mesh.name}`);
+                }
             } else {
                 console.warn(`Attribute ${oldName} not found in mesh ${mesh.name}`);
             }
