@@ -12,33 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// DefaultVS.glsl
+// Sparks vertex shader
 in vec4 a_position;
 in vec3 a_normal;
 in vec4 a_color;
 in vec2 a_texcoord0;
 
 out vec4 v_color;
-out vec3 v_normal;  // Camera-space normal.
-out vec3 v_position;  // Camera-space position.
 out vec2 v_texcoord0;
-out vec3 v_light_dir_0;  // Camera-space light direction, main light.
-out vec3 v_light_dir_1;  // Camera-space light direction, other light.
-out float f_fog_coord;
 
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
-uniform mat3 normalMatrix;
-uniform mat4 u_SceneLight_0_matrix;
-uniform mat4 u_SceneLight_1_matrix;
+uniform float u_DisplacementAmount;
+uniform float u_DisplacementExponent;
+uniform vec4 u_MainTex_ST; // xy: tiling, zw: offset
 
 void main() {
-  gl_Position = projectionMatrix * modelViewMatrix * a_position;
-  f_fog_coord = gl_Position.z;
-  v_normal = normalMatrix * a_normal;
-  v_position = (modelViewMatrix * a_position).xyz;
-  v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
-  v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
+
+  vec4 pos = a_position;
+
+  // Radial displacement along normal
+  float displacement = pow(a_texcoord0.x, u_DisplacementExponent);
+  pos.xyz += (a_normal * 0.1) * displacement * u_DisplacementAmount;
+
+  gl_Position = projectionMatrix * modelViewMatrix * pos;
   v_color = a_color;
-  v_texcoord0 = a_texcoord0;
+  v_texcoord0 = a_texcoord0 * u_MainTex_ST.xy + u_MainTex_ST.zw;
 }

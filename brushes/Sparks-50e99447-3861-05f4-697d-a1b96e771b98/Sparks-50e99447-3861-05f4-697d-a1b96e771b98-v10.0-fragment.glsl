@@ -1,4 +1,3 @@
-#define TB_EMISSION_GAIN 0.723
 // Copyright 2020 The Tilt Brush Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,34 +12,52 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Additive.glsl
+// Sparks fragment shader (additive)
 precision mediump float;
 
 uniform sampler2D u_MainTex;
+uniform float u_EmissionGain;
+uniform float u_StretchDistortionExponent;
+uniform float u_NumSides;
+uniform float u_Speed;
+uniform vec4 u_time;
 
 in vec4 v_color;
 in vec2 v_texcoord0;
 
 out vec4 fragColor;
 
-vec4 bloomColor(vec4 color, float gain) {
-  // Guarantee that there's at least a little bit of all 3 channels.
-  // This makes fully-saturated strokes (which only have 2 non-zero
-  // color channels) eventually clip to white rather than to a secondary.
-  float cmin = length(color.rgb) * .05;
-  color.rgb = max(color.rgb, vec3(cmin, cmin, cmin));
-  // If we try to remove this pow() from .a, it brightens up
-  // pressure-sensitive strokes; looks better as-is.
-  color.r = pow(color.r, 2.2);
-  color.g = pow(color.g, 2.2);
-  color.b = pow(color.b, 2.2);
-  color.a = pow(color.a, 2.2);
-  color.rgb *= 2.0 * exp(gain * 10.0);
-  return color;
+float rand_1_05(float row) {
+  float n = fract(sin(row * (12.9898 + 78.233) * 2.0) * 50.0);
+  return abs(n + n) * 0.75; // Approximation of HLSL trick
 }
 
 void main() {
-  const float emission_gain = TB_EMISSION_GAIN;
-  float brush_mask = texture(u_MainTex, v_texcoord0).w;
-  fragColor = brush_mask * bloomColor(v_color, emission_gain);
+  // Warp U to slow near the end of the stroke
+  vec2 uv = v_texcoord0;
+  uv.x = pow(uv.x, u_StretchDistortionExponent);
+
+  // Animate origin along U in [0, u_Scale)
+  float u_scale = u_Speed;
+  float t = mod(u_time.w * u_scale, u_scale);
+  float u = uv.x * u_scale - t;
+
+  // Row-based random offset so strips don't animate together
+  float row_id = floor(uv.y * u_NumSides);
+  float r = rand_1_05(row_id);
+  u += r * u_scale;
+  u = mod(u, u_scale);
+
+  // Rescale V per side
+  float v = uv.y * u_NumSides;
+
+  // Sample and manually clamp outside [0,1] in U
+  vec4 tex = texture(u_MainTex, vec2(u, v));
+  if (u < 0.0 || u > 1.0) tex = vec4(0.0);
+
+  float bloom = exp(u_EmissionGain * 5.0) * (1.0 - v_texcoord0.x);
+  vec4 color = v_color * tex * bloom;
+
+  // Additive output
+  fragColor = vec4(color.rgb, color.a);
 }

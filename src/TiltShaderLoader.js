@@ -2080,6 +2080,7 @@ const tiltBrushMaterialParams = {
             u_Glossiness: { value: 0.5 },
             u_GlossyReflections: { value: 1.0 },
             u_MainTex: { value: "Sparks-50e99447-3861-05f4-697d-a1b96e771b98/Sparks-50e99447-3861-05f4-697d-a1b96e771b98-v10.0-MainTex.png" },
+            u_MainTex_ST: { value: new Vector4(1.0, 1.0, 0.0, 0.0) },
             u_Metallic: { value: 0.0 },
             u_Mode: { value: 0.0 },
             u_NumSides: { value: 4.0 },
