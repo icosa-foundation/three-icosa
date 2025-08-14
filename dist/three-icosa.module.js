@@ -6664,6 +6664,15 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_ColorX: {
+                value: new (0, $a0PbU$Vector4)(1, 0, 0, 1)
+            },
+            u_ColorY: {
+                value: new (0, $a0PbU$Vector4)(0, 1, 0, 1)
+            },
+            u_ColorZ: {
+                value: new (0, $a0PbU$Vector4)(0, 0, 1, 1)
             }
         },
         vertexShader: "FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27/FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",

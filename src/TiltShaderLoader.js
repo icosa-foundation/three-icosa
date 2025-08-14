@@ -2485,7 +2485,10 @@ const tiltBrushMaterialParams = {
             u_SceneLight_0_color: { value: new Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_fogColor: { value: new Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_ColorX: { value: new Vector4(1, 0, 0, 1) },
+            u_ColorY: { value: new Vector4(0, 1, 0, 1) },
+            u_ColorZ: { value: new Vector4(0, 0, 1, 1) }
         },
         vertexShader: "FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27/FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
         fragmentShader: "FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27/FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27-v10.0-fragment.glsl",

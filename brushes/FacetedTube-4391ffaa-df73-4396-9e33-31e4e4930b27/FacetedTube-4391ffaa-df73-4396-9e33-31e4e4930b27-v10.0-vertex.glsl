@@ -12,33 +12,41 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// DefaultVS.glsl
+// FacetedTube vertex shader (GLSL 3.0)
 in vec4 a_position;
 in vec3 a_normal;
 in vec4 a_color;
 in vec2 a_texcoord0;
 
 out vec4 v_color;
-out vec3 v_normal;  // Camera-space normal.
-out vec3 v_position;  // Camera-space position.
+out vec3 v_normal;      // Camera-space normal.
+out vec3 v_position;    // Camera-space position.
 out vec2 v_texcoord0;
-out vec3 v_light_dir_0;  // Camera-space light direction, main light.
-out vec3 v_light_dir_1;  // Camera-space light direction, other light.
+out vec3 v_light_dir_0; // Camera-space light direction, main light.
+out vec3 v_light_dir_1; // Camera-space light direction, other light.
 out float f_fog_coord;
+out vec3 v_worldPos;    // World-space position.
 
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
 uniform mat3 normalMatrix;
+uniform mat4 modelMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
 
 void main() {
-  gl_Position = projectionMatrix * modelViewMatrix * a_position;
+  // Positions
+  vec4 worldPos = modelMatrix * a_position;
+  vec4 viewPos = modelViewMatrix * a_position;
+  gl_Position = projectionMatrix * viewPos;
+
+  // Varyings
   f_fog_coord = gl_Position.z;
   v_normal = normalMatrix * a_normal;
-  v_position = (modelViewMatrix * a_position).xyz;
+  v_position = viewPos.xyz;
   v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
   v_color = a_color;
   v_texcoord0 = a_texcoord0;
+  v_worldPos = worldPos.xyz;
 }
