@@ -47,21 +47,37 @@ export class TiltShaderLoader extends THREE.Loader {
         materialParams.fragmentShader = await loader.loadAsync(materialParams.fragmentShader);
 
         if (materialParams.uniforms.u_MainTex) {
-            const mainTex = await textureLoader.loadAsync(materialParams.uniforms.u_MainTex.value);
-            mainTex.name = `${brushName}_MainTex`;
-            mainTex.wrapS = THREE.RepeatWrapping;
-            mainTex.wrapT = THREE.RepeatWrapping;
-            mainTex.flipY = false;
-            materialParams.uniforms.u_MainTex.value = mainTex;
+            if (materialParams.uniforms.u_MainTex.value === null) {
+                // Create a 1x1 white texture with full alpha for null values
+                const defaultTexture = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1, THREE.RGBAFormat);
+                defaultTexture.name = `${brushName}_DefaultMainTex`;
+                defaultTexture.needsUpdate = true;
+                materialParams.uniforms.u_MainTex.value = defaultTexture;
+            } else {
+                const mainTex = await textureLoader.loadAsync(materialParams.uniforms.u_MainTex.value);
+                mainTex.name = `${brushName}_MainTex`;
+                mainTex.wrapS = THREE.RepeatWrapping;
+                mainTex.wrapT = THREE.RepeatWrapping;
+                mainTex.flipY = false;
+                materialParams.uniforms.u_MainTex.value = mainTex;
+            }
         }
 
         if (materialParams.uniforms.u_BumpMap) {
-            const bumpMap = await textureLoader.loadAsync(materialParams.uniforms.u_BumpMap.value);
-            bumpMap.name = `${brushName}_BumpMap`;
-            bumpMap.wrapS = THREE.RepeatWrapping;
-            bumpMap.wrapT = THREE.RepeatWrapping;
-            bumpMap.flipY = false;
-            materialParams.uniforms.u_BumpMap.value = bumpMap;
+            if (materialParams.uniforms.u_BumpMap.value === null) {
+                // Create a 1x1 neutral normal map for null values
+                const defaultBumpMap = new THREE.DataTexture(new Uint8Array([128, 128, 255, 255]), 1, 1, THREE.RGBAFormat);
+                defaultBumpMap.name = `${brushName}_DefaultBumpMap`;
+                defaultBumpMap.needsUpdate = true;
+                materialParams.uniforms.u_BumpMap.value = defaultBumpMap;
+            } else {
+                const bumpMap = await textureLoader.loadAsync(materialParams.uniforms.u_BumpMap.value);
+                bumpMap.name = `${brushName}_BumpMap`;
+                bumpMap.wrapS = THREE.RepeatWrapping;
+                bumpMap.wrapT = THREE.RepeatWrapping;
+                bumpMap.flipY = false;
+                materialParams.uniforms.u_BumpMap.value = bumpMap;
+            }
         }
 
         if (materialParams.uniforms.u_AlphaMask) {
@@ -80,6 +96,15 @@ export class TiltShaderLoader extends THREE.Loader {
             displaceTex.wrapT = THREE.RepeatWrapping;
             displaceTex.flipY = false;
             materialParams.uniforms.u_DisplaceTex.value = displaceTex;
+        }
+
+        if (materialParams.uniforms.u_SecondaryTex) {
+            const secondaryTex = await textureLoader.loadAsync(materialParams.uniforms.u_SecondaryTex.value);
+            secondaryTex.name = `${brushName}_SecondaryTex`;
+            secondaryTex.wrapS = THREE.RepeatWrapping;
+            secondaryTex.wrapT = THREE.RepeatWrapping;
+            secondaryTex.flipY = false;
+            materialParams.uniforms.u_SecondaryTex.value = secondaryTex;
         }
 
         if (materialParams.uniforms.u_SpecTex) {
@@ -687,6 +712,7 @@ const tiltBrushMaterialParams = {
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_time: { value: new THREE.Vector4() },
             u_EmissionGain: { value: 0.45 },
+            u_MainTex: { value: null },
         },
         vertexShader: "ChromaticWave-0f0ff7b2-a677-45eb-a7d6-0cd7206f4816/ChromaticWave-0f0ff7b2-a677-45eb-a7d6-0cd7206f4816-v10.0-vertex.glsl",
         fragmentShader: "ChromaticWave-0f0ff7b2-a677-45eb-a7d6-0cd7206f4816/ChromaticWave-0f0ff7b2-a677-45eb-a7d6-0cd7206f4816-v10.0-fragment.glsl",
@@ -1245,6 +1271,7 @@ const tiltBrushMaterialParams = {
             u_ambient_light_color: { value: new THREE.Vector4(0.3922, 0.3922, 0.3922, 1) },
             u_SceneLight_0_color: { value: new THREE.Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
+            u_MainTex: { value: null },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 }
         },
@@ -1444,6 +1471,8 @@ const tiltBrushMaterialParams = {
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_SpecColor: { value: new THREE.Vector3(0.1985294, 0.1985294, 0.1985294) },
             u_Shininess: { value: 0.7430 },
+            u_MainTex: { value: null },
+            u_BumpMap: { value: null },
             u_Cutoff: { value: 0.5 },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
@@ -2029,7 +2058,7 @@ const tiltBrushMaterialParams = {
             u_OcclusionStrength: { value: 1.0 },
             u_Parallax: { value: 0.02 },
             u_Ratio: { value: 0.57 },
-            u_SecondaryTex: { value: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-u_SecondaryTex.png" },
+            u_SecondaryTex: { value: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-SecondaryTex.png" },
             u_Shininess: { value: 0.01 },
             u_SmoothnessTextureChannel: { value: 0.0 },
             u_SpecColor: { value: new THREE.Vector3(0, 0, 0) },
@@ -2688,6 +2717,7 @@ const tiltBrushMaterialParams = {
             u_ambient_light_color: { value: new THREE.Vector4(0.3922, 0.3922, 0.3922, 1) },
             u_SceneLight_0_color: { value: new THREE.Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
+            u_MainTex: { value: null },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 }
         },
@@ -2746,8 +2776,14 @@ const tiltBrushMaterialParams = {
             u_ambient_light_color: { value: new THREE.Vector4(0.3922, 0.3922, 0.3922, 1) },
             u_SceneLight_0_color: { value: new THREE.Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
+            u_SpecColor: { value: new THREE.Vector3(0.5372549, 0.5372549, 0.5372549) },
+            u_Shininess: { value: 0.414 },
+            u_MainTex: { value: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-MainTex.png" },
+            u_Cutoff: { value: 0.2 },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_BumpMap: { value: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-BumpMap.png" },
+            u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) }
         },
         vertexShader: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-vertex.glsl",
         fragmentShader: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-fragment.glsl",
@@ -3245,8 +3281,14 @@ const tiltBrushMaterialParams = {
             u_ambient_light_color: { value: new THREE.Vector4(0.3922, 0.3922, 0.3922, 1) },
             u_SceneLight_0_color: { value: new THREE.Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
+            u_SpecColor: { value: new THREE.Vector3(0.5372549, 0.5372549, 0.5372549) },
+            u_Shininess: { value: 0.414 },
+            u_MainTex: { value: "Bubbles-89d104cd-d012-426b-b5b3-bbaee63ac43c/Bubbles-89d104cd-d012-426b-b5b3-bbaee63ac43c-v10.0-MainTex.png" },
+            u_Cutoff: { value: 0.2 },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_BumpMap: { value: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-BumpMap.png" },
+            u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) }
         },
         vertexShader: "ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6/ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6-v10.0-vertex.glsl",
         fragmentShader: "ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6/ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6-v10.0-fragment.glsl",

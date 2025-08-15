@@ -1,4 +1,4 @@
-import {FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, GLSL3 as $fugmd$GLSL3, RepeatWrapping as $fugmd$RepeatWrapping, UniformsLib as $fugmd$UniformsLib, RawShaderMaterial as $fugmd$RawShaderMaterial, Loader as $fugmd$Loader, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute} from "three";
+import {FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, GLSL3 as $fugmd$GLSL3, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, RepeatWrapping as $fugmd$RepeatWrapping, UniformsLib as $fugmd$UniformsLib, RawShaderMaterial as $fugmd$RawShaderMaterial, Loader as $fugmd$Loader, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -38,20 +38,46 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
         materialParams.vertexShader = await loader.loadAsync(materialParams.vertexShader);
         materialParams.fragmentShader = await loader.loadAsync(materialParams.fragmentShader);
         if (materialParams.uniforms.u_MainTex) {
-            const mainTex = await textureLoader.loadAsync(materialParams.uniforms.u_MainTex.value);
-            mainTex.name = `${brushName}_MainTex`;
-            mainTex.wrapS = $fugmd$RepeatWrapping;
-            mainTex.wrapT = $fugmd$RepeatWrapping;
-            mainTex.flipY = false;
-            materialParams.uniforms.u_MainTex.value = mainTex;
+            if (materialParams.uniforms.u_MainTex.value === null) {
+                // Create a 1x1 white texture with full alpha for null values
+                const defaultTexture = new $fugmd$DataTexture(new Uint8Array([
+                    255,
+                    255,
+                    255,
+                    255
+                ]), 1, 1, $fugmd$RGBAFormat);
+                defaultTexture.name = `${brushName}_DefaultMainTex`;
+                defaultTexture.needsUpdate = true;
+                materialParams.uniforms.u_MainTex.value = defaultTexture;
+            } else {
+                const mainTex = await textureLoader.loadAsync(materialParams.uniforms.u_MainTex.value);
+                mainTex.name = `${brushName}_MainTex`;
+                mainTex.wrapS = $fugmd$RepeatWrapping;
+                mainTex.wrapT = $fugmd$RepeatWrapping;
+                mainTex.flipY = false;
+                materialParams.uniforms.u_MainTex.value = mainTex;
+            }
         }
         if (materialParams.uniforms.u_BumpMap) {
-            const bumpMap = await textureLoader.loadAsync(materialParams.uniforms.u_BumpMap.value);
-            bumpMap.name = `${brushName}_BumpMap`;
-            bumpMap.wrapS = $fugmd$RepeatWrapping;
-            bumpMap.wrapT = $fugmd$RepeatWrapping;
-            bumpMap.flipY = false;
-            materialParams.uniforms.u_BumpMap.value = bumpMap;
+            if (materialParams.uniforms.u_BumpMap.value === null) {
+                // Create a 1x1 neutral normal map for null values
+                const defaultBumpMap = new $fugmd$DataTexture(new Uint8Array([
+                    128,
+                    128,
+                    255,
+                    255
+                ]), 1, 1, $fugmd$RGBAFormat);
+                defaultBumpMap.name = `${brushName}_DefaultBumpMap`;
+                defaultBumpMap.needsUpdate = true;
+                materialParams.uniforms.u_BumpMap.value = defaultBumpMap;
+            } else {
+                const bumpMap = await textureLoader.loadAsync(materialParams.uniforms.u_BumpMap.value);
+                bumpMap.name = `${brushName}_BumpMap`;
+                bumpMap.wrapS = $fugmd$RepeatWrapping;
+                bumpMap.wrapT = $fugmd$RepeatWrapping;
+                bumpMap.flipY = false;
+                materialParams.uniforms.u_BumpMap.value = bumpMap;
+            }
         }
         if (materialParams.uniforms.u_AlphaMask) {
             const alphaMask = await textureLoader.loadAsync(materialParams.uniforms.u_AlphaMask.value);
@@ -68,6 +94,14 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
             displaceTex.wrapT = $fugmd$RepeatWrapping;
             displaceTex.flipY = false;
             materialParams.uniforms.u_DisplaceTex.value = displaceTex;
+        }
+        if (materialParams.uniforms.u_SecondaryTex) {
+            const secondaryTex = await textureLoader.loadAsync(materialParams.uniforms.u_SecondaryTex.value);
+            secondaryTex.name = `${brushName}_SecondaryTex`;
+            secondaryTex.wrapS = $fugmd$RepeatWrapping;
+            secondaryTex.wrapT = $fugmd$RepeatWrapping;
+            secondaryTex.flipY = false;
+            materialParams.uniforms.u_SecondaryTex.value = secondaryTex;
         }
         if (materialParams.uniforms.u_SpecTex) {
             const specTex = await textureLoader.loadAsync(materialParams.uniforms.u_SpecTex.value);
@@ -848,6 +882,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_EmissionGain: {
                 value: 0.45
+            },
+            u_MainTex: {
+                value: null
             }
         },
         vertexShader: "ChromaticWave-0f0ff7b2-a677-45eb-a7d6-0cd7206f4816/ChromaticWave-0f0ff7b2-a677-45eb-a7d6-0cd7206f4816-v10.0-vertex.glsl",
@@ -2649,6 +2686,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_SceneLight_1_color: {
                 value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
+            u_MainTex: {
+                value: null
+            },
             u_fogColor: {
                 value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
@@ -3309,6 +3349,12 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_Shininess: {
                 value: 0.7430
+            },
+            u_MainTex: {
+                value: null
+            },
+            u_BumpMap: {
+                value: null
             },
             u_Cutoff: {
                 value: 0.5
@@ -5207,7 +5253,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                 value: 0.57
             },
             u_SecondaryTex: {
-                value: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-u_SecondaryTex.png"
+                value: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-SecondaryTex.png"
             },
             u_Shininess: {
                 value: 0.01
@@ -7385,6 +7431,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_SceneLight_1_color: {
                 value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
+            u_MainTex: {
+                value: null
+            },
             u_fogColor: {
                 value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
@@ -7579,11 +7628,29 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_SceneLight_1_color: {
                 value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
+            u_SpecColor: {
+                value: new $fugmd$Vector3(0.5372549, 0.5372549, 0.5372549)
+            },
+            u_Shininess: {
+                value: 0.414
+            },
+            u_MainTex: {
+                value: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-MainTex.png"
+            },
+            u_Cutoff: {
+                value: 0.2
+            },
             u_fogColor: {
                 value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-BumpMap.png"
+            },
+            u_BumpMap_TexelSize: {
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-vertex.glsl",
@@ -9210,11 +9277,29 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_SceneLight_1_color: {
                 value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
+            u_SpecColor: {
+                value: new $fugmd$Vector3(0.5372549, 0.5372549, 0.5372549)
+            },
+            u_Shininess: {
+                value: 0.414
+            },
+            u_MainTex: {
+                value: "Bubbles-89d104cd-d012-426b-b5b3-bbaee63ac43c/Bubbles-89d104cd-d012-426b-b5b3-bbaee63ac43c-v10.0-MainTex.png"
+            },
+            u_Cutoff: {
+                value: 0.2
+            },
             u_fogColor: {
                 value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_BumpMap: {
+                value: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-BumpMap.png"
+            },
+            u_BumpMap_TexelSize: {
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6/ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6-v10.0-vertex.glsl",
