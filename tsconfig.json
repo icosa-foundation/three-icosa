@@ -2,17 +2,20 @@
   "compilerOptions": {
     "allowJs": true,
     "declaration": true,
+    "emitDeclarationOnly": true,
     "baseUrl": "src",
     "outDir": "./dist",
     "target": "es6",
-    "strict": true,
+    "module": "esnext",
+    "strict": false,
     "removeComments": true,
-    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node"
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

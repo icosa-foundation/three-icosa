@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 export class TiltShaderLoader extends THREE.Loader<any, string> {
     constructor(manager: any);
     loadedMaterials: {};
@@ -5,4 +7,3 @@ export class TiltShaderLoader extends THREE.Loader<any, string> {
     parse(rawMaterial: any): any;
     lookupMaterialName(nameOrGuid: any): string | undefined;
 }
-import * as THREE from 'three';

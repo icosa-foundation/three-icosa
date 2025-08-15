@@ -12,11 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {
-    MeshStandardMaterial,
-    Vector4,
-    Clock
-} from 'three';
+import * as THREE from 'three';
 
 import { TiltShaderLoader } from '../TiltShaderLoader.js';
 
@@ -778,7 +774,7 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
 
         this.tiltShaderLoader = new TiltShaderLoader(parser.options.manager);
         this.tiltShaderLoader.setPath(brushPath);
-        this.clock = new Clock();
+        this.clock = new THREE.Clock();
     }
 
     beforeRoot() {

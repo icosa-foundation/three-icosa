@@ -12,11 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {
-    BufferAttribute,
-    Clock,
-    Vector4
-} from 'three';
+import * as THREE from 'three';
 
 import { TiltShaderLoader } from '../TiltShaderLoader.js';
 
@@ -35,7 +31,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
         this.tiltShaderLoader = new TiltShaderLoader(parser.options.manager);
         this.tiltShaderLoader.setPath(this.brushPath);
-        this.clock = new Clock();
+        this.clock = new THREE.Clock();
     }
 
     beforeRoot() {
@@ -223,7 +219,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                             normalizedColors[i * itemSize + 3] = Math.round(src[i * itemSize + 3] * 255); // A (linear)
                         }
                     }
-                    colorAttribute = new BufferAttribute(normalizedColors, itemSize, true);
+                    colorAttribute = new THREE.BufferAttribute(normalizedColors, itemSize, true);
                     mesh.geometry.setAttribute("a_color", colorAttribute);
                 }
                 else
@@ -1445,7 +1441,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
             case "a8147ce1-005e-abe4-88e8-09a1eaadcc89":
             case "Rising Bubbles":
-                console.log("replace material Rising Bubbles");
                 mesh.geometry.name = "geometry_Rising Bubbles";
 
                 setAttributeIfExists(mesh, "position", "a_position");
@@ -1662,6 +1657,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
+                
+                renameAttribute(mesh, "_tb_timestamp", "a_timestamp");
+                
                 shader = await this.tiltShaderLoader.loadAsync("DanceFloor");
                 mesh.material = shader;
                 mesh.material.name = "material_DanceFloor";
@@ -2067,7 +2065,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             if (material?.uniforms?.u_time) {
                 const elapsedTime = this.clock.getElapsedTime();
                 // _Time from https://docs.unity3d.com/Manual/SL-UnityShaderVariables.html
-                const time = new Vector4(elapsedTime/20, elapsedTime, elapsedTime*2, elapsedTime*3);
+                const time = new THREE.Vector4(elapsedTime/20, elapsedTime, elapsedTime*2, elapsedTime*3);
 
                 material.uniforms["u_time"].value = time;
             }
@@ -2083,7 +2081,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                     // Color
                     if(material.uniforms.u_SceneLight_0_color) {
                         const color = material.uniforms.directionalLights.value[0].color;
-                        material.uniforms.u_SceneLight_0_color.value = new Vector4(color.r, color.g, color.b, 1);
+                        material.uniforms.u_SceneLight_0_color.value = new THREE.Vector4(color.r, color.g, color.b, 1);
                     }
                 }
 
@@ -2093,7 +2091,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                     // Color
                     if(material.uniforms.u_SceneLight_1_color) {
                         const color = material.uniforms.directionalLights.value[1].color;
-                        material.uniforms.u_SceneLight_1_color.value = new Vector4(color.r, color.g, color.b, 1);
+                        material.uniforms.u_SceneLight_1_color.value = new THREE.Vector4(color.r, color.g, color.b, 1);
                     }
                 }
             }
@@ -2102,7 +2100,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             if(material?.uniforms?.ambientLightColor?.value) {
                 if(material.uniforms.u_ambient_light_color) {
                     const colorArray = material.uniforms.ambientLightColor.value;
-                    material.uniforms.u_ambient_light_color.value = new Vector4(colorArray[0], colorArray[1], colorArray[2], 1);
+                    material.uniforms.u_ambient_light_color.value = new THREE.Vector4(colorArray[0], colorArray[1], colorArray[2], 1);
                 }
             }
 

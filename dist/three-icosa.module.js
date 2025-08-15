@@ -1,4 +1,4 @@
-import {FileLoader as $a0PbU$FileLoader, TextureLoader as $a0PbU$TextureLoader, GLSL3 as $a0PbU$GLSL3, RepeatWrapping as $a0PbU$RepeatWrapping, UniformsLib as $a0PbU$UniformsLib, RawShaderMaterial as $a0PbU$RawShaderMaterial, Loader as $a0PbU$Loader, Vector4 as $a0PbU$Vector4, Vector3 as $a0PbU$Vector3, Clock as $a0PbU$Clock, BufferAttribute as $a0PbU$BufferAttribute} from "three";
+import {FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, GLSL3 as $fugmd$GLSL3, RepeatWrapping as $fugmd$RepeatWrapping, UniformsLib as $fugmd$UniformsLib, RawShaderMaterial as $fugmd$RawShaderMaterial, Loader as $fugmd$Loader, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -14,7 +14,7 @@ import {FileLoader as $a0PbU$FileLoader, TextureLoader as $a0PbU$TextureLoader, 
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-class $cf098bb13503440d$export$bcc22bf437a07d8f extends $a0PbU$Loader {
+class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
     constructor(manager){
         super(manager);
         this.loadedMaterials = {};
@@ -26,61 +26,61 @@ class $cf098bb13503440d$export$bcc22bf437a07d8f extends $a0PbU$Loader {
             onLoad(scope.parse(isAlreadyLoaded));
             return;
         }
-        const loader = new (0, $a0PbU$FileLoader)(this.manager);
+        const loader = new $fugmd$FileLoader(this.manager);
         loader.setPath(this.path);
         loader.setResponseType("text");
         loader.setWithCredentials(this.withCredentials);
-        const textureLoader = new (0, $a0PbU$TextureLoader)(this.manager);
+        const textureLoader = new $fugmd$TextureLoader(this.manager);
         textureLoader.setPath(this.path);
         textureLoader.setWithCredentials(this.withCredentials);
-        const materialParams = $cf098bb13503440d$var$tiltBrushMaterialParams[brushName];
-        materialParams.glslVersion = (0, $a0PbU$GLSL3);
+        const materialParams = $4fdc68aa1ebb2033$var$tiltBrushMaterialParams[brushName];
+        materialParams.glslVersion = $fugmd$GLSL3;
         materialParams.vertexShader = await loader.loadAsync(materialParams.vertexShader);
         materialParams.fragmentShader = await loader.loadAsync(materialParams.fragmentShader);
         if (materialParams.uniforms.u_MainTex) {
             const mainTex = await textureLoader.loadAsync(materialParams.uniforms.u_MainTex.value);
             mainTex.name = `${brushName}_MainTex`;
-            mainTex.wrapS = (0, $a0PbU$RepeatWrapping);
-            mainTex.wrapT = (0, $a0PbU$RepeatWrapping);
+            mainTex.wrapS = $fugmd$RepeatWrapping;
+            mainTex.wrapT = $fugmd$RepeatWrapping;
             mainTex.flipY = false;
             materialParams.uniforms.u_MainTex.value = mainTex;
         }
         if (materialParams.uniforms.u_BumpMap) {
             const bumpMap = await textureLoader.loadAsync(materialParams.uniforms.u_BumpMap.value);
             bumpMap.name = `${brushName}_BumpMap`;
-            bumpMap.wrapS = (0, $a0PbU$RepeatWrapping);
-            bumpMap.wrapT = (0, $a0PbU$RepeatWrapping);
+            bumpMap.wrapS = $fugmd$RepeatWrapping;
+            bumpMap.wrapT = $fugmd$RepeatWrapping;
             bumpMap.flipY = false;
             materialParams.uniforms.u_BumpMap.value = bumpMap;
         }
         if (materialParams.uniforms.u_AlphaMask) {
             const alphaMask = await textureLoader.loadAsync(materialParams.uniforms.u_AlphaMask.value);
             alphaMask.name = `${brushName}_AlphaMask`;
-            alphaMask.wrapS = (0, $a0PbU$RepeatWrapping);
-            alphaMask.wrapT = (0, $a0PbU$RepeatWrapping);
+            alphaMask.wrapS = $fugmd$RepeatWrapping;
+            alphaMask.wrapT = $fugmd$RepeatWrapping;
             alphaMask.flipY = false;
             materialParams.uniforms.u_AlphaMask.value = alphaMask;
         }
         if (materialParams.uniforms.u_DisplaceTex) {
             const displaceTex = await textureLoader.loadAsync(materialParams.uniforms.u_DisplaceTex.value);
             displaceTex.name = `${brushName}_DisplaceTex`;
-            displaceTex.wrapS = (0, $a0PbU$RepeatWrapping);
-            displaceTex.wrapT = (0, $a0PbU$RepeatWrapping);
+            displaceTex.wrapS = $fugmd$RepeatWrapping;
+            displaceTex.wrapT = $fugmd$RepeatWrapping;
             displaceTex.flipY = false;
             materialParams.uniforms.u_DisplaceTex.value = displaceTex;
         }
         if (materialParams.uniforms.u_SpecTex) {
             const specTex = await textureLoader.loadAsync(materialParams.uniforms.u_SpecTex.value);
             specTex.name = `${brushName}_SpecTex`;
-            specTex.wrapS = (0, $a0PbU$RepeatWrapping);
-            specTex.wrapT = (0, $a0PbU$RepeatWrapping);
+            specTex.wrapS = $fugmd$RepeatWrapping;
+            specTex.wrapT = $fugmd$RepeatWrapping;
             specTex.flipY = false;
             materialParams.uniforms.u_SpecTex.value = specTex;
         }
         // inject three.js lighting and fog uniforms
-        for(var lightType in (0, $a0PbU$UniformsLib).lights)materialParams.uniforms[lightType] = (0, $a0PbU$UniformsLib).lights[lightType];
-        for(var fogType in (0, $a0PbU$UniformsLib).fog)materialParams.uniforms[fogType] = (0, $a0PbU$UniformsLib).fog[fogType];
-        let rawMaterial = new (0, $a0PbU$RawShaderMaterial)(materialParams);
+        for(var lightType in $fugmd$UniformsLib.lights)materialParams.uniforms[lightType] = $fugmd$UniformsLib.lights[lightType];
+        for(var fogType in $fugmd$UniformsLib.fog)materialParams.uniforms[fogType] = $fugmd$UniformsLib.fog[fogType];
+        let rawMaterial = new $fugmd$RawShaderMaterial(materialParams);
         this.loadedMaterials[brushName] = rawMaterial;
         onLoad(scope.parse(rawMaterial));
     }
@@ -88,7 +88,7 @@ class $cf098bb13503440d$export$bcc22bf437a07d8f extends $a0PbU$Loader {
         return rawMaterial;
     }
     lookupMaterialParams(materialName) {
-        return $cf098bb13503440d$var$tiltBrushMaterialParams[materialName] || null;
+        return $4fdc68aa1ebb2033$var$tiltBrushMaterialParams[materialName] || null;
     }
     lookupMaterialName(nameOrGuid) {
         // Open Brush "new glb" exports prefix the material names
@@ -438,7 +438,7 @@ class $cf098bb13503440d$export$bcc22bf437a07d8f extends $a0PbU$Loader {
         }
     }
 }
-const $cf098bb13503440d$var$tiltBrushMaterialParams = {
+const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
     "BlocksBasic": {
         uniforms: {
             u_SceneLight_0_matrix: {
@@ -482,22 +482,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_Shininess: {
                 value: 0.2
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.1960784, 0.1960784, 0.1960784)
+                value: new $fugmd$Vector3(0.1960784, 0.1960784, 0.1960784)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -555,16 +555,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Shininess: {
                 value: 0.9
@@ -582,7 +582,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -640,16 +640,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Shininess: {
                 value: 0.8
@@ -661,7 +661,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 4
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -780,7 +780,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "CelVinyl-700f3aa8-9a7c-2384-8b8a-ea028905dd8c/CelVinyl-700f3aa8-9a7c-2384-8b8a-ea028905dd8c-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -838,13 +838,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_EmissionGain: {
                 value: 0.45
@@ -908,13 +908,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_MainTex: {
                 value: "CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43/CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43-v10.0-MainTex.png"
@@ -923,7 +923,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.25
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -987,10 +987,10 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Comet-1caa6d7d-f015-3f54-3a4b-8b5354d39f81/Comet-1caa6d7d-f015-3f54-3a4b-8b5354d39f81-v10.0-AlphaMask.png"
             },
             u_AlphaMask_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0156, 1, 64, 1)
+                value: new $fugmd$Vector4(0.0156, 1, 64, 1)
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_Speed: {
                 value: 1
@@ -999,7 +999,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.5
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1057,25 +1057,25 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_MainTex: {
                 value: "DiamondHull-c8313697-2563-47fc-832e-290f4c04b901/DiamondHull-c8313697-2563-47fc-832e-290f4c04b901-v10.0-MainTex.png"
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             cameraPosition: {
-                value: new (0, $a0PbU$Vector3)()
+                value: new $fugmd$Vector3()
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1139,25 +1139,25 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_Shininess: {
                 value: 0.65
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.5147059, 0.5147059, 0.5147059)
+                value: new $fugmd$Vector3(0.5147059, 0.5147059, 0.5147059)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1218,7 +1218,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "DotMarker-d1d991f2-e7a0-4cf1-b328-f57e915e6260/DotMarker-d1d991f2-e7a0-4cf1-b328-f57e915e6260-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1279,7 +1279,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Dots-6a1cf9f9-032c-45ec-9b1d-a6680bee30f7/Dots-6a1cf9f9-032c-45ec-9b1d-a6680bee30f7-v10.0-MainTex.png"
             },
             u_TintColor: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_EmissionGain: {
                 value: 300
@@ -1340,22 +1340,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1413,7 +1413,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1471,16 +1471,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.5372549, 0.5372549, 0.5372549)
+                value: new $fugmd$Vector3(0.5372549, 0.5372549, 0.5372549)
             },
             u_Shininess: {
                 value: 0.414
@@ -1492,7 +1492,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.2
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1501,7 +1501,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1/DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "DuctTape-d0262945-853c-4481-9cbd-88586bed93cb/DuctTape-d0262945-853c-4481-9cbd-88586bed93cb-v10.0-vertex.glsl",
@@ -1516,7 +1516,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
     "Electricity": {
         uniforms: {
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_DisplacementIntensity: {
                 value: 2.0
@@ -1537,13 +1537,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
     "Embers": {
         uniforms: {
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_ScrollRate: {
                 value: 0.6
             },
             u_ScrollDistance: {
-                value: new (0, $a0PbU$Vector3)(-0.2, 0.6, 0)
+                value: new $fugmd$Vector3(-0.2, 0.6, 0)
             },
             u_ScrollJitterIntensity: {
                 value: 0.03
@@ -1552,7 +1552,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 5
             },
             u_TintColor: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_MainTex: {
                 value: "Embers-02ffb866-7fb2-4d15-b761-1012cefb1360/Embers-02ffb866-7fb2-4d15-b761-1012cefb1360-v10.0-MainTex.png"
@@ -1613,22 +1613,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1689,22 +1689,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1768,7 +1768,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Fire-cb92b597-94ca-4255-b017-0e3f42f12f9e/Fire-cb92b597-94ca-4255-b017-0e3f42f12f9e-v10.0-MainTex.png"
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_EmissionGain: {
                 value: 0.5
@@ -1832,16 +1832,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1966,31 +1966,31 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_Shininess: {
                 value: 0.5
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.2745098, 0.2745098, 0.2745098)
+                value: new $fugmd$Vector3(0.2745098, 0.2745098, 0.2745098)
             },
             u_MainTex: {
                 value: "Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c/Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c-v10.0-MainTex.png"
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_Cutoff: {
                 value: 0.5
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -1999,7 +1999,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c/Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c/Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c-v10.0-vertex.glsl",
@@ -2054,7 +2054,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_TintColor: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_MainTex: {
                 value: "HyperGrid-6a1cf9f9-032c-45ec-9b6e-a6680bee32e9/HyperGrid-6a1cf9f9-032c-45ec-9b6e-a6680bee32e9-v10.0-MainTex.png"
@@ -2112,16 +2112,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.2352941, 0.2352941, 0.2352941)
+                value: new $fugmd$Vector3(0.2352941, 0.2352941, 0.2352941)
             },
             u_Shininess: {
                 value: 0.1500
@@ -2133,7 +2133,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37/Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-BumpMap.png"
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2142,7 +2142,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37/Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37/Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-vertex.glsl",
@@ -2197,16 +2197,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.2352941, 0.2352941, 0.2352941)
+                value: new $fugmd$Vector3(0.2352941, 0.2352941, 0.2352941)
             },
             u_Shininess: {
                 value: 0.4
@@ -2218,7 +2218,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2227,7 +2227,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "Ink-f5c336cf-5108-4b40-ade9-c687504385ab/Ink-f5c336cf-5108-4b40-ade9-c687504385ab-v10.0-vertex.glsl",
@@ -2282,16 +2282,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.395
@@ -2303,7 +2303,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Leaves-ea19de07-d0c0-4484-9198-18489a3c1487/Leaves-ea19de07-d0c0-4484-9198-18489a3c1487-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2312,7 +2312,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Leaves-ea19de07-d0c0-4484-9198-18489a3c1487/Leaves-ea19de07-d0c0-4484-9198-18489a3c1487-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "Leaves-ea19de07-d0c0-4484-9198-18489a3c1487/Leaves-ea19de07-d0c0-4484-9198-18489a3c1487-v10.0-vertex.glsl",
@@ -2431,25 +2431,25 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_Shininess: {
                 value: 0.81
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.3455882, 0.3455882, 0.3455882)
+                value: new $fugmd$Vector3(0.3455882, 0.3455882, 0.3455882)
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2510,16 +2510,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2583,7 +2583,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.067
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2641,16 +2641,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2708,13 +2708,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_EmissionGain: {
                 value: 0.5
@@ -2778,16 +2778,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.2352941, 0.2352941, 0.2352941)
+                value: new $fugmd$Vector3(0.2352941, 0.2352941, 0.2352941)
             },
             u_Shininess: {
                 value: 0.4
@@ -2799,7 +2799,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699/OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2808,7 +2808,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699/OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0020, 0.0020, 512, 512)
+                value: new $fugmd$Vector4(0.0020, 0.0020, 512, 512)
             }
         },
         vertexShader: "OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699/OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699-v10.0-vertex.glsl",
@@ -2863,16 +2863,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.145
@@ -2884,7 +2884,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Paper-759f1ebd-20cd-4720-8d41-234e0da63716/Paper-759f1ebd-20cd-4720-8d41-234e0da63716-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -2893,7 +2893,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Paper-759f1ebd-20cd-4720-8d41-234e0da63716/Paper-759f1ebd-20cd-4720-8d41-234e0da63716-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5/Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5-v10.0-vertex.glsl",
@@ -2948,22 +2948,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3024,22 +3024,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3100,22 +3100,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.01
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3177,7 +3177,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336/Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336-v10.0-MainTex.png"
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336/Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336-v10.0-vertex.glsl",
@@ -3232,7 +3232,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_EmissionGain: {
                 value: 0.65
@@ -3296,16 +3296,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.1985294, 0.1985294, 0.1985294)
+                value: new $fugmd$Vector3(0.1985294, 0.1985294, 0.1985294)
             },
             u_Shininess: {
                 value: 0.7430
@@ -3314,7 +3314,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.5
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3372,7 +3372,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_TintColor: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_MainTex: {
                 value: "Smoke-70d79cca-b159-4f35-990c-f02193947fe8/Smoke-70d79cca-b159-4f35-990c-f02193947fe8-v10.0-MainTex.png"
@@ -3390,13 +3390,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
     "Snow": {
         uniforms: {
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_ScrollRate: {
                 value: 0.2
             },
             u_ScrollDistance: {
-                value: new (0, $a0PbU$Vector3)(0, -0.3, 0)
+                value: new $fugmd$Vector3(0, -0.3, 0)
             },
             u_ScrollJitterIntensity: {
                 value: 0.01
@@ -3405,7 +3405,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 12
             },
             u_TintColor: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_MainTex: {
                 value: "Snow-d902ed8b-d0d1-476c-a8de-878a79e3a34c/Snow-d902ed8b-d0d1-476c-a8de-878a79e3a34c-v10.0-MainTex.png"
@@ -3524,16 +3524,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3591,13 +3591,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_MainTex: {
                 value: "Splatter-7a1c8107-50c5-4b70-9a39-421576d6617e/Splatter-7a1c8107-50c5-4b70-9a39-421576d6617e-v10.0-MainTex.png"
@@ -3606,7 +3606,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.2
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3664,7 +3664,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_SparkleRate: {
                 value: 5.3
@@ -3731,7 +3731,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.4
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "Streamers-44bb800a-fbc3-4592-8426-94ecb05ddec3/Streamers-44bb800a-fbc3-4592-8426-94ecb05ddec3-v10.0-vertex.glsl",
@@ -3789,7 +3789,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Taffy-0077f88c-d93a-42f3-b59b-b31c50cdb414/Taffy-0077f88c-d93a-42f3-b59b-b31c50cdb414-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3847,13 +3847,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_MainTex: {
                 value: "TaperedFlat-b468c1fb-f254-41ed-8ec9-57030bc5660c/TaperedFlat-b468c1fb-f254-41ed-8ec9-57030bc5660c-v10.0-MainTex.png"
@@ -3862,7 +3862,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.067
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3920,22 +3920,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_Shininess: {
                 value: 0.1500
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -3999,16 +3999,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.2352941, 0.2352941, 0.2352941)
+                value: new $fugmd$Vector3(0.2352941, 0.2352941, 0.2352941)
             },
             u_Shininess: {
                 value: 0.4
@@ -4020,7 +4020,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f/ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4029,7 +4029,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f/ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             }
         },
         vertexShader: "ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f/ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f-v10.0-vertex.glsl",
@@ -4084,7 +4084,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4142,7 +4142,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4203,7 +4203,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "VelvetInk-d229d335-c334-495a-a801-660ac8a87360/VelvetInk-d229d335-c334-495a-a801-660ac8a87360-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4264,7 +4264,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.5178571
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_MainTex: {
                 value: "Waveform-10201aa3-ebc2-42d8-84b7-2e63f6eeb8ab/Waveform-10201aa3-ebc2-42d8-84b7-2e63f6eeb8ab-v10.0-MainTex.png"
@@ -4288,7 +4288,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.3
@@ -4300,7 +4300,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -4333,7 +4333,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.139706, 0.139706, 0.139706)
+                value: new $fugmd$Vector3(0.139706, 0.139706, 0.139706)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -4400,16 +4400,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -4418,7 +4418,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "WigglyGraphite-5347acf0-a8e2-47b6-8346-30c70719d763/WigglyGraphite-5347acf0-a8e2-47b6-8346-30c70719d763-v10.0-MainTex.png"
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4476,7 +4476,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4534,16 +4534,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4601,16 +4601,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4619,13 +4619,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b/Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             },
             u_BumpScale: {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -4637,7 +4637,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -4666,7 +4666,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -4727,22 +4727,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -4787,7 +4787,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.078125
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.75, 0.75, 0.75)
+                value: new $fugmd$Vector3(0.75, 0.75, 0.75)
             },
             u_SqueezeAmount: {
                 value: 0.473
@@ -4796,7 +4796,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.5
             },
             u_TintColor: {
-                value: new (0, $a0PbU$Vector4)(0.617647, 0.617647, 0.617647, 1)
+                value: new $fugmd$Vector4(0.617647, 0.617647, 0.617647, 1)
             }
         },
         vertexShader: "MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a/MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a-v10.0-vertex.glsl",
@@ -4851,16 +4851,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -4872,7 +4872,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -4887,7 +4887,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_EmissionGain: {
                 value: 1.0
@@ -4905,7 +4905,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f/Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f-v10.0-MainTex.png"
             },
             u_MainTex_ST: {
-                value: new (0, $a0PbU$Vector4)(4.0, 1.0, 0.0, 0.0)
+                value: new $fugmd$Vector4(4.0, 1.0, 0.0, 0.0)
             },
             u_Metallic: {
                 value: 0.0
@@ -4950,7 +4950,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             },
             u_Bulge: {
                 value: 2.25
@@ -5008,16 +5008,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -5026,13 +5026,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "DryBrush-725f4c6a-6427-6524-29ab-da371924adab/DryBrush-725f4c6a-6427-6524-29ab-da371924adab-v10.0-BumpMap.jpg"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             },
             u_BumpScale: {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.2
@@ -5044,7 +5044,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -5077,7 +5077,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -5144,16 +5144,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -5162,7 +5162,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(0.441176, 0.441176, 0.441176, 1)
+                value: new $fugmd$Vector4(0.441176, 0.441176, 0.441176, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -5174,7 +5174,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -5186,7 +5186,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_LineColor: {
-                value: new (0, $a0PbU$Vector4)(0.151581, 0.62766, 0.941176, 1)
+                value: new $fugmd$Vector4(0.151581, 0.62766, 0.941176, 1)
             },
             u_MainTex: {
                 value: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-MainTex.png"
@@ -5216,7 +5216,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -5286,16 +5286,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -5304,7 +5304,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -5322,7 +5322,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_EmissionGain: {
                 value: 0.723
@@ -5340,7 +5340,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Sparks-50e99447-3861-05f4-697d-a1b96e771b98/Sparks-50e99447-3861-05f4-697d-a1b96e771b98-v10.0-MainTex.png"
             },
             u_MainTex_ST: {
-                value: new (0, $a0PbU$Vector4)(1.0, 1.0, 0.0, 0.0)
+                value: new $fugmd$Vector4(1.0, 1.0, 0.0, 0.0)
             },
             u_Metallic: {
                 value: 0.0
@@ -5379,7 +5379,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "Sparks-50e99447-3861-05f4-697d-a1b96e771b98/Sparks-50e99447-3861-05f4-697d-a1b96e771b98-v10.0-vertex.glsl",
@@ -5434,16 +5434,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -5452,7 +5452,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -5464,7 +5464,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -5509,7 +5509,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "Wind-7136a729-1aab-bd24-f8b2-ca88b6adfb67/Wind-7136a729-1aab-bd24-f8b2-ca88b6adfb67-v10.0-vertex.glsl",
@@ -5565,16 +5565,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -5586,7 +5586,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -5598,7 +5598,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_EmissionGain: {
                 value: 300.0
@@ -5634,7 +5634,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.02
             },
             u_ScrollDistance: {
-                value: new (0, $a0PbU$Vector4)(0.5, 5, 0, 0.5)
+                value: new $fugmd$Vector4(0.5, 5, 0, 0.5)
             },
             u_ScrollJitterFrequency: {
                 value: 5.0
@@ -5655,7 +5655,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 2.5
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.5, 0.5, 0.5)
+                value: new $fugmd$Vector3(0.5, 0.5, 0.5)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -5670,7 +5670,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_TintColor: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_UVSec: {
                 value: 0.0
@@ -5679,13 +5679,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.1
             },
             u_WaveformIntensity: {
-                value: new (0, $a0PbU$Vector4)(0, 15, 0, 0)
+                value: new $fugmd$Vector4(0, 15, 0, 0)
             },
             u_ZWrite: {
                 value: 1.0
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "Rising%20Bubbles-a8147ce1-005e-abe4-88e8-09a1eaadcc89/Rising%20Bubbles-a8147ce1-005e-abe4-88e8-09a1eaadcc89-v10.0-vertex.glsl",
@@ -5740,16 +5740,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -5758,7 +5758,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -5770,7 +5770,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -5803,7 +5803,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.0955882, 0.0955882, 0.0955882)
+                value: new $fugmd$Vector3(0.0955882, 0.0955882, 0.0955882)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -5870,16 +5870,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -5888,13 +5888,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa/SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             },
             u_BumpScale: {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.16
@@ -5906,7 +5906,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -5939,7 +5939,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -6006,16 +6006,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -6024,13 +6024,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3/ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             },
             u_BumpScale: {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(0.705882, 0.705882, 0.705882, 1)
+                value: new $fugmd$Vector4(0.705882, 0.705882, 0.705882, 1)
             },
             u_Cutoff: {
                 value: 0.2
@@ -6042,7 +6042,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -6078,7 +6078,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.537255, 0.537255, 0.537255)
+                value: new $fugmd$Vector3(0.537255, 0.537255, 0.537255)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -6145,16 +6145,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -6212,16 +6212,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -6230,13 +6230,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3/Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             },
             u_BumpScale: {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.3
@@ -6248,7 +6248,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -6281,7 +6281,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.0808824, 0.0808824, 0.0808824)
+                value: new $fugmd$Vector3(0.0808824, 0.0808824, 0.0808824)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -6348,16 +6348,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -6366,13 +6366,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5/Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             },
             u_BumpScale: {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.3
@@ -6384,7 +6384,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -6417,7 +6417,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.237457, 0.257941, 0.264706)
+                value: new $fugmd$Vector3(0.237457, 0.257941, 0.264706)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -6484,22 +6484,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_DisplaceTex: {
                 value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-DisplaceTex.png"
@@ -6529,10 +6529,10 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 8.0
             },
             u_TintColor: {
-                value: new (0, $a0PbU$Vector4)(0.617647, 0.617647, 0.617647, 1)
+                value: new $fugmd$Vector4(0.617647, 0.617647, 0.617647, 1)
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-vertex.glsl",
@@ -6587,16 +6587,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -6654,28 +6654,28 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
             },
             u_ColorX: {
-                value: new (0, $a0PbU$Vector4)(1, 0, 0, 1)
+                value: new $fugmd$Vector4(1, 0, 0, 1)
             },
             u_ColorY: {
-                value: new (0, $a0PbU$Vector4)(0, 1, 0, 1)
+                value: new $fugmd$Vector4(0, 1, 0, 1)
             },
             u_ColorZ: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 1, 1)
+                value: new $fugmd$Vector4(0, 0, 1, 1)
             }
         },
         vertexShader: "FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27/FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
@@ -6730,22 +6730,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7/WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7-v10.0-vertex.glsl",
@@ -6800,22 +6800,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -6854,10 +6854,10 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.5
             },
             u_TintColor: {
-                value: new (0, $a0PbU$Vector4)(0.617647, 0.617647, 0.617647, 1)
+                value: new $fugmd$Vector4(0.617647, 0.617647, 0.617647, 1)
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4/BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4-v10.0-vertex.glsl",
@@ -6912,32 +6912,36 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
+            },
+            u_MainTex: {
+                value: "DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9/DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9-v10.0-MainTex.png"
+            },
+            u_TintColor: {
+                value: new $fugmd$Vector4(0.5, 0.5, 0.5, 0.5)
             }
         },
         vertexShader: "DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9/DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9-v10.0-vertex.glsl",
         fragmentShader: "DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9/DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9-v10.0-fragment.glsl",
         side: 2,
-        transparent: true,
-        depthFunc: 2,
-        depthWrite: false,
-        depthTest: true,
-        blending: 2
+        transparent: false,
+        depthWrite: true,
+        depthTest: true
     },
     "WaveformTube": {
         uniforms: {
@@ -6982,22 +6986,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "WaveformTube-0f5820df-cb6b-4a6c-960e-56e4c8000eda/WaveformTube-0f5820df-cb6b-4a6c-960e-56e4c8000eda-v10.0-vertex.glsl",
@@ -7052,16 +7056,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -7125,16 +7129,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -7143,7 +7147,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -7155,7 +7159,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -7249,16 +7253,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -7267,7 +7271,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -7279,7 +7283,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -7373,16 +7377,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -7440,16 +7444,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -7458,7 +7462,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -7470,7 +7474,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_EmissionGain: {
                 value: 0.5
@@ -7567,16 +7571,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -7634,16 +7638,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -7652,7 +7656,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -7664,7 +7668,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_EmissionGain: {
                 value: 0.5
@@ -7761,16 +7765,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -7779,13 +7783,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c/Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             },
             u_BumpScale: {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_Cutoff: {
                 value: 0.9
@@ -7797,7 +7801,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 0.741
@@ -7830,7 +7834,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.147059, 0.147059, 0.147059)
+                value: new $fugmd$Vector3(0.147059, 0.147059, 0.147059)
             },
             u_SpecGlossMap: {
                 value: "Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c/Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c-v10.0-SpecGlossMap.png"
@@ -7904,16 +7908,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -7922,13 +7926,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1/Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             },
             u_BumpScale: {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -7940,7 +7944,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 0.741
@@ -7973,7 +7977,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.220588, 0.220588, 0.220588)
+                value: new $fugmd$Vector3(0.220588, 0.220588, 0.220588)
             },
             u_SpecGlossMap: {
                 value: "Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1/Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1-v10.0-SpecGlossMap.png"
@@ -8046,16 +8050,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -8064,13 +8068,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             },
             u_BumpScale: {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -8082,7 +8086,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -8115,7 +8119,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -8182,16 +8186,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -8200,7 +8204,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -8212,7 +8216,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -8242,7 +8246,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.757353, 0.757353, 0.757353)
+                value: new $fugmd$Vector3(0.757353, 0.757353, 0.757353)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -8257,7 +8261,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf/KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf-v10.0-vertex.glsl",
@@ -8313,16 +8317,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -8381,16 +8385,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -8399,7 +8403,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -8411,7 +8415,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -8441,7 +8445,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.5, 0.5, 0.5)
+                value: new $fugmd$Vector3(0.5, 0.5, 0.5)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -8508,22 +8512,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "WaveformFFT-d120944d-772f-4062-99c6-46a6f219eeaf/WaveformFFT-d120944d-772f-4062-99c6-46a6f219eeaf-v10.0-vertex.glsl",
@@ -8578,16 +8582,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -8596,7 +8600,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -8608,7 +8612,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_EmissionGain: {
                 value: 0.5
@@ -8650,7 +8654,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "Fairy-d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc/Fairy-d9cc5e99-ace1-4d12-96e0-4a7c18c99cfc-v10.0-vertex.glsl",
@@ -8705,22 +8709,22 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
             },
             u_time: {
-                value: new (0, $a0PbU$Vector4)()
+                value: new $fugmd$Vector4()
             }
         },
         vertexShader: "Space-bdf65db2-1fb7-4202-b5e0-c6b5e3ea851e/Space-bdf65db2-1fb7-4202-b5e0-c6b5e3ea851e-v10.0-vertex.glsl",
@@ -8775,16 +8779,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -8799,7 +8803,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -8811,7 +8815,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -8847,7 +8851,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.294118, 0.294118, 0.294118)
+                value: new $fugmd$Vector3(0.294118, 0.294118, 0.294118)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -8920,16 +8924,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -8938,13 +8942,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95/Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             },
             u_BumpScale: {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -8956,7 +8960,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -8992,7 +8996,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0, 0, 0)
+                value: new $fugmd$Vector3(0, 0, 0)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -9059,16 +9063,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -9077,13 +9081,13 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: "InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb/InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new (0, $a0PbU$Vector4)(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             },
             u_BumpScale: {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -9095,7 +9099,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -9131,7 +9135,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.235294, 0.235294, 0.235294)
+                value: new $fugmd$Vector3(0.235294, 0.235294, 0.235294)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -9198,16 +9202,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -9266,16 +9270,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -9333,16 +9337,16 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 ]
             },
             u_ambient_light_color: {
-                value: new (0, $a0PbU$Vector4)(0.3922, 0.3922, 0.3922, 1)
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
             },
             u_SceneLight_0_color: {
-                value: new (0, $a0PbU$Vector4)(0.7780, 0.8157, 0.9914, 1)
+                value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },
             u_SceneLight_1_color: {
-                value: new (0, $a0PbU$Vector4)(0.4282, 0.4212, 0.3459, 1)
+                value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
             u_fogColor: {
-                value: new (0, $a0PbU$Vector3)(0.0196, 0.0196, 0.0196)
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
             u_fogDensity: {
                 value: 0
@@ -9357,7 +9361,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 1.0
             },
             u_Color: {
-                value: new (0, $a0PbU$Vector4)(1, 1, 1, 1)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Cutoff: {
                 value: 0.5
@@ -9369,7 +9373,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_EmissionColor: {
-                value: new (0, $a0PbU$Vector4)(0, 0, 0, 1)
+                value: new $fugmd$Vector4(0, 0, 0, 1)
             },
             u_GlossMapScale: {
                 value: 1.0
@@ -9405,7 +9409,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
                 value: 0.0
             },
             u_SpecColor: {
-                value: new (0, $a0PbU$Vector3)(0.294118, 0.294118, 0.294118)
+                value: new $fugmd$Vector3(0.294118, 0.294118, 0.294118)
             },
             u_SpecularHighlights: {
                 value: 1.0
@@ -9453,7 +9457,7 @@ const $cf098bb13503440d$var$tiltBrushMaterialParams = {
 // limitations under the License.
 
 
-class $ca086492148dd3fa$export$2b011a5b12963d65 {
+class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
     constructor(parser, brushPath){
         this.name = "GOOGLE_tilt_brush_material";
         this.altName = "GOOGLE_tilt_brush_techniques";
@@ -9461,9 +9465,9 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
         this.brushPath = brushPath;
         // Quick repair of path if required
         if (this.brushPath.slice(this.brushPath.length - 1) !== "/") this.brushPath += "/";
-        this.tiltShaderLoader = new (0, $cf098bb13503440d$export$bcc22bf437a07d8f)(parser.options.manager);
+        this.tiltShaderLoader = new (0, $4fdc68aa1ebb2033$export$bcc22bf437a07d8f)(parser.options.manager);
         this.tiltShaderLoader.setPath(this.brushPath);
-        this.clock = new (0, $a0PbU$Clock)();
+        this.clock = new $fugmd$Clock();
     }
     beforeRoot() {
         const parser = this.parser;
@@ -9583,7 +9587,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                         normalizedColors[i * itemSize + 2] = Math.round(linearToSRGB(src[i * itemSize + 2]) * 255); // B
                         if (itemSize > 3) normalizedColors[i * itemSize + 3] = Math.round(src[i * itemSize + 3] * 255); // A (linear)
                     }
-                    colorAttribute = new (0, $a0PbU$BufferAttribute)(normalizedColors, itemSize, true);
+                    colorAttribute = new $fugmd$BufferAttribute(normalizedColors, itemSize, true);
                     mesh.geometry.setAttribute("a_color", colorAttribute);
                 } else mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
             }
@@ -10662,7 +10666,6 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                 break;
             case "a8147ce1-005e-abe4-88e8-09a1eaadcc89":
             case "Rising Bubbles":
-                console.log("replace material Rising Bubbles");
                 mesh.geometry.name = "geometry_Rising Bubbles";
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
@@ -10851,6 +10854,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                 setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "_tb_timestamp", "a_timestamp");
                 shader = await this.tiltShaderLoader.loadAsync("DanceFloor");
                 mesh.material = shader;
                 mesh.material.name = "material_DanceFloor";
@@ -11207,7 +11211,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
             if (material?.uniforms?.u_time) {
                 const elapsedTime = this.clock.getElapsedTime();
                 // _Time from https://docs.unity3d.com/Manual/SL-UnityShaderVariables.html
-                const time = new (0, $a0PbU$Vector4)(elapsedTime / 20, elapsedTime, elapsedTime * 2, elapsedTime * 3);
+                const time = new $fugmd$Vector4(elapsedTime / 20, elapsedTime, elapsedTime * 2, elapsedTime * 3);
                 material.uniforms["u_time"].value = time;
             }
             if (material?.uniforms?.cameraPosition) material.uniforms["cameraPosition"].value = camera.position;
@@ -11217,7 +11221,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                 {
                     if (material.uniforms.u_SceneLight_0_color) {
                         const color = material.uniforms.directionalLights.value[0].color;
-                        material.uniforms.u_SceneLight_0_color.value = new (0, $a0PbU$Vector4)(color.r, color.g, color.b, 1);
+                        material.uniforms.u_SceneLight_0_color.value = new $fugmd$Vector4(color.r, color.g, color.b, 1);
                     }
                 }
                 // Shadow Light
@@ -11225,7 +11229,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
                 {
                     if (material.uniforms.u_SceneLight_1_color) {
                         const color = material.uniforms.directionalLights.value[1].color;
-                        material.uniforms.u_SceneLight_1_color.value = new (0, $a0PbU$Vector4)(color.r, color.g, color.b, 1);
+                        material.uniforms.u_SceneLight_1_color.value = new $fugmd$Vector4(color.r, color.g, color.b, 1);
                     }
                 }
             }
@@ -11233,7 +11237,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
             if (material?.uniforms?.ambientLightColor?.value) {
                 if (material.uniforms.u_ambient_light_color) {
                     const colorArray = material.uniforms.ambientLightColor.value;
-                    material.uniforms.u_ambient_light_color.value = new (0, $a0PbU$Vector4)(colorArray[0], colorArray[1], colorArray[2], 1);
+                    material.uniforms.u_ambient_light_color.value = new $fugmd$Vector4(colorArray[0], colorArray[1], colorArray[2], 1);
                 }
             }
             // Fog
@@ -11266,7 +11270,7 @@ class $ca086492148dd3fa$export$2b011a5b12963d65 {
 // limitations under the License.
 
 
-class $d838b23e95c97ee8$export$24723e25468f5bb7 {
+class $14e7a74c93f87da8$export$24723e25468f5bb7 {
     constructor(parser, brushPath){
         this.name = "GOOGLE_tilt_brush_techniques";
         this.parser = parser;
@@ -12012,9 +12016,9 @@ class $d838b23e95c97ee8$export$24723e25468f5bb7 {
         };
         // Quick repair of path if required
         if (this.brushPath.slice(this.brushPath.length - 1) !== "/") this.brushPath += "/";
-        this.tiltShaderLoader = new (0, $cf098bb13503440d$export$bcc22bf437a07d8f)(parser.options.manager);
+        this.tiltShaderLoader = new (0, $4fdc68aa1ebb2033$export$bcc22bf437a07d8f)(parser.options.manager);
         this.tiltShaderLoader.setPath(brushPath);
-        this.clock = new (0, $a0PbU$Clock)();
+        this.clock = new $fugmd$Clock();
     }
     beforeRoot() {
         const parser = this.parser;
@@ -12039,5 +12043,5 @@ class $d838b23e95c97ee8$export$24723e25468f5bb7 {
 
 
 
-export {$cf098bb13503440d$export$bcc22bf437a07d8f as TiltShaderLoader, $ca086492148dd3fa$export$2b011a5b12963d65 as GLTFGoogleTiltBrushMaterialExtension, $d838b23e95c97ee8$export$24723e25468f5bb7 as GLTFGoogleTiltBrushTechniquesExtension};
+export {$4fdc68aa1ebb2033$export$bcc22bf437a07d8f as TiltShaderLoader, $e02d07ddc3ccd105$export$2b011a5b12963d65 as GLTFGoogleTiltBrushMaterialExtension, $14e7a74c93f87da8$export$24723e25468f5bb7 as GLTFGoogleTiltBrushTechniquesExtension};
 //# sourceMappingURL=three-icosa.module.js.map
