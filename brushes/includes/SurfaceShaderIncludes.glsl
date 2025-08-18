@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Complete Surface Shader emulation package for Three.js
-// Includes: PerturbNormal, Fog, Surface Shader BRDF functions
+// Includes: PerturbNormal, Surface Shader BRDF functions
 
 precision mediump float;
 
@@ -51,21 +51,6 @@ vec3 PerturbNormal(vec3 position, vec3 normal, vec2 uv) {
     vec3 perturbedNormal = normalize(normal + tangentNormal * 0.3);
     
     return perturbedNormal;
-}
-
-// =============================================================================
-// FOG
-// =============================================================================
-
-uniform vec3 u_fogColor;
-uniform float u_fogDensity;
-
-vec3 ApplyFog(vec3 color, float fogCoord) {
-    float density = (u_fogDensity / .693147) * 10.;
-    float fogFactor = fogCoord * density;
-    fogFactor = exp2(-fogFactor);
-    fogFactor = clamp( fogFactor, 0.0, 1.0 );
-    return mix(u_fogColor, color.xyz, fogFactor);
 }
 
 // =============================================================================
@@ -133,12 +118,19 @@ vec3 SurfaceShaderInternal(
 }
 
 vec3 SurfaceShaderSpecularGloss(
-    vec3 normal, vec3 lightDir, vec3 eyeDir, vec3 lightColor,
-    vec3 albedoColor, vec3 specularColor, float gloss) {
+        vec3 normal,
+        vec3 lightDir,
+        vec3 eyeDir,
+        vec3 lightColor,
+        vec3 albedoColor,
+        vec3 specularColor,
+        float gloss) {
+
     float oneMinusSpecularIntensity = 1.0 - clamp(max(max(specularColor.r, specularColor.g), specularColor.b), 0., 1.);
     vec3 diffuseColor = albedoColor * oneMinusSpecularIntensity;
     float perceptualRoughness = 1.0 - gloss;
     return SurfaceShaderInternal(normal, lightDir, eyeDir, lightColor, diffuseColor, specularColor, perceptualRoughness);
+
 }
 
 vec3 SurfaceShaderMetallicRoughness(
@@ -166,59 +158,3 @@ vec3 LambertShader(vec3 normal, vec3 lightDir, vec3 lightColor, vec3 diffuseColo
     float NdotL = clamp(dot(normal, lightDir), 0.0, 1.0);
     return diffuseColor * lightColor * NdotL;
 }
-
-vec3 computeLighting(
-    vec3 normal,
-    vec3 position,
-    vec3 light_dir_0,
-    vec3 light_dir_1,
-    vec4 color,
-    vec4 SceneLight_0_color,
-    vec4 SceneLight_1_color,
-    vec3 SpecColor,
-    float Shininess,
-    vec4 ambient_light_color
-) {
-    if (!gl_FrontFacing) {
-        // Always use front-facing normal for double-sided surfaces.
-        normal *= -1.0;
-    }
-    vec3 lightDir0 = normalize(light_dir_0);
-    vec3 lightDir1 = normalize(light_dir_1);
-    vec3 eyeDir = -normalize(position);
-
-    vec3 lightOut0 = SurfaceShaderSpecularGloss(normal, lightDir0, eyeDir, SceneLight_0_color.rgb,
-    color.rgb, SpecColor, Shininess);
-    vec3 lightOut1 = ShShaderWithSpec(normal, lightDir1, SceneLight_1_color.rgb, color.rgb, SpecColor);
-    vec3 ambientOut = color.rgb * ambient_light_color.rgb;
-
-    return (lightOut0 + lightOut1 + ambientOut);
-}
-
-vec3 computeLighting(
-    vec3 position,
-    vec3 light_dir_0,
-    vec3 light_dir_1,
-    vec4 color,
-    vec4 SceneLight_0_color,
-    vec4 SceneLight_1_color,
-    vec3 SpecColor,
-    float Shininess,
-    vec4 ambient_light_color
-) {
-    if (!gl_FrontFacing) {
-        // Always use front-facing normal for double-sided surfaces.
-        normal *= -1.0;
-    }
-    vec3 lightDir0 = normalize(light_dir_0);
-    vec3 lightDir1 = normalize(light_dir_1);
-    vec3 eyeDir = -normalize(position);
-
-    vec3 lightOut0 = SurfaceShaderSpecularGloss(normal, lightDir0, eyeDir, SceneLight_0_color.rgb,
-    color.rgb, SpecColor, Shininess);
-    vec3 lightOut1 = ShShaderWithSpec(normal, lightDir1, SceneLight_1_color.rgb, color.rgb, SpecColor);
-    vec3 ambientOut = color.rgb * ambient_light_color.rgb;
-
-    return (lightOut0 + lightOut1 + ambientOut);
-}
-

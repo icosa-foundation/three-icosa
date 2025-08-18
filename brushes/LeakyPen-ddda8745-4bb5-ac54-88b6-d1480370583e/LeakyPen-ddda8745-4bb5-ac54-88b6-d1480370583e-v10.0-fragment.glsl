@@ -34,19 +34,7 @@ in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;  // MainTex UV (for alpha mask)
 in vec2 v_texcoord1;  // SecondaryTex UV (for diffuse)
-
-// Fogging support
-uniform vec3 u_fogColor;
-uniform float u_fogDensity;
 in float f_fog_coord;
-
-vec3 ApplyFog(vec3 color) {
-  float density = (u_fogDensity / .693147) * 10.;
-  float fogFactor = f_fog_coord * density;
-  fogFactor = exp2(-fogFactor);
-  fogFactor = clamp( fogFactor, 0.0, 1.0 );
-  return mix(u_fogColor, color.xyz, fogFactor);
-}
 
 // Simple diffuse lighting for LeakyPen (no specular)
 vec3 computeSimpleLighting(vec3 normal, vec3 albedo) {
@@ -88,6 +76,6 @@ void main() {
   vec3 litColor = computeSimpleLighting(normal, albedo);
   
   // Apply fog and output
-  fragColor.rgb = ApplyFog(litColor);
+  fragColor.rgb = ApplyFog(litColor, f_fog_coord);
   fragColor.a = 1.0;
 }

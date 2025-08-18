@@ -742,9 +742,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 shader.fog = true;
                 shader.uniformsNeedUpdate = true;
                 mesh.material = shader;
-                console.log(`Setting ${mesh.material.name}`);
                 mesh.material.name = "material_Light";
-                console.log(`Set material for mesh ${mesh.name} to ${mesh.material.name}`);
                 break;
 
             case "4391aaaa-df81-4396-9e33-31e4e4930b27":
@@ -2077,23 +2075,42 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             if(material?.uniforms?.directionalLights?.value) {
                 // Main Light
                 if(material.uniforms.directionalLights.value[0]) {
-                    
+
                     // Color
                     if(material.uniforms.u_SceneLight_0_color) {
                         const color = material.uniforms.directionalLights.value[0].color;
                         material.uniforms.u_SceneLight_0_color.value = new THREE.Vector4(color.r, color.g, color.b, 1);
                     }
+                    // Transforms
+                    if(material.uniforms.u_SceneLight_0_matrix) {
+                        const direction = material.uniforms.directionalLights.value[0].direction;
+                        material.uniforms.u_SceneLight_0_matrix.value = new THREE.Matrix4().lookAt(
+                            new THREE.Vector3(0, 0, 0),
+                            direction,
+                            new THREE.Vector3(0, 1, 0)
+                        );
+                    }
                 }
 
                 // Shadow Light
                 if(material.uniforms.directionalLights.value[1]) {
-    
+
                     // Color
                     if(material.uniforms.u_SceneLight_1_color) {
                         const color = material.uniforms.directionalLights.value[1].color;
                         material.uniforms.u_SceneLight_1_color.value = new THREE.Vector4(color.r, color.g, color.b, 1);
                     }
+                    // Transforms
+                    if(material.uniforms.u_SceneLight_1_matrix) {
+                        const direction = material.uniforms.directionalLights.value[1].direction;
+                        material.uniforms.u_SceneLight_1_matrix.value = new THREE.Matrix4().lookAt(
+                            new THREE.Vector3(0, 0, 0),
+                            direction,
+                            new THREE.Vector3(0, 1, 0)
+                        );
+                    }
                 }
+
             }
 
             // Ambient Light

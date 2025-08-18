@@ -14,11 +14,44 @@
 
 import * as THREE from 'three';
 
+// Cached default textures to prevent creating multiple instances
+let defaultWhiteTexture = null;
+let defaultNormalTexture = null;
+
+function getDefaultWhiteTexture() {
+    if (!defaultWhiteTexture) {
+        defaultWhiteTexture = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1, THREE.RGBAFormat);
+        defaultWhiteTexture.name = 'DefaultWhiteTexture';
+        defaultWhiteTexture.needsUpdate = true;
+    }
+    return defaultWhiteTexture;
+}
+
+function getDefaultNormalTexture() {
+    if (!defaultNormalTexture) {
+        defaultNormalTexture = new THREE.DataTexture(new Uint8Array([128, 128, 255, 255]), 1, 1, THREE.RGBAFormat);
+        defaultNormalTexture.name = 'DefaultNormalTexture';
+        defaultNormalTexture.needsUpdate = true;
+    }
+    return defaultNormalTexture;
+}
+
 export class TiltShaderLoader extends THREE.Loader {
     constructor( manager ) {
         super( manager );
         
         this.loadedMaterials = {};
+    }
+    
+    async loadShaderIncludes(relativePath) {
+        const loader = new THREE.FileLoader(this.manager);
+        loader.setPath(this.path);
+        try {
+            return await loader.loadAsync(relativePath);
+        } catch (error) {
+            console.warn('Failed to load surface shader includes:', relativePath, error);
+            return '// Failed to load surface shader includes ' + relativePath + '\n';
+        }
     }
     
     async load(brushName, onLoad, onProgress, onError ) {
@@ -43,16 +76,33 @@ export class TiltShaderLoader extends THREE.Loader {
         const materialParams = tiltBrushMaterialParams[brushName];
 
         materialParams.glslVersion = THREE.GLSL3;
-        materialParams.vertexShader = await loader.loadAsync(materialParams.vertexShader);
-        materialParams.fragmentShader = await loader.loadAsync(materialParams.fragmentShader);
+        
+        // Load shaders
+        const vertexShaderText = await loader.loadAsync(materialParams.vertexShader);
+
+        let fragmentShaderText = await loader.loadAsync(materialParams.fragmentShader);
+        if (!this.fogShaderCode) {
+            this.fogShaderCode = await this.loadShaderIncludes('includes/FogShaderIncludes.glsl');
+        }
+        fragmentShaderText = this.fogShaderCode + '\n' + fragmentShaderText;
+
+        // Prepend surface shader code if needed
+        if (materialParams.isSurfaceShader) {
+            if (!this.surfaceShaderCode) {
+                this.surfaceShaderCode = await this.loadShaderIncludes('includes/SurfaceShaderIncludes.glsl');
+            }
+            fragmentShaderText = this.surfaceShaderCode + '\n' + fragmentShaderText;
+        }
+                
+        // Remove custom flag before passing to Three.js
+        delete materialParams.isSurfaceShader;
+        
+        materialParams.vertexShader = vertexShaderText;
+        materialParams.fragmentShader = fragmentShaderText;
 
         if (materialParams.uniforms.u_MainTex) {
             if (materialParams.uniforms.u_MainTex.value === null) {
-                // Create a 1x1 white texture with full alpha for null values
-                const defaultTexture = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1, THREE.RGBAFormat);
-                defaultTexture.name = `${brushName}_DefaultMainTex`;
-                defaultTexture.needsUpdate = true;
-                materialParams.uniforms.u_MainTex.value = defaultTexture;
+                materialParams.uniforms.u_MainTex.value = getDefaultWhiteTexture();
             } else {
                 const mainTex = await textureLoader.loadAsync(materialParams.uniforms.u_MainTex.value);
                 mainTex.name = `${brushName}_MainTex`;
@@ -65,11 +115,7 @@ export class TiltShaderLoader extends THREE.Loader {
 
         if (materialParams.uniforms.u_BumpMap) {
             if (materialParams.uniforms.u_BumpMap.value === null) {
-                // Create a 1x1 neutral normal map for null values
-                const defaultBumpMap = new THREE.DataTexture(new Uint8Array([128, 128, 255, 255]), 1, 1, THREE.RGBAFormat);
-                defaultBumpMap.name = `${brushName}_DefaultBumpMap`;
-                defaultBumpMap.needsUpdate = true;
-                materialParams.uniforms.u_BumpMap.value = defaultBumpMap;
+                materialParams.uniforms.u_BumpMap.value = getDefaultNormalTexture();
             } else {
                 const bumpMap = await textureLoader.loadAsync(materialParams.uniforms.u_BumpMap.value);
                 bumpMap.name = `${brushName}_BumpMap`;
@@ -639,6 +685,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: {value: new THREE.Vector3(0.0196, 0.0196, 0.0196)},
             u_fogDensity: {value: 0 }
         },
+        isSurfaceShader: true,
         vertexShader: "BlocksGem-232998f8-d357-47a2-993a-53415df9be10/BlocksGem-232998f8-d357-47a2-993a-53415df9be10-v10.0-vertex.glsl",
         fragmentShader: "BlocksGem-232998f8-d357-47a2-993a-53415df9be10/BlocksGem-232998f8-d357-47a2-993a-53415df9be10-v10.0-fragment.glsl",
         side: 2,
@@ -662,6 +709,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 }
         },
+        isSurfaceShader: true,
         vertexShader: "BlocksGlass-3d813d82-5839-4450-8ddc-8e889ecd96c7/BlocksGlass-3d813d82-5839-4450-8ddc-8e889ecd96c7-v10.0-vertex.glsl",
         fragmentShader: "BlocksGlass-3d813d82-5839-4450-8ddc-8e889ecd96c7/BlocksGlass-3d813d82-5839-4450-8ddc-8e889ecd96c7-v10.0-fragment.glsl",
         side: 2,
@@ -741,6 +789,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
         },
+        isSurfaceShader: true,
         vertexShader: "CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43/CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43-v10.0-vertex.glsl",
         fragmentShader: "CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43/CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43-v10.0-fragment.glsl",
         side: 2,
@@ -785,6 +834,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
         },
+        isSurfaceShader: true,
         vertexShader: "DiamondHull-c8313697-2563-47fc-832e-290f4c04b901/DiamondHull-c8313697-2563-47fc-832e-290f4c04b901-v10.0-vertex.glsl",
         fragmentShader: "DiamondHull-c8313697-2563-47fc-832e-290f4c04b901/DiamondHull-c8313697-2563-47fc-832e-290f4c04b901-v10.0-fragment.glsl",
         side: 2,
@@ -798,7 +848,7 @@ const tiltBrushMaterialParams = {
         blendEquationAlpha: 100,
         blendEquation: 100,
         blendSrcAlpha: 201,
-        blendSrc: 201,
+        blendSrc: 201
     },
     "Disco" : {
         uniforms: {
@@ -830,6 +880,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 }
         },
+        isSurfaceShader: true,
         vertexShader: "DotMarker-d1d991f2-e7a0-4cf1-b328-f57e915e6260/DotMarker-d1d991f2-e7a0-4cf1-b328-f57e915e6260-v10.0-vertex.glsl",
         fragmentShader: "DotMarker-d1d991f2-e7a0-4cf1-b328-f57e915e6260/DotMarker-d1d991f2-e7a0-4cf1-b328-f57e915e6260-v10.0-fragment.glsl",
         side: 2,
@@ -837,7 +888,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true,
         depthTest: true,
-        blending: 0,
+        blending: 0
         
     },
     "Dots" : {
@@ -870,6 +921,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
         },
+        isSurfaceShader: true,
         vertexShader: "DoubleTaperedFlat-0d3889f3-3ede-470c-8af4-f44813306126/DoubleTaperedFlat-0d3889f3-3ede-470c-8af4-f44813306126-v10.0-vertex.glsl",
         fragmentShader: "DoubleTaperedFlat-0d3889f3-3ede-470c-8af4-f44813306126/DoubleTaperedFlat-0d3889f3-3ede-470c-8af4-f44813306126-v10.0-fragment.glsl",
         side: 2,
@@ -911,6 +963,7 @@ const tiltBrushMaterialParams = {
             u_BumpMap: { value: "DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1/DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1-v10.0-BumpMap.png" },
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) },
         },
+        isSurfaceShader: true,
         vertexShader: "DuctTape-d0262945-853c-4481-9cbd-88586bed93cb/DuctTape-d0262945-853c-4481-9cbd-88586bed93cb-v10.0-vertex.glsl",
         fragmentShader: "DuctTape-d0262945-853c-4481-9cbd-88586bed93cb/DuctTape-d0262945-853c-4481-9cbd-88586bed93cb-v10.0-fragment.glsl",
         side: 2,
@@ -968,6 +1021,7 @@ const tiltBrushMaterialParams = {
             u_fogDensity: { value: 0 },
             u_Cutoff: { value: 0.2 }
         },
+        isSurfaceShader: true,
         vertexShader: "EnvironmentDiffuse-0ad58bbd-42bc-484e-ad9a-b61036ff4ce7/EnvironmentDiffuse-0ad58bbd-42bc-484e-ad9a-b61036ff4ce7-v1.0-vertex.glsl",
         fragmentShader: "EnvironmentDiffuse-0ad58bbd-42bc-484e-ad9a-b61036ff4ce7/EnvironmentDiffuse-0ad58bbd-42bc-484e-ad9a-b61036ff4ce7-v1.0-fragment.glsl",
         side: 2,
@@ -1033,6 +1087,7 @@ const tiltBrushMaterialParams = {
             u_fogDensity: { value: 0 },
             u_Cutoff: { value: 0.2 }
         },
+        isSurfaceShader: true,
         vertexShader: "Flat-2d35bcf0-e4d8-452c-97b1-3311be063130/Flat-2d35bcf0-e4d8-452c-97b1-3311be063130-v10.0-vertex.glsl",
         fragmentShader: "Flat-2d35bcf0-e4d8-452c-97b1-3311be063130/Flat-2d35bcf0-e4d8-452c-97b1-3311be063130-v10.0-fragment.glsl",
         side: 2,
@@ -1046,7 +1101,7 @@ const tiltBrushMaterialParams = {
         blendEquationAlpha: 100,
         blendEquation: 100,
         blendSrcAlpha: 201,
-        blendSrc: 201,
+        blendSrc: 201
     },
     "Highlighter" : {
         uniforms: {
@@ -1081,6 +1136,7 @@ const tiltBrushMaterialParams = {
             u_BumpMap: { value: "Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c/Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c-v10.0-BumpMap.png" },
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) },
         },
+        isSurfaceShader: true,
         vertexShader: "Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c/Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c-v10.0-vertex.glsl",
         fragmentShader: "Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c/Hypercolor-dce872c2-7b49-4684-b59b-c45387949c5c-v10.0-fragment.glsl",
         side: 2,
@@ -1122,6 +1178,7 @@ const tiltBrushMaterialParams = {
             u_BumpMap: { value: "Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37/Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-BumpMap.png" },
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) },
         },
+        isSurfaceShader: true,
         vertexShader: "Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37/Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-vertex.glsl",
         fragmentShader: "Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37/Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-fragment.glsl",
         side: 2,
@@ -1147,6 +1204,7 @@ const tiltBrushMaterialParams = {
             u_BumpMap: { value: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-BumpMap.png" },
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) },
         },
+        isSurfaceShader: true,
         vertexShader: "Ink-f5c336cf-5108-4b40-ade9-c687504385ab/Ink-f5c336cf-5108-4b40-ade9-c687504385ab-v10.0-vertex.glsl",
         fragmentShader: "Ink-f5c336cf-5108-4b40-ade9-c687504385ab/Ink-f5c336cf-5108-4b40-ade9-c687504385ab-v10.0-fragment.glsl",
         side: 2,
@@ -1217,6 +1275,7 @@ const tiltBrushMaterialParams = {
             u_fogDensity: { value: 0 },
             u_MainTex: { value: "LightWire-4391aaaa-df81-4396-9e33-31e4e4930b27/LightWire-4391aaaa-df81-4396-9e33-31e4e4930b27-v10.0-MainTex.png"}
         },
+        isSurfaceShader: true,
         vertexShader: "LightWire-4391aaaa-df81-4396-9e33-31e4e4930b27/LightWire-4391aaaa-df81-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
         fragmentShader: "LightWire-4391aaaa-df81-4396-9e33-31e4e4930b27/LightWire-4391aaaa-df81-4396-9e33-31e4e4930b27-v10.0-fragment.glsl",
         side: 2,
@@ -1236,6 +1295,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 }
         },
+        isSurfaceShader: true,
         vertexShader: "Lofted-d381e0f5-3def-4a0d-8853-31e9200bcbda/Lofted-d381e0f5-3def-4a0d-8853-31e9200bcbda-v10.0-vertex.glsl",
         fragmentShader: "Lofted-d381e0f5-3def-4a0d-8853-31e9200bcbda/Lofted-d381e0f5-3def-4a0d-8853-31e9200bcbda-v10.0-fragment.glsl",
         side: 2,
@@ -1254,6 +1314,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
         },
+        isSurfaceShader: true,
         vertexShader: "Marker-429ed64a-4e97-4466-84d3-145a861ef684/Marker-429ed64a-4e97-4466-84d3-145a861ef684-v10.0-vertex.glsl",
         fragmentShader: "Marker-429ed64a-4e97-4466-84d3-145a861ef684/Marker-429ed64a-4e97-4466-84d3-145a861ef684-v10.0-fragment.glsl",
         side: 2,
@@ -1261,7 +1322,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true,
         depthTest: true,
-        blending: 0,
+        blending: 0
         
     },
     "MatteHull" : {
@@ -1275,6 +1336,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 }
         },
+        isSurfaceShader: true,
         vertexShader: "MatteHull-79348357-432d-4746-8e29-0e25c112e3aa/MatteHull-79348357-432d-4746-8e29-0e25c112e3aa-v10.0-vertex.glsl",
         fragmentShader: "MatteHull-79348357-432d-4746-8e29-0e25c112e3aa/MatteHull-79348357-432d-4746-8e29-0e25c112e3aa-v10.0-fragment.glsl",
         side: 2,
@@ -1282,7 +1344,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true,
         depthTest: true,
-        blending: 0,
+        blending: 0
     },
     "NeonPulse" : {
         uniforms: {
@@ -1293,6 +1355,7 @@ const tiltBrushMaterialParams = {
             u_time: { value: new THREE.Vector4() },
             u_EmissionGain: { value: 0.5 },
         },
+        isSurfaceShader: true,
         vertexShader: "NeonPulse-b2ffef01-eaaa-4ab5-aa64-95a2c4f5dbc6/NeonPulse-b2ffef01-eaaa-4ab5-aa64-95a2c4f5dbc6-v10.0-vertex.glsl",
         fragmentShader: "NeonPulse-b2ffef01-eaaa-4ab5-aa64-95a2c4f5dbc6/NeonPulse-b2ffef01-eaaa-4ab5-aa64-95a2c4f5dbc6-v10.0-fragment.glsl",
         side: 2,
@@ -1306,7 +1369,7 @@ const tiltBrushMaterialParams = {
         blendEquationAlpha: 100,
         blendEquation: 100,
         blendSrcAlpha: 201,
-        blendSrc: 201,
+        blendSrc: 201
     },
     "OilPaint": {
         uniforms: {
@@ -1324,6 +1387,7 @@ const tiltBrushMaterialParams = {
             u_BumpMap: { value: "OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699/OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699-v10.0-BumpMap.png" },
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0020, 0.0020, 512, 512) },
         },
+        isSurfaceShader: true,
         vertexShader: "OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699/OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699-v10.0-vertex.glsl",
         fragmentShader: "OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699/OilPaint-f72ec0e7-a844-4e38-82e3-140c44772699-v10.0-fragment.glsl",
         side: 2,
@@ -1349,6 +1413,7 @@ const tiltBrushMaterialParams = {
             u_BumpMap: { value: "Paper-759f1ebd-20cd-4720-8d41-234e0da63716/Paper-759f1ebd-20cd-4720-8d41-234e0da63716-v10.0-BumpMap.png" },
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) },
         },
+        isSurfaceShader: true,
         vertexShader: "Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5/Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5-v10.0-vertex.glsl",
         fragmentShader: "Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5/Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5-v10.0-fragment.glsl",
         side: 2,
@@ -1414,6 +1479,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
         },
+        isSurfaceShader: true,
         vertexShader: "Petal-e0abbc80-0f80-e854-4970-8924a0863dcc/Petal-e0abbc80-0f80-e854-4970-8924a0863dcc-v10.0-vertex.glsl",
         fragmentShader: "Petal-e0abbc80-0f80-e854-4970-8924a0863dcc/Petal-e0abbc80-0f80-e854-4970-8924a0863dcc-v10.0-fragment.glsl",
         side: 2,
@@ -1477,6 +1543,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
         },
+        isSurfaceShader: true,
         vertexShader: "ShinyHull-faaa4d44-fcfb-4177-96be-753ac0421ba3/ShinyHull-faaa4d44-fcfb-4177-96be-753ac0421ba3-v10.0-vertex.glsl",
         fragmentShader: "ShinyHull-faaa4d44-fcfb-4177-96be-753ac0421ba3/ShinyHull-faaa4d44-fcfb-4177-96be-753ac0421ba3-v10.0-fragment.glsl",
         side: 2,
@@ -1552,6 +1619,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
         },
+        isSurfaceShader: true,
         vertexShader: "Spikes-cf7f0059-7aeb-53a4-2b67-c83d863a9ffa/Spikes-cf7f0059-7aeb-53a4-2b67-c83d863a9ffa-v10.0-vertex.glsl",
         fragmentShader: "Spikes-cf7f0059-7aeb-53a4-2b67-c83d863a9ffa/Spikes-cf7f0059-7aeb-53a4-2b67-c83d863a9ffa-v10.0-fragment.glsl",
         side: 2,
@@ -1645,6 +1713,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
         },
+        isSurfaceShader: true,
         vertexShader: "TaperedFlat-b468c1fb-f254-41ed-8ec9-57030bc5660c/TaperedFlat-b468c1fb-f254-41ed-8ec9-57030bc5660c-v10.0-vertex.glsl",
         fragmentShader: "TaperedFlat-b468c1fb-f254-41ed-8ec9-57030bc5660c/TaperedFlat-b468c1fb-f254-41ed-8ec9-57030bc5660c-v10.0-fragment.glsl",
         side: 2,
@@ -1668,6 +1737,7 @@ const tiltBrushMaterialParams = {
             u_MainTex: { value: "TaperedMarker_Flat-1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0/TaperedMarker_Flat-1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0-v10.0-MainTex.png" },
             u_Cutoff: { value: 0.2 }
         },
+        isSurfaceShader: true,
         vertexShader: "TaperedMarker_Flat-1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0/TaperedMarker_Flat-1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0-v10.0-vertex.glsl",
         fragmentShader: "TaperedMarker_Flat-1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0/TaperedMarker_Flat-1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0-v10.0-fragment.glsl",
         side: 2,
@@ -1693,6 +1763,7 @@ const tiltBrushMaterialParams = {
             u_BumpMap: { value: "ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f/ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f-v10.0-BumpMap.png" },
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) },
         },
+        isSurfaceShader: true,
         vertexShader: "ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f/ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f-v10.0-vertex.glsl",
         fragmentShader: "ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f/ThickPaint-75b32cf0-fdd6-4d89-a64b-e2a00b247b0f-v10.0-fragment.glsl",
         side: 2,
@@ -1793,6 +1864,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3/WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3-v10.0-vertex.glsl",
         fragmentShader: "WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3/WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3-v10.0-fragment.glsl",
         side: 2,
@@ -1815,6 +1887,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
         },
+        isSurfaceShader: true,
         vertexShader: "WigglyGraphite-5347acf0-a8e2-47b6-8346-30c70719d763/WigglyGraphite-5347acf0-a8e2-47b6-8346-30c70719d763-v10.0-vertex.glsl",
         fragmentShader: "WigglyGraphite-5347acf0-a8e2-47b6-8346-30c70719d763/WigglyGraphite-5347acf0-a8e2-47b6-8346-30c70719d763-v10.0-fragment.glsl",
         side: 2,
@@ -1831,6 +1904,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 }
         },
+        isSurfaceShader: true,
         vertexShader: "Wire-4391385a-cf83-4396-9e33-31e4e4930b27/Wire-4391385a-cf83-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
         fragmentShader: "Wire-4391385a-cf83-4396-9e33-31e4e4930b27/Wire-4391385a-cf83-4396-9e33-31e4e4930b27-v10.0-fragment.glsl",
         side: 2,
@@ -1838,7 +1912,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true,
         depthTest: true,
-        blending: 0,
+        blending: 0
     },
 
 
@@ -1853,6 +1927,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 }
         },
+        isSurfaceShader: true,
         vertexShader: "SvgTemplate-cf3401b3-4ada-4877-995a-1aa64e7b604a/SvgTemplate-cf3401b3-4ada-4877-995a-1aa64e7b604a-v10.0-vertex.glsl",
         fragmentShader: "SvgTemplate-cf3401b3-4ada-4877-995a-1aa64e7b604a/SvgTemplate-cf3401b3-4ada-4877-995a-1aa64e7b604a-v10.0-fragment.glsl",
         side: 2,
@@ -1860,7 +1935,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true,
         depthTest: true,
-        blending: 0,
+        blending: 0
     },
     "Gouache" : {
         uniforms: {
@@ -1895,6 +1970,7 @@ const tiltBrushMaterialParams = {
             // u_UVSec: { value: 0.0 },
             // u_ZWrite: { value: 1.0 },
         },
+        isSurfaceShader: true,
         vertexShader: "Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b/Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b-v10.0-vertex.glsl",
         fragmentShader: "Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b/Gouache-4465b5ef-3605-bec4-2b3e-6b04508ddb6b-v10.0-fragment.glsl",
         side: 2,
@@ -1933,6 +2009,7 @@ const tiltBrushMaterialParams = {
             u_Strength: { value: 0.5 },
             u_TintColor: { value: new THREE.Vector4(0.617647, 0.617647, 0.617647, 1) }
         },
+        isSurfaceShader: true,
         vertexShader: "MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a/MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a-v10.0-vertex.glsl",
         fragmentShader: "MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a/MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a-v10.0-fragment.glsl",
         side: 1,
@@ -2024,6 +2101,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "DryBrush-725f4c6a-6427-6524-29ab-da371924adab/DryBrush-725f4c6a-6427-6524-29ab-da371924adab-v10.0-vertex.glsl",
         fragmentShader: "DryBrush-725f4c6a-6427-6524-29ab-da371924adab/DryBrush-725f4c6a-6427-6524-29ab-da371924adab-v10.0-fragment.glsl",
         side: 1,
@@ -2068,6 +2146,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-vertex.glsl",
         fragmentShader: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-fragment.glsl",
         side: 1,
@@ -2250,6 +2329,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e/TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e-v10.0-vertex.glsl",
         fragmentShader: "TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e/TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -2292,6 +2372,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa/SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa-v10.0-vertex.glsl",
         fragmentShader: "SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa/SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -2335,6 +2416,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3/ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3-v10.0-vertex.glsl",
         fragmentShader: "ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3/ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -2396,6 +2478,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3/Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3-v10.0-vertex.glsl",
         fragmentShader: "Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3/Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -2438,6 +2521,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5/Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5-v10.0-vertex.glsl",
         fragmentShader: "Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5/Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -2564,6 +2648,7 @@ const tiltBrushMaterialParams = {
             u_TintColor: { value: new THREE.Vector4(0.617647, 0.617647, 0.617647, 1) },
             u_time: { value: new THREE.Vector4() }
         },
+        isSurfaceShader: true,
         vertexShader: "BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4/BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4-v10.0-vertex.glsl",
         fragmentShader: "BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4/BubbleWand-eba3f993-f9a1-4d35-b84e-bb08f48981a4-v10.0-fragment.glsl",
         side: 2,
@@ -2663,12 +2748,13 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9/SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9-v10.0-vertex.glsl",
         fragmentShader: "SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9/SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9-v10.0-fragment.glsl",
-        side: 1, // TODO
-        transparent: false, // TODO
+        side: 1,
+        transparent: false,
         depthFunc: 2,
-        depthWrite: true, // TODO
+        depthWrite: true,
         depthTest: true,
         blending: 0,
     },
@@ -2701,6 +2787,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454/DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454-v10.0-vertex.glsl",
         fragmentShader: "DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454/DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -2785,6 +2872,7 @@ const tiltBrushMaterialParams = {
             u_BumpMap: { value: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-BumpMap.png" },
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) }
         },
+        isSurfaceShader: true,
         vertexShader: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-vertex.glsl",
         fragmentShader: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -2868,6 +2956,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c/Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c-v10.0-vertex.glsl",
         fragmentShader: "Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c/Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -2913,6 +3002,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1/Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1-v10.0-vertex.glsl",
         fragmentShader: "Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1/Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -2955,6 +3045,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-vertex.glsl",
         fragmentShader: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -2962,7 +3053,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0,
+        blending: 0
     },
     "KeijiroTube" : {
         uniforms: {
@@ -2995,6 +3086,7 @@ const tiltBrushMaterialParams = {
             u_ZWrite: { value: 1.0 },
             u_time: { value: new THREE.Vector4() }
         },
+        isSurfaceShader: true,
         vertexShader: "KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf/KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf-v10.0-vertex.glsl",
         fragmentShader: "KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf/KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -3055,6 +3147,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "Wire (Lit)-62fef968-e842-3224-4a0e-1fdb7cfb745c/Wire (Lit)-62fef968-e842-3224-4a0e-1fdb7cfb745c-v10.0-vertex.glsl",
         fragmentShader: "Wire (Lit)-62fef968-e842-3224-4a0e-1fdb7cfb745c/Wire (Lit)-62fef968-e842-3224-4a0e-1fdb7cfb745c-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -3179,6 +3272,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b/SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b-v10.0-vertex.glsl",
         fragmentShader: "SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b/SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -3222,6 +3316,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95/Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95-v10.0-vertex.glsl",
         fragmentShader: "Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95/Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -3229,7 +3324,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0,
+        blending: 0
     },
     "InkGeometry" : {
         uniforms: {
@@ -3265,6 +3360,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb/InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb-v10.0-vertex.glsl",
         fragmentShader: "InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb/InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -3290,6 +3386,7 @@ const tiltBrushMaterialParams = {
             u_BumpMap: { value: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-BumpMap.png" },
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) }
         },
+        isSurfaceShader: true,
         vertexShader: "ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6/ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6-v10.0-vertex.glsl",
         fragmentShader: "ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6/ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -3297,7 +3394,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0,
+        blending: 0
     },
     "3D Printing Brush" : {
       // TODO Uniforms and name fix: 3D Printing Brush
@@ -3310,6 +3407,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 }
         },
+        isSurfaceShader: true,
         vertexShader: "3D Printing Brush-d3f3b18a-da03-f694-b838-28ba8e749a98/3D Printing Brush-d3f3b18a-da03-f694-b838-28ba8e749a98-v10.0-vertex.glsl",
         fragmentShader: "3D Printing Brush-d3f3b18a-da03-f694-b838-28ba8e749a98/3D Printing Brush-d3f3b18a-da03-f694-b838-28ba8e749a98-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -3355,6 +3453,7 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 }
         },
+        isSurfaceShader: true,
         vertexShader: "PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac/PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac-v10.0-vertex.glsl",
         fragmentShader: "PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac/PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac-v10.0-fragment.glsl",
         side: 1, // TODO
@@ -3362,6 +3461,6 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true, // TODO
         depthTest: true,
-        blending: 0,
+        blending: 0
     },
 }
