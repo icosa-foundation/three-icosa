@@ -21,6 +21,8 @@ in vec3 a_texcoord0;
 out vec4 v_color;
 out vec3 unity_normal;
 out vec3 v_normal;  // Camera-space normal.
+out vec3 v_tangent;  // Camera-space tangent.
+out vec3 v_bitangent;  // Camera-space bitangent.
 out vec3 v_position;  // Camera-space position.
 out vec2 v_texcoord0;
 out vec3 v_light_dir_0;  // Camera-space light direction, main light.

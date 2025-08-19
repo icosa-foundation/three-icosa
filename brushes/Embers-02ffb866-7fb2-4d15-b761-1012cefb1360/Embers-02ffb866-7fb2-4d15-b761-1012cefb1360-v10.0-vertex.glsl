@@ -26,6 +26,8 @@ in vec4 a_texcoord1;
 
 out vec4 v_color;
 out vec3 v_normal;  // Camera-space normal.
+out vec3 v_tangent;  // Camera-space tangent.
+out vec3 v_bitangent;  // Camera-space bitangent.
 out vec3 v_position;  // Camera-space position.
 out vec2 v_texcoord0;
 
@@ -115,7 +117,16 @@ vec4 GetParticlePositionLS() {
 void main() {
   vec4 pos = GetParticlePositionLS();
 
-  v_normal = normalMatrix * a_normal;
+  // Transform normal and tangent to view space
+  vec3 normal = normalize(normalMatrix * a_normal);
+  vec3 tangent = normalize(normalMatrix * a_tangent.xyz);
+  
+  // Compute bitangent using cross product and handedness
+  vec3 bitangent = cross(normal, tangent) * a_tangent.w;
+  
+  v_normal = normal;
+  v_tangent = tangent;
+  v_bitangent = bitangent;
   v_color = a_color;
   v_texcoord0 = a_texcoord0.xy;
 

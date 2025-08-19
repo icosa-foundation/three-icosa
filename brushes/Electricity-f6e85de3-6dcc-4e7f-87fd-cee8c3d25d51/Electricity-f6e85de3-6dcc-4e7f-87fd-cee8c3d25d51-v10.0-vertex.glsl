@@ -22,10 +22,13 @@ in vec4 a_position;
 in vec3 a_normal;
 in vec4 a_color;
 in vec2 a_texcoord0;
+in vec4 a_tangent;
 in vec3 a_texcoord1;
 
 out vec4 v_color;
 out vec3 v_normal;  // Camera-space normal.
+out vec3 v_tangent;  // Camera-space tangent.
+out vec3 v_bitangent;  // Camera-space bitangent.
 out vec3 v_position;  // Camera-space position.
 out vec2 v_texcoord0;
 
@@ -74,5 +77,14 @@ void main() {
 	v_color += v_color * (1.0 - envelopePow);
 
 	v_texcoord0 = a_texcoord0;
-	v_normal = normalMatrix * a_normal;
+	// Transform normal and tangent to view space
+  vec3 normal = normalize(normalMatrix * a_normal);
+  vec3 tangent = normalize(normalMatrix * a_tangent.xyz);
+  
+  // Compute bitangent using cross product and handedness
+  vec3 bitangent = cross(normal, tangent) * a_tangent.w;
+  
+  v_normal = normal;
+  v_tangent = tangent;
+  v_bitangent = bitangent;
 }

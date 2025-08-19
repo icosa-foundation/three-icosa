@@ -17,10 +17,13 @@ in vec4 a_position;
 in vec3 a_normal;
 in vec4 a_color;
 in vec2 a_texcoord0;
+in vec4 a_tangent;
 
 out vec4 v_color;
 out vec3 v_worldNormal;  // World-space normal.
 out vec3 v_normal;       // Camera-space normal.
+out vec3 v_tangent;  // Camera-space tangent.
+out vec3 v_bitangent;  // Camera-space bitangent.
 out vec3 v_position;     // Camera-space position.
 out vec3 v_worldPosition;// World-space position.
 out vec2 v_texcoord0;
@@ -41,7 +44,16 @@ void main() {
   gl_Position = projectionMatrix * modelViewMatrix * a_position;
   f_fog_coord = gl_Position.z;
 
-  v_normal = normalMatrix * a_normal;
+  // Transform normal and tangent to view space
+  vec3 normal = normalize(normalMatrix * a_normal);
+  vec3 tangent = normalize(normalMatrix * a_tangent.xyz);
+  
+  // Compute bitangent using cross product and handedness
+  vec3 bitangent = cross(normal, tangent) * a_tangent.w;
+  
+  v_normal = normal;
+  v_tangent = tangent;
+  v_bitangent = bitangent;
   // modelMatrix is not correct, but correct enough.
   v_worldNormal = (modelMatrix * vec4(a_normal, 1)).xyz;
 

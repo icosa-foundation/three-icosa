@@ -35,6 +35,8 @@ uniform vec3 cameraPosition;
 
 in vec4 v_color;
 in vec3 v_normal;
+in vec3 v_tangent;
+in vec3 v_bitangent;
 in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
@@ -114,3 +116,4 @@ void main() {
     fragColor.rgb = ApplyFog(computeLighting(v_normal) + emission, f_fog_coord);
     fragColor.a = 1.0;
 }
+

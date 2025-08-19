@@ -964,8 +964,8 @@ const tiltBrushMaterialParams = {
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) },
         },
         isSurfaceShader: true,
-        vertexShader: "DuctTape-d0262945-853c-4481-9cbd-88586bed93cb/DuctTape-d0262945-853c-4481-9cbd-88586bed93cb-v10.0-vertex.glsl",
-        fragmentShader: "DuctTape-d0262945-853c-4481-9cbd-88586bed93cb/DuctTape-d0262945-853c-4481-9cbd-88586bed93cb-v10.0-fragment.glsl",
+        vertexShader: "DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1/DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1-v10.0-vertex.glsl",
+        fragmentShader: "DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1/DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1-v10.0-fragment.glsl",
         side: 2,
         transparent: false,
         depthFunc: 2,
@@ -1205,8 +1205,8 @@ const tiltBrushMaterialParams = {
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) },
         },
         isSurfaceShader: true,
-        vertexShader: "Ink-f5c336cf-5108-4b40-ade9-c687504385ab/Ink-f5c336cf-5108-4b40-ade9-c687504385ab-v10.0-vertex.glsl",
-        fragmentShader: "Ink-f5c336cf-5108-4b40-ade9-c687504385ab/Ink-f5c336cf-5108-4b40-ade9-c687504385ab-v10.0-fragment.glsl",
+        vertexShader: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment-v10.0-vertex.glsl",
+        fragmentShader: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment-v10.0-fragment.glsl",
         side: 2,
         transparent: false,
         depthFunc: 2,
@@ -1414,8 +1414,8 @@ const tiltBrushMaterialParams = {
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) },
         },
         isSurfaceShader: true,
-        vertexShader: "Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5/Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5-v10.0-vertex.glsl",
-        fragmentShader: "Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5/Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5-v10.0-fragment.glsl",
+        vertexShader: "Paper-759f1ebd-20cd-4720-8d41-234e0da63716/Paper-759f1ebd-20cd-4720-8d41-234e0da63716-v10.0-vertex.glsl",
+        fragmentShader: "Paper-759f1ebd-20cd-4720-8d41-234e0da63716/Paper-759f1ebd-20cd-4720-8d41-234e0da63716-v10.0-fragment.glsl",
         side: 2,
         transparent: false,
         depthFunc: 2,
@@ -1495,6 +1495,7 @@ const tiltBrushMaterialParams = {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_MainTex: { value: "Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336/Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336-v10.0-MainTex.png" },
+            u_MainTex_ST: { value: new THREE.Vector4(0.5, 1.0, 0.0, 0.0) },
             u_time: { value: new THREE.Vector4() }
         },
         vertexShader: "Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336/Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336-v10.0-vertex.glsl",
@@ -2012,7 +2013,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a/MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a-v10.0-vertex.glsl",
         fragmentShader: "MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a/MylarTube-8e58ceea-7830-49b4-aba9-6215104ab52a-v10.0-fragment.glsl",
-        side: 1,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -2104,7 +2105,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "DryBrush-725f4c6a-6427-6524-29ab-da371924adab/DryBrush-725f4c6a-6427-6524-29ab-da371924adab-v10.0-vertex.glsl",
         fragmentShader: "DryBrush-725f4c6a-6427-6524-29ab-da371924adab/DryBrush-725f4c6a-6427-6524-29ab-da371924adab-v10.0-fragment.glsl",
-        side: 1,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -2131,12 +2132,14 @@ const tiltBrushMaterialParams = {
             u_GlossyReflections: { value: 1.0 },
             u_LineColor: { value: new THREE.Vector4(0.151581, 0.62766, 0.941176, 1) },
             u_MainTex: { value: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-MainTex.png" },
+            u_MainTex_ST: { value: new THREE.Vector4(1, 1, 0.0, 0.0) },
             u_Metallic: { value: 0.0 },
             u_Mode: { value: 0.0 },
             u_OcclusionStrength: { value: 1.0 },
             u_Parallax: { value: 0.02 },
             u_Ratio: { value: 0.57 },
             u_SecondaryTex: { value: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-SecondaryTex.png" },
+            u_SecondaryTex_ST: { value: new THREE.Vector4(0.3, 0.5, 0.0, 0.0) },
             u_Shininess: { value: 0.01 },
             u_SmoothnessTextureChannel: { value: 0.0 },
             u_SpecColor: { value: new THREE.Vector3(0, 0, 0) },
@@ -2149,7 +2152,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-vertex.glsl",
         fragmentShader: "LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e/LeakyPen-ddda8745-4bb5-ac54-88b6-d1480370583e-v10.0-fragment.glsl",
-        side: 1,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -2332,7 +2335,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e/TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e-v10.0-vertex.glsl",
         fragmentShader: "TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e/TaperedWire-9568870f-8594-60f4-1b20-dfbc8a5eac0e-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -2375,7 +2378,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa/SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa-v10.0-vertex.glsl",
         fragmentShader: "SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa/SquarePaper-2e03b1bf-3ebd-4609-9d7e-f4cafadc4dfa-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -2419,7 +2422,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3/ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3-v10.0-vertex.glsl",
         fragmentShader: "ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3/ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -2466,6 +2469,7 @@ const tiltBrushMaterialParams = {
             u_Glossiness: { value: 0.305 },
             u_GlossyReflections: { value: 1.0 },
             u_MainTex: { value: "Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3/Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3-v10.0-MainTex.png" },
+            u_MainTex_ST: { value: new THREE.Vector4(0.25, 1.0, 0.0, 0.0) },
             u_Metallic: { value: 0.0 },
             u_Mode: { value: 0.0 },
             u_OcclusionStrength: { value: 1.0 },
@@ -2481,7 +2485,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3/Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3-v10.0-vertex.glsl",
         fragmentShader: "Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3/Muscle-f28c395c-a57d-464b-8f0b-558c59478fa3-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -2509,6 +2513,7 @@ const tiltBrushMaterialParams = {
             u_Glossiness: { value: 0.305 },
             u_GlossyReflections: { value: 1.0 },
             u_MainTex: { value: "Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5/Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5-v10.0-MainTex.png" },
+            u_MainTex_ST: { value: new THREE.Vector4(0.15, 1.0, 0.0, 0.0) },
             u_Metallic: { value: 0.0 },
             u_Mode: { value: 0.0 },
             u_OcclusionStrength: { value: 1.0 },
@@ -2524,7 +2529,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5/Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5-v10.0-vertex.glsl",
         fragmentShader: "Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5/Guts-99aafe96-1645-44cd-99bd-979bc6ef37c5-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -2542,6 +2547,7 @@ const tiltBrushMaterialParams = {
             u_fogDensity: { value: 0 },
             u_Color: { value: new THREE.Vector4(1, 1, 1, 1) },
             u_DisplaceTex: { value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-DisplaceTex.png" },
+            u_DisplaceTex_ST: { value: new THREE.Vector4(2.45, 1.0, 0.0, 0.0) },
             u_DisplacementIntensity: { value: 0.04 },
             u_EmissionGain: { value: 0.405 },
             u_FlameFadeMax: { value: 30.0 },
@@ -2574,7 +2580,7 @@ const tiltBrushMaterialParams = {
         },
         vertexShader: "TubeToonInverted-9871385a-df73-4396-9e33-31e4e4930b27/TubeToonInverted-9871385a-df73-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
         fragmentShader: "TubeToonInverted-9871385a-df73-4396-9e33-31e4e4930b27/TubeToonInverted-9871385a-df73-4396-9e33-31e4e4930b27-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -2596,7 +2602,7 @@ const tiltBrushMaterialParams = {
         },
         vertexShader: "FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27/FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
         fragmentShader: "FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27/FacetedTube-4391ffaa-df73-4396-9e33-31e4e4930b27-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -2751,7 +2757,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9/SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9-v10.0-vertex.glsl",
         fragmentShader: "SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9/SingleSided-f0a2298a-be80-432c-9fee-a86dcc06f4f9-v10.0-fragment.glsl",
-        side: 1,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -2790,7 +2796,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454/DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454-v10.0-vertex.glsl",
         fragmentShader: "DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454/DoubleFlat-f4a0550c-332a-4e1a-9793-b71508f4a454-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -2810,7 +2816,7 @@ const tiltBrushMaterialParams = {
         },
         vertexShader: "TubeAdditive-c1c9b26d-673a-4dc6-b373-51715654ab96/TubeAdditive-c1c9b26d-673a-4dc6-b373-51715654ab96-v10.0-vertex.glsl",
         fragmentShader: "TubeAdditive-c1c9b26d-673a-4dc6-b373-51715654ab96/TubeAdditive-c1c9b26d-673a-4dc6-b373-51715654ab96-v10.0-fragment.glsl",
-        side: 1,
+        side: 0,
         transparent: true,
         depthFunc: 2,
         depthWrite: false,
@@ -2875,7 +2881,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-vertex.glsl",
         fragmentShader: "DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664/DuctTapeGeometry-84d5bbb2-6634-8434-f8a7-681b576b4664-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -2959,7 +2965,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c/Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c-v10.0-vertex.glsl",
         fragmentShader: "Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c/Lacewing-1cf94f63-f57a-4a1a-ad14-295af4f5ab5c-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -3005,7 +3011,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1/Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1-v10.0-vertex.glsl",
         fragmentShader: "Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1/Marbled Rainbow-c86c058d-1bda-2e94-08db-f3d6a96ac4a1-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -3048,7 +3054,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-vertex.glsl",
         fragmentShader: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -3089,7 +3095,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf/KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf-v10.0-vertex.glsl",
         fragmentShader: "KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf/KeijiroTube-f8ba3d18-01fc-4d7b-b2d9-b99d10b8e7cf-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -3109,7 +3115,7 @@ const tiltBrushMaterialParams = {
         },
         vertexShader: "Lofted (Hue Shift)-c5da2e70-a6e4-63a4-898c-5cfedef09c97/Lofted (Hue Shift)-c5da2e70-a6e4-63a4-898c-5cfedef09c97-v10.0-vertex.glsl",
         fragmentShader: "Lofted (Hue Shift)-c5da2e70-a6e4-63a4-898c-5cfedef09c97/Lofted (Hue Shift)-c5da2e70-a6e4-63a4-898c-5cfedef09c97-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -3150,7 +3156,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "Wire (Lit)-62fef968-e842-3224-4a0e-1fdb7cfb745c/Wire (Lit)-62fef968-e842-3224-4a0e-1fdb7cfb745c-v10.0-vertex.glsl",
         fragmentShader: "Wire (Lit)-62fef968-e842-3224-4a0e-1fdb7cfb745c/Wire (Lit)-62fef968-e842-3224-4a0e-1fdb7cfb745c-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -3275,7 +3281,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b/SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b-v10.0-vertex.glsl",
         fragmentShader: "SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b/SmoothHull-355b3579-bf1d-4ff5-a200-704437fe684b-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -3319,7 +3325,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95/Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95-v10.0-vertex.glsl",
         fragmentShader: "Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95/Leaves2-7259cce5-41c1-ec74-c885-78af28a31d95-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -3363,7 +3369,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb/InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb-v10.0-vertex.glsl",
         fragmentShader: "InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb/InkGeometry-7c972c27-d3c2-8af4-7bf8-5d9db8f0b7bb-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -3389,7 +3395,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6/ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6-v10.0-vertex.glsl",
         fragmentShader: "ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6/ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -3410,7 +3416,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "3D Printing Brush-d3f3b18a-da03-f694-b838-28ba8e749a98/3D Printing Brush-d3f3b18a-da03-f694-b838-28ba8e749a98-v10.0-vertex.glsl",
         fragmentShader: "3D Printing Brush-d3f3b18a-da03-f694-b838-28ba8e749a98/3D Printing Brush-d3f3b18a-da03-f694-b838-28ba8e749a98-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
@@ -3456,7 +3462,7 @@ const tiltBrushMaterialParams = {
         isSurfaceShader: true,
         vertexShader: "PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac/PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac-v10.0-vertex.glsl",
         fragmentShader: "PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac/PassthroughHull-cc131ff8-0d17-4677-93e0-d7cd19fea9ac-v10.0-fragment.glsl",
-        side: 1, // TODO
+        side: 0, // TODO
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO

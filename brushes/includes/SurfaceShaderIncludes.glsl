@@ -28,11 +28,13 @@ vec3 UnpackNormal(vec3 normalMapSample) {
     return normalize(normalMapSample * 2.0 - 1.0);
 }
 
-// Convert normal from tangent space to world space
-vec3 PerturbNormal(vec3 position, vec3 normal, vec2 uv) {
-    // Handle face orientation first - flip base normal for back faces
+// Convert normal from tangent space to view space using proper tangent vectors
+vec3 PerturbNormal(vec3 tangent, vec3 bitangent, vec3 normal, vec2 uv) {
+    // Handle face orientation first - flip vectors for back faces
     if (!gl_FrontFacing) {
         normal = -normal;
+        tangent = -tangent;
+        bitangent = -bitangent;
     }
     
     // Sample the normal map
@@ -46,11 +48,14 @@ vec3 PerturbNormal(vec3 position, vec3 normal, vec2 uv) {
     // Unpack from [0,1] to [-1,1] range
     vec3 tangentNormal = UnpackNormal(normalMapSample);
     
-    // For now, we'll use a simplified approach since we don't have tangent vectors
-    // This assumes the normal map is relatively aligned with the surface normal
-    vec3 perturbedNormal = normalize(normal + tangentNormal * 0.3);
+    // Fix Y-axis direction to account for flipY = false in texture loading
+    tangentNormal.y = -tangentNormal.y;
     
-    return perturbedNormal;
+    // Build TBN matrix from mesh tangent vectors (more accurate than derivatives)
+    mat3 TBN = mat3(normalize(tangent), normalize(bitangent), normalize(normal));
+    
+    // Transform tangent-space normal to view space
+    return normalize(TBN * tangentNormal);
 }
 
 // =============================================================================

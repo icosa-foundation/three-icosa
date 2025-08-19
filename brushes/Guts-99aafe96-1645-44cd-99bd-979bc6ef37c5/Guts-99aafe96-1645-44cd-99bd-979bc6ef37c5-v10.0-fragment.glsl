@@ -26,6 +26,8 @@ uniform sampler2D u_MainTex;
 
 in vec4 v_color;
 in vec3 v_normal;
+in vec3 v_tangent;
+in vec3 v_bitangent;
 in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
@@ -49,9 +51,9 @@ void main() {
     float brush_mask = texture(u_MainTex, v_texcoord0).w;
     brush_mask *= v_color.w;
 
-    // Now using fixed normal map unpacking instead of derivative-based height mapping
-    vec3 normal = PerturbNormal(v_position, normalize(v_normal), v_texcoord0);
-    fragColor.rgb = ApplyFog(computeLighting(normalize(v_normal)), f_fog_coord);
+    // Now using proper tangent vectors instead of derivative-based calculation
+    vec3 normal = PerturbNormal(v_tangent, v_bitangent, v_normal, v_texcoord0);
+    fragColor.rgb = ApplyFog(computeLighting(normal), f_fog_coord);
     fragColor.a = 1.0;
     if (brush_mask <= u_Cutoff) {
         discard;

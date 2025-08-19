@@ -31,6 +31,8 @@ uniform sampler2D u_MainTex;
 
 in vec4 v_color;
 in vec3 v_normal;
+in vec3 v_tangent;
+in vec3 v_bitangent;
 in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
@@ -92,7 +94,7 @@ void main() {
   brush_mask *= v_color.w;
 
   // WARNING: PerturbNormal uses derivatives and must not be called conditionally.
-  vec3 normal = PerturbNormal(v_position, normalize(v_normal), v_texcoord0);
+  vec3 normal = PerturbNormal(v_tangent, v_bitangent, v_normal, v_texcoord0);
 
     // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below,
     // causing issues on some hardware/drivers. So we compute lighting just to discard it later.
@@ -104,3 +106,4 @@ void main() {
 	  discard;
   }
 }
+

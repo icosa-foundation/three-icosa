@@ -29,6 +29,8 @@ uniform sampler2D u_SpecTex;
 
 in vec4 v_color;
 in vec3 v_normal;
+in vec3 v_tangent;
+in vec3 v_bitangent;
 in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
@@ -58,8 +60,8 @@ void main() {
     vec4 specTex = texture(u_SpecTex, v_texcoord0);
     vec3 normal = normalize(v_normal);
     
-    // Sample bump map and perturb normal - now using fixed normal map unpacking
-    vec3 bumpNormal = PerturbNormal(v_position.xyz, normal, v_texcoord0);
+    // Sample bump map and perturb normal - now using proper tangent vectors
+    vec3 bumpNormal = PerturbNormal(v_tangent, v_bitangent, normal, v_texcoord0);
     
     // Surface properties
     vec3 albedo = mainTex.rgb * v_color.rgb;
@@ -88,3 +90,4 @@ void main() {
         discard;
     }
 }
+

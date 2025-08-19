@@ -32,6 +32,8 @@ uniform vec4 u_time;
 
 in vec4 v_color;
 in vec3 v_normal;
+in vec3 v_tangent;
+in vec3 v_bitangent;
 in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
@@ -78,7 +80,7 @@ void main() {
     vec3 normal = normalize(v_normal);
     
     // Sample bump map and perturb normal
-    vec3 bumpNormal = PerturbNormal(v_position.xyz, normal, v_texcoord0);
+    vec3 bumpNormal = PerturbNormal(v_tangent, v_bitangent, normal, v_texcoord0);
     
     float scroll = u_time.z;
     
@@ -115,3 +117,4 @@ void main() {
         discard;
     }
 }
+

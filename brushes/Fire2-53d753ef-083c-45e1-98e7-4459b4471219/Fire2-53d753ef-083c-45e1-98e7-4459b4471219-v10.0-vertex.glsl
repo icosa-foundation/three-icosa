@@ -16,6 +16,7 @@
 in vec4 a_position;
 in vec4 a_color;
 in vec2 a_texcoord0;
+in vec4 a_tangent;
 
 out vec4 v_color;
 out vec2 v_texcoord0;
@@ -24,10 +25,11 @@ out vec4 v_worldPos;
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
 uniform mat4 modelMatrix;
+uniform vec4 u_MainTex_ST; // xy: tiling, zw: offset
 
 void main() {
   gl_Position = projectionMatrix * modelViewMatrix * a_position;
   v_worldPos = modelMatrix * a_position;
   v_color = a_color;
-  v_texcoord0 = a_texcoord0;
+  v_texcoord0 = a_texcoord0 * u_MainTex_ST.xy + u_MainTex_ST.zw;
 }

@@ -22,10 +22,13 @@ in vec4 a_position;
 in vec3 a_normal;
 in vec4 a_color;
 in vec2 a_texcoord0;
+in vec4 a_tangent;
 in vec4 a_texcoord1;
 
 out vec4 v_color;
 out vec3 v_normal;  // Camera-space normal.
+out vec3 v_tangent;  // Camera-space tangent.
+out vec3 v_bitangent;  // Camera-space bitangent.
 out vec3 v_position;  // Camera-space position.
 out vec2 v_texcoord0;
 out vec3 v_light_dir_0;  // Camera-space light direction, main light.
@@ -50,7 +53,16 @@ void main() {
   worldPos.xyz = ceil(worldPos.xyz * q) / q;
 
   gl_Position = projectionMatrix * viewMatrix * worldPos;
-  v_normal = normalMatrix * a_normal;
+  // Transform normal and tangent to view space
+  vec3 normal = normalize(normalMatrix * a_normal);
+  vec3 tangent = normalize(normalMatrix * a_tangent.xyz);
+  
+  // Compute bitangent using cross product and handedness
+  vec3 bitangent = cross(normal, tangent) * a_tangent.w;
+  
+  v_normal = normal;
+  v_tangent = tangent;
+  v_bitangent = bitangent;
   v_position = gl_Position.xyz;
   v_light_dir_0 = u_SceneLight_0_matrix[2].xyz;
   v_light_dir_1 = u_SceneLight_1_matrix[2].xyz;

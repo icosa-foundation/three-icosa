@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Auto-copied from Paper-759f1ebd-20cd-4720-8d41-234e0da63716-v10.0-fragment.glsl
 // Brush-specific shader for GlTF web preview, based on General generator
 // with parameters lit=1, a=0.5.
 
@@ -31,6 +32,8 @@ uniform sampler2D u_MainTex;
 
 in vec4 v_color;
 in vec3 v_normal;
+in vec3 v_tangent;
+in vec3 v_bitangent;
 in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
@@ -116,7 +119,7 @@ void main() {
   brush_mask *= v_color.w;
 
   // WARNING: PerturbNormal uses derivatives and must not be called conditionally.
-  vec3 normal = PerturbNormal(v_position, normalize(v_normal), v_texcoord0);
+  vec3 normal = PerturbNormal(v_tangent, v_bitangent, v_normal, v_texcoord0);
 
   // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below, 
   // causing issues on some hardware/drivers. So we compute lighting just to discard it later.
@@ -128,3 +131,4 @@ void main() {
     discard;
   }
 }
+
