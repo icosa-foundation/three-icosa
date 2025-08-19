@@ -12,51 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// DefaultVS.glsl
-in vec4 a_position;
-in vec3 a_normal;
-in vec4 a_color;
-in vec2 a_texcoord0;
+in vec3 position;
+in vec3 color;
 
 out vec4 v_color;
-out vec3 v_normal;    // Camera-space normal.
-out vec3 v_tangent;   // Camera-space tangent.
-out vec3 v_bitangent; // Camera-space bitangent.
-out vec3 v_position;  // Camera-space position.
-out vec2 v_texcoord0;
-out vec3 v_light_dir_0;  // Camera-space light direction, main light.
-out vec3 v_light_dir_1;  // Camera-space light direction, other light.
-out float f_fog_coord;
+out vec3 v_position;  // Camera-space position for derivatives
+out vec3 v_light_dir_0;
+out vec3 v_light_dir_1;
 
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
-uniform mat3 normalMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
 
 void main() {
-  gl_Position = projectionMatrix * modelViewMatrix * a_position;
-  f_fog_coord = gl_Position.z;
-  
-  // Transform normal to view space
-  vec3 normal = normalize(normalMatrix * a_normal);
-  v_normal = normal;
-  
-  // Since geometry doesn't have tangent data, compute tangent and bitangent
-  // using screen-space derivatives in fragment shader approach
-  // For now, create a basic tangent space from the normal
-  vec3 tangent = vec3(1.0, 0.0, 0.0);
-  if (abs(normal.x) > 0.9) {
-    tangent = vec3(0.0, 1.0, 0.0);
-  }
-  tangent = normalize(tangent - normal * dot(tangent, normal));
-  vec3 bitangent = cross(normal, tangent);
-  
-  v_tangent = normalize(normalMatrix * tangent);
-  v_bitangent = normalize(normalMatrix * bitangent);
-  v_position = (modelViewMatrix * a_position).xyz;
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  v_position = (modelViewMatrix * vec4(position, 1.0)).xyz;
   v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
-  v_color = a_color;
-  v_texcoord0 = a_texcoord0;
+  v_color = vec4(color, 1.0);
 }

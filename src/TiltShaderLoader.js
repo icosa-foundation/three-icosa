@@ -2246,7 +2246,6 @@ const tiltBrushMaterialParams = {
         blending: 2
     },
     "Rising Bubbles" : {
-      // TODO Uniforms and name fix: RisingTODO Uniforms: Bubbles
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -2547,13 +2546,13 @@ const tiltBrushMaterialParams = {
             u_fogDensity: { value: 0 },
             u_Color: { value: new THREE.Vector4(1, 1, 1, 1) },
             u_DisplaceTex: { value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-DisplaceTex.png" },
-            u_DisplaceTex_ST: { value: new THREE.Vector4(2.45, 1.0, 0.0, 0.0) },
             u_DisplacementIntensity: { value: 0.04 },
             u_EmissionGain: { value: 0.405 },
             u_FlameFadeMax: { value: 30.0 },
             u_FlameFadeMin: { value: 8.53 },
             u_InvFade: { value: 1.0 },
             u_MainTex: { value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-MainTex.png" },
+            u_MainTex_ST: { value: new THREE.Vector4(1, 1.0, 0.0, 0.0) },
             u_Scroll1: { value: 15.0 },
             u_Scroll2: { value: 8.0 },
             u_TintColor: { value: new THREE.Vector4(0.617647, 0.617647, 0.617647, 1) },
@@ -2973,7 +2972,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Marbled Rainbow" : {
-      // TODO Uniforms and name fix: Marbled Rainbow
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -3103,7 +3101,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Lofted (Hue Shift)" : {
-      // TODO Uniforms and name fix: Lofted (Hue Shift)
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -3123,7 +3120,6 @@ const tiltBrushMaterialParams = {
         blending: 0,
     },
     "Wire (Lit)" : {
-      // TODO Uniforms and name fix: Wire (Lit)
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -3403,7 +3399,6 @@ const tiltBrushMaterialParams = {
         blending: 0
     },
     "3D Printing Brush" : {
-      // TODO Uniforms and name fix: 3D Printing Brush
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },

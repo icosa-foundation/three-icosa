@@ -174,8 +174,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
     async replaceMaterial(mesh, guidOrName) {
 
         let renameAttribute = (mesh, oldName, newName) => {
-            if (mesh.geometry.getAttribute(oldName)) {
-                mesh.geometry.setAttribute(newName, mesh.geometry.getAttribute(oldName));
+            const attr = mesh.geometry.getAttribute(oldName);
+            if (attr) {
+                mesh.geometry.setAttribute(newName, attr);
                 mesh.geometry.deleteAttribute(oldName);
             }
         };
@@ -1460,7 +1461,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.geometry.name = "geometry_Rising Bubbles";
 
                 setAttributeIfExists(mesh, "position", "a_position");
-                setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -1497,7 +1497,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
-                setAttributeIfExists(mesh, "tangent", "a_tangent");
+                // TODO Generate tangents?
+                // setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -1795,6 +1796,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
+
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -1919,6 +1922,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -1936,6 +1940,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -1985,11 +1990,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
-                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
-                setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("SmoothHull");
@@ -2003,6 +2006,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -2020,6 +2024,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -2037,11 +2042,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
-                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
-                setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("ConcaveHull");
@@ -2053,11 +2056,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             case "3D Printing Brush":
                 mesh.geometry.name = "geometry_3D Printing Brush";
 
-                setAttributeIfExists(mesh, "position", "a_position");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
-                setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("3D Printing Brush");

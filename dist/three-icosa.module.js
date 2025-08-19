@@ -60,8 +60,10 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
     }
     async load(brushName, onLoad, onProgress, onError) {
         const scope = this;
+        console.log("TiltShaderLoader: Loading brush:", brushName);
         const isAlreadyLoaded = this.loadedMaterials[brushName];
         if (isAlreadyLoaded !== undefined) {
+            console.log("TiltShaderLoader: Brush already loaded:", brushName);
             onLoad(scope.parse(isAlreadyLoaded));
             return;
         }
@@ -146,7 +148,15 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
         for(var lightType in $fugmd$UniformsLib.lights)materialParams.uniforms[lightType] = $fugmd$UniformsLib.lights[lightType];
         for(var fogType in $fugmd$UniformsLib.fog)materialParams.uniforms[fogType] = $fugmd$UniformsLib.fog[fogType];
         let rawMaterial = new $fugmd$RawShaderMaterial(materialParams);
+        // Add error checking for shader compilation
+        rawMaterial.onBeforeCompile = (shader)=>{
+            console.log(`Compiling shader for ${brushName}`);
+        };
+        rawMaterial.addEventListener("dispose", ()=>{
+            console.log(`Disposed shader for ${brushName}`);
+        });
         this.loadedMaterials[brushName] = rawMaterial;
+        console.log(`Created material for ${brushName}:`, rawMaterial);
         onLoad(scope.parse(rawMaterial));
     }
     parse(rawMaterial) {
@@ -1579,8 +1589,8 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             }
         },
         isSurfaceShader: true,
-        vertexShader: "DuctTape-d0262945-853c-4481-9cbd-88586bed93cb/DuctTape-d0262945-853c-4481-9cbd-88586bed93cb-v10.0-vertex.glsl",
-        fragmentShader: "DuctTape-d0262945-853c-4481-9cbd-88586bed93cb/DuctTape-d0262945-853c-4481-9cbd-88586bed93cb-v10.0-fragment.glsl",
+        vertexShader: "DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1/DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1-v10.0-vertex.glsl",
+        fragmentShader: "DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1/DuctTape-3ca16e2f-bdcd-4da2-8631-dcef342f40f1-v10.0-fragment.glsl",
         side: 2,
         transparent: false,
         depthFunc: 2,
@@ -2310,8 +2320,8 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             }
         },
         isSurfaceShader: true,
-        vertexShader: "Ink-f5c336cf-5108-4b40-ade9-c687504385ab/Ink-f5c336cf-5108-4b40-ade9-c687504385ab-v10.0-vertex.glsl",
-        fragmentShader: "Ink-f5c336cf-5108-4b40-ade9-c687504385ab/Ink-f5c336cf-5108-4b40-ade9-c687504385ab-v10.0-fragment.glsl",
+        vertexShader: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment-v10.0-vertex.glsl",
+        fragmentShader: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment-v10.0-fragment.glsl",
         side: 2,
         transparent: false,
         depthFunc: 2,
@@ -2986,8 +2996,8 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             }
         },
         isSurfaceShader: true,
-        vertexShader: "Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5/Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5-v10.0-vertex.glsl",
-        fragmentShader: "Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5/Paper-f1114e2e-eb8d-4fde-915a-6e653b54e9f5-v10.0-fragment.glsl",
+        vertexShader: "Paper-759f1ebd-20cd-4720-8d41-234e0da63716/Paper-759f1ebd-20cd-4720-8d41-234e0da63716-v10.0-vertex.glsl",
+        fragmentShader: "Paper-759f1ebd-20cd-4720-8d41-234e0da63716/Paper-759f1ebd-20cd-4720-8d41-234e0da63716-v10.0-fragment.glsl",
         side: 2,
         transparent: false,
         depthFunc: 2,
@@ -5641,7 +5651,6 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         blending: 2
     },
     "Rising Bubbles": {
-        // TODO Uniforms and name fix: RisingTODO Uniforms: Bubbles
         uniforms: {
             u_SceneLight_0_matrix: {
                 value: [
@@ -6634,9 +6643,6 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_DisplaceTex: {
                 value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-DisplaceTex.png"
             },
-            u_DisplaceTex_ST: {
-                value: new $fugmd$Vector4(2.45, 1.0, 0.0, 0.0)
-            },
             u_DisplacementIntensity: {
                 value: 0.04
             },
@@ -6654,6 +6660,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_MainTex: {
                 value: "Fire2-53d753ef-083c-45e1-98e7-4459b4471219/Fire2-53d753ef-083c-45e1-98e7-4459b4471219-v10.0-MainTex.png"
+            },
+            u_MainTex_ST: {
+                value: new $fugmd$Vector4(1, 1.0, 0.0, 0.0)
             },
             u_Scroll1: {
                 value: 15.0
@@ -8024,7 +8033,6 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         blending: 0
     },
     "Marbled Rainbow": {
-        // TODO Uniforms and name fix: Marbled Rainbow
         uniforms: {
             u_SceneLight_0_matrix: {
                 value: [
@@ -8436,7 +8444,6 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         blending: 0
     },
     "Lofted (Hue Shift)": {
-        // TODO Uniforms and name fix: Lofted (Hue Shift)
         uniforms: {
             u_SceneLight_0_matrix: {
                 value: [
@@ -8504,7 +8511,6 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         blending: 0
     },
     "Wire (Lit)": {
-        // TODO Uniforms and name fix: Wire (Lit)
         uniforms: {
             u_SceneLight_0_matrix: {
                 value: [
@@ -9412,7 +9418,6 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         blending: 0
     },
     "3D Printing Brush": {
-        // TODO Uniforms and name fix: 3D Printing Brush
         uniforms: {
             u_SceneLight_0_matrix: {
                 value: [
@@ -9742,9 +9747,20 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
         return isTiltGltf;
     }
     async replaceMaterial(mesh, guidOrName) {
+        if (guidOrName === "3D Printing Brush" || guidOrName === "d3f3b18a-da03-f694-b838-28ba8e749a98") {
+            console.log("3D Printing Brush mesh geometry check:");
+            console.log("- Vertex count:", mesh.geometry.getAttribute("position")?.count || 0);
+            console.log("- Has normals:", !!mesh.geometry.getAttribute("normal"));
+            console.log("- Has colors:", !!mesh.geometry.getAttribute("color"));
+            console.log("- Has UV:", !!mesh.geometry.getAttribute("uv"));
+            console.log("- All attributes:", Object.keys(mesh.geometry.attributes));
+            console.log("- Material will be:", guidOrName);
+            console.log("- Mesh name:", mesh.name);
+        }
         let renameAttribute = (mesh, oldName, newName)=>{
-            if (mesh.geometry.getAttribute(oldName)) {
-                mesh.geometry.setAttribute(newName, mesh.geometry.getAttribute(oldName));
+            const attr = mesh.geometry.getAttribute(oldName);
+            if (attr) {
+                mesh.geometry.setAttribute(newName, attr);
                 mesh.geometry.deleteAttribute(oldName);
             }
         };
@@ -10871,7 +10887,6 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
             case "Rising Bubbles":
                 mesh.geometry.name = "geometry_Rising Bubbles";
                 setAttributeIfExists(mesh, "position", "a_position");
-                setAttributeIfExists(mesh, "normal", "a_normal");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -10904,7 +10919,8 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 mesh.geometry.name = "geometry_SquarePaper";
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
-                setAttributeIfExists(mesh, "tangent", "a_tangent");
+                // TODO Generate tangents?
+                // setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -11163,6 +11179,7 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 mesh.geometry.name = "geometry_DuctTapeGeometry";
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -11273,6 +11290,7 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 mesh.geometry.name = "geometry_Wire (Lit)";
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -11288,6 +11306,7 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 mesh.geometry.name = "geometry_WaveformFFT";
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -11331,11 +11350,9 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 mesh.geometry.name = "geometry_SmoothHull";
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
-                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
-                setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("SmoothHull");
@@ -11347,6 +11364,7 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 mesh.geometry.name = "geometry_Leaves2";
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -11362,6 +11380,7 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 mesh.geometry.name = "geometry_InkGeometry";
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -11377,11 +11396,9 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 mesh.geometry.name = "geometry_ConcaveHull";
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
-                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
-                setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("ConcaveHull");
@@ -11391,11 +11408,9 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
             case "d3f3b18a-da03-f694-b838-28ba8e749a98":
             case "3D Printing Brush":
                 mesh.geometry.name = "geometry_3D Printing Brush";
-                setAttributeIfExists(mesh, "position", "a_position");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
-                setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("3D Printing Brush");
