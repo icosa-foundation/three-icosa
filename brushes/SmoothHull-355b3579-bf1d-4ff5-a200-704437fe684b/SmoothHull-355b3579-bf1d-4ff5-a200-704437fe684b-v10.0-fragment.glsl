@@ -28,8 +28,6 @@ uniform sampler2D u_MainTex;
 
 in vec4 v_color;
 in vec3 v_normal;
-in vec3 v_tangent;
-in vec3 v_bitangent;
 in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;

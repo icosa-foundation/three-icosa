@@ -54,16 +54,18 @@ vec3 computeLighting(vec3 normal) {
 }
 
 void main() {
-    float brush_mask = texture(u_MainTex, v_texcoord0).w;
-    brush_mask *= v_color.w;
+//    // Approximate tangent in fragment shader
+//    vec3 dp1 = dFdx(v_position);
+//    vec3 dp2 = dFdy(v_position);
+//    vec2 duv1 = dFdx(v_texcoord0);
+//    vec2 duv2 = dFdy(v_texcoord0);
+//
+//    float r = 1.0 / (duv1.x * duv2.y - duv2.x * duv1.y);
+//    vec3 tangent = normalize((dp1 * duv2.y - dp2 * duv1.y) * r);
+//    vec3 bitangent = normalize((dp2 * duv1.x - dp1 * duv2.x) * r);
 
-    // Now using fixed normal map unpacking instead of derivative-based height mapping
-    vec3 normal = PerturbNormal(v_tangent, v_bitangent, v_normal, v_texcoord0);
+    vec3 normal = v_normal;
     fragColor.rgb = ApplyFog(computeLighting(normal), f_fog_coord);
     fragColor.a = 1.0;
-
-    if (brush_mask <= u_Cutoff) {
-        discard;
-    }
 }
 
