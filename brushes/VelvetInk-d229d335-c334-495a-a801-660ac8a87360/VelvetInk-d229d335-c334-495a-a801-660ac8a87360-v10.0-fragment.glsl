@@ -23,6 +23,8 @@ out vec4 fragColor;
 in vec4 v_color;
 in vec3 v_position;
 in vec2 v_texcoord0;
+in float f_fog_coord;
+
 uniform sampler2D u_MainTex;
 
 // Copyright 2020 The Tilt Brush Authors
@@ -42,6 +44,6 @@ uniform sampler2D u_MainTex;
 
 void main() {
   vec4 brush_tex = texture(u_MainTex, v_texcoord0);
-  fragColor.rgb = ApplyFog(brush_tex.a * v_color.rgb);
+  fragColor.rgb = ApplyFog(brush_tex.a * v_color.rgb, f_fog_coord);
   fragColor.a = 1.0;
 }

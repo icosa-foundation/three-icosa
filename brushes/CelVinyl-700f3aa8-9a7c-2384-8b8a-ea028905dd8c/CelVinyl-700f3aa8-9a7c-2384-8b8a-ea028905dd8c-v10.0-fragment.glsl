@@ -26,6 +26,7 @@ uniform sampler2D u_MainTex;
 in vec4 v_color;
 in vec3 v_position;
 in vec2 v_texcoord0;
+in float f_fog_coord;
 
 float dispAmount = .0025;
 
@@ -51,6 +52,6 @@ void main() {
 	  discard;
   }
 
-  fragColor.rgb = ApplyFog(tex.rgb);
+  fragColor.rgb = ApplyFog(tex.rgb, f_fog_coord);
   fragColor.a = 1.0;
 }

@@ -29,6 +29,7 @@ in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;
+in float f_fog_coord;
 
 // Copyright 2020 The Tilt Brush Authors
 //
@@ -78,6 +79,6 @@ void main() {
   vec3 diffuseColor = vec3(0.0,0.0,0.0);
   vec3 specularColor = v_color.rgb * u_SpecColor;
 
-  fragColor.rgb = ApplyFog(computeLighting(diffuseColor, specularColor));
+  fragColor.rgb = ApplyFog(computeLighting(diffuseColor, specularColor), f_fog_coord);
   fragColor.a = 1.0;
 }

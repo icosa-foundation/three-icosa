@@ -978,7 +978,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
-                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -1516,6 +1515,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
 
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
+
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");

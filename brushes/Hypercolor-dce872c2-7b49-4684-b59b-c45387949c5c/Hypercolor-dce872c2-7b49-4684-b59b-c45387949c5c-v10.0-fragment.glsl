@@ -36,6 +36,7 @@ in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;
+in float f_fog_coord;
 
 uniform sampler2D u_MainTex;
 uniform vec4 u_time;
@@ -132,7 +133,7 @@ void main() {
   float colorMultiplier = 0.5; // This factor is glsl specific - not exactly sure why I need to fudge this to match the look in Tilt Brush.
   vec3 specularColor = u_SpecColor * tex.rgb * colorMultiplier;
   vec3 diffuseColor = tex.rgb * v_color.rgb * colorMultiplier;
-  fragColor.rgb = ApplyFog(computeLighting(diffuseColor, specularColor, normal));
+  fragColor.rgb = ApplyFog(computeLighting(diffuseColor, specularColor, normal), f_fog_coord);
   fragColor.a = 1.0;
 
   // This must come last to ensure PerturbNormal is called uniformly for all invocations.

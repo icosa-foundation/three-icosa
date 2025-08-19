@@ -20,6 +20,7 @@ out vec4 fragColor;
 in vec4 v_color;
 in vec2 v_texcoord0;
 in vec3 v_position;
+in float f_fog_coord;
 
 // Copyright 2020 The Tilt Brush Authors
 //

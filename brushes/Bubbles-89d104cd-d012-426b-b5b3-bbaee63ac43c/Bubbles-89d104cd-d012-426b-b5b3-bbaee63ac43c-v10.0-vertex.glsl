@@ -21,8 +21,6 @@ in vec4 a_texcoord1;
 
 out vec4 v_color;
 out vec3 v_normal;  // Camera-space normal.
-out vec3 v_tangent;  // Camera-space tangent.
-out vec3 v_bitangent;  // Camera-space bitangent.
 out vec3 v_position;  // Camera-space position.
 out vec2 v_texcoord0;
 out vec3 v_light_dir_0;  // Camera-space light direction, main light.
@@ -112,16 +110,7 @@ void main() {
   vec4 pos = GetParticlePositionLS();
 
   gl_Position = projectionMatrix * modelViewMatrix * pos;
-  // Transform normal and tangent to view space
-  vec3 normal = normalize(normalMatrix * a_normal);
-  vec3 tangent = normalize(normalMatrix * a_tangent.xyz);
-  
-  // Compute bitangent using cross product and handedness
-  vec3 bitangent = cross(normal, tangent) * a_tangent.w;
-  
-  v_normal = normal;
-  v_tangent = tangent;
-  v_bitangent = bitangent;
+  v_normal = normalize(normalMatrix * a_normal);
   v_position = (modelViewMatrix * pos).xyz;
   v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);

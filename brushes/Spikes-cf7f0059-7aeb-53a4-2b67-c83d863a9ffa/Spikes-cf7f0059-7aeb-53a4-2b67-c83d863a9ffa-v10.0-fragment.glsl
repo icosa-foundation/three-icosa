@@ -34,9 +34,9 @@ in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;
+in float f_fog_coord;
 
-vec3 computeLighting() {
-  vec3 normal = normalize(v_normal);
+vec3 computeLighting(vec3 normal) {
   if (!gl_FrontFacing) {
     // Always use front-facing normal for double-sided surfaces.
     normal *= -1.0;

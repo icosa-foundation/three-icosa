@@ -60,10 +60,8 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
     }
     async load(brushName, onLoad, onProgress, onError) {
         const scope = this;
-        console.log("TiltShaderLoader: Loading brush:", brushName);
         const isAlreadyLoaded = this.loadedMaterials[brushName];
         if (isAlreadyLoaded !== undefined) {
-            console.log("TiltShaderLoader: Brush already loaded:", brushName);
             onLoad(scope.parse(isAlreadyLoaded));
             return;
         }
@@ -148,15 +146,7 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
         for(var lightType in $fugmd$UniformsLib.lights)materialParams.uniforms[lightType] = $fugmd$UniformsLib.lights[lightType];
         for(var fogType in $fugmd$UniformsLib.fog)materialParams.uniforms[fogType] = $fugmd$UniformsLib.fog[fogType];
         let rawMaterial = new $fugmd$RawShaderMaterial(materialParams);
-        // Add error checking for shader compilation
-        rawMaterial.onBeforeCompile = (shader)=>{
-            console.log(`Compiling shader for ${brushName}`);
-        };
-        rawMaterial.addEventListener("dispose", ()=>{
-            console.log(`Disposed shader for ${brushName}`);
-        });
         this.loadedMaterials[brushName] = rawMaterial;
-        console.log(`Created material for ${brushName}:`, rawMaterial);
         onLoad(scope.parse(rawMaterial));
     }
     parse(rawMaterial) {
@@ -1245,6 +1235,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                 value: 0
             }
         },
+        isSurfaceShader: true,
         vertexShader: "Disco-4391aaaa-df73-4396-9e33-31e4e4930b27/Disco-4391aaaa-df73-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
         fragmentShader: "Disco-4391aaaa-df73-4396-9e33-31e4e4930b27/Disco-4391aaaa-df73-4396-9e33-31e4e4930b27-v10.0-fragment.glsl",
         side: 2,
@@ -2320,8 +2311,8 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             }
         },
         isSurfaceShader: true,
-        vertexShader: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment-v10.0-vertex.glsl",
-        fragmentShader: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment-v10.0-fragment.glsl",
+        vertexShader: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-vertex.glsl",
+        fragmentShader: "Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa/Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment.glsl",
         side: 2,
         transparent: false,
         depthFunc: 2,
@@ -3724,6 +3715,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                 value: 0
             }
         },
+        isSurfaceShader: true,
         vertexShader: "Splatter-7a1c8107-50c5-4b70-9a39-421576d6617e/Splatter-7a1c8107-50c5-4b70-9a39-421576d6617e-v10.0-vertex.glsl",
         fragmentShader: "Splatter-7a1c8107-50c5-4b70-9a39-421576d6617e/Splatter-7a1c8107-50c5-4b70-9a39-421576d6617e-v10.0-fragment.glsl",
         side: 2,
@@ -6144,6 +6136,18 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_SceneLight_1_color: {
                 value: new $fugmd$Vector4(0.4282, 0.4212, 0.3459, 1)
             },
+            u_SpecColor: {
+                value: new $fugmd$Vector3(0.5372549, 0.5372549, 0.5372549)
+            },
+            u_Shininess: {
+                value: 0.414
+            },
+            u_MainTex: {
+                value: "ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3/ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3-v10.0-MainTex.png"
+            },
+            u_Cutoff: {
+                value: 0.2
+            },
             u_fogColor: {
                 value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
@@ -6155,72 +6159,6 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_BumpMap_TexelSize: {
                 value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
-            },
-            u_BumpScale: {
-                value: 1.0
-            },
-            u_Color: {
-                value: new $fugmd$Vector4(0.705882, 0.705882, 0.705882, 1)
-            },
-            u_Cutoff: {
-                value: 0.2
-            },
-            u_DetailNormalMapScale: {
-                value: 1.0
-            },
-            u_DstBlend: {
-                value: 0.0
-            },
-            u_EmissionColor: {
-                value: new $fugmd$Vector4(0, 0, 0, 1)
-            },
-            u_GlossMapScale: {
-                value: 1.0
-            },
-            u_Glossiness: {
-                value: 0.5
-            },
-            u_GlossyReflections: {
-                value: 1.0
-            },
-            u_MainTex: {
-                value: "ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3/ThickGeometry-39ee7377-7a9e-47a7-a0f8-0c77712f75d3-v10.0-MainTex.png"
-            },
-            u_Metallic: {
-                value: 0.0
-            },
-            u_Mode: {
-                value: 0.0
-            },
-            u_OcclusionStrength: {
-                value: 1.0
-            },
-            u_Parallax: {
-                value: 0.02
-            },
-            u_SelectionEdging: {
-                value: 1.0
-            },
-            u_Shininess: {
-                value: 0.414
-            },
-            u_SmoothnessTextureChannel: {
-                value: 0.0
-            },
-            u_SpecColor: {
-                value: new $fugmd$Vector3(0.537255, 0.537255, 0.537255)
-            },
-            u_SpecularHighlights: {
-                value: 1.0
-            },
-            u_SrcBlend: {
-                value: 1.0
-            },
-            u_UVSec: {
-                value: 0.0
-            },
-            u_ZWrite: {
-                value: 1.0
             }
         },
         isSurfaceShader: true,
@@ -9747,16 +9685,6 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
         return isTiltGltf;
     }
     async replaceMaterial(mesh, guidOrName) {
-        if (guidOrName === "3D Printing Brush" || guidOrName === "d3f3b18a-da03-f694-b838-28ba8e749a98") {
-            console.log("3D Printing Brush mesh geometry check:");
-            console.log("- Vertex count:", mesh.geometry.getAttribute("position")?.count || 0);
-            console.log("- Has normals:", !!mesh.geometry.getAttribute("normal"));
-            console.log("- Has colors:", !!mesh.geometry.getAttribute("color"));
-            console.log("- Has UV:", !!mesh.geometry.getAttribute("uv"));
-            console.log("- All attributes:", Object.keys(mesh.geometry.attributes));
-            console.log("- Material will be:", guidOrName);
-            console.log("- Mesh name:", mesh.name);
-        }
         let renameAttribute = (mesh, oldName, newName)=>{
             const attr = mesh.geometry.getAttribute(oldName);
             if (attr) {
@@ -10461,7 +10389,6 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 mesh.geometry.name = "geometry_ShinyHull";
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
-                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
@@ -10936,6 +10863,7 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 mesh.geometry.name = "geometry_ThickGeometry";
                 setAttributeIfExists(mesh, "position", "a_position");
                 setAttributeIfExists(mesh, "normal", "a_normal");
+                setAttributeIfExists(mesh, "tangent", "a_tangent");
                 copyFixColorAttribute(mesh);
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");

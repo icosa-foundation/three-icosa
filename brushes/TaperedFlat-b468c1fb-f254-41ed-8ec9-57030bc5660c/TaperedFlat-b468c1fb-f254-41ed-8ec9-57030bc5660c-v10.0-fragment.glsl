@@ -31,6 +31,7 @@ in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;
+in float f_fog_coord;
 
 uniform sampler2D u_MainTex;
 uniform float u_Cutoff;
@@ -77,7 +78,7 @@ vec3 computeLighting() {
 void main() {
   float brush_mask = texture(u_MainTex, v_texcoord0).w;
   if (brush_mask > u_Cutoff) {
-    fragColor.rgb = ApplyFog(computeLighting());
+    fragColor.rgb = ApplyFog(computeLighting(), f_fog_coord);
     fragColor.a = 1.0;
   } else {
     discard;

@@ -56,16 +56,7 @@ void main() {
   gl_Position = projectionMatrix * modelViewMatrix * newPosition;
   f_fog_coord = gl_Position.z;
   v_position = a_position.xyz;
-  // Transform normal and tangent to view space
-  vec3 normal = normalize(normalMatrix * a_normal);
-  vec3 tangent = normalize(normalMatrix * a_tangent.xyz);
-  
-  // Compute bitangent using cross product and handedness
-  vec3 bitangent = cross(normal, tangent) * a_tangent.w;
-  
-  v_normal = normal;
-  v_tangent = tangent;
-  v_bitangent = bitangent;
+  v_normal = normalize(normalMatrix * a_normal);
   v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
   v_color = a_color;

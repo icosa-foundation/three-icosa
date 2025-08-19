@@ -30,6 +30,7 @@ in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;
+in float f_fog_coord;
 
 // Copyright 2020 The Tilt Brush Authors
 //
@@ -119,5 +120,5 @@ void main() {
 
   // Emission
   fragColor.rgb += lights * color.rgb;
-  fragColor.rgb = ApplyFog(fragColor.rgb);
+  fragColor.rgb = ApplyFog(fragColor.rgb, f_fog_coord);
 }
