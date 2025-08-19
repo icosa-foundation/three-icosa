@@ -90,14 +90,6 @@ vec2 xxx_dFdy2(vec2 v) {
 }
 // </HACK>
 
-
-
-
-
-
-
-
-
 vec3 computeLighting(vec3 normal) {
   vec3 lightDir0 = normalize(v_light_dir_0);
   vec3 lightDir1 = normalize(v_light_dir_1);
@@ -115,7 +107,6 @@ void main() {
   float brush_mask = texture(u_MainTex, v_texcoord0).w;
   brush_mask *= v_color.w;
 
-  // WARNING: PerturbNormal uses derivatives and must not be called conditionally.
   vec3 normal = PerturbNormal(v_tangent, v_bitangent, v_normal, v_texcoord0);
 
   // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below, 

@@ -53,6 +53,7 @@ uniform mat4 u_SceneLight_1_matrix;
 void main() {
   gl_Position = projectionMatrix * modelViewMatrix * a_position;
   f_fog_coord = gl_Position.z;
+
   // Transform normal and tangent to view space
   vec3 normal = normalize(normalMatrix * a_normal);
   vec3 tangent = normalize(normalMatrix * a_tangent.xyz);

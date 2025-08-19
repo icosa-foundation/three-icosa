@@ -91,18 +91,7 @@ vec2 xxx_dFdy2(vec2 v) {
 }
 // </HACK>
 
-
-
-
-
-
-
-
 vec3 computeLighting(vec3 normal) {
-  if (!gl_FrontFacing) {
-    // Always use front-facing normal for double-sided surfaces.
-    normal *= -1.0;
-  }
   vec3 lightDir0 = normalize(v_light_dir_0);
   vec3 lightDir1 = normalize(v_light_dir_1);
   vec3 eyeDir = -normalize(v_position);

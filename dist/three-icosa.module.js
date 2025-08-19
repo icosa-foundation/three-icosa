@@ -2983,7 +2983,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                 value: "Paper-759f1ebd-20cd-4720-8d41-234e0da63716/Paper-759f1ebd-20cd-4720-8d41-234e0da63716-v10.0-BumpMap.png"
             },
             u_BumpMap_TexelSize: {
-                value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
+                value: new $fugmd$Vector4(0.0020, 0.0020, 512, 512)
             }
         },
         isSurfaceShader: true,
