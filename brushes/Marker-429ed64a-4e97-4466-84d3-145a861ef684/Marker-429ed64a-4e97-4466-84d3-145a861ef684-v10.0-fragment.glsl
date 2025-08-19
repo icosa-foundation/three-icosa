@@ -23,6 +23,7 @@ out vec4 fragColor;
 in vec4 v_color;
 in vec3 v_position;
 in vec2 v_texcoord0;
+in float f_fog_coord;
 
 uniform sampler2D u_MainTex;
 uniform float u_Cutoff;

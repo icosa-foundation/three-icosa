@@ -37,6 +37,7 @@ in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;
+in float f_fog_coord;
 
 float dispAmount = .0015;
 
@@ -88,14 +89,6 @@ vec2 xxx_dFdy2(vec2 v) {
   return vec2(dFdy(v.x), dFdy(v.y));
 }
 // </HACK>
-
-
-
-
-
-
-
-
 
 vec3 computeLighting(vec3 normal) {
    
