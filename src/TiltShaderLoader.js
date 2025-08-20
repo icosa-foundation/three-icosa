@@ -78,10 +78,13 @@ export class TiltShaderLoader extends THREE.Loader {
         materialParams.glslVersion = THREE.GLSL3;
         // Legacy fix. TODO: investigate
         if (brushName == "TaperedMarker") {brushName = "TaperedMarker_Flat"};
-        
-        // Load shaders
-        const vertexShaderText = await loader.loadAsync(materialParams.vertexShader);
 
+        const materialParams = tiltBrushMaterialParams[brushName];
+
+        if (!materialParams) return;
+
+        // Load shaders
+        const vertexShaderText = await loader.loadAsync(materialParams.vertexShader)
         let fragmentShaderText = await loader.loadAsync(materialParams.fragmentShader);
         if (!this.fogShaderCode) {
             this.fogShaderCode = await this.loadShaderIncludes('includes/FogShaderIncludes.glsl');
