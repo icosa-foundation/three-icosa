@@ -73,7 +73,6 @@ export class TiltShaderLoader extends THREE.Loader {
         textureLoader.setPath(this.path);
         textureLoader.setWithCredentials( this.withCredentials );
 
-        const materialParams = tiltBrushMaterialParams[brushName];
 
         materialParams.glslVersion = THREE.GLSL3;
         // Legacy fix. TODO: investigate
