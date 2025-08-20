@@ -76,6 +76,8 @@ export class TiltShaderLoader extends THREE.Loader {
         const materialParams = tiltBrushMaterialParams[brushName];
 
         materialParams.glslVersion = THREE.GLSL3;
+        // Legacy fix. TODO: investigate
+        if (brushName == "TaperedMarker") {brushName = "TaperedMarker_Flat"};
         
         // Load shaders
         const vertexShaderText = await loader.loadAsync(materialParams.vertexShader);
