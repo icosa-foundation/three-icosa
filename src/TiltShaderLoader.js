@@ -2781,6 +2781,7 @@ const tiltBrushMaterialParams = {
             u_fogDensity: { value: 0 },
             u_Opacity: { value: 1.0 },
             u_DraftingVisibility01: { value: 1.0 }
+            u_MainTex: { value: "Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e/Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e-v10.0-MainTex.png" },
         },
         glslVersion: THREE.GLSL3,
         vertexShader: "Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e/Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e-v10.0-vertex.glsl",
