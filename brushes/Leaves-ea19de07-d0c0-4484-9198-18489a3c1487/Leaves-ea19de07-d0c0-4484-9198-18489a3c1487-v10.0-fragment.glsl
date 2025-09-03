@@ -48,6 +48,7 @@ in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;
+in float f_fog_coord;
 
 #if TB_HAS_ALPHA_CUTOFF
 uniform sampler2D u_MainTex;
@@ -106,7 +107,7 @@ void main() {
     discard;
   }
 #else
-  fragColor.rgb = ApplyFog(computeLighting());
+  fragColor.rgb = ApplyFog(computeLighting(), f_fog_coord);
   fragColor.a = 1.0;
 #endif
 }
