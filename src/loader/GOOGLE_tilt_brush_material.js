@@ -1161,6 +1161,23 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 break;
 
             case "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c":
+            case "TaperedMarker":
+                mesh.geometry.name = "geometry_TaperedMarker";
+
+                setAttributeIfExists(mesh, "position", "a_position");
+                setAttributeIfExists(mesh, "normal", "a_normal");
+                copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                shader = await this.tiltShaderLoader.loadAsync("TaperedMarker");
+                shader.lights = false;
+                shader.fog = true;
+                shader.uniformsNeedUpdate = true;
+                mesh.material = shader;
+                mesh.material.name = "material_TaperedMarker";
+                break;
+
             case "1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0":
             case "TaperedMarker_Flat":
                 mesh.geometry.name = "geometry_TaperedMarker_Flat";

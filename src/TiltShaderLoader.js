@@ -73,9 +73,6 @@ export class TiltShaderLoader extends THREE.Loader {
         textureLoader.setPath(this.path);
         textureLoader.setWithCredentials( this.withCredentials );
 
-        // Legacy fix. TODO: investigate
-        if (brushName == "TaperedMarker") {brushName = "TaperedMarker_Flat"};
-
         const materialParams = tiltBrushMaterialParams[brushName];
 
         if (!materialParams) return;
@@ -412,9 +409,12 @@ export class TiltShaderLoader extends THREE.Loader {
                 return "TaperedFlat";
 
             case "TaperedMarker_Flat":
-            case "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c":
             case "1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0":
                 return "TaperedMarker_Flat";
+
+            case "TaperedMarker":
+            case "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c":
+                return "TaperedMarker";
 
             case "ThickPaint":
             case "75b32cf0-fdd6-4d89-a64b-e2a00b247b0f":
@@ -1778,6 +1778,24 @@ const tiltBrushMaterialParams = {
         depthTest: true,
         blending: 0
     },
+    "TaperedMarker" : {
+        uniforms: {
+            u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
+            u_fogDensity: { value: 0 }
+        },
+        isSurfaceShader: false,
+        glslVersion: THREE.GLSL3,
+        vertexShader: "TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c/TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c-v10.0-vertex.glsl",
+        fragmentShader: "TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c/TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c-v10.0-fragment.glsl",
+        side: 2,
+        transparent: false,
+        depthFunc: 2,
+        depthWrite: true,
+        depthTest: true,
+        blending: 0
+    },
     "TaperedMarker_Flat" : {
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
@@ -1967,7 +1985,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 }
         },
-        isSurfaceShader: true,
+        isSurfaceShader: false,
         glslVersion: THREE.GLSL3,
         vertexShader: "Wire-4391385a-cf83-4396-9e33-31e4e4930b27/Wire-4391385a-cf83-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
         fragmentShader: "Wire-4391385a-cf83-4396-9e33-31e4e4930b27/Wire-4391385a-cf83-4396-9e33-31e4e4930b27-v10.0-fragment.glsl",
@@ -2780,7 +2798,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
             u_Opacity: { value: 1.0 },
-            u_DraftingVisibility01: { value: 1.0 }
+            u_DraftingVisibility01: { value: 1.0 },
             u_MainTex: { value: "Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e/Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e-v10.0-MainTex.png" },
         },
         glslVersion: THREE.GLSL3,

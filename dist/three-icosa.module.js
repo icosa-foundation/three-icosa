@@ -72,11 +72,9 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
         const textureLoader = new $fugmd$TextureLoader(this.manager);
         textureLoader.setPath(this.path);
         textureLoader.setWithCredentials(this.withCredentials);
-        // Legacy fix. TODO: investigate
-        if (brushName == "TaperedMarker") brushName = "TaperedMarker_Flat";
         const materialParams = $4fdc68aa1ebb2033$var$tiltBrushMaterialParams[brushName];
-        // Load shaders
         if (!materialParams) return;
+        // Load shaders
         const vertexShaderText = await loader.loadAsync(materialParams.vertexShader);
         let fragmentShaderText = await loader.loadAsync(materialParams.fragmentShader);
         if (!this.fogShaderCode) this.fogShaderCode = await this.loadShaderIncludes("includes/FogShaderIncludes.glsl");
@@ -326,9 +324,11 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
             case "c8ccb53d-ae13-45ef-8afb-b730d81394eb":
                 return "TaperedFlat";
             case "TaperedMarker_Flat":
-            case "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c":
             case "1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0":
                 return "TaperedMarker_Flat";
+            case "TaperedMarker":
+            case "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c":
+                return "TaperedMarker";
             case "ThickPaint":
             case "75b32cf0-fdd6-4d89-a64b-e2a00b247b0f":
             case "fdf0326a-c0d1-4fed-b101-9db0ff6d071f":
@@ -4034,6 +4034,66 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         depthTest: true,
         blending: 0
     },
+    "TaperedMarker": {
+        uniforms: {
+            u_SceneLight_0_matrix: {
+                value: [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                ]
+            },
+            u_SceneLight_1_matrix: {
+                value: [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                ]
+            },
+            u_fogColor: {
+                value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
+            },
+            u_fogDensity: {
+                value: 0
+            }
+        },
+        isSurfaceShader: false,
+        glslVersion: $fugmd$GLSL3,
+        vertexShader: "TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c/TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c-v10.0-vertex.glsl",
+        fragmentShader: "TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c/TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c-v10.0-fragment.glsl",
+        side: 2,
+        transparent: false,
+        depthFunc: 2,
+        depthWrite: true,
+        depthTest: true,
+        blending: 0
+    },
     "TaperedMarker_Flat": {
         uniforms: {
             u_SceneLight_0_matrix: {
@@ -4651,7 +4711,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                 value: 0
             }
         },
-        isSurfaceShader: true,
+        isSurfaceShader: false,
         glslVersion: $fugmd$GLSL3,
         vertexShader: "Wire-4391385a-cf83-4396-9e33-31e4e4930b27/Wire-4391385a-cf83-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
         fragmentShader: "Wire-4391385a-cf83-4396-9e33-31e4e4930b27/Wire-4391385a-cf83-4396-9e33-31e4e4930b27-v10.0-fragment.glsl",
@@ -7239,6 +7299,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_DraftingVisibility01: {
                 value: 1.0
+            },
+            u_MainTex: {
+                value: "Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e/Drafting-492b36ff-b337-436a-ba5f-1e87ee86747e-v10.0-MainTex.png"
             }
         },
         glslVersion: $fugmd$GLSL3,
@@ -10659,6 +10722,21 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 mesh.material.name = "material_TaperedFlat";
                 break;
             case "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c":
+            case "TaperedMarker":
+                mesh.geometry.name = "geometry_TaperedMarker";
+                setAttributeIfExists(mesh, "position", "a_position");
+                setAttributeIfExists(mesh, "normal", "a_normal");
+                copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                shader = await this.tiltShaderLoader.loadAsync("TaperedMarker");
+                shader.lights = false;
+                shader.fog = true;
+                shader.uniformsNeedUpdate = true;
+                mesh.material = shader;
+                mesh.material.name = "material_TaperedMarker";
+                break;
             case "1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0":
             case "TaperedMarker_Flat":
                 mesh.geometry.name = "geometry_TaperedMarker_Flat";
