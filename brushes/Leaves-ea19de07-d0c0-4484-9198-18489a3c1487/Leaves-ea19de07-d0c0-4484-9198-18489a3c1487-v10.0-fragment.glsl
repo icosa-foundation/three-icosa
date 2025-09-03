@@ -101,7 +101,7 @@ void main() {
   const float alpha_threshold = TB_ALPHA_CUTOFF;
   float brush_mask = texture(u_MainTex, v_texcoord0).w;
   if (brush_mask > alpha_threshold) {
-    fragColor.rgb = ApplyFog(computeLighting());
+    fragColor.rgb = ApplyFog(computeLighting(), f_fog_coord);
     fragColor.a = 1.0;
   } else {
     discard;

@@ -44,6 +44,12 @@ uniform float u_Cutoff;
 
 
 void main() {
+  float brush_mask = texture(u_MainTex, v_texcoord0).w;
+  brush_mask *= v_color.a;
+  if (brush_mask > u_Cutoff) {
     fragColor.rgb = ApplyFog(v_color.rgb, f_fog_coord);
     fragColor.a = 1.0;
+  } else {
+    discard;
+  }
 }
