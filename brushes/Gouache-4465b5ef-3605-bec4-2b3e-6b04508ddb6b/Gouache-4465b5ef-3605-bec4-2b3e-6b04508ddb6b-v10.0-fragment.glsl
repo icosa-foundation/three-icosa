@@ -13,8 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Brush-specific shader for GlTF web preview, based on General generator
-// with parameters lit=1, a=0.5.
 
 precision mediump float;
 
@@ -37,6 +35,7 @@ in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
 in vec2 v_texcoord0;
+in float f_fog_coord;
 
 float dispAmount = .0025;
 
@@ -54,23 +53,7 @@ float dispAmount = .0025;
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-in float f_fog_coord;
 
-// This fog function emulates the exponential fog used in Tilt Brush
-//
-// Details:
-//   * For exponential fog, Unity defines u_density = density / ln(2) on the CPU, sp that they can
-//        convert the base from e to 2 and use exp2 rather than exp. We might as well do the same.
-//   * The fog on Plya does not precisely match that in Unity, though it's very close.  Two known
-//        reasons for this are
-//          1) Clipping plans on Poly are different than in Tilt Brush.  Poly is .1:2000, Tilt
-//             Brush is .5:10000.
-//          2) Poly applies post processing (vignettes, etc...) that can subtly change the look
-//             of the fog.
-//   * Finally, Tilt Brush uses "decimeters" for legacy reasons.
-//        In order to convert Density values from TB to Poly, we multiply by 10.0 in order to
-//        convert decimeters to meters.
-//
 
 vec3 computeLighting(vec3 normal) {
     if (!gl_FrontFacing) {

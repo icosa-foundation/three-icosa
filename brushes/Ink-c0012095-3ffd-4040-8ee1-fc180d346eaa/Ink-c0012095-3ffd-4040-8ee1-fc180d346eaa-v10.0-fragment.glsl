@@ -13,9 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Auto-copied from Ink-c0012095-3ffd-4040-8ee1-fc180d346eaa-v10.0-fragment.glsl
-// Brush-specific shader for GlTF web preview, based on General generator
-// with parameters lit=1, a=0.5.
 
 precision mediump float;
 
@@ -55,47 +52,6 @@ float dispAmount = .0025;
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-// Copyright 2020 The Tilt Brush Authors
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Requires a global constant "float dispAmount"
-// TODO: turn it into a parameter!
-
-
-uniform vec4 u_BumpMap_TexelSize;
-
-// HACK: Workaround for GPUs which struggle with vec3/vec2 derivatives.
-vec3 xxx_dFdx3(vec3 v) {
-  return vec3(dFdx(v.x), dFdx(v.y), dFdx(v.z));
-}
-vec3 xxx_dFdy3(vec3 v) {
-  return vec3(dFdy(v.x), dFdy(v.y), dFdy(v.z));
-}
-vec2 xxx_dFdx2(vec2 v) {
-  return vec2(dFdx(v.x), dFdx(v.y));
-}
-vec2 xxx_dFdy2(vec2 v) {
-  return vec2(dFdy(v.x), dFdy(v.y));
-}
-// </HACK>
-
-
-
-
-
-
 
 
 
