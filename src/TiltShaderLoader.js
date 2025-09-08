@@ -1115,18 +1115,12 @@ const tiltBrushMaterialParams = {
         glslVersion: THREE.GLSL3,
         vertexShader: "Flat-2d35bcf0-e4d8-452c-97b1-3311be063130/Flat-2d35bcf0-e4d8-452c-97b1-3311be063130-v10.0-vertex.glsl",
         fragmentShader: "Flat-2d35bcf0-e4d8-452c-97b1-3311be063130/Flat-2d35bcf0-e4d8-452c-97b1-3311be063130-v10.0-fragment.glsl",
-        side: 2,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
         depthTest: true,
-        blending: 5,
-        blendDstAlpha: 201,
-        blendDst: 201,
-        blendEquationAlpha: 100,
-        blendEquation: 100,
-        blendSrcAlpha: 201,
-        blendSrc: 201
+        blending: 0,
     },
     "Highlighter" : {
         uniforms: {
@@ -1921,7 +1915,15 @@ const tiltBrushMaterialParams = {
     },
     "WetPaint" : {
         uniforms: {
+            u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_ambient_light_color: { value: new THREE.Vector4(0.3922, 0.3922, 0.3922, 1) },
+            u_SceneLight_0_color: { value: new THREE.Vector4(0.7780, 0.8157, 0.9914, 1) },
+            u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
+            u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
+            u_fogDensity: { value: 0 },
             u_BumpMap: { value: "WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3/WetPaint-b67c0e81-ce6d-40a8-aeb0-ef036b081aa3-v10.0-BumpMap.png" },
+            u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) },
             u_BumpScale: { value: 1.0 },
             u_Color: { value: new THREE.Vector4(1, 1, 1, 1) },
             u_Cutoff: { value: 0.3 },
