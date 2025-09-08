@@ -57,8 +57,8 @@ void main() {
   float brush_mask = texture(u_MainTex, v_texcoord0).w;
   brush_mask *= v_color.w;
 
-    // Now using fixed normal map unpacking instead of derivative-based height mapping
   vec3 normal = PerturbNormal(v_tangent, v_bitangent, v_normal, v_texcoord0);
+
     fragColor.rgb = ApplyFog(computeLighting(normal), f_fog_coord);
     fragColor.a = 1.0;
 

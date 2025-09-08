@@ -13,9 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Brush-specific shader for GlTF web preview, based on General generator
-// with parameters lit=1, a=0.5.
-
 precision mediump float;
 
 out vec4 fragColor;
@@ -41,37 +38,8 @@ in float f_fog_coord;
 
 float dispAmount = .00009;
 
-// Copyright 2020 The Tilt Brush Authors
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Copyright 2020 The Tilt Brush Authors
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 // Requires a global constant "float dispAmount"
 // TODO: turn it into a parameter!
-
 
 uniform vec4 u_BumpMap_TexelSize;
 
@@ -109,12 +77,9 @@ void main() {
 
   vec3 normal = PerturbNormal(v_tangent, v_bitangent, v_normal, v_texcoord0);
 
-  // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below, 
-  // causing issues on some hardware/drivers. So we compute lighting just to discard it later.
   fragColor.rgb = ApplyFog(computeLighting(normal), f_fog_coord);
   fragColor.a = 1.0;
 
-  // This must come last to ensure PerturbNormal is called uniformly for all invocations.
   if (brush_mask <= u_Cutoff) {
 	  discard;
   }

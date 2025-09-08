@@ -48,9 +48,25 @@ in float f_fog_coord;
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+vec3 computeLighting(vec3 normal) {
+    if (!gl_FrontFacing) {
+        // Always use front-facing normal for double-sided surfaces.
+        normal *= -1.0;
+    }
+    vec3 lightDir0 = normalize(v_light_dir_0);
+    vec3 lightDir1 = normalize(v_light_dir_1);
+    vec3 eyeDir = -normalize(v_position);
 
+    vec3 lightOut0 = SurfaceShaderSpecularGloss(normal, lightDir0, eyeDir, u_SceneLight_0_color.rgb,
+    v_color.rgb, u_SpecColor, u_Shininess);
+    vec3 lightOut1 = ShShaderWithSpec(normal, lightDir1, u_SceneLight_1_color.rgb, v_color.rgb, u_SpecColor);
+    vec3 ambientOut = v_color.rgb * u_ambient_light_color.rgb;
+
+    return (lightOut0 + lightOut1 + ambientOut);
+}
 
 void main() {
-    fragColor.rgb = ApplyFog(computeLighting(), f_fog_coord);
+    vec3 normal = normalize(v_normal);
+    fragColor.rgb = ApplyFog(computeLighting(normal), f_fog_coord);
     fragColor.a = 1.0;
 }
