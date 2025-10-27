@@ -20,8 +20,15 @@ let defaultNormalTexture = null;
 
 function getDefaultWhiteTexture() {
     if (!defaultWhiteTexture) {
-        defaultWhiteTexture = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1, THREE.RGBAFormat);
+        defaultWhiteTexture = new THREE.DataTexture(
+            new Uint8Array([255, 255, 255, 255]),
+            1,
+            1,
+            THREE.RGBAFormat,
+            THREE.UnsignedByteType
+        );
         defaultWhiteTexture.name = 'DefaultWhiteTexture';
+        defaultWhiteTexture.colorSpace = THREE.SRGBColorSpace;
         defaultWhiteTexture.needsUpdate = true;
     }
     return defaultWhiteTexture;
@@ -29,8 +36,15 @@ function getDefaultWhiteTexture() {
 
 function getDefaultNormalTexture() {
     if (!defaultNormalTexture) {
-        defaultNormalTexture = new THREE.DataTexture(new Uint8Array([128, 128, 255, 255]), 1, 1, THREE.RGBAFormat);
+        defaultNormalTexture = new THREE.DataTexture(
+            new Uint8Array([128, 128, 255, 255]),
+            1,
+            1,
+            THREE.RGBAFormat,
+            THREE.UnsignedByteType
+        );
         defaultNormalTexture.name = 'DefaultNormalTexture';
+        defaultNormalTexture.colorSpace = THREE.NoColorSpace;
         defaultNormalTexture.needsUpdate = true;
     }
     return defaultNormalTexture;
@@ -102,26 +116,34 @@ export class TiltShaderLoader extends THREE.Loader {
         if (materialParams.uniforms.u_MainTex) {
             if (materialParams.uniforms.u_MainTex.value === null) {
                 materialParams.uniforms.u_MainTex.value = getDefaultWhiteTexture();
-            } else {
+            } else if (typeof materialParams.uniforms.u_MainTex.value === 'string') {
                 const mainTex = await textureLoader.loadAsync(materialParams.uniforms.u_MainTex.value);
                 mainTex.name = `${brushName}_MainTex`;
                 mainTex.wrapS = THREE.RepeatWrapping;
                 mainTex.wrapT = THREE.RepeatWrapping;
                 mainTex.flipY = false;
                 materialParams.uniforms.u_MainTex.value = mainTex;
+            } else if (materialParams.uniforms.u_MainTex.value.isTexture) {
+                // Already a texture
+            } else {
+                console.error(`[TiltShaderLoader] u_MainTex has unexpected type for ${brushName}:`, materialParams.uniforms.u_MainTex.value);
             }
         }
 
         if (materialParams.uniforms.u_BumpMap) {
             if (materialParams.uniforms.u_BumpMap.value === null) {
                 materialParams.uniforms.u_BumpMap.value = getDefaultNormalTexture();
-            } else {
+            } else if (typeof materialParams.uniforms.u_BumpMap.value === 'string') {
                 const bumpMap = await textureLoader.loadAsync(materialParams.uniforms.u_BumpMap.value);
                 bumpMap.name = `${brushName}_BumpMap`;
                 bumpMap.wrapS = THREE.RepeatWrapping;
                 bumpMap.wrapT = THREE.RepeatWrapping;
                 bumpMap.flipY = false;
                 materialParams.uniforms.u_BumpMap.value = bumpMap;
+            } else if (materialParams.uniforms.u_BumpMap.value.isTexture) {
+                // Already a texture
+            } else {
+                console.error(`[TiltShaderLoader] u_MainTex has unexpected type for ${brushName}:`, materialParams.uniforms.u_MainTex.value);
             }
         }
 
