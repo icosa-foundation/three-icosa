@@ -53,13 +53,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             if (extensionsDef?.[this.name]) {
                 nameOrGuid = extensionsDef[this.name].guid;
             }
-            else if (material.name.startsWith("material_")) {
+            else if (material.name?.startsWith("material_")) {
                 nameOrGuid = material.name.replace('material_', '');
-            } else if (material.name.startsWith('ob-')) {
+            } else if (material.name?.startsWith('ob-')) {
                 nameOrGuid = material.name.replace('ob-', '');
             }
-            else
-            {
+            else if (material.name !== undefined) {
                 let newName = this.tryReplaceBlocksName(material.name);
                 if (newName !== undefined) {
                     nameOrGuid = newName;
@@ -116,11 +115,11 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                     const extensionsDef = material.extensions;
 
                     let brushName;
-                    if (material.name.startsWith('ob-')) {
+                    if (material.name?.startsWith('ob-')) {
                         // New glb naming convention
                         brushName = material.name.replace('ob-', '');
                     }
-                    else if (material.name.startsWith('material_')) {
+                    else if (material.name?.startsWith('material_')) {
                         // Some legacy poly files
                         // TODO - risk of name collision with non-tilt materials
                         // Maybe we should pass in a flag when a tilt gltf is detected?
@@ -151,6 +150,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
     }
 
     tryReplaceBlocksName(originalName) {
+        if (originalName === undefined) return;
         // Handle naming embedded models exported from newer Open Brush versions
         let newName;
         if (originalName.includes('_BlocksPaper ')) {
