@@ -4080,6 +4080,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_MainTex: {
+                value: "TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c\\TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c-v10.0-MainTex.png"
             }
         },
         isSurfaceShader: false,

@@ -1800,7 +1800,8 @@ const tiltBrushMaterialParams = {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_MainTex: { value: "TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c\\TaperedMarker-d90c6ad8-af0f-4b54-b422-e0f92abe1b3c-v10.0-MainTex.png" }
         },
         isSurfaceShader: false,
         glslVersion: THREE.GLSL3,
