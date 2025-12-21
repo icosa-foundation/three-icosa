@@ -122,6 +122,7 @@ export class TiltShaderLoader extends THREE.Loader {
                 mainTex.wrapS = THREE.RepeatWrapping;
                 mainTex.wrapT = THREE.RepeatWrapping;
                 mainTex.flipY = false;
+                mainTex.anisotropy = 4;
                 materialParams.uniforms.u_MainTex.value = mainTex;
             } else if (materialParams.uniforms.u_MainTex.value.isTexture) {
                 // Already a texture

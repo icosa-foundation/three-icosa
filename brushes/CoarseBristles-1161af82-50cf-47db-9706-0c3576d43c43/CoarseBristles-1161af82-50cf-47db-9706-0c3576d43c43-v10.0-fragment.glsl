@@ -68,11 +68,24 @@ vec3 computeLighting() {
 }
 
 void main() {
-    float brush_mask = texture(u_MainTex, v_texcoord0).w;
-    if (brush_mask > u_Cutoff) {
-        fragColor.rgb = ApplyFog(computeLighting(), f_fog_coord);
-        fragColor.a = 1.0;
-    } else {
-        discard;
-    }
+    float a = texture(u_MainTex, v_texcoord0).a;
+
+    // mip level grows with distance / minification
+    vec2 texSize = vec2(textureSize(u_MainTex, 0));
+    vec2 dx = dFdx(v_texcoord0 * texSize);
+    vec2 dy = dFdy(v_texcoord0 * texSize);
+    float mip = 0.5 * log2(max(dot(dx, dx), dot(dy, dy)));
+    mip = max(mip - 2.0, 0.0);
+
+    // lower cutoff as mip increases to preserve coverage
+    float cutoff = u_Cutoff - clamp(mip * 0.01, 0.0, 0.03);
+
+    // optional: add a tiny transition band for stability
+    float w = fwidth(a) * 0.15;
+    float coverage = smoothstep(cutoff - w, cutoff + w, a);
+
+    if (coverage <= 0.0) discard;
+
+    fragColor.rgb = ApplyFog(computeLighting(), f_fog_coord);
+    fragColor.a = coverage; // keep for alphaToCoverage
 }

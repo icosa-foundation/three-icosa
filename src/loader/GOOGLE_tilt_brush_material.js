@@ -364,6 +364,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
                 setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 shader = await this.tiltShaderLoader.loadAsync("CoarseBristles");
+                shader.alphaToCoverage = true;
+                shader.alphaTest = 0.5;
                 shader.lights = true;
                 shader.fog = true;
                 shader.uniformsNeedUpdate = true;

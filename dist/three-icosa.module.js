@@ -98,6 +98,7 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
                 mainTex.wrapS = $fugmd$RepeatWrapping;
                 mainTex.wrapT = $fugmd$RepeatWrapping;
                 mainTex.flipY = false;
+                mainTex.anisotropy = 4;
                 materialParams.uniforms.u_MainTex.value = mainTex;
             } else if (materialParams.uniforms.u_MainTex.value.isTexture) ;
             else console.error(`[TiltShaderLoader] u_MainTex has unexpected type for ${brushName}:`, materialParams.uniforms.u_MainTex.value);
@@ -2253,7 +2254,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         glslVersion: $fugmd$GLSL3,
         vertexShader: "Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37/Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-vertex.glsl",
         fragmentShader: "Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37/Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-fragment.glsl",
-        side: 2,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -2572,7 +2573,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         glslVersion: $fugmd$GLSL3,
         vertexShader: "LightWire-4391aaaa-df81-4396-9e33-31e4e4930b27/LightWire-4391aaaa-df81-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
         fragmentShader: "LightWire-4391aaaa-df81-4396-9e33-31e4e4930b27/LightWire-4391aaaa-df81-4396-9e33-31e4e4930b27-v10.0-fragment.glsl",
-        side: 2,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -2641,7 +2642,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         glslVersion: $fugmd$GLSL3,
         vertexShader: "Lofted-d381e0f5-3def-4a0d-8853-31e9200bcbda/Lofted-d381e0f5-3def-4a0d-8853-31e9200bcbda-v10.0-vertex.glsl",
         fragmentShader: "Lofted-d381e0f5-3def-4a0d-8853-31e9200bcbda/Lofted-d381e0f5-3def-4a0d-8853-31e9200bcbda-v10.0-fragment.glsl",
-        side: 2,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -2779,7 +2780,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         glslVersion: $fugmd$GLSL3,
         vertexShader: "MatteHull-79348357-432d-4746-8e29-0e25c112e3aa/MatteHull-79348357-432d-4746-8e29-0e25c112e3aa-v10.0-vertex.glsl",
         fragmentShader: "MatteHull-79348357-432d-4746-8e29-0e25c112e3aa/MatteHull-79348357-432d-4746-8e29-0e25c112e3aa-v10.0-fragment.glsl",
-        side: 2,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -3466,7 +3467,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         glslVersion: $fugmd$GLSL3,
         vertexShader: "ShinyHull-faaa4d44-fcfb-4177-96be-753ac0421ba3/ShinyHull-faaa4d44-fcfb-4177-96be-753ac0421ba3-v10.0-vertex.glsl",
         fragmentShader: "ShinyHull-faaa4d44-fcfb-4177-96be-753ac0421ba3/ShinyHull-faaa4d44-fcfb-4177-96be-753ac0421ba3-v10.0-fragment.glsl",
-        side: 2,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -3690,7 +3691,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         glslVersion: $fugmd$GLSL3,
         vertexShader: "Spikes-cf7f0059-7aeb-53a4-2b67-c83d863a9ffa/Spikes-cf7f0059-7aeb-53a4-2b67-c83d863a9ffa-v10.0-vertex.glsl",
         fragmentShader: "Spikes-cf7f0059-7aeb-53a4-2b67-c83d863a9ffa/Spikes-cf7f0059-7aeb-53a4-2b67-c83d863a9ffa-v10.0-fragment.glsl",
-        side: 2,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -4375,7 +4376,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         glslVersion: $fugmd$GLSL3,
         vertexShader: "UnlitHull-a8fea537-da7c-4d4b-817f-24f074725d6d/UnlitHull-a8fea537-da7c-4d4b-817f-24f074725d6d-v10.0-vertex.glsl",
         fragmentShader: "UnlitHull-a8fea537-da7c-4d4b-817f-24f074725d6d/UnlitHull-a8fea537-da7c-4d4b-817f-24f074725d6d-v10.0-fragment.glsl",
-        side: 2,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -4775,7 +4776,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         glslVersion: $fugmd$GLSL3,
         vertexShader: "Wire-4391385a-cf83-4396-9e33-31e4e4930b27/Wire-4391385a-cf83-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
         fragmentShader: "Wire-4391385a-cf83-4396-9e33-31e4e4930b27/Wire-4391385a-cf83-4396-9e33-31e4e4930b27-v10.0-fragment.glsl",
-        side: 2,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -8033,7 +8034,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         glslVersion: $fugmd$GLSL3,
         vertexShader: "TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52/TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52-v10.0-vertex.glsl",
         fragmentShader: "TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52/TaperedHueShift-3d9755da-56c7-7294-9b1d-5ec349975f52-v10.0-fragment.glsl",
-        side: 2,
+        side: 0,
         transparent: false,
         depthFunc: 2,
         depthWrite: true,
@@ -10072,6 +10073,8 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
                 setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 shader = await this.tiltShaderLoader.loadAsync("CoarseBristles");
+                shader.alphaToCoverage = true;
+                shader.alphaTest = 0.5;
                 shader.lights = true;
                 shader.fog = true;
                 shader.uniformsNeedUpdate = true;
