@@ -100,11 +100,18 @@ export class TiltShaderLoader extends THREE.Loader {
         fragmentShaderText = this.fogShaderCode + '\n' + fragmentShaderText;
 
         // Prepend surface shader code if needed
-        if (materialParams.isSurfaceShader) {
+        const hasSurfaceShader = materialParams.isSurfaceShader;
+        if (hasSurfaceShader) {
             if (!this.surfaceShaderCode) {
                 this.surfaceShaderCode = await this.loadShaderIncludes('includes/SurfaceShaderIncludes.glsl');
             }
             fragmentShaderText = this.surfaceShaderCode + '\n' + fragmentShaderText;
+
+            // Add shadow support for surface shaders
+            if (!this.shadowShaderCode) {
+                this.shadowShaderCode = await this.loadShaderIncludes('includes/ShadowIncludes.glsl');
+            }
+            fragmentShaderText = this.shadowShaderCode + '\n' + fragmentShaderText;
         }
 
         // Remove custom flag before passing to Three.js
@@ -195,6 +202,12 @@ export class TiltShaderLoader extends THREE.Loader {
         }
 
         let rawMaterial = new THREE.RawShaderMaterial(materialParams);
+
+        // Enable lighting updates for surface shaders (needed for shadows)
+        if (hasSurfaceShader) {
+            rawMaterial.lights = true;
+        }
+
         this.loadedMaterials[brushName] = rawMaterial;
         onLoad( scope.parse( rawMaterial ) );
     }
