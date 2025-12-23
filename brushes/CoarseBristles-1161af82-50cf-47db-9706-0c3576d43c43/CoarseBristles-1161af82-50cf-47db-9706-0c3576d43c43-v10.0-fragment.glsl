@@ -75,10 +75,10 @@ void main() {
     vec2 dx = dFdx(v_texcoord0 * texSize);
     vec2 dy = dFdy(v_texcoord0 * texSize);
     float mip = 0.5 * log2(max(dot(dx, dx), dot(dy, dy)));
-    mip = max(mip - 2.0, 0.0);
+    mip = max(mip, 0.0);
 
     // lower cutoff as mip increases to preserve coverage
-    float cutoff = u_Cutoff - clamp(mip * 0.01, 0.0, 0.03);
+    float cutoff = u_Cutoff - clamp(mip * 0.04, 0.0, 0.10); // tune 0.05..0.12, 0.12..0.25
 
     // optional: add a tiny transition band for stability
     float w = fwidth(a) * 0.15;
