@@ -106,7 +106,7 @@ export class TiltShaderLoader extends THREE.Loader {
             }
             fragmentShaderText = this.surfaceShaderCode + '\n' + fragmentShaderText;
         }
-                
+
         // Remove custom flag before passing to Three.js
         delete materialParams.isSurfaceShader;
         
