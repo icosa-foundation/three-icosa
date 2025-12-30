@@ -10186,6 +10186,8 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
                 setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("DoubleTaperedFlat");
                 shader.lights = true;
                 shader.fog = true;
@@ -10202,6 +10204,8 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
                 setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("DoubleTaperedMarker");
                 shader.lights = true;
                 shader.fog = true;
@@ -11690,7 +11694,6 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 const gl = renderer.getContext();
                 const samples = gl.getParameter(gl.SAMPLES);
                 if (samples > 0) gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
-                console.log("State after enable:", gl.isEnabled(gl.SAMPLE_ALPHA_TO_COVERAGE));
             }
         };
     }
