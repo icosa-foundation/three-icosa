@@ -2803,6 +2803,8 @@ const tiltBrushMaterialParams = {
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
+            u_MainTex: { value: "WaveformTube-0f5820df-cb6b-4a6c-960e-56e4c8000eda/WaveformTube-0f5820df-cb6b-4a6c-960e-56e4c8000eda-v10.0-MainTex.png" },
+            u_EmissionGain: { value: 0.5178571 },
             u_time: { value: new THREE.Vector4() }
         },
         glslVersion: THREE.GLSL3,
@@ -3192,6 +3194,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
             u_BumpScale: { value: 1.0 },
+            u_MainTex: { value: null },
             u_Color: { value: new THREE.Vector4(0, 0, 0, 1) },
             u_Cutoff: { value: 0.5 },
             u_DetailNormalMapScale: { value: 1.0 },
@@ -3232,7 +3235,8 @@ const tiltBrushMaterialParams = {
             u_SceneLight_0_color: { value: new THREE.Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_MainTex: { value: null }
         },
         glslVersion: THREE.GLSL3,
         vertexShader: "Lofted (Hue Shift)-c5da2e70-a6e4-63a4-898c-5cfedef09c97/Lofted (Hue Shift)-c5da2e70-a6e4-63a4-898c-5cfedef09c97-v10.0-vertex.glsl",
