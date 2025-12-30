@@ -2194,6 +2194,14 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                     material.uniforms.u_fogDensity.value = material.uniforms.fogDensity.value;
                 }
             }
+
+            if (material?.alphaToCoverage) {
+                const gl = renderer.getContext();
+                const samples = gl.getParameter(gl.SAMPLES);
+                if (samples > 0) { // MSAA is available
+                    gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
+                }
+            }
         };
     }
 }
