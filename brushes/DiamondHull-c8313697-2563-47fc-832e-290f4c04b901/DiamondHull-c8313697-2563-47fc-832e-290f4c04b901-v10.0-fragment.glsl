@@ -218,12 +218,13 @@ void main() {
   vec3 normal = v_normal;
 
   float rim = 1.0 - abs(dot(normalize(viewDir), v_worldNormal));
+
   rim *= 1.0 - pow(rim, 5.0);
 
   rim = mix(rim, 150.0,
             1.0 - clamp(abs(dot(normalize(viewDir), v_worldNormal)) / .1, 0.0, 1.0));
 
-  vec3 diffraction = texture(u_MainTex, vec2(rim + u_time.x * .3 + normal.x, rim + normal.y)).xyz;
+  vec3 diffraction = texture(u_MainTex, vec2(rim + u_time.x * .3, rim)).xyz;
   diffraction = GetDiffraction(diffraction, normal, normalize(viewDir));
 
   vec3 emission = rim * v_color.rgb * diffraction * .5 + rim * diffraction * .25;

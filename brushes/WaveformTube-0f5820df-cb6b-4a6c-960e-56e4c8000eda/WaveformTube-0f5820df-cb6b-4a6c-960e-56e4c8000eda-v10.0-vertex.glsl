@@ -34,6 +34,24 @@ uniform mat4 projectionMatrix;
 uniform mat3 normalMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
+uniform float u_EmissionGain;
+
+vec4
+bloomColor(vec4 color, float gain) {
+  // Guarantee that there's at least a little bit of all 3 channels.
+  // This makes fully-saturated strokes (which only have 2 non-zero
+  // color channels) eventually clip to white rather than to a secondary.
+  float cmin = length(color.rgb) * .05;
+  color.rgb = max(color.rgb, vec3(cmin, cmin, cmin));
+  // If we try to remove this pow() from .a, it brightens up
+  // pressure-sensitive strokes; looks better as-is.
+  color.r = pow(color.r, 2.2);
+  color.g = pow(color.g, 2.2);
+  color.b = pow(color.b, 2.2);
+  color.a = pow(color.a, 2.2);
+  color.rgb *= 2.0 * exp(gain * 10.0);
+  return color;
+}
 
 void main() {
   gl_Position = projectionMatrix * modelViewMatrix * a_position;
@@ -41,16 +59,16 @@ void main() {
   // Transform normal and tangent to view space
   vec3 normal = normalize(normalMatrix * a_normal);
   vec3 tangent = normalize(normalMatrix * a_tangent.xyz);
-  
+
   // Compute bitangent using cross product and handedness
   vec3 bitangent = cross(normal, tangent) * a_tangent.w;
-  
+
   v_normal = normal;
   v_tangent = tangent;
   v_bitangent = bitangent;
   v_position = (modelViewMatrix * a_position).xyz;
   v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
-  v_color = a_color;
+  v_color = bloomColor(a_color, u_EmissionGain);
   v_texcoord0 = a_texcoord0;
 }

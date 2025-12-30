@@ -54,8 +54,8 @@ void main() {
   v_normal = normal;
   v_tangent = tangent;
   v_bitangent = bitangent;
-  // modelMatrix is not correct, but correct enough.
-  v_worldNormal = (modelMatrix * vec4(a_normal, 1)).xyz;
+  // Transform normal to world space (works correctly for uniform scaling)
+  v_worldNormal = normalize(mat3(modelMatrix) * a_normal);
 
   v_position = (modelViewMatrix * a_position).xyz;
   v_worldPosition = (modelMatrix * a_position).xyz;

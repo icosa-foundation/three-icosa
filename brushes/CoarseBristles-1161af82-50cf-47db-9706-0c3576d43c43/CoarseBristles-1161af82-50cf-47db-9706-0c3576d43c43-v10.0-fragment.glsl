@@ -70,22 +70,23 @@ vec3 computeLighting() {
 void main() {
     float a = texture(u_MainTex, v_texcoord0).a;
 
-    // mip level grows with distance / minification
+    // Calculate mip level for coverage compensation
     vec2 texSize = vec2(textureSize(u_MainTex, 0));
     vec2 dx = dFdx(v_texcoord0 * texSize);
     vec2 dy = dFdy(v_texcoord0 * texSize);
     float mip = 0.5 * log2(max(dot(dx, dx), dot(dy, dy)));
     mip = max(mip, 0.0);
 
-    // lower cutoff as mip increases to preserve coverage
-    float cutoff = u_Cutoff - clamp(mip * 0.04, 0.0, 0.10); // tune 0.05..0.12, 0.12..0.25
+    // Boost alpha at higher mip levels to compensate for mipmap averaging
+    // This preserves coverage when using alpha-to-coverage
+    float compensation = 1.0 + mip * 0.6;
+    float adjustedAlpha = clamp(a * compensation, 0.0, 1.0);
 
-    // optional: add a tiny transition band for stability
-    float w = fwidth(a) * 0.15;
-    float coverage = smoothstep(cutoff - w, cutoff + w, a);
-
-    if (coverage <= 0.0) discard;
+    // Discard only fully transparent pixels
+    if (adjustedAlpha < 0.01) {
+        discard;
+    }
 
     fragColor.rgb = ApplyFog(computeLighting(), f_fog_coord);
-    fragColor.a = coverage; // keep for alphaToCoverage
+    fragColor.a = adjustedAlpha;
 }
