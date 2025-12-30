@@ -7284,6 +7284,12 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_fogDensity: {
                 value: 0
             },
+            u_MainTex: {
+                value: "WaveformTube-0f5820df-cb6b-4a6c-960e-56e4c8000eda/WaveformTube-0f5820df-cb6b-4a6c-960e-56e4c8000eda-v10.0-MainTex.png"
+            },
+            u_EmissionGain: {
+                value: 0.5178571
+            },
             u_time: {
                 value: new $fugmd$Vector4()
             }
@@ -8527,6 +8533,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_BumpScale: {
                 value: 1.0
             },
+            u_MainTex: {
+                value: null
+            },
             u_Color: {
                 value: new $fugmd$Vector4(0, 0, 0, 1)
             },
@@ -8655,6 +8664,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_MainTex: {
+                value: null
             }
         },
         glslVersion: $fugmd$GLSL3,
@@ -11673,6 +11685,12 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
             }
             if (material?.uniforms?.fogDensity?.value) {
                 if (material.uniforms.u_fogDensity) material.uniforms.u_fogDensity.value = material.uniforms.fogDensity.value;
+            }
+            if (material?.alphaToCoverage) {
+                const gl = renderer.getContext();
+                const samples = gl.getParameter(gl.SAMPLES);
+                if (samples > 0) gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
+                console.log("State after enable:", gl.isEnabled(gl.SAMPLE_ALPHA_TO_COVERAGE));
             }
         };
     }
