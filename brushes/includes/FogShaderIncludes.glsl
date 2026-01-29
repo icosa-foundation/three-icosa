@@ -25,7 +25,7 @@ uniform float u_fogDensity;
 
 vec3 ApplyFog(vec3 color, float fogCoord) {
     float density = (u_fogDensity / .693147) * 10.;
-    float fogFactor = fogCoord * density;
+    float fogFactor = abs(fogCoord) * density;  // Use abs() to handle negative camera-space Z
     fogFactor = exp2(-fogFactor);
     fogFactor = clamp( fogFactor, 0.0, 1.0 );
     return mix(u_fogColor, color.xyz, fogFactor);
