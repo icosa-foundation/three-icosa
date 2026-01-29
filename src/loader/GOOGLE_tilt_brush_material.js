@@ -94,9 +94,14 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         //     return null;
         // }
 
+        // Detect exporter type and store on scenes
+        const generator = json.asset?.generator;
+        const isNewTiltExporter = generator && generator.includes('Open Brush UnityGLTF Exporter');
+
         const shaderResolves = [];
 
         for(const scene of glTF.scenes) {
+            scene.userData.isNewTiltExporter = isNewTiltExporter;
             scene.traverse(async object => {
                 const association = parser.associations.get(object);
 
@@ -138,7 +143,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                     }
 
                     if (brushName !== undefined) {
-                        shaderResolves.push(this.replaceMaterial(object, brushName));
+                        shaderResolves.push(this.replaceMaterial(object, brushName, isNewTiltExporter));
                     } else {
                         console.warn("No brush name found for material", material.name, brushName);
                     }
@@ -172,7 +177,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         return isTiltGltf;
     }
 
-    async replaceMaterial(mesh, guidOrName) {
+    async replaceMaterial(mesh, guidOrName, isNewTiltExporter = false) {
 
         let renameAttribute = (mesh, oldName, newName) => {
             const attr = mesh.geometry.getAttribute(oldName);
@@ -2125,7 +2130,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             default:
                 console.warn(`Could not find brush with guid ${guidOrName}!`);
         }
-        
+
+        // Set the exporter type flag on the shader
+        if (mesh.material?.uniforms) {
+            mesh.material.uniforms.u_isNewTiltExporter = { value: isNewTiltExporter };
+        }
+
         mesh.onBeforeRender = (renderer, scene, camera, geometry, material, group) => {
             if (material?.uniforms?.u_time) {
                 const elapsedTime = this.clock.getElapsedTime();
