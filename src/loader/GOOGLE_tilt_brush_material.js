@@ -2214,11 +2214,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
             if (material?.alphaToCoverage) {
                 const gl = renderer.getContext();
                 const samples = gl.getParameter(gl.SAMPLES);
-                const a2cEnabled = samples > 0;
-                if (material.uniforms?.u_A2CEnabled) {
-                    material.uniforms.u_A2CEnabled.value = a2cEnabled ? 1.0 : 0.0;
-                }
-                if (a2cEnabled) { // MSAA is available
+                if (samples > 0) { // MSAA is available
                     gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
                 }
             }
