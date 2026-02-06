@@ -34,6 +34,7 @@ in float f_fog_coord;
 
 uniform sampler2D u_MainTex;
 uniform float u_Cutoff;
+uniform float u_A2CEnabled;
 
 // Copyright 2020 The Tilt Brush Authors
 //
@@ -69,6 +70,15 @@ vec3 computeLighting() {
 
 void main() {
     float a = texture(u_MainTex, v_texcoord0).a;
+
+    if (u_A2CEnabled < 0.5) {
+        if (a <= u_Cutoff) {
+            discard;
+        }
+        fragColor.rgb = ApplyFog(computeLighting(), f_fog_coord);
+        fragColor.a = 1.0;
+        return;
+    }
 
     // Calculate mip level for coverage compensation
     vec2 texSize = vec2(textureSize(u_MainTex, 0));
