@@ -818,6 +818,7 @@ const tiltBrushMaterialParams = {
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_MainTex: { value: "CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43/CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43-v10.0-MainTex.png" },
             u_Cutoff: { value: 0.25 },
+            u_A2CEnabled: { value: 1.0 },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
         },
