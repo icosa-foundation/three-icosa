@@ -10157,8 +10157,16 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
+                setAttributeIfExists(mesh, "uv1", "a_texcoord1");
                 setAttributeIfExists(mesh, "uv2", "a_texcoord1");
                 setAttributeIfExists(mesh, "uv3", "a_texcoord1");
+                if (isNewTiltExporter) {
+                    const uv0 = mesh.geometry.getAttribute("a_texcoord0");
+                    const uv1 = mesh.geometry.getAttribute("a_texcoord1");
+                    const uv0HasRadius = uv0 && uv0.itemSize >= 3;
+                    const uv1HasBakedRadius = uv1 && uv1.itemSize >= 1;
+                    if (!uv0HasRadius && !uv1HasBakedRadius) console.warn("Disco brush is missing radius data (need texcoord0.z or baked texcoord1.x). New exporter GLB likely lacks UV bake output.", mesh.name);
+                }
                 shader = await this.tiltShaderLoader.loadAsync("Disco");
                 shader.lights = true;
                 shader.fog = true;
