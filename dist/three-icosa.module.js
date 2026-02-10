@@ -7247,9 +7247,17 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         vertexShader: "DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9/DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9-v10.0-vertex.glsl",
         fragmentShader: "DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9/DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9-v10.0-fragment.glsl",
         side: 2,
-        transparent: false,
+        transparent: true,
+        depthFunc: 2,
         depthWrite: true,
-        depthTest: true
+        depthTest: true,
+        blending: 5,
+        blendDstAlpha: 201,
+        blendDst: 201,
+        blendEquationAlpha: 103,
+        blendEquation: 100,
+        blendSrcAlpha: 201,
+        blendSrc: 201
     },
     "WaveformTube": {
         uniforms: {
@@ -9088,6 +9096,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_fogDensity: {
                 value: 0
             },
+            u_EmissionGain: {
+                value: 0.5
+            },
             u_time: {
                 value: new $fugmd$Vector4()
             }
@@ -9100,7 +9111,13 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: false,
         depthTest: true,
-        blending: 2
+        blending: 5,
+        blendDstAlpha: 201,
+        blendDst: 201,
+        blendEquationAlpha: 103,
+        blendEquation: 100,
+        blendSrcAlpha: 201,
+        blendSrc: 201
     },
     "SmoothHull": {
         uniforms: {

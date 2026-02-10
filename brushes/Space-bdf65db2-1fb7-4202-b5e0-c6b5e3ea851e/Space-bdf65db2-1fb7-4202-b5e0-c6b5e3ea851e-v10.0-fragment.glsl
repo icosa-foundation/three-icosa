@@ -18,7 +18,7 @@ precision mediump float;
 out vec4 fragColor;
 
 uniform vec4 u_time;
-uniform float u_Opacity;
+uniform float u_EmissionGain;
 
 in vec4 v_color;
 in vec2 v_texcoord0;
@@ -107,6 +107,18 @@ float clampedRemap(float x1, float x2, float y1, float y2, float x) {
     return mix(y1, y2, t);
 }
 
+vec4 bloomColor(vec4 color, float gain) {
+    float cmin = length(color.rgb) * 0.05;
+    color.rgb = max(color.rgb, vec3(cmin, cmin, cmin));
+    color = pow(color, vec4(2.2));
+    color.rgb *= 2.0 * exp(gain * 10.0);
+    return color;
+}
+
+vec4 encodeHdr(vec3 color) {
+    return vec4(color, 1.0);
+}
+
 void main() {
     float analog_spread = 0.1;  // how far the analogous hues are from the primary
     float gain = 10.0;
@@ -150,9 +162,7 @@ void main() {
     lum *= smoothstep(rfbm, rfbm - 0.2, r);
 
     color.rgb = HSVToRGB(vec3(final_hue, i_HSV.y, i_HSV.z * lum));
-    color = clamp(color, 0.0, 1.0);  // Unity had saturate() here
-
-    // Apply HDR-style boost and final opacity
-    color.rgb *= color.a * u_Opacity;
-    fragColor = color * u_Opacity;
+    color = clamp(color, 0.0, 1.0);
+    color = bloomColor(color, u_EmissionGain);
+    fragColor = encodeHdr(color.rgb);
 }

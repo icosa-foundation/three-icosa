@@ -152,7 +152,8 @@ vec4 displace(vec4 pos, float timeOffset) {
   vec3 disp = vec3(1,0,0) * curlX(pos.xyz * freq + time, d);
   disp += vec3(0,1,0) * curlY(pos.xyz * freq + time, d);
   disp += vec3(0,0,1) * curlZ(pos.xyz * freq + time, d);
-  pos.xyz = u_ScrollJitterIntensity * disp * 0.05; // Reduced noise scale
+  // Unity uses kDecimetersToWorldUnits; exported geometry is meters, so scale by 0.1.
+  pos.xyz = u_ScrollJitterIntensity * disp * 0.1;
   return pos;
 }
 
