@@ -3522,18 +3522,18 @@ const tiltBrushMaterialParams = {
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_SpecColor: { value: new THREE.Vector3(0.5372549, 0.5372549, 0.5372549) },
             u_Shininess: { value: 0.414 },
-            u_MainTex: { value: "Bubbles-89d104cd-d012-426b-b5b3-bbaee63ac43c/Bubbles-89d104cd-d012-426b-b5b3-bbaee63ac43c-v10.0-MainTex.png" },
-            u_Cutoff: { value: 0.2 },
+            u_MainTex: { value: null },
+            u_Cutoff: { value: 0.5 },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
-            u_BumpMap: { value: "Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6/Charcoal-fde6e778-0f7a-e584-38d6-89d44cee59f6-v10.0-BumpMap.png" },
+            u_BumpMap: { value: null },
             u_BumpMap_TexelSize: { value: new THREE.Vector4(0.0010, 0.0078, 1024, 128) }
         },
         isSurfaceShader: true,
         glslVersion: THREE.GLSL3,
         vertexShader: "ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6/ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6-v10.0-vertex.glsl",
         fragmentShader: "ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6/ConcaveHull-7ae1f880-a517-44a0-99f9-1cab654498c6-v10.0-fragment.glsl",
-        side: 0, // TODO
+        side: 2,
         transparent: false, // TODO
         depthFunc: 2,
         depthWrite: true, // TODO
