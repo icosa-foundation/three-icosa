@@ -750,6 +750,10 @@ const tiltBrushMaterialParams = {
     },
     "Bubbles" : {
         uniforms: {
+            u_time: { value: new THREE.Vector4() },
+            u_ScrollRate: { value: 0.5 },
+            u_ScrollJitterIntensity: { value: 0.02 },
+            u_ScrollJitterFrequency: { value: 0.2 },
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_MainTex: { value: "Bubbles-89d104cd-d012-426b-b5b3-bbaee63ac43c/Bubbles-89d104cd-d012-426b-b5b3-bbaee63ac43c-v10.0-MainTex.png" },
