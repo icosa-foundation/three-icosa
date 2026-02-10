@@ -81,25 +81,22 @@ float curlZ(vec3 p, float d) {
 }
 
 void main() {
-  vec4 worldPos = modelMatrix * a_position;
-
   vec3 perVertOffset = a_texcoord1.xyz;
   float lifetime = u_time.y - a_texcoord1.w;
   float release = clamp(lifetime * 0.1, 0.0, 1.0);
 
   vec3 localMidpointPos = a_position.xyz - perVertOffset;
-  vec4 worldMidpointPos = modelMatrix * vec4(localMidpointPos, 1.0);
 
   float t = lifetime;
   float d = 10.0 + a_color.g * 3.0;
   float freq = 1.5 + a_color.r;
-  vec3 p = worldMidpointPos.xyz * freq + vec3(t);
+  vec3 p = localMidpointPos * freq + vec3(t);
 
   vec3 disp = vec3(curlX(p, d), curlY(p, d), curlZ(p, d));
-  worldMidpointPos.xyz += release * disp * 10.0;
+  localMidpointPos += release * disp * 10.0;
 
-  vec3 perVertOffsetWS = (modelMatrix * vec4(perVertOffset, 0.0)).xyz;
-  worldPos.xyz = worldMidpointPos.xyz + perVertOffsetWS;
+  vec3 localPos = localMidpointPos + perVertOffset;
+  vec4 worldPos = modelMatrix * vec4(localPos, 1.0);
 
   gl_Position = projectionMatrix * viewMatrix * worldPos;
   v_color = a_color;

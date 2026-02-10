@@ -34,6 +34,11 @@ vec4 encodeHdr(vec3 color) {
 void main() {
   // Unity: float4 c = i.color * _TintColor * tex2D(_MainTex, i.texcoord);
   vec4 c = v_color * u_TintColor * texture(u_MainTex, v_texcoord0);
+
+  // Keep alpha cutout behavior so quads don't render as solid cards.
+  if (c.a <= 0.01) {
+    discard;
+  }
   
   // Unity: c = encodeHdr(c.rgb * c.a);
   fragColor = encodeHdr(c.rgb * c.a);

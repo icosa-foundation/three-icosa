@@ -21,6 +21,7 @@ in vec4 a_position;
 in vec3 a_normal;
 in vec4 a_color;
 in vec3 a_texcoord0;
+in vec4 a_texcoord1;
 
 out vec4 v_color;
 out vec3 v_normal;  // Camera-space normal.
@@ -45,6 +46,7 @@ uniform vec4 u_time;
 uniform float u_ScrollRate;
 uniform float u_ScrollJitterIntensity;
 uniform float u_ScrollJitterFrequency;
+uniform bool u_isNewTiltExporter;
 
 // Noise functions from Noise.cginc
 float mod289(float x) {
@@ -152,8 +154,8 @@ vec4 displace(vec4 pos, float timeOffset) {
   vec3 disp = vec3(1,0,0) * curlX(pos.xyz * freq + time, d);
   disp += vec3(0,1,0) * curlY(pos.xyz * freq + time, d);
   disp += vec3(0,0,1) * curlZ(pos.xyz * freq + time, d);
-  // Unity uses kDecimetersToWorldUnits; exported geometry is meters, so scale by 0.1.
-  pos.xyz = u_ScrollJitterIntensity * disp * 0.1;
+  // Match Unity behavior (kDecimetersToWorldUnits = 1.0 for non-toolkit builds).
+  pos.xyz = u_ScrollJitterIntensity * disp;
   return pos;
 }
 
@@ -162,10 +164,13 @@ void main() {
   vec3 normal = a_normal;
   
   float radius = a_texcoord0.z;
+  if (u_isNewTiltExporter && radius <= 0.000001) {
+    radius = a_texcoord1.x;
+  }
 
-  // Bulge displacement - increased scale for better visibility
+  // Bulge displacement
   float wave = sin(a_texcoord0.x * 3.14159);
-  vec3 wave_displacement = radius * normal * wave * 2.0; // Scale up the bulge
+  vec3 wave_displacement = radius * normal * wave;
   vertex.xyz += wave_displacement;
   
   // Noise displacement
