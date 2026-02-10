@@ -13,43 +13,95 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Default shader for GlTF web preview.
-//
-// This shader is used as a fall-back when a brush-specific shader is
-// unavailable.
-
 in vec4 a_position;
 in vec4 a_color;
 in vec2 a_texcoord0;
-in vec4 a_tangent;
+in vec4 a_texcoord1;
 
 out vec4 v_color;
 out vec2 v_texcoord0;
-out vec4 v_unbloomedColor;
 
-uniform mat4 modelViewMatrix;
+uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
-uniform float u_EmissionGain;
+uniform vec4 u_time;
 
-vec4 bloomColor(vec4 color, float gain) {
-  // Guarantee that there's at least a little bit of all 3 channels.
-  // This makes fully-saturated strokes (which only have 2 non-zero
-  // color channels) eventually clip to white rather than to a secondary.
-  float cmin = length(color.rgb) * .05;
-  color.rgb = max(color.rgb, vec3(cmin, cmin, cmin));
-  // If we try to remove this pow() from .a, it brightens up
-  // pressure-sensitive strokes; looks better as-is.
-  color.r = pow(color.r, 2.2);
-  color.g = pow(color.g, 2.2);
-  color.b = pow(color.b, 2.2);
-  color.a = pow(color.a, 2.2);
-  color.rgb *= 2.0 * exp(gain * 10.0);
-  return color;
+vec3 hash3(vec3 p) {
+  p = vec3(dot(p, vec3(127.1, 311.7, 74.7)),
+           dot(p, vec3(269.5, 183.3, 246.1)),
+           dot(p, vec3(113.5, 271.9, 124.6)));
+  return fract(sin(p) * 43758.5453123);
+}
+
+float noise3(vec3 p) {
+  vec3 i = floor(p);
+  vec3 f = fract(p);
+  f = f * f * (3.0 - 2.0 * f);
+
+  float n000 = dot(hash3(i + vec3(0.0, 0.0, 0.0)), f - vec3(0.0, 0.0, 0.0));
+  float n100 = dot(hash3(i + vec3(1.0, 0.0, 0.0)), f - vec3(1.0, 0.0, 0.0));
+  float n010 = dot(hash3(i + vec3(0.0, 1.0, 0.0)), f - vec3(0.0, 1.0, 0.0));
+  float n110 = dot(hash3(i + vec3(1.0, 1.0, 0.0)), f - vec3(1.0, 1.0, 0.0));
+  float n001 = dot(hash3(i + vec3(0.0, 0.0, 1.0)), f - vec3(0.0, 0.0, 1.0));
+  float n101 = dot(hash3(i + vec3(1.0, 0.0, 1.0)), f - vec3(1.0, 0.0, 1.0));
+  float n011 = dot(hash3(i + vec3(0.0, 1.0, 1.0)), f - vec3(0.0, 1.0, 1.0));
+  float n111 = dot(hash3(i + vec3(1.0, 1.0, 1.0)), f - vec3(1.0, 1.0, 1.0));
+
+  float nx00 = mix(n000, n100, f.x);
+  float nx10 = mix(n010, n110, f.x);
+  float nx01 = mix(n001, n101, f.x);
+  float nx11 = mix(n011, n111, f.x);
+  float nxy0 = mix(nx00, nx10, f.y);
+  float nxy1 = mix(nx01, nx11, f.y);
+  return mix(nxy0, nxy1, f.z);
+}
+
+float curlX(vec3 p, float d) {
+  float y1 = noise3(p + vec3(0.0, d, 0.0));
+  float y2 = noise3(p - vec3(0.0, d, 0.0));
+  float z1 = noise3(p + vec3(0.0, 0.0, d));
+  float z2 = noise3(p - vec3(0.0, 0.0, d));
+  return (y1 - y2 - (z1 - z2)) / (2.0 * d);
+}
+
+float curlY(vec3 p, float d) {
+  float z1 = noise3(p + vec3(0.0, 0.0, d));
+  float z2 = noise3(p - vec3(0.0, 0.0, d));
+  float x1 = noise3(p + vec3(d, 0.0, 0.0));
+  float x2 = noise3(p - vec3(d, 0.0, 0.0));
+  return (z1 - z2 - (x1 - x2)) / (2.0 * d);
+}
+
+float curlZ(vec3 p, float d) {
+  float x1 = noise3(p + vec3(d, 0.0, 0.0));
+  float x2 = noise3(p - vec3(d, 0.0, 0.0));
+  float y1 = noise3(p + vec3(0.0, d, 0.0));
+  float y2 = noise3(p - vec3(0.0, d, 0.0));
+  return (x1 - x2 - (y1 - y2)) / (2.0 * d);
 }
 
 void main() {
-  gl_Position = projectionMatrix * modelViewMatrix * a_position;
-  v_color = bloomColor(a_color, u_EmissionGain);
-  v_unbloomedColor = a_color;
+  vec4 worldPos = modelMatrix * a_position;
+
+  vec3 perVertOffset = a_texcoord1.xyz;
+  float lifetime = u_time.y - a_texcoord1.w;
+  float release = clamp(lifetime * 0.1, 0.0, 1.0);
+
+  vec3 localMidpointPos = a_position.xyz - perVertOffset;
+  vec4 worldMidpointPos = modelMatrix * vec4(localMidpointPos, 1.0);
+
+  float t = lifetime;
+  float d = 10.0 + a_color.g * 3.0;
+  float freq = 1.5 + a_color.r;
+  vec3 p = worldMidpointPos.xyz * freq + vec3(t);
+
+  vec3 disp = vec3(curlX(p, d), curlY(p, d), curlZ(p, d));
+  worldMidpointPos.xyz += release * disp * 10.0;
+
+  vec3 perVertOffsetWS = (modelMatrix * vec4(perVertOffset, 0.0)).xyz;
+  worldPos.xyz = worldMidpointPos.xyz + perVertOffsetWS;
+
+  gl_Position = projectionMatrix * viewMatrix * worldPos;
+  v_color = a_color;
   v_texcoord0 = a_texcoord0;
 }

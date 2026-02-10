@@ -7039,6 +7039,15 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_fogDensity: {
                 value: 0
             },
+            u_MainTex: {
+                value: "WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7/WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7-v10.0-MainTex.png"
+            },
+            u_TintColor: {
+                value: new $fugmd$Vector4(0.5, 0.5, 0.5, 0.5)
+            },
+            u_Opacity: {
+                value: 1.0
+            },
             u_time: {
                 value: new $fugmd$Vector4()
             }
@@ -11284,6 +11293,9 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 setAttributeIfExists(mesh, "uv", "a_texcoord0");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
+                setAttributeIfExists(mesh, "uv1", "a_texcoord1");
+                setAttributeIfExists(mesh, "uv2", "a_texcoord1");
+                setAttributeIfExists(mesh, "uv3", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("WaveformParticles");
                 mesh.material = shader;
                 mesh.material.name = "material_WaveformParticles";
