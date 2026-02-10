@@ -40,6 +40,7 @@ uniform mat4 projectionMatrix;
 uniform mat3 normalMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
+uniform bool u_isNewTiltExporter;
 
 uniform vec4 u_time;
 
@@ -48,9 +49,14 @@ void main() {
   vec4 worldPos = modelMatrix * a_position;
   float size = length(a_texcoord1.xyz);
 
-  // Quantize vertices
-  float q = (1. / size) * .5;
-  worldPos.xyz = ceil(worldPos.xyz * q) / q;
+
+
+
+	if (!u_isNewTiltExporter) {
+	  // Quantize vertices
+	  float q = (1. / size) * .5;
+	  worldPos.xyz = ceil(worldPos.xyz * q) / q;
+	}
 
   gl_Position = projectionMatrix * viewMatrix * worldPos;
   // Transform normal and tangent to view space

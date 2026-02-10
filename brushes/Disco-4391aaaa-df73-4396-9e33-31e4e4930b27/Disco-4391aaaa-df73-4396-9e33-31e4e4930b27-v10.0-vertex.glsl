@@ -22,6 +22,7 @@ in vec4 a_position;
 in vec3 a_normal;
 in vec4 a_color;
 in vec3 a_texcoord0;
+in vec4 a_texcoord1;
 
 out vec4 v_color;
 out vec3 v_normal;  // Camera-space normal.
@@ -38,13 +39,21 @@ uniform mat4 projectionMatrix;
 uniform mat3 normalMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
+uniform bool u_isNewTiltExporter;
 
 uniform vec4 u_time;
 
 void main() {
 
   float t, uTileRate, waveIntensity;
-  float radius = a_texcoord0.z;  
+  float radius = a_texcoord0.z;
+  if (u_isNewTiltExporter) {
+    // New exporter can bake radius into UV1.x because UV0.z may be truncated.
+    float bakedRadius = a_texcoord1.x;
+    if (bakedRadius > 0.000001) {
+      radius = bakedRadius;
+    }
+  }
 
   t = u_time.z;
   uTileRate = 10.0;

@@ -756,6 +756,18 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
     },
     "Bubbles": {
         uniforms: {
+            u_time: {
+                value: new $fugmd$Vector4()
+            },
+            u_ScrollRate: {
+                value: 0.5
+            },
+            u_ScrollJitterIntensity: {
+                value: 0.02
+            },
+            u_ScrollJitterFrequency: {
+                value: 0.2
+            },
             u_SceneLight_0_matrix: {
                 value: [
                     1,
@@ -10143,6 +10155,10 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
                 renameAttribute(mesh, "texcoord_0", "a_texcoord0");
                 setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
+                setAttributeIfExists(mesh, "uv2", "a_texcoord1");
+                setAttributeIfExists(mesh, "uv3", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("Disco");
                 shader.lights = true;
                 shader.fog = true;
