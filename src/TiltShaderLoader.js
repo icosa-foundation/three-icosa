@@ -831,11 +831,11 @@ const tiltBrushMaterialParams = {
         vertexShader: "CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43/CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43-v10.0-vertex.glsl",
         fragmentShader: "CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43/CoarseBristles-1161af82-50cf-47db-9706-0c3576d43c43-v10.0-fragment.glsl",
         side: 2,
-        transparent: false,
+        transparent: true,
         depthFunc: 2,
         depthWrite: true,
         depthTest: true,
-        blending: 0
+        blending: 1
     },
     "Comet" : {
         uniforms: {
