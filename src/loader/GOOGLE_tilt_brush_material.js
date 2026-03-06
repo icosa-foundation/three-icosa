@@ -2159,6 +2159,69 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 mesh.material.name = "material_PassthroughHull";
                 break;
 
+            case "b3e7f8c2-4d5a-1e9b-6c8f-3a7d2f1e9c4b":
+            case "QuillCube":
+                mesh.geometry.name = "geometry_QuillCube";
+                setAttributeIfExists(mesh, "position", "a_position");
+                setAttributeIfExists(mesh, "normal", "a_normal");
+                copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
+                shader = await this.tiltShaderLoader.loadAsync("QuillCylinder");
+                mesh.material = shader;
+                mesh.material.name = "material_QuillCube";
+                break;
+
+            case "f1c4e3e7-2a9f-4b5d-8c3e-7d9a1f8e6b4c":
+            case "QuillCylinder":
+                mesh.geometry.name = "geometry_QuillCylinder";
+                setAttributeIfExists(mesh, "position", "a_position");
+                setAttributeIfExists(mesh, "normal", "a_normal");
+                copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
+                shader = await this.tiltShaderLoader.loadAsync("QuillCylinder");
+                mesh.material = shader;
+                mesh.material.name = "material_QuillCylinder";
+                break;
+
+            case "a2d5f6b8-9c1e-4f3a-7b8d-2e6c9f4a1d5b":
+            case "QuillEllipse":
+                mesh.geometry.name = "geometry_QuillEllipse";
+                setAttributeIfExists(mesh, "position", "a_position");
+                setAttributeIfExists(mesh, "normal", "a_normal");
+                copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
+                shader = await this.tiltShaderLoader.loadAsync("QuillEllipse");
+                mesh.material = shader;
+                mesh.material.name = "material_QuillEllipse";
+                break;
+
+            case "c4f8b3e2-9d1a-5e7f-4c3b-8a6d2f9e1c7b":
+            case "QuillRibbon":
+                mesh.geometry.name = "geometry_QuillRibbon";
+                setAttributeIfExists(mesh, "position", "a_position");
+                setAttributeIfExists(mesh, "normal", "a_normal");
+                copyFixColorAttribute(mesh);
+                renameAttribute(mesh, "_tb_unity_texcoord_0", "a_texcoord0");
+                renameAttribute(mesh, "texcoord_0", "a_texcoord0");
+                setAttributeIfExists(mesh, "uv", "a_texcoord0");
+                renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
+                renameAttribute(mesh, "texcoord_1", "a_texcoord1");
+                shader = await this.tiltShaderLoader.loadAsync("QuillRibbon");
+                mesh.material = shader;
+                mesh.material.name = "material_QuillRibbon";
+                break;
 
             default:
                 console.warn(`Could not find brush with guid ${guidOrName}!`);

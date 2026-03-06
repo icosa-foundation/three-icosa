@@ -762,9 +762,51 @@ export class GLTFGoogleTiltBrushTechniquesExtension {
                         "guid": "4465b5ef-3605-bec4-2b3e-6b04508ddb6b"
                     }
                 }
+            },
+
+            "b3e7f8c2-4d5a-1e9b-6c8f-3a7d2f1e9c4b": {
+                "alphaMode": "OPAQUE",
+                "doubleSided": true,
+                "name": "brush_QuillCube",
+                "extensions": {
+                    "GOOGLE_tilt_brush_material": {
+                        "guid": "b3e7f8c2-4d5a-1e9b-6c8f-3a7d2f1e9c4b"
+                    }
+                }
+            },
+
+            "f1c4e3e7-2a9f-4b5d-8c3e-7d9a1f8e6b4c": {
+                "alphaMode": "OPAQUE",
+                "doubleSided": true,
+                "name": "brush_QuillCylinder",
+                "extensions": {
+                    "GOOGLE_tilt_brush_material": {
+                        "guid": "f1c4e3e7-2a9f-4b5d-8c3e-7d9a1f8e6b4c"
+                    }
+                }
+            },
+
+            "a2d5f6b8-9c1e-4f3a-7b8d-2e6c9f4a1d5b": {
+                "alphaMode": "OPAQUE",
+                "doubleSided": true,
+                "name": "brush_QuillEllipse",
+                "extensions": {
+                    "GOOGLE_tilt_brush_material": {
+                        "guid": "a2d5f6b8-9c1e-4f3a-7b8d-2e6c9f4a1d5b"
+                    }
+                }
+            },
+
+            "c4f8b3e2-9d1a-5e7f-4c3b-8a6d2f9e1c7b": {
+                "alphaMode": "OPAQUE",
+                "doubleSided": true,
+                "name": "brush_QuillRibbon",
+                "extensions": {
+                    "GOOGLE_tilt_brush_material": {
+                        "guid": "c4f8b3e2-9d1a-5e7f-4c3b-8a6d2f9e1c7b"
+                    }
+                }
             }
-
-
         };
 
         // Quick repair of path if required

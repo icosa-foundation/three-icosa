@@ -668,6 +668,23 @@ export class TiltShaderLoader extends THREE.Loader {
             case "cc131ff8-0d17-4677-93e0-d7cd19fea9ac":
             case "PassthroughHull":
                 return "PassthroughHull";
+
+            case "b3e7f8c2-4d5a-1e9b-6c8f-3a7d2f1e9c4b":
+            case "QuillCube":
+                return "QuillCube";
+
+            case "f1c4e3e7-2a9f-4b5d-8c3e-7d9a1f8e6b4c":
+            case "QuillCylinder":
+                return "QuillCylinder";
+
+            case "a2d5f6b8-9c1e-4f3a-7b8d-2e6c9f4a1d5b":
+            case "QuillEllipse":
+                return "QuillEllipse";
+
+            case "c4f8b3e2-9d1a-5e7f-4c3b-8a6d2f9e1c7b":
+            case "QuillRibbon":
+                return "QuillRibbon";
+
         }
     }
 }
@@ -3626,4 +3643,72 @@ const tiltBrushMaterialParams = {
         depthTest: true,
         blending: 0
     },
+    "QuillCube": {
+        uniforms: {
+            u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
+            u_fogDensity: { value: 0 },
+        },
+        glslVersion: THREE.GLSL3,
+        vertexShader: "QuillCube-b3e7f8c2-4d5a-1e9b-6c8f-3a7d2f1e9c4b/QuillCube-b3e7f8c2-4d5a-1e9b-6c8f-3a7d2f1e9c4b-v10.0-vertex.glsl",
+        fragmentShader: "QuillCube-b3e7f8c2-4d5a-1e9b-6c8f-3a7d2f1e9c4b/QuillCube-b3e7f8c2-4d5a-1e9b-6c8f-3a7d2f1e9c4b-v10.0-fragment.glsl",
+        side: 2,
+        transparent: false,
+        depthFunc: 2,
+        depthWrite: true,
+        depthTest: true,
+        blending: 0
+    },
+    "QuillCylinder": {
+        uniforms: {
+            u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
+            u_fogDensity: { value: 0 },
+        },
+        glslVersion: THREE.GLSL3,
+        vertexShader: "QuillCylinder-f1c4e3e7-2a9f-4b5d-8c3e-7d9a1f8e6b4c/QuillCylinder-f1c4e3e7-2a9f-4b5d-8c3e-7d9a1f8e6b4c-v10.0-vertex.glsl",
+        fragmentShader: "QuillCylinder-f1c4e3e7-2a9f-4b5d-8c3e-7d9a1f8e6b4c/QuillCylinder-f1c4e3e7-2a9f-4b5d-8c3e-7d9a1f8e6b4c-v10.0-fragment.glsl",
+        side: 2,
+        transparent: false,
+        depthFunc: 2,
+        depthWrite: true,
+        depthTest: true,
+        blending: 0
+    },
+    "QuillEllipse": {
+        uniforms: {
+            u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
+            u_fogDensity: { value: 0 },
+        },
+        glslVersion: THREE.GLSL3,
+        vertexShader: "QuillEllipse-a2d5f6b8-9c1e-4f3a-7b8d-2e6c9f4a1d5b/QuillEllipse-a2d5f6b8-9c1e-4f3a-7b8d-2e6c9f4a1d5b-v10.0-vertex.glsl",
+        fragmentShader: "QuillEllipse-a2d5f6b8-9c1e-4f3a-7b8d-2e6c9f4a1d5b/QuillEllipse-a2d5f6b8-9c1e-4f3a-7b8d-2e6c9f4a1d5b-v10.0-fragment.glsl",
+        side: 2,
+        transparent: false,
+        depthFunc: 2,
+        depthWrite: true,
+        depthTest: true,
+        blending: 0
+    },
+    "QuillRibbon": {
+        uniforms: {
+            u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+            u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
+            u_fogDensity: { value: 0 },
+        },
+        glslVersion: THREE.GLSL3,
+        vertexShader: "QuillRibbon-c4f8b3e2-9d1a-5e7f-4c3b-8a6d2f9e1c7b/QuillRibbon-c4f8b3e2-9d1a-5e7f-4c3b-8a6d2f9e1c7b-v10.0-vertex.glsl",
+        fragmentShader: "QuillRibbon-c4f8b3e2-9d1a-5e7f-4c3b-8a6d2f9e1c7b/QuillRibbon-c4f8b3e2-9d1a-5e7f-4c3b-8a6d2f9e1c7b-v10.0-fragment.glsl",
+        side: 2,
+        transparent: false,
+        depthFunc: 2,
+        depthWrite: true,
+        depthTest: true,
+        blending: 0
+    }
 }
