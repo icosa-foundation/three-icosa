@@ -9905,6 +9905,24 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_Cutoff: {
+                value: 0.067
+            },
+            u_A2CEnabled: {
+                value: 1.0
+            },
+            u_DitherStrength: {
+                value: 0.5
+            },
+            u_OrderedDither: {
+                value: 0.0
+            },
+            u_AlphaBias: {
+                value: 0.0
+            },
+            u_AlphaPower: {
+                value: 1.0
+            },
             u_fogColor: {
                 value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
@@ -9963,6 +9981,24 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_Cutoff: {
+                value: 0.067
+            },
+            u_A2CEnabled: {
+                value: 1.0
+            },
+            u_DitherStrength: {
+                value: 0.5
+            },
+            u_OrderedDither: {
+                value: 0.0
+            },
+            u_AlphaBias: {
+                value: 0.0
+            },
+            u_AlphaPower: {
+                value: 1.0
             },
             u_fogColor: {
                 value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
@@ -10023,6 +10059,24 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_Cutoff: {
+                value: 0.067
+            },
+            u_A2CEnabled: {
+                value: 1.0
+            },
+            u_DitherStrength: {
+                value: 0.5
+            },
+            u_OrderedDither: {
+                value: 0.0
+            },
+            u_AlphaBias: {
+                value: 0.0
+            },
+            u_AlphaPower: {
+                value: 1.0
+            },
             u_fogColor: {
                 value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
             },
@@ -10081,6 +10135,24 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                     0,
                     1
                 ]
+            },
+            u_Cutoff: {
+                value: 0.067
+            },
+            u_A2CEnabled: {
+                value: 1.0
+            },
+            u_DitherStrength: {
+                value: 0.5
+            },
+            u_OrderedDither: {
+                value: 0.0
+            },
+            u_AlphaBias: {
+                value: 0.0
+            },
+            u_AlphaPower: {
+                value: 1.0
             },
             u_fogColor: {
                 value: new $fugmd$Vector3(0.0196, 0.0196, 0.0196)
@@ -11968,6 +12040,7 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("QuillCylinder");
+                shader.alphaToCoverage = true;
                 mesh.material = shader;
                 mesh.material.name = "material_QuillCube";
                 break;
@@ -11983,6 +12056,7 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("QuillCylinder");
+                shader.alphaToCoverage = true;
                 mesh.material = shader;
                 mesh.material.name = "material_QuillCylinder";
                 break;
@@ -11998,6 +12072,7 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("QuillEllipse");
+                shader.alphaToCoverage = true;
                 mesh.material = shader;
                 mesh.material.name = "material_QuillEllipse";
                 break;
@@ -12013,6 +12088,7 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("QuillRibbon");
+                shader.alphaToCoverage = true;
                 mesh.material = shader;
                 mesh.material.name = "material_QuillRibbon";
                 break;

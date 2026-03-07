@@ -2171,6 +2171,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("QuillCylinder");
+                shader.alphaToCoverage = true;
                 mesh.material = shader;
                 mesh.material.name = "material_QuillCube";
                 break;
@@ -2187,6 +2188,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("QuillCylinder");
+                shader.alphaToCoverage = true;
                 mesh.material = shader;
                 mesh.material.name = "material_QuillCylinder";
                 break;
@@ -2203,6 +2205,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("QuillEllipse");
+                shader.alphaToCoverage = true;
                 mesh.material = shader;
                 mesh.material.name = "material_QuillEllipse";
                 break;
@@ -2219,6 +2222,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
                 shader = await this.tiltShaderLoader.loadAsync("QuillRibbon");
+                shader.alphaToCoverage = true;
                 mesh.material = shader;
                 mesh.material.name = "material_QuillRibbon";
                 break;
