@@ -16,7 +16,7 @@
 // Fairy brush - procedural animated particle dots
 // Ported from Unity Fairy.shader
 
-precision mediump float;
+precision highp float;
 
 out vec4 fragColor;
 
