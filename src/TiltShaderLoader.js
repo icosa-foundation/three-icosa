@@ -50,11 +50,59 @@ function getDefaultNormalTexture() {
     return defaultNormalTexture;
 }
 
+function cloneMaterialParams(materialParams) {
+    return {
+        ...materialParams,
+        uniforms: {
+            ...materialParams.uniforms
+        }
+    };
+}
+
 export class TiltShaderLoader extends THREE.Loader {
     constructor( manager ) {
         super( manager );
         
         this.loadedMaterials = {};
+    }
+
+    buildShadowSettings(materialParams) {
+        const isOpaqueSurfaceBrush =
+            materialParams.isSurfaceShader === true &&
+            materialParams.transparent === false &&
+            materialParams.depthWrite === true &&
+            materialParams.blending === THREE.NormalBlending;
+
+        const mainTex = materialParams.uniforms?.u_MainTex?.value;
+        const cutoff = materialParams.uniforms?.u_Cutoff?.value;
+
+        return {
+            enabled: isOpaqueSurfaceBrush,
+            alphaTest: typeof cutoff === 'number' ? cutoff : 0,
+            map: mainTex?.isTexture ? mainTex : null
+        };
+    }
+
+    createStopgapShadowMaterial(material, shadowSettings, isPointLight = false) {
+        if (!shadowSettings?.enabled) {
+            return null;
+        }
+
+        const shadowMaterial = isPointLight
+            ? new THREE.MeshDistanceMaterial()
+            : new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking });
+
+        shadowMaterial.name = `${material.name || 'TiltBrush'}_${isPointLight ? 'distance' : 'depth'}`;
+        shadowMaterial.side = material.side;
+        shadowMaterial.map = shadowSettings.map;
+        shadowMaterial.alphaTest = shadowSettings.alphaTest;
+        shadowMaterial.vertexColors = true;
+        shadowMaterial.transparent = false;
+        shadowMaterial.depthWrite = true;
+        shadowMaterial.depthTest = true;
+        shadowMaterial.clipShadows = true;
+        shadowMaterial.needsUpdate = true;
+        return shadowMaterial;
     }
     
     async loadShaderIncludes(relativePath) {
@@ -87,9 +135,11 @@ export class TiltShaderLoader extends THREE.Loader {
         textureLoader.setPath(this.path);
         textureLoader.setWithCredentials( this.withCredentials );
 
-        const materialParams = tiltBrushMaterialParams[brushName];
+        const sourceMaterialParams = tiltBrushMaterialParams[brushName];
 
-        if (!materialParams) return;
+        if (!sourceMaterialParams) return;
+
+        const materialParams = cloneMaterialParams(sourceMaterialParams);
 
         // Load shaders
         const vertexShaderText = await loader.loadAsync(materialParams.vertexShader)
