@@ -67,12 +67,11 @@ export class TiltShaderLoader extends THREE.Loader {
     }
 
     buildShadowSettings(materialParams) {
-        // tiltBrushMaterialParams uses repo-local numeric blending values.
-        // In this table, 0 is the opaque/default blend mode that should cast shadows.
         const isOpaqueSurfaceBrush =
+            materialParams.isSurfaceShader === true &&
             materialParams.transparent === false &&
             materialParams.depthWrite === true &&
-            materialParams.blending === 0;
+            materialParams.blending === THREE.NormalBlending;
 
         const mainTex = materialParams.uniforms?.u_MainTex?.value;
         const cutoff = materialParams.uniforms?.u_Cutoff?.value;
