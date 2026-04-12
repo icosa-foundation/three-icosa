@@ -2336,6 +2336,10 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 }
             }
 
+            if (material?.uniforms?.receiveShadow) {
+                material.uniforms.receiveShadow.value = mesh.receiveShadow === true;
+            }
+
             // Fog
             if(material?.uniforms?.fogColor?.value) {
                 if(material.uniforms.u_fogColor) {
