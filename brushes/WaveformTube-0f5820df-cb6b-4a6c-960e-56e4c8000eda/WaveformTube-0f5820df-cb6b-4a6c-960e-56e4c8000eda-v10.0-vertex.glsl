@@ -53,6 +53,8 @@ bloomColor(vec4 color, float gain) {
   return color;
 }
 
+uniform mat4 modelMatrix;
+
 void main() {
   gl_Position = projectionMatrix * modelViewMatrix * a_position;
   f_fog_coord = gl_Position.z;

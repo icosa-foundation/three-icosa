@@ -186,12 +186,29 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         }
 
         const shadowSettings = this.tiltShaderLoader.buildShadowSettings(materialParams);
+        const shadowEnabled = shadowSettings?.enabled === true;
+        const receiveShadowEnabled = shadowEnabled && this.tiltShaderLoader.materialSupportsStopgapShadowReceiving(material);
 
-        if (!shadowSettings?.enabled) {
+        console.log(
+            `[TB_SHADOW_AUDIT_20260410] brush=${brushName} castShadow=${shadowEnabled} ` +
+            `receiveShadow=${receiveShadowEnabled} ` +
+            `isSurfaceShader=${materialParams.isSurfaceShader === true} ` +
+            `transparent=${materialParams.transparent === true} ` +
+            `depthWrite=${materialParams.depthWrite === true} ` +
+            `blending=${materialParams.blending}`
+        );
+
+        if (!shadowEnabled) {
             return;
         }
 
         mesh.castShadow = true;
+        mesh.receiveShadow = receiveShadowEnabled;
+        material.lights = true;
+        if (material.uniforms?.receiveShadow) {
+            material.uniforms.receiveShadow.value = receiveShadowEnabled;
+        }
+        material.needsUpdate = true;
         mesh.customDepthMaterial = this.tiltShaderLoader.createStopgapShadowMaterial(material, shadowSettings, false);
         mesh.customDistanceMaterial = this.tiltShaderLoader.createStopgapShadowMaterial(material, shadowSettings, true);
     }

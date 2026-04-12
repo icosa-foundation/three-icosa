@@ -36,6 +36,8 @@ uniform mat3 normalMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
 
+uniform mat4 modelMatrix;
+
 void main() {
   gl_Position = projectionMatrix * modelViewMatrix * a_position;
   // Transform normal and tangent to view space

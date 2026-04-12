@@ -37,6 +37,8 @@ uniform mat4 u_SceneLight_1_matrix;
 
 uniform float u_SqueezeAmount;
 
+uniform mat4 modelMatrix;
+
 void main() {
 //  float radius = a_texcoord0.z;
   float radius = 0.05;  // Temp fix

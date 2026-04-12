@@ -36,6 +36,8 @@ uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
 uniform vec4 u_time;
 
+uniform mat4 modelMatrix;
+
 void main() {
   vec4 pos = a_position;
   

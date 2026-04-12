@@ -41,6 +41,8 @@ uniform mat3 normalMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
 
+uniform mat4 modelMatrix;
+
 void main() {
   float envelope = sin(a_texcoord0.x * 3.14159);
   float widthMultiplier = 1.0 - envelope;

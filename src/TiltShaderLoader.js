@@ -17,6 +17,7 @@ import * as THREE from 'three';
 // Cached default textures to prevent creating multiple instances
 let defaultWhiteTexture = null;
 let defaultNormalTexture = null;
+const shadowReceivingMaterials = new WeakSet();
 
 function getDefaultWhiteTexture() {
     if (!defaultWhiteTexture) {
@@ -105,6 +106,36 @@ export class TiltShaderLoader extends THREE.Loader {
         shadowMaterial.needsUpdate = true;
         return shadowMaterial;
     }
+
+    supportsStopgapShadowReceiving(vertexShaderText, fragmentShaderText) {
+        return /in\s+vec3\s+a_normal\s*;/.test(vertexShaderText) &&
+            /uniform\s+mat4\s+modelMatrix\s*;/.test(vertexShaderText) &&
+            /vec3\s+lightOut0\s*=/.test(fragmentShaderText);
+    }
+
+    injectShadowReceivingVertex(vertexShaderText) {
+        const injectedVertexShaderText = vertexShaderText.replace(
+            /void\s+main\s*\(\s*\)\s*{([\s\S]*)}\s*$/,
+            (match, body) => `void main() {${body}
+  TiltBrushSetShadowCoords(modelMatrix * a_position, a_normal, modelMatrix);
+}
+`
+        );
+
+        return injectedVertexShaderText;
+    }
+
+    injectShadowReceivingFragment(fragmentShaderText) {
+        return fragmentShaderText.replace(
+            /vec3\s+lightOut0\s*=\s*([\s\S]*?);/,
+            (match) => `${match}
+  lightOut0 *= TiltBrushGetShadowMask();`
+        );
+    }
+
+    materialSupportsStopgapShadowReceiving(material) {
+        return shadowReceivingMaterials.has(material);
+    }
     
     async loadShaderIncludes(relativePath) {
         const loader = new THREE.FileLoader(this.manager);
@@ -143,7 +174,7 @@ export class TiltShaderLoader extends THREE.Loader {
         const materialParams = cloneMaterialParams(sourceMaterialParams);
 
         // Load shaders
-        const vertexShaderText = await loader.loadAsync(materialParams.vertexShader)
+        let vertexShaderText = await loader.loadAsync(materialParams.vertexShader);
         let fragmentShaderText = await loader.loadAsync(materialParams.fragmentShader);
         if (!this.fogShaderCode) {
             this.fogShaderCode = await this.loadShaderIncludes('includes/FogShaderIncludes.glsl');
@@ -156,6 +187,43 @@ export class TiltShaderLoader extends THREE.Loader {
                 this.surfaceShaderCode = await this.loadShaderIncludes('includes/SurfaceShaderIncludes.glsl');
             }
             fragmentShaderText = this.surfaceShaderCode + '\n' + fragmentShaderText;
+        }
+
+        const shadowSettings = this.buildShadowSettings(materialParams);
+        const shadowReceiveSupported = shadowSettings.enabled &&
+            this.supportsStopgapShadowReceiving(vertexShaderText, fragmentShaderText);
+        let shadowReceiveEligible = false;
+
+        console.log(
+            `[TB_SHADOW_PIPELINE_20260410_B] brush=${brushName} ` +
+            `castCandidate=${shadowSettings.enabled === true} ` +
+            `receiveSupported=${shadowReceiveSupported} ` +
+            `hasModelMatrix=${/uniform\s+mat4\s+modelMatrix\s*;/.test(vertexShaderText)} ` +
+            `hasLightOut0=${/vec3\s+lightOut0\s*=/.test(fragmentShaderText)}`
+        );
+
+        if (shadowReceiveSupported) {
+            if (!this.shadowReceiveVertexCode) {
+                this.shadowReceiveVertexCode = await this.loadShaderIncludes('includes/ShadowReceiveVertexIncludes.glsl');
+            }
+            if (!this.shadowReceiveFragmentCode) {
+                this.shadowReceiveFragmentCode = await this.loadShaderIncludes('includes/ShadowReceiveFragmentIncludes.glsl');
+            }
+
+            const injectedVertexShaderText = this.injectShadowReceivingVertex(vertexShaderText);
+            const injectedFragmentShaderText = this.injectShadowReceivingFragment(fragmentShaderText);
+
+            shadowReceiveEligible = injectedVertexShaderText !== vertexShaderText &&
+                injectedFragmentShaderText !== fragmentShaderText;
+
+            if (shadowReceiveEligible) {
+                vertexShaderText = this.shadowReceiveVertexCode + '\n' + injectedVertexShaderText;
+                fragmentShaderText = this.shadowReceiveFragmentCode + '\n' + injectedFragmentShaderText;
+                materialParams.uniforms.receiveShadow = { value: true };
+                console.log(`[TB_SHADOW_PIPELINE_20260410_B] brush=${brushName} receiveInjection=applied`);
+            } else {
+                console.warn(`[TB_SHADOW_PIPELINE_20260410_B] brush=${brushName} receiveInjection=skipped`);
+            }
         }
 
         // Remove custom flag before passing to Three.js
@@ -246,6 +314,9 @@ export class TiltShaderLoader extends THREE.Loader {
         }
 
         let rawMaterial = new THREE.RawShaderMaterial(materialParams);
+        if (shadowReceiveEligible) {
+            shadowReceivingMaterials.add(rawMaterial);
+        }
         this.loadedMaterials[brushName] = rawMaterial;
         onLoad( scope.parse( rawMaterial ) );
     }

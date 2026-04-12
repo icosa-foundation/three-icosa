@@ -38,7 +38,9 @@ uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
 uniform vec4 u_time;
 
-void  main() {
+uniform mat4 modelMatrix;
+
+void main() {
   vec4 worldPos = a_position;
   
   // Create per-quad variation using hash of quad index

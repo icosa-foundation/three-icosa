@@ -47,6 +47,8 @@ vec4 bloomColor(vec4 color, float gain) {
 	return color;
 }
 
+uniform mat4 modelMatrix;
+
 void main() {
   gl_Position = projectionMatrix * modelViewMatrix * a_position;
   v_color = bloomColor(a_color, u_EmissionGain);

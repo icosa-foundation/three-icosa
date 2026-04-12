@@ -28,6 +28,8 @@ uniform float u_DisplacementAmount;
 uniform float u_DisplacementExponent;
 uniform vec4 u_MainTex_ST; // xy: tiling, zw: offset
 
+uniform mat4 modelMatrix;
+
 void main() {
 
   vec4 pos = a_position;

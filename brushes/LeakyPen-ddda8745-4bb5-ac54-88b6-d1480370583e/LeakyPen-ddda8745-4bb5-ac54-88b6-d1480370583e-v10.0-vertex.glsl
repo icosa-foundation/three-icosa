@@ -39,6 +39,8 @@ uniform mat4 u_SceneLight_1_matrix;
 uniform vec4 u_MainTex_ST; // xy: tiling, zw: offset
 uniform vec4 u_SecondaryTex_ST; // xy: tiling, zw: offset
 
+uniform mat4 modelMatrix;
+
 void main() {
   gl_Position = projectionMatrix * modelViewMatrix * a_position;
   f_fog_coord = gl_Position.z;

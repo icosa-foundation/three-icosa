@@ -21,6 +21,8 @@ out vec3 v_texcoord0;
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
 
+uniform mat4 modelMatrix;
+
 void main() {
   gl_Position = projectionMatrix * modelViewMatrix * a_position;
   v_texcoord0 = a_texcoord0;
