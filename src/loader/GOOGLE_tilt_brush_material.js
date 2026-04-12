@@ -177,25 +177,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         return isTiltGltf;
     }
 
-    attachStopgapShadows(mesh, brushName) {
-        const material = mesh.material;
-        const materialParams = this.tiltShaderLoader.lookupMaterialParams(brushName);
-
-        if (!materialParams) {
-            return;
-        }
-
-        const shadowSettings = this.tiltShaderLoader.buildShadowSettings(materialParams);
-
-        if (!shadowSettings?.enabled) {
-            return;
-        }
-
-        mesh.castShadow = true;
-        mesh.customDepthMaterial = this.tiltShaderLoader.createStopgapShadowMaterial(material, shadowSettings, false);
-        mesh.customDistanceMaterial = this.tiltShaderLoader.createStopgapShadowMaterial(material, shadowSettings, true);
-    }
-
     async replaceMaterial(mesh, guidOrName, isNewTiltExporter = false) {
 
         let renameAttribute = (mesh, oldName, newName) => {
@@ -2254,8 +2235,6 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         if (mesh.material?.uniforms) {
             mesh.material.uniforms.u_isNewTiltExporter = { value: isNewTiltExporter };
         }
-
-        this.attachStopgapShadows(mesh, this.tiltShaderLoader.lookupMaterialName(guidOrName));
 
         mesh.onBeforeRender = (renderer, scene, camera, geometry, material, group) => {
             if (material?.uniforms?.u_time) {
