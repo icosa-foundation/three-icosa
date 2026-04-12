@@ -2281,7 +2281,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                     }
                     // Transforms
                     if(material.uniforms.u_SceneLight_0_matrix) {
-                        const direction = material.uniforms.directionalLights.value[0].direction;
+                        const direction = material.uniforms.directionalLights.value[0].direction.clone().negate();
                         material.uniforms.u_SceneLight_0_matrix.value = new THREE.Matrix4().lookAt(
                             new THREE.Vector3(0, 0, 0),
                             direction,
@@ -2300,7 +2300,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                     }
                     // Transforms
                     if(material.uniforms.u_SceneLight_1_matrix) {
-                        const direction = material.uniforms.directionalLights.value[1].direction;
+                        const direction = material.uniforms.directionalLights.value[1].direction.clone().negate();
                         material.uniforms.u_SceneLight_1_matrix.value = new THREE.Matrix4().lookAt(
                             new THREE.Vector3(0, 0, 0),
                             direction,
