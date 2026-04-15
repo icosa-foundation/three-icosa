@@ -17,6 +17,7 @@ in vec4 a_position;
 in vec3 a_normal;
 in vec4 a_color;
 in vec3 a_texcoord0;  // Need z component for radius
+in vec4 a_texcoord1;
 in vec4 a_tangent;
 
 out vec4 v_color;
@@ -35,15 +36,27 @@ uniform mat3 normalMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
 uniform vec4 u_time;
+uniform bool u_isNewTiltExporter;
+
 
 void main() {
   vec4 pos = a_position;
-  
-  // Wave animation (from Unity KeijiroTube)
   float radius = a_texcoord0.z;
+  if (u_isNewTiltExporter && radius <= 0.000001) {
+    radius = a_texcoord1.x;
+  }
+
   float wave = sin(a_texcoord0.x - u_time.z);
   float pulse = smoothstep(0.45, 0.5, clamp(wave, 0.0, 1.0));
-  pos.xyz -= pulse * radius * a_normal;
+
+  if (u_isNewTiltExporter) {
+    // The baked mesh already contains the pose from bake time (_Time.z == 2).
+    float bakedWave = sin(a_texcoord0.x - 2.0);
+    float bakedPulse = smoothstep(0.45, 0.5, clamp(bakedWave, 0.0, 1.0));
+    pos.xyz -= (pulse - bakedPulse) * radius * a_normal;
+  } else {
+    pos.xyz -= pulse * radius * a_normal;
+  }
   
   gl_Position = projectionMatrix * modelViewMatrix * pos;
   f_fog_coord = gl_Position.z;
