@@ -137,6 +137,7 @@ export class TiltShaderLoader extends THREE.Loader {
             } else if (typeof materialParams.uniforms.u_BumpMap.value === 'string') {
                 const bumpMap = await textureLoader.loadAsync(materialParams.uniforms.u_BumpMap.value);
                 bumpMap.name = `${brushName}_BumpMap`;
+                bumpMap.colorSpace = THREE.NoColorSpace; // Normal maps are data, not color
                 bumpMap.wrapS = THREE.RepeatWrapping;
                 bumpMap.wrapT = THREE.RepeatWrapping;
                 bumpMap.flipY = false;
