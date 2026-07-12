@@ -704,15 +704,15 @@ export class TiltShaderLoader extends THREE.Loader {
     }
 }
 
-function createUntexturedAdditiveParams() {
+function createProceduralAdditiveParams(brushName, brushGuid) {
+    const assetPath = `${brushName}-${brushGuid}/${brushName}-${brushGuid}-v10.0`;
     return {
         uniforms: {
-            u_MainTex: { value: null },
             u_EmissionGain: { value: 0.5 }
         },
         glslVersion: THREE.GLSL3,
-        vertexShader: "Light-2241cd32-8ba2-48a5-9ee7-2caef7e9ed62/Light-2241cd32-8ba2-48a5-9ee7-2caef7e9ed62-v10.0-vertex.glsl",
-        fragmentShader: "Light-2241cd32-8ba2-48a5-9ee7-2caef7e9ed62/Light-2241cd32-8ba2-48a5-9ee7-2caef7e9ed62-v10.0-fragment.glsl",
+        vertexShader: `${assetPath}-vertex.glsl`,
+        fragmentShader: `${assetPath}-fragment.glsl`,
         side: 2,
         transparent: true,
         depthFunc: 2,
@@ -723,8 +723,8 @@ function createUntexturedAdditiveParams() {
 }
 
 const tiltBrushMaterialParams = {
-    "Digital": createUntexturedAdditiveParams(),
-    "Race": createUntexturedAdditiveParams(),
+    "Digital": createProceduralAdditiveParams("Digital", "30cb9af6-be41-4872-8f3e-cbff63fe3db8"),
+    "Race": createProceduralAdditiveParams("Race", "abfbb2aa-70b4-4a5c-8126-8eedda2b3628"),
     "BlocksBasic" : {
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
