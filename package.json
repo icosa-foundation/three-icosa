@@ -57,8 +57,5 @@
     "vr",
     "ar",
     "xr"
-  ],
-  "dependencies": {
-    "codex-monorepo": "github:openai/codex"
-  }
+  ]
 }
