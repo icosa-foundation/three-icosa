@@ -266,6 +266,10 @@ export class TiltShaderLoader extends THREE.Loader {
             case "Disco":
             case "4391aaaa-df73-4396-9e33-31e4e4930b27":
                 return "Disco";
+
+            case "Digital":
+            case "30cb9af6-be41-4872-8f3e-cbff63fe3db8":
+                return "Digital";
             
             case "DotMarker":
             case "d1d991f2-e7a0-4cf1-b328-f57e915e6260":
@@ -395,6 +399,10 @@ export class TiltShaderLoader extends THREE.Loader {
             case "Rainbow":
             case "ad1ad437-76e2-450d-a23a-e17f8310b960":
                 return "Rainbow";
+
+            case "Race":
+            case "abfbb2aa-70b4-4a5c-8126-8eedda2b3628":
+                return "Race";
 
             case "ShinyHull":
             case "faaa4d44-fcfb-4177-96be-753ac0421ba3":
@@ -696,7 +704,27 @@ export class TiltShaderLoader extends THREE.Loader {
     }
 }
 
+function createUntexturedAdditiveParams() {
+    return {
+        uniforms: {
+            u_MainTex: { value: null },
+            u_EmissionGain: { value: 0.5 }
+        },
+        glslVersion: THREE.GLSL3,
+        vertexShader: "Light-2241cd32-8ba2-48a5-9ee7-2caef7e9ed62/Light-2241cd32-8ba2-48a5-9ee7-2caef7e9ed62-v10.0-vertex.glsl",
+        fragmentShader: "Light-2241cd32-8ba2-48a5-9ee7-2caef7e9ed62/Light-2241cd32-8ba2-48a5-9ee7-2caef7e9ed62-v10.0-fragment.glsl",
+        side: 2,
+        transparent: true,
+        depthFunc: 2,
+        depthWrite: false,
+        depthTest: true,
+        blending: 2
+    };
+}
+
 const tiltBrushMaterialParams = {
+    "Digital": createUntexturedAdditiveParams(),
+    "Race": createUntexturedAdditiveParams(),
     "BlocksBasic" : {
         uniforms: {
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
