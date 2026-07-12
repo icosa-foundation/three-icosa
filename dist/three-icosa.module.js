@@ -1,4 +1,4 @@
-import {DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, RepeatWrapping as $fugmd$RepeatWrapping, UniformsLib as $fugmd$UniformsLib, RawShaderMaterial as $fugmd$RawShaderMaterial, Loader as $fugmd$Loader, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, GLSL3 as $fugmd$GLSL3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4} from "three";
+import {DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, RepeatWrapping as $fugmd$RepeatWrapping, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, GLSL3 as $fugmd$GLSL3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -46,9 +46,13 @@ function $4fdc68aa1ebb2033$var$getDefaultNormalTexture() {
     return $4fdc68aa1ebb2033$var$defaultNormalTexture;
 }
 class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
-    constructor(manager){
+    constructor(manager, options = {}){
         super(manager);
+        this.materialFactory = options.materialFactory || ((materialParams)=>new $fugmd$RawShaderMaterial(materialParams));
         this.loadedMaterials = {};
+    }
+    createMaterial(materialParams, brushName) {
+        return this.materialFactory(materialParams, brushName);
     }
     async loadShaderIncludes(relativePath) {
         const loader = new $fugmd$FileLoader(this.manager);
@@ -151,9 +155,9 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
         // inject three.js lighting and fog uniforms
         for(var lightType in $fugmd$UniformsLib.lights)materialParams.uniforms[lightType] = $fugmd$UniformsLib.lights[lightType];
         for(var fogType in $fugmd$UniformsLib.fog)materialParams.uniforms[fogType] = $fugmd$UniformsLib.fog[fogType];
-        let rawMaterial = new $fugmd$RawShaderMaterial(materialParams);
-        this.loadedMaterials[brushName] = rawMaterial;
-        onLoad(scope.parse(rawMaterial));
+        const material = this.createMaterial(materialParams, brushName);
+        this.loadedMaterials[brushName] = material;
+        onLoad(scope.parse(material));
     }
     parse(rawMaterial) {
         return rawMaterial;

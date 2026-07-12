@@ -51,10 +51,16 @@ function getDefaultNormalTexture() {
 }
 
 export class TiltShaderLoader extends THREE.Loader {
-    constructor( manager ) {
+    constructor( manager, options = {} ) {
         super( manager );
-        
+
+        this.materialFactory = options.materialFactory || ((materialParams) =>
+            new THREE.RawShaderMaterial(materialParams));
         this.loadedMaterials = {};
+    }
+
+    createMaterial(materialParams, brushName) {
+        return this.materialFactory(materialParams, brushName);
     }
     
     async loadShaderIncludes(relativePath) {
@@ -195,9 +201,9 @@ export class TiltShaderLoader extends THREE.Loader {
             materialParams.uniforms[fogType] = THREE.UniformsLib.fog[fogType];
         }
 
-        let rawMaterial = new THREE.RawShaderMaterial(materialParams);
-        this.loadedMaterials[brushName] = rawMaterial;
-        onLoad( scope.parse( rawMaterial ) );
+        const material = this.createMaterial(materialParams, brushName);
+        this.loadedMaterials[brushName] = material;
+        onLoad( scope.parse( material ) );
     }
 
     parse( rawMaterial ) {
