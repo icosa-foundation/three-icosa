@@ -6949,6 +6949,12 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_TubeToonColorPass: {
+                value: false
+            },
+            u_TubeToonOutlineSize: {
+                value: 0.05
             }
         },
         glslVersion: $fugmd$GLSL3,

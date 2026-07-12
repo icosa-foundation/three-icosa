@@ -2742,7 +2742,9 @@ const tiltBrushMaterialParams = {
             u_SceneLight_0_color: { value: new THREE.Vector4(0.7780, 0.8157, 0.9914, 1) },
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
-            u_fogDensity: { value: 0 }
+            u_fogDensity: { value: 0 },
+            u_TubeToonColorPass: { value: false },
+            u_TubeToonOutlineSize: { value: 0.05 }
         },
         glslVersion: THREE.GLSL3,
         vertexShader: "TubeToonInverted-9871385a-df73-4396-9e33-31e4e4930b27/TubeToonInverted-9871385a-df73-4396-9e33-31e4e4930b27-v10.0-vertex.glsl",
