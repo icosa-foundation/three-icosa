@@ -4377,6 +4377,12 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_fogDensity: {
                 value: 0
+            },
+            u_ToonOutlinePass: {
+                value: false
+            },
+            u_OutlineMax: {
+                value: 0.005
             }
         },
         glslVersion: $fugmd$GLSL3,
