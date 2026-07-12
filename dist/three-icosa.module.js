@@ -1679,6 +1679,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_DisplacementIntensity: {
                 value: 2.0
             },
+            u_DisplacementMod: {
+                value: 1.0
+            },
             u_EmissionGain: {
                 value: 0.2
             }

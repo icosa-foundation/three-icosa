@@ -1076,6 +1076,7 @@ const tiltBrushMaterialParams = {
         uniforms: {
             u_time: { value: new THREE.Vector4() },
             u_DisplacementIntensity: { value: 2.0 },
+            u_DisplacementMod: { value: 1.0 },
             u_EmissionGain: { value: 0.2 }
         },
         glslVersion: THREE.GLSL3,
