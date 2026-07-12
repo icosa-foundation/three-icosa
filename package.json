@@ -17,6 +17,7 @@
   "source": "src/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/three-icosa.module.js",
       "default": "./dist/three-icosa.module.js"
     }
