@@ -25,3 +25,12 @@ test( 'uses an injected material factory', () => {
     assert.equal( material, expected );
     assert.equal( receivedBrushName, 'OilPaint' );
 } );
+
+test( 'binds untextured experimental additive brushes independently', () => {
+    const loader = new TiltShaderLoader();
+
+    assert.equal( loader.lookupMaterialName( '30cb9af6-be41-4872-8f3e-cbff63fe3db8' ), 'Digital' );
+    assert.equal( loader.lookupMaterialName( 'abfbb2aa-70b4-4a5c-8126-8eedda2b3628' ), 'Race' );
+    assert.notEqual( loader.lookupMaterialParams( 'Digital' ), loader.lookupMaterialParams( 'Race' ) );
+    assert.equal( loader.lookupMaterialParams( 'Digital' ).uniforms.u_MainTex.value, null );
+} );
