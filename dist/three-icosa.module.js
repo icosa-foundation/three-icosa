@@ -1,4 +1,4 @@
-import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrapping as $fugmd$MirroredRepeatWrapping, RepeatWrapping as $fugmd$RepeatWrapping, NearestFilter as $fugmd$NearestFilter, LinearFilter as $fugmd$LinearFilter, NearestMipmapNearestFilter as $fugmd$NearestMipmapNearestFilter, LinearMipmapLinearFilter as $fugmd$LinearMipmapLinearFilter, LinearMipmapNearestFilter as $fugmd$LinearMipmapNearestFilter, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4} from "three";
+import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrapping as $fugmd$MirroredRepeatWrapping, RepeatWrapping as $fugmd$RepeatWrapping, NearestFilter as $fugmd$NearestFilter, LinearFilter as $fugmd$LinearFilter, NearestMipmapNearestFilter as $fugmd$NearestMipmapNearestFilter, LinearMipmapLinearFilter as $fugmd$LinearMipmapLinearFilter, LinearMipmapNearestFilter as $fugmd$LinearMipmapNearestFilter, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, DoubleSide as $fugmd$DoubleSide, FrontSide as $fugmd$FrontSide, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -13,6 +13,297 @@ import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrappin
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+// Generated from pinned Open Brush brush render metadata.
+// Regenerate with scripts/generate-texture-settings.mjs; do not edit by hand.
+const $893dd13f874e2f96$export$9ca3db12bec15353 = {
+    "OilPaint": {
+        "renderBackfaces": true
+    },
+    "Ink": {
+        "renderBackfaces": true
+    },
+    "ThickPaint": {
+        "renderBackfaces": true
+    },
+    "WetPaint": {
+        "renderBackfaces": true
+    },
+    "Marker": {
+        "renderBackfaces": true
+    },
+    "TaperedMarker": {
+        "renderBackfaces": true
+    },
+    "TaperedMarker_Flat": {
+        "renderBackfaces": true
+    },
+    "DoubleTaperedMarker": {
+        "renderBackfaces": true
+    },
+    "Highlighter": {
+        "renderBackfaces": true
+    },
+    "Flat": {
+        "renderBackfaces": true
+    },
+    "TaperedFlat": {
+        "renderBackfaces": true
+    },
+    "DoubleTaperedFlat": {
+        "renderBackfaces": true
+    },
+    "SoftHighlighter": {
+        "renderBackfaces": true
+    },
+    "Light": {
+        "renderBackfaces": true
+    },
+    "Fire": {
+        "renderBackfaces": true
+    },
+    "Embers": {
+        "renderBackfaces": true
+    },
+    "Smoke": {
+        "renderBackfaces": true
+    },
+    "Snow": {
+        "renderBackfaces": true
+    },
+    "Rainbow": {
+        "renderBackfaces": true
+    },
+    "Stars": {
+        "renderBackfaces": true
+    },
+    "VelvetInk": {
+        "renderBackfaces": true
+    },
+    "Waveform": {
+        "renderBackfaces": true
+    },
+    "Splatter": {
+        "renderBackfaces": true
+    },
+    "DuctTape": {
+        "renderBackfaces": true
+    },
+    "Paper": {
+        "renderBackfaces": true
+    },
+    "CoarseBristles": {
+        "renderBackfaces": true
+    },
+    "WigglyGraphite": {
+        "renderBackfaces": true
+    },
+    "Electricity": {
+        "renderBackfaces": true
+    },
+    "Streamers": {
+        "renderBackfaces": true
+    },
+    "Hypercolor": {
+        "renderBackfaces": true
+    },
+    "Bubbles": {
+        "renderBackfaces": true
+    },
+    "NeonPulse": {
+        "renderBackfaces": true
+    },
+    "CelVinyl": {
+        "renderBackfaces": true
+    },
+    "HyperGrid": {
+        "renderBackfaces": true
+    },
+    "LightWire": {
+        "renderBackfaces": false
+    },
+    "ChromaticWave": {
+        "renderBackfaces": true
+    },
+    "Dots": {
+        "renderBackfaces": true
+    },
+    "Petal": {
+        "renderBackfaces": true
+    },
+    "Icing": {
+        "renderBackfaces": false
+    },
+    "Toon": {
+        "renderBackfaces": false
+    },
+    "Wire": {
+        "renderBackfaces": false
+    },
+    "Spikes": {
+        "renderBackfaces": false
+    },
+    "Lofted": {
+        "renderBackfaces": false
+    },
+    "Disco": {
+        "renderBackfaces": false
+    },
+    "Comet": {
+        "renderBackfaces": true
+    },
+    "ShinyHull": {
+        "renderBackfaces": false
+    },
+    "MatteHull": {
+        "renderBackfaces": false
+    },
+    "UnlitHull": {
+        "renderBackfaces": false
+    },
+    "DiamondHull": {
+        "renderBackfaces": true
+    },
+    "DotMarker": {
+        "renderBackfaces": true
+    },
+    "Plasma": {
+        "renderBackfaces": true
+    },
+    "Gouache": {
+        "renderBackfaces": true
+    },
+    "MylarTube": {
+        "renderBackfaces": false
+    },
+    "Rain": {
+        "renderBackfaces": true
+    },
+    "DryBrush": {
+        "renderBackfaces": true
+    },
+    "LeakyPen": {
+        "renderBackfaces": true
+    },
+    "Sparks": {
+        "renderBackfaces": true
+    },
+    "Wind": {
+        "renderBackfaces": true
+    },
+    "Rising Bubbles": {
+        "renderBackfaces": true
+    },
+    "TaperedWire": {
+        "renderBackfaces": false
+    },
+    "SquarePaper": {
+        "renderBackfaces": false
+    },
+    "ThickGeometry": {
+        "renderBackfaces": true
+    },
+    "Wireframe": {
+        "renderBackfaces": true
+    },
+    "Muscle": {
+        "renderBackfaces": false
+    },
+    "Guts": {
+        "renderBackfaces": false
+    },
+    "Fire2": {
+        "renderBackfaces": true
+    },
+    "TubeToonInverted": {
+        "renderBackfaces": false
+    },
+    "FacetedTube": {
+        "renderBackfaces": false
+    },
+    "WaveformParticles": {
+        "renderBackfaces": true
+    },
+    "BubbleWand": {
+        "renderBackfaces": true
+    },
+    "DanceFloor": {
+        "renderBackfaces": true
+    },
+    "WaveformTube": {
+        "renderBackfaces": true
+    },
+    "Drafting": {
+        "renderBackfaces": true
+    },
+    "SingleSided": {
+        "renderBackfaces": false
+    },
+    "DoubleFlat": {
+        "renderBackfaces": true
+    },
+    "TubeAdditive": {
+        "renderBackfaces": false
+    },
+    "Feather": {
+        "renderBackfaces": true
+    },
+    "DuctTapeGeometry": {
+        "renderBackfaces": true
+    },
+    "TaperedHueShift": {
+        "renderBackfaces": true
+    },
+    "Lacewing": {
+        "renderBackfaces": true
+    },
+    "Marbled Rainbow": {
+        "renderBackfaces": true
+    },
+    "Charcoal": {
+        "renderBackfaces": true
+    },
+    "KeijiroTube": {
+        "renderBackfaces": true
+    },
+    "Lofted (Hue Shift)": {
+        "renderBackfaces": false
+    },
+    "Wire (Lit)": {
+        "renderBackfaces": false
+    },
+    "WaveformFFT": {
+        "renderBackfaces": true
+    },
+    "Fairy": {
+        "renderBackfaces": true
+    },
+    "Space": {
+        "renderBackfaces": true
+    },
+    "Digital": {
+        "renderBackfaces": false
+    },
+    "Race": {
+        "renderBackfaces": false
+    },
+    "SmoothHull": {
+        "renderBackfaces": false
+    },
+    "Leaves2": {
+        "renderBackfaces": true
+    },
+    "InkGeometry": {
+        "renderBackfaces": true
+    },
+    "ConcaveHull": {
+        "renderBackfaces": false
+    },
+    "3D Printing Brush": {
+        "renderBackfaces": false
+    }
+};
+
 
 // Generated from pinned Open Brush texture importer metadata.
 // Regenerate with scripts/generate-texture-settings.mjs; do not edit by hand.
@@ -1023,6 +1314,11 @@ function $4fdc68aa1ebb2033$var$applyBrushTextureSettings(texture, brushName, uni
     texture.anisotropy = settings.anisotropy;
     texture.needsUpdate = true;
 }
+function $4fdc68aa1ebb2033$var$applyBrushMaterialSettings(materialParams, brushName) {
+    const settings = (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName];
+    if (!settings) return;
+    materialParams.side = settings.renderBackfaces ? $fugmd$DoubleSide : $fugmd$FrontSide;
+}
 // Cached default textures to prevent creating multiple instances
 let $4fdc68aa1ebb2033$var$defaultWhiteTexture = null;
 let $4fdc68aa1ebb2033$var$defaultNormalTexture = null;
@@ -1062,6 +1358,7 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
         this.loadedMaterials = {};
     }
     createMaterial(materialParams, brushName) {
+        $4fdc68aa1ebb2033$var$applyBrushMaterialSettings(materialParams, brushName);
         return this.materialFactory(materialParams, brushName);
     }
     configureTexture(texture, brushName, uniformName, isFallback = false) {

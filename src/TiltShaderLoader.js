@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as THREE from 'three';
+import { brushMaterialSettings } from './brushMaterialSettings.js';
 import { brushTextureSettings } from './brushTextureSettings.js';
 
 function resolveWrapping(mode) {
@@ -45,6 +46,12 @@ function applyBrushTextureSettings(texture, brushName, uniformName) {
     texture.minFilter = resolveMinFilter(settings.filter, settings.mipmaps);
     texture.anisotropy = settings.anisotropy;
     texture.needsUpdate = true;
+}
+
+function applyBrushMaterialSettings(materialParams, brushName) {
+    const settings = brushMaterialSettings[brushName];
+    if (!settings) return;
+    materialParams.side = settings.renderBackfaces ? THREE.DoubleSide : THREE.FrontSide;
 }
 
 // Cached default textures to prevent creating multiple instances
@@ -94,6 +101,7 @@ export class TiltShaderLoader extends THREE.Loader {
     }
 
     createMaterial(materialParams, brushName) {
+        applyBrushMaterialSettings(materialParams, brushName);
         return this.materialFactory(materialParams, brushName);
     }
 

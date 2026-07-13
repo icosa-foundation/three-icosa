@@ -1,11 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const [manifestPath, assetsPath, loaderPath, outputPath] = process.argv.slice(2);
+const [manifestPath, assetsPath, loaderPath, textureOutputPath, materialOutputPath] =
+    process.argv.slice(2);
 
-if (!outputPath) {
+if (!materialOutputPath) {
     throw new Error(
-        "Usage: node scripts/generate-texture-settings.mjs <exportManifest.json> <brush-assets.json> <TiltShaderLoader.js> <output.js>"
+        "Usage: node scripts/generate-texture-settings.mjs <exportManifest.json> <brush-assets.json> <TiltShaderLoader.js> <texture-output.js> <material-output.js>"
     );
 }
 
@@ -38,5 +39,25 @@ const source = `// Generated from pinned Open Brush texture importer metadata.\n
     `// Regenerate with scripts/generate-texture-settings.mjs; do not edit by hand.\n` +
     `export const brushTextureSettings = ${JSON.stringify(settings, null, 4)};\n`;
 
-fs.writeFileSync(outputPath, source);
-console.log(`Wrote ${Object.keys(settings).length} brush entries to ${path.resolve(outputPath)}`);
+fs.writeFileSync(textureOutputPath, source);
+console.log(`Wrote ${Object.keys(settings).length} brush entries to ${path.resolve(textureOutputPath)}`);
+
+const materialSettings = {};
+for (const [guid, brush] of Object.entries(manifest.brushes)) {
+    const extracted = assets.brushes[guid];
+    if (
+        !["standard", "experimental"].includes(extracted?.catalogSection) ||
+        extracted.tags?.includes("broken") ||
+        typeof extracted.geometry?.renderBackfaces !== "boolean"
+    ) continue;
+    materialSettings[brush.name] = {
+        renderBackfaces: extracted.geometry.renderBackfaces
+    };
+}
+
+const materialSource = `// Generated from pinned Open Brush brush render metadata.\n` +
+    `// Regenerate with scripts/generate-texture-settings.mjs; do not edit by hand.\n` +
+    `export const brushMaterialSettings = ${JSON.stringify(materialSettings, null, 4)};\n`;
+
+fs.writeFileSync(materialOutputPath, materialSource);
+console.log(`Wrote ${Object.keys(materialSettings).length} brush entries to ${path.resolve(materialOutputPath)}`);

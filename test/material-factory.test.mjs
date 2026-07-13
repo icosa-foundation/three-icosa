@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
     ClampToEdgeWrapping,
+    DoubleSide,
+    FrontSide,
     LinearFilter,
     LinearMipmapNearestFilter,
     NoColorSpace,
@@ -34,6 +36,20 @@ test( 'uses an injected material factory', () => {
 
     assert.equal( material, expected );
     assert.equal( receivedBrushName, 'OilPaint' );
+} );
+
+test( 'applies authoritative required-brush culling by default', () => {
+    const loader = new TiltShaderLoader();
+
+    const flat = loader.createMaterial( {}, 'Flat' );
+    const toon = loader.createMaterial( {}, 'Toon' );
+    const dryBrush = loader.createMaterial( {}, 'DryBrush' );
+    const digital = loader.createMaterial( {}, 'Digital' );
+
+    assert.equal( flat.side, DoubleSide );
+    assert.equal( toon.side, FrontSide );
+    assert.equal( dryBrush.side, DoubleSide );
+    assert.equal( digital.side, FrontSide );
 } );
 
 test( 'allows callers to configure loaded textures', () => {
