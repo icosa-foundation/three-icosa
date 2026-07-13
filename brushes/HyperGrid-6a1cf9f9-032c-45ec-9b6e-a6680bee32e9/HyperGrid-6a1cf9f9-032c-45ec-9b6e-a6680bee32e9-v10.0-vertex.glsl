@@ -45,16 +45,15 @@ uniform bool u_isNewTiltExporter;
 uniform vec4 u_time;
 
 void main() {
-  vec4 _Time = u_time;
   vec4 worldPos = modelMatrix * a_position;
   float size = length(a_texcoord1.xyz);
-
-
-
+  float lifetime = u_time.y - a_texcoord1.w;
+  float release = clamp(lifetime, 0.0, 1.0);
 
 	if (!u_isNewTiltExporter) {
-	  // Quantize vertices
+	  // Match Unity's finer grid at birth, relaxing to the particle-size grid.
 	  float q = (1. / size) * .5;
+	  q += 5.0 * clamp(1.0 - release * 10.0, 0.0, 1.0);
 	  worldPos.xyz = ceil(worldPos.xyz * q) / q;
 	}
 
