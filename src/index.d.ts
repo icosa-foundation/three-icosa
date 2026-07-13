@@ -2,6 +2,8 @@ export { TiltShaderLoader } from "./TiltShaderLoader";
 export {
   applyTiltBrushRenderGroups,
   createTiltBrushRenderMaterial,
+  ELECTRICITY_BRUSH_GUID,
+  ELECTRICITY_DISPLACEMENT_MODS,
   TOON_BRUSH_GUID,
   TUBE_TOON_INVERTED_BRUSH_GUID,
   TUBE_TOON_INVERTED_OUTLINE_SIZE,

@@ -25,6 +25,15 @@ test( 'keeps brushes without material passes unchanged', () => {
     assert.equal(createTiltBrushRenderMaterial('Flat', source), source);
 } );
 
+test( 'creates all three Electricity displacement material passes', () => {
+    const source = new ShaderMaterial({ uniforms: { u_time: { value: 0 } } });
+    const sharedTime = { value: 1.5 };
+    const materials = createTiltBrushRenderMaterial('Electricity', source, { u_time: sharedTime });
+    assert.equal(materials.length, 3);
+    assert.deepEqual(materials.map(material => material.uniforms.u_DisplacementMod.value), [1, 1.333, 1.77]);
+    assert.ok(materials.every(material => material.uniforms.u_time === sharedTime));
+} );
+
 test( 'creates Toon surface and outline material passes', () => {
     const source = new ShaderMaterial({ uniforms: { u_time: { value: 0 } } });
     const sharedTime = { value: 1.5 };
