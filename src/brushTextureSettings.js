@@ -395,6 +395,15 @@ export const brushTextureSettings = {
         }
     },
     "Icing": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
         "u_BumpMap": {
             "sRGB": false,
             "mipmaps": true,
@@ -521,6 +530,15 @@ export const brushTextureSettings = {
         }
     },
     "Rain": {
+        "u_AlphaMask": {
+            "sRGB": false,
+            "mipmaps": false,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
         "u_MainTex": {
             "sRGB": false,
             "mipmaps": false,

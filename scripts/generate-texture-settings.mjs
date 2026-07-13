@@ -19,9 +19,18 @@ for (const [guid, brush] of Object.entries(manifest.brushes)) {
     if (!extracted?.textures) continue;
 
     for (const [uniformName, texture] of Object.entries(extracted.textures)) {
-        if (!texture.importer || !loaderSource.includes(texture.file)) continue;
+        if (!texture.importer) continue;
+        const escapedFile = texture.file.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const bindingPattern = new RegExp(
+            `(u_[A-Za-z0-9_]+)\\s*:\\s*\\{\\s*value:\\s*"[^"]*${escapedFile}"`,
+            "g"
+        );
+        const bindings = [...loaderSource.matchAll(bindingPattern)];
+        if (bindings.length === 0) continue;
         settings[brush.name] ??= {};
-        settings[brush.name][`u_${uniformName}`] = texture.importer;
+        for (const binding of bindings) {
+            settings[brush.name][binding[1] ?? `u_${uniformName}`] = texture.importer;
+        }
     }
 }
 

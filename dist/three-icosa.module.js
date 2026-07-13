@@ -411,6 +411,15 @@ const $7a1e9f07aec2d837$export$3ec06be695b639a9 = {
         }
     },
     "Icing": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
         "u_BumpMap": {
             "sRGB": false,
             "mipmaps": true,
@@ -537,6 +546,15 @@ const $7a1e9f07aec2d837$export$3ec06be695b639a9 = {
         }
     },
     "Rain": {
+        "u_AlphaMask": {
+            "sRGB": false,
+            "mipmaps": false,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
         "u_MainTex": {
             "sRGB": false,
             "mipmaps": false,

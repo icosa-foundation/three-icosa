@@ -4,6 +4,7 @@ import {
     ClampToEdgeWrapping,
     LinearFilter,
     LinearMipmapNearestFilter,
+    NoColorSpace,
     RawShaderMaterial,
     RepeatWrapping,
     ShaderMaterial,
@@ -82,6 +83,17 @@ test( 'does not mutate shared fallback textures', () => {
     loader.configureTexture( texture, 'OilPaint', 'u_MainTex', true );
 
     assert.equal( texture.wrapS, RepeatWrapping );
+} );
+
+test( 'follows shader uniform aliases when applying texture settings', () => {
+    const texture = new Texture();
+    const loader = new TiltShaderLoader();
+
+    loader.configureTexture( texture, 'Rain', 'u_AlphaMask' );
+
+    assert.equal( texture.colorSpace, NoColorSpace );
+    assert.equal( texture.generateMipmaps, false );
+    assert.equal( texture.minFilter, LinearFilter );
 } );
 
 test( 'keeps texture configuration optional', () => {
