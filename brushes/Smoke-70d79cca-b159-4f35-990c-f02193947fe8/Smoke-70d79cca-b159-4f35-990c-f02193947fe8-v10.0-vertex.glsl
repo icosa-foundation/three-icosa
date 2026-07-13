@@ -92,10 +92,15 @@ vec4 PositionParticle(
 	float vertexId,
 	vec4 vertexPos,
 	vec3 center,
-	float rotation) {
+	float rotation,
+	float birthTime) {
 
 	float corner = mod(vertexId, 4.0);
 	float size = length(vertexPos.xyz - center) * kRecipSquareRootOfTwo;
+	if (birthTime < 0.0) {
+		float life01 = clamp((u_time.y + birthTime) / 0.2, 0.0, 1.0);
+		size *= 1.0 - life01 * life01;
+	}
 
 	// Gets the scale from the model matrix
 	float scale = modelMatrix[1][1];
@@ -106,7 +111,8 @@ vec4 PositionParticle(
 
 // Returns the particle position for this vertex, untransformed, in local/object space.
 vec4 GetParticlePositionLS() {
-	return PositionParticle(float(gl_VertexID), a_position, a_normal, a_texcoord0.z);
+	return PositionParticle(
+		float(gl_VertexID), a_position, a_normal, a_texcoord0.z, a_texcoord0.w);
 }
 // ---------------------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------------------- //

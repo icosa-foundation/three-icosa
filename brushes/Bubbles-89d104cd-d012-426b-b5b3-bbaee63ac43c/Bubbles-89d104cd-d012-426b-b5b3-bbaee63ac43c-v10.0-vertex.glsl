@@ -183,6 +183,10 @@ vec3 computeDisplacement(vec3 seed, float timeOffset) {
 void main() {
   // Get particle half size from corner/center distance
   float halfSize = length(a_position.xyz - a_normal) * kRecipSquareRootOfTwo;
+  if (a_texcoord0.w < 0.0) {
+    float life01 = clamp((u_time.y + a_texcoord0.w) / 0.2, 0.0, 1.0);
+    halfSize *= 1.0 - life01 * life01;
+  }
   float rotation = a_texcoord0.z;
 
   // Center is stored in a_normal (particle center)
