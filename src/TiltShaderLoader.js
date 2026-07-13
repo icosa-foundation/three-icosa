@@ -13,6 +13,39 @@
 // limitations under the License.
 
 import * as THREE from 'three';
+import { brushTextureSettings } from './brushTextureSettings.js';
+
+function resolveWrapping(mode) {
+    switch (mode) {
+        case 'clamp': return THREE.ClampToEdgeWrapping;
+        case 'mirror':
+        case 'mirror-once': return THREE.MirroredRepeatWrapping;
+        default: return THREE.RepeatWrapping;
+    }
+}
+
+function resolveMinFilter(filter, mipmaps) {
+    if (!mipmaps) return filter === 'point' ? THREE.NearestFilter : THREE.LinearFilter;
+    switch (filter) {
+        case 'point': return THREE.NearestMipmapNearestFilter;
+        case 'trilinear': return THREE.LinearMipmapLinearFilter;
+        default: return THREE.LinearMipmapNearestFilter;
+    }
+}
+
+function applyBrushTextureSettings(texture, brushName, uniformName) {
+    const settings = brushTextureSettings[brushName]?.[uniformName];
+    if (!settings) return;
+
+    texture.colorSpace = settings.sRGB ? THREE.SRGBColorSpace : THREE.NoColorSpace;
+    texture.wrapS = resolveWrapping(settings.wrapU);
+    texture.wrapT = resolveWrapping(settings.wrapV);
+    texture.generateMipmaps = settings.mipmaps;
+    texture.magFilter = settings.filter === 'point' ? THREE.NearestFilter : THREE.LinearFilter;
+    texture.minFilter = resolveMinFilter(settings.filter, settings.mipmaps);
+    texture.anisotropy = settings.anisotropy;
+    texture.needsUpdate = true;
+}
 
 // Cached default textures to prevent creating multiple instances
 let defaultWhiteTexture = null;
@@ -65,6 +98,9 @@ export class TiltShaderLoader extends THREE.Loader {
     }
 
     configureTexture(texture, brushName, uniformName, isFallback = false) {
+        if (!isFallback) {
+            applyBrushTextureSettings(texture, brushName, uniformName);
+        }
         if (this.textureConfigurator) {
             this.textureConfigurator(texture, {
                 brushName,

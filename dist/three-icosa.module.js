@@ -1,4 +1,4 @@
-import {DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, RepeatWrapping as $fugmd$RepeatWrapping, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4} from "three";
+import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrapping as $fugmd$MirroredRepeatWrapping, RepeatWrapping as $fugmd$RepeatWrapping, NearestFilter as $fugmd$NearestFilter, LinearFilter as $fugmd$LinearFilter, NearestMipmapNearestFilter as $fugmd$NearestMipmapNearestFilter, LinearMipmapLinearFilter as $fugmd$LinearMipmapLinearFilter, LinearMipmapNearestFilter as $fugmd$LinearMipmapNearestFilter, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -14,6 +14,997 @@ import {DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, Unsi
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Generated from pinned Open Brush texture importer metadata.
+// Regenerate with scripts/generate-texture-settings.mjs; do not edit by hand.
+const $7a1e9f07aec2d837$export$3ec06be695b639a9 = {
+    "OilPaint": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 4,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "Ink": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "ThickPaint": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "WetPaint": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Marker": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "TaperedMarker": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "TaperedMarker_Flat": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "Highlighter": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "TaperedFlat": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "SoftHighlighter": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "Light": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Fire": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 3,
+            "mipBias": 0
+        }
+    },
+    "Embers": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Smoke": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Snow": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Stars": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "VelvetInk": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Waveform": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": false,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 2,
+            "mipBias": 0
+        }
+    },
+    "Splatter": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "DuctTape": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 4,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "Paper": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 4,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "CoarseBristles": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "WigglyGraphite": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "Streamers": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 5,
+            "mipBias": 0
+        }
+    },
+    "Hypercolor": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 4,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Bubbles": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "CelVinyl": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "HyperGrid": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "LightWire": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": false,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Dots": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Icing": {
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Comet": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_AlphaMask": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "DiamondHull": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Leaves": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "DotMarker": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Plasma": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": false,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Taffy": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "Gouache": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "MylarTube": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Rain": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": false,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "DryBrush": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "LeakyPen": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_SecondaryTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Sparks": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": false,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Wind": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Rising Bubbles": {
+        "u_MainTex": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "TaperedWire": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "SquarePaper": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 4,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 2,
+            "mipBias": 0
+        }
+    },
+    "ThickGeometry": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 4,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "Muscle": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Guts": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Fire2": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_DisplaceTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "WaveformParticles": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "BubbleWand": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "DanceFloor": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "WaveformTube": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": false,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 2,
+            "mipBias": 0
+        }
+    },
+    "Drafting": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "SingleSided": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "DoubleFlat": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Feather": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "DuctTapeGeometry": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 4,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "TaperedHueShift": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "anisotropy": 4,
+            "mipBias": 0
+        }
+    },
+    "Lacewing": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_SpecTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Marbled Rainbow": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_SpecTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Charcoal": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "Leaves2": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    },
+    "InkGeometry": {
+        "u_MainTex": {
+            "sRGB": true,
+            "mipmaps": true,
+            "filter": "bilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        },
+        "u_BumpMap": {
+            "sRGB": false,
+            "mipmaps": true,
+            "filter": "trilinear",
+            "wrapU": "repeat",
+            "wrapV": "repeat",
+            "anisotropy": 1,
+            "mipBias": 0
+        }
+    }
+};
+
+
+function $4fdc68aa1ebb2033$var$resolveWrapping(mode) {
+    switch(mode){
+        case "clamp":
+            return $fugmd$ClampToEdgeWrapping;
+        case "mirror":
+        case "mirror-once":
+            return $fugmd$MirroredRepeatWrapping;
+        default:
+            return $fugmd$RepeatWrapping;
+    }
+}
+function $4fdc68aa1ebb2033$var$resolveMinFilter(filter, mipmaps) {
+    if (!mipmaps) return filter === "point" ? $fugmd$NearestFilter : $fugmd$LinearFilter;
+    switch(filter){
+        case "point":
+            return $fugmd$NearestMipmapNearestFilter;
+        case "trilinear":
+            return $fugmd$LinearMipmapLinearFilter;
+        default:
+            return $fugmd$LinearMipmapNearestFilter;
+    }
+}
+function $4fdc68aa1ebb2033$var$applyBrushTextureSettings(texture, brushName, uniformName) {
+    const settings = (0, $7a1e9f07aec2d837$export$3ec06be695b639a9)[brushName]?.[uniformName];
+    if (!settings) return;
+    texture.colorSpace = settings.sRGB ? $fugmd$SRGBColorSpace : $fugmd$NoColorSpace;
+    texture.wrapS = $4fdc68aa1ebb2033$var$resolveWrapping(settings.wrapU);
+    texture.wrapT = $4fdc68aa1ebb2033$var$resolveWrapping(settings.wrapV);
+    texture.generateMipmaps = settings.mipmaps;
+    texture.magFilter = settings.filter === "point" ? $fugmd$NearestFilter : $fugmd$LinearFilter;
+    texture.minFilter = $4fdc68aa1ebb2033$var$resolveMinFilter(settings.filter, settings.mipmaps);
+    texture.anisotropy = settings.anisotropy;
+    texture.needsUpdate = true;
+}
 // Cached default textures to prevent creating multiple instances
 let $4fdc68aa1ebb2033$var$defaultWhiteTexture = null;
 let $4fdc68aa1ebb2033$var$defaultNormalTexture = null;
@@ -56,6 +1047,7 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
         return this.materialFactory(materialParams, brushName);
     }
     configureTexture(texture, brushName, uniformName, isFallback = false) {
+        if (!isFallback) $4fdc68aa1ebb2033$var$applyBrushTextureSettings(texture, brushName, uniformName);
         if (this.textureConfigurator) this.textureConfigurator(texture, {
             brushName: brushName,
             uniformName: uniformName,

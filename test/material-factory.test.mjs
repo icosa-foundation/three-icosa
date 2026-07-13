@@ -1,6 +1,15 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { RawShaderMaterial, ShaderMaterial, Texture } from 'three';
+import {
+    ClampToEdgeWrapping,
+    LinearFilter,
+    LinearMipmapNearestFilter,
+    RawShaderMaterial,
+    RepeatWrapping,
+    ShaderMaterial,
+    SRGBColorSpace,
+    Texture
+} from 'three';
 import { TiltShaderLoader } from '../dist/three-icosa.module.js';
 
 test( 'uses RawShaderMaterial by default', () => {
@@ -40,12 +49,39 @@ test( 'allows callers to configure loaded textures', () => {
     const result = loader.configureTexture( texture, 'OilPaint', 'u_MainTex' );
 
     assert.equal( result, texture );
+    assert.equal( texture.wrapS, ClampToEdgeWrapping );
+    assert.equal( texture.wrapT, ClampToEdgeWrapping );
     assert.equal( texture.userData.configured, true );
     assert.deepEqual( receivedContext, {
         brushName: 'OilPaint',
         uniformName: 'u_MainTex',
         isFallback: false
     } );
+} );
+
+test( 'applies authoritative brush texture settings by default', () => {
+    const texture = new Texture();
+    const loader = new TiltShaderLoader();
+
+    loader.configureTexture( texture, 'OilPaint', 'u_MainTex' );
+
+    assert.equal( texture.colorSpace, SRGBColorSpace );
+    assert.equal( texture.wrapS, ClampToEdgeWrapping );
+    assert.equal( texture.wrapT, ClampToEdgeWrapping );
+    assert.equal( texture.generateMipmaps, true );
+    assert.equal( texture.magFilter, LinearFilter );
+    assert.equal( texture.minFilter, LinearMipmapNearestFilter );
+    assert.equal( texture.anisotropy, 4 );
+} );
+
+test( 'does not mutate shared fallback textures', () => {
+    const texture = new Texture();
+    texture.wrapS = RepeatWrapping;
+    const loader = new TiltShaderLoader();
+
+    loader.configureTexture( texture, 'OilPaint', 'u_MainTex', true );
+
+    assert.equal( texture.wrapS, RepeatWrapping );
 } );
 
 test( 'keeps texture configuration optional', () => {
