@@ -1,4 +1,4 @@
-import {DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, RepeatWrapping as $fugmd$RepeatWrapping, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, GLSL3 as $fugmd$GLSL3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4} from "three";
+import {DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, RepeatWrapping as $fugmd$RepeatWrapping, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -202,6 +202,9 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
             case "Disco":
             case "4391aaaa-df73-4396-9e33-31e4e4930b27":
                 return "Disco";
+            case "Digital":
+            case "30cb9af6-be41-4872-8f3e-cbff63fe3db8":
+                return "Digital";
             case "DotMarker":
             case "d1d991f2-e7a0-4cf1-b328-f57e915e6260":
                 return "DotMarker";
@@ -301,6 +304,9 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
             case "Rainbow":
             case "ad1ad437-76e2-450d-a23a-e17f8310b960":
                 return "Rainbow";
+            case "Race":
+            case "abfbb2aa-70b4-4a5c-8126-8eedda2b3628":
+                return "Race";
             case "ShinyHull":
             case "faaa4d44-fcfb-4177-96be-753ac0421ba3":
                 return "ShinyHull";
@@ -527,7 +533,28 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
         }
     }
 }
+function $4fdc68aa1ebb2033$var$createProceduralAdditiveParams(brushName, brushGuid) {
+    const assetPath = `${brushName}-${brushGuid}/${brushName}-${brushGuid}-v10.0`;
+    return {
+        uniforms: {
+            u_EmissionGain: {
+                value: 0.5
+            }
+        },
+        glslVersion: $fugmd$GLSL3,
+        vertexShader: `${assetPath}-vertex.glsl`,
+        fragmentShader: `${assetPath}-fragment.glsl`,
+        side: 2,
+        transparent: true,
+        depthFunc: 2,
+        depthWrite: false,
+        depthTest: true,
+        blending: 2
+    };
+}
 const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
+    "Digital": $4fdc68aa1ebb2033$var$createProceduralAdditiveParams("Digital", "30cb9af6-be41-4872-8f3e-cbff63fe3db8"),
+    "Race": $4fdc68aa1ebb2033$var$createProceduralAdditiveParams("Race", "abfbb2aa-70b4-4a5c-8126-8eedda2b3628"),
     "BlocksBasic": {
         uniforms: {
             u_SceneLight_0_matrix: {
