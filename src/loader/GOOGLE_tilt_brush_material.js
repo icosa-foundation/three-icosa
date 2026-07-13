@@ -15,15 +15,20 @@
 import * as THREE from 'three';
 
 import { TiltShaderLoader } from '../TiltShaderLoader.js';
+import {
+    applyTiltBrushRenderGroups,
+    createTiltBrushRenderMaterial
+} from '../TiltBrushRenderPasses.js';
 
 export class GLTFGoogleTiltBrushMaterialExtension {
 
-    constructor(parser, brushPath, isLegacy = false) {
+    constructor(parser, brushPath, isLegacy = false, options = {}) {
         this.name = "GOOGLE_tilt_brush_material";
         this.altName = "GOOGLE_tilt_brush_techniques"
         this.parser = parser;
         this.brushPath = brushPath;
         this.isLegacy = isLegacy;
+        this.enableMultipass = options.enableMultipass ?? false;
 
         // Quick repair of path if required
         if (this.brushPath.slice(this.brushPath.length - 1) !== "/") {
@@ -2234,9 +2239,24 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 console.warn(`Could not find brush with guid ${guidOrName}!`);
         }
 
+        if (this.enableMultipass && mesh.material?.uniforms) {
+            const renderMaterial = createTiltBrushRenderMaterial(guidOrName, mesh.material);
+            if (renderMaterial !== mesh.material) {
+                mesh.material = renderMaterial;
+                applyTiltBrushRenderGroups(
+                    mesh.geometry,
+                    mesh.geometry.index?.count ?? mesh.geometry.getAttribute('position')?.count ?? 0,
+                    renderMaterial
+                );
+            }
+        }
+
         // Set the exporter type flag on the shader
-        if (mesh.material?.uniforms) {
-            mesh.material.uniforms.u_isNewTiltExporter = { value: isNewTiltExporter };
+        const renderMaterials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+        for (const material of renderMaterials) {
+            if (material?.uniforms) {
+                material.uniforms.u_isNewTiltExporter = { value: isNewTiltExporter };
+            }
         }
 
         mesh.onBeforeRender = (renderer, scene, camera, geometry, material, group) => {

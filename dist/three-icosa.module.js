@@ -1,4 +1,4 @@
-import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrapping as $fugmd$MirroredRepeatWrapping, RepeatWrapping as $fugmd$RepeatWrapping, NearestFilter as $fugmd$NearestFilter, LinearFilter as $fugmd$LinearFilter, NearestMipmapNearestFilter as $fugmd$NearestMipmapNearestFilter, LinearMipmapLinearFilter as $fugmd$LinearMipmapLinearFilter, LinearMipmapNearestFilter as $fugmd$LinearMipmapNearestFilter, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, DoubleSide as $fugmd$DoubleSide, FrontSide as $fugmd$FrontSide, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4} from "three";
+import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrapping as $fugmd$MirroredRepeatWrapping, RepeatWrapping as $fugmd$RepeatWrapping, NearestFilter as $fugmd$NearestFilter, LinearFilter as $fugmd$LinearFilter, NearestMipmapNearestFilter as $fugmd$NearestMipmapNearestFilter, LinearMipmapLinearFilter as $fugmd$LinearMipmapLinearFilter, LinearMipmapNearestFilter as $fugmd$LinearMipmapNearestFilter, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, DoubleSide as $fugmd$DoubleSide, FrontSide as $fugmd$FrontSide, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, BackSide as $fugmd$BackSide, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -11537,6 +11537,51 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
 };
 
 
+
+const $16cff2322f67c674$export$c1bb71fdd9aa3dc9 = "9871385a-df73-4396-9e33-31e4e4930b27";
+const $16cff2322f67c674$export$18e64de72c17bfe = 0.05;
+function $16cff2322f67c674$export$2bd00b77fe2d55ec(brushNameOrGuid, source, sharedUniforms = {}) {
+    if (!$16cff2322f67c674$var$isTubeToonInverted(brushNameOrGuid) || !source?.uniforms) return source;
+    const base = $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms);
+    base.side = $fugmd$FrontSide;
+    base.uniforms.u_TubeToonPass = {
+        value: 1
+    };
+    base.uniforms.u_TubeToonOutlineSize = {
+        value: $16cff2322f67c674$export$18e64de72c17bfe
+    };
+    const color = $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms);
+    color.side = $fugmd$BackSide;
+    color.uniforms.u_TubeToonPass = {
+        value: 2
+    };
+    color.uniforms.u_TubeToonOutlineSize = {
+        value: $16cff2322f67c674$export$18e64de72c17bfe
+    };
+    return [
+        base,
+        color
+    ];
+}
+function $16cff2322f67c674$export$341ae8ac0b7c3891(geometry, indexCount, material) {
+    if (!Array.isArray(material)) return;
+    geometry.clearGroups();
+    for(let materialIndex = 0; materialIndex < material.length; materialIndex += 1)geometry.addGroup(0, indexCount, materialIndex);
+}
+function $16cff2322f67c674$var$isTubeToonInverted(brushNameOrGuid) {
+    const normalized = String(brushNameOrGuid ?? "").replace(/^material_/, "").toLowerCase();
+    return normalized === "tubetooninverted" || normalized === $16cff2322f67c674$export$c1bb71fdd9aa3dc9;
+}
+function $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms) {
+    const material = source.clone();
+    material.uniforms = {
+        ...material.uniforms,
+        ...sharedUniforms
+    };
+    return material;
+}
+
+
 // Copyright 2021-2022 Icosa Gallery
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -11552,13 +11597,15 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
 // limitations under the License.
 
 
+
 class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
-    constructor(parser, brushPath, isLegacy = false){
+    constructor(parser, brushPath, isLegacy = false, options = {}){
         this.name = "GOOGLE_tilt_brush_material";
         this.altName = "GOOGLE_tilt_brush_techniques";
         this.parser = parser;
         this.brushPath = brushPath;
         this.isLegacy = isLegacy;
+        this.enableMultipass = options.enableMultipass ?? false;
         // Quick repair of path if required
         if (this.brushPath.slice(this.brushPath.length - 1) !== "/") this.brushPath += "/";
         this.tiltShaderLoader = new (0, $4fdc68aa1ebb2033$export$bcc22bf437a07d8f)(parser.options.manager);
@@ -13461,8 +13508,18 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
             default:
                 console.warn(`Could not find brush with guid ${guidOrName}!`);
         }
+        if (this.enableMultipass && mesh.material?.uniforms) {
+            const renderMaterial = (0, $16cff2322f67c674$export$2bd00b77fe2d55ec)(guidOrName, mesh.material);
+            if (renderMaterial !== mesh.material) {
+                mesh.material = renderMaterial;
+                (0, $16cff2322f67c674$export$341ae8ac0b7c3891)(mesh.geometry, mesh.geometry.index?.count ?? mesh.geometry.getAttribute("position")?.count ?? 0, renderMaterial);
+            }
+        }
         // Set the exporter type flag on the shader
-        if (mesh.material?.uniforms) mesh.material.uniforms.u_isNewTiltExporter = {
+        const renderMaterials = Array.isArray(mesh.material) ? mesh.material : [
+            mesh.material
+        ];
+        for (const material of renderMaterials)if (material?.uniforms) material.uniforms.u_isNewTiltExporter = {
             value: isNewTiltExporter
         };
         mesh.onBeforeRender = (renderer, scene, camera, geometry, material, group)=>{
@@ -14358,5 +14415,5 @@ class $14e7a74c93f87da8$export$24723e25468f5bb7 {
 
 
 
-export {$4fdc68aa1ebb2033$export$bcc22bf437a07d8f as TiltShaderLoader, $e02d07ddc3ccd105$export$2b011a5b12963d65 as GLTFGoogleTiltBrushMaterialExtension, $14e7a74c93f87da8$export$24723e25468f5bb7 as GLTFGoogleTiltBrushTechniquesExtension};
+export {$4fdc68aa1ebb2033$export$bcc22bf437a07d8f as TiltShaderLoader, $16cff2322f67c674$export$341ae8ac0b7c3891 as applyTiltBrushRenderGroups, $16cff2322f67c674$export$2bd00b77fe2d55ec as createTiltBrushRenderMaterial, $16cff2322f67c674$export$c1bb71fdd9aa3dc9 as TUBE_TOON_INVERTED_BRUSH_GUID, $16cff2322f67c674$export$18e64de72c17bfe as TUBE_TOON_INVERTED_OUTLINE_SIZE, $e02d07ddc3ccd105$export$2b011a5b12963d65 as GLTFGoogleTiltBrushMaterialExtension, $14e7a74c93f87da8$export$24723e25468f5bb7 as GLTFGoogleTiltBrushTechniquesExtension};
 //# sourceMappingURL=three-icosa.module.js.map

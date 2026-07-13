@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
+    BackSide,
     ClampToEdgeWrapping,
     DoubleSide,
     FrontSide,
@@ -13,7 +14,36 @@ import {
     SRGBColorSpace,
     Texture
 } from 'three';
-import { TiltShaderLoader } from '../dist/three-icosa.module.js';
+import {
+    applyTiltBrushRenderGroups,
+    createTiltBrushRenderMaterial,
+    TiltShaderLoader
+} from '../dist/three-icosa.module.js';
+
+test( 'keeps render materials unchanged unless a supported pass is requested', () => {
+    const source = new ShaderMaterial();
+    assert.equal(createTiltBrushRenderMaterial('Flat', source), source);
+} );
+
+test( 'creates opt-in inverted Toon render passes', () => {
+    const source = new ShaderMaterial({ uniforms: { u_time: { value: 0 } } });
+    const materials = createTiltBrushRenderMaterial('TubeToonInverted', source);
+    assert.equal(materials.length, 2);
+    assert.deepEqual(materials.map(material => material.side), [FrontSide, BackSide]);
+    assert.deepEqual(materials.map(material => material.uniforms.u_TubeToonPass.value), [1, 2]);
+    assert.deepEqual(materials.map(material => material.uniforms.u_TubeToonOutlineSize.value), [0.05, 0.05]);
+
+    const groups = [];
+    const geometry = {
+        clearGroups: () => { groups.length = 0; },
+        addGroup: (start, count, materialIndex) => groups.push({ start, count, materialIndex })
+    };
+    applyTiltBrushRenderGroups(geometry, 18, materials);
+    assert.deepEqual(groups, [
+        { start: 0, count: 18, materialIndex: 0 },
+        { start: 0, count: 18, materialIndex: 1 }
+    ]);
+} );
 
 test( 'uses RawShaderMaterial by default', () => {
     const loader = new TiltShaderLoader();
