@@ -11540,8 +11540,26 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
 
 const $16cff2322f67c674$export$c1bb71fdd9aa3dc9 = "9871385a-df73-4396-9e33-31e4e4930b27";
 const $16cff2322f67c674$export$18e64de72c17bfe = 0.05;
+const $16cff2322f67c674$export$6c8c313f844ab31d = "4391385a-df73-4396-9e33-31e4e4930b27";
 function $16cff2322f67c674$export$2bd00b77fe2d55ec(brushNameOrGuid, source, sharedUniforms = {}) {
-    if (!$16cff2322f67c674$var$isTubeToonInverted(brushNameOrGuid) || !source?.uniforms) return source;
+    if (!source?.uniforms) return source;
+    if ($16cff2322f67c674$var$isToon(brushNameOrGuid)) {
+        const surface = $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms);
+        surface.side = $fugmd$FrontSide;
+        surface.uniforms.u_ToonOutlinePass = {
+            value: false
+        };
+        const outline = $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms);
+        outline.side = $fugmd$BackSide;
+        outline.uniforms.u_ToonOutlinePass = {
+            value: true
+        };
+        return [
+            surface,
+            outline
+        ];
+    }
+    if (!$16cff2322f67c674$var$isTubeToonInverted(brushNameOrGuid)) return source;
     const base = $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms);
     base.side = $fugmd$FrontSide;
     base.uniforms.u_TubeToonPass = {
@@ -11568,9 +11586,16 @@ function $16cff2322f67c674$export$341ae8ac0b7c3891(geometry, indexCount, materia
     geometry.clearGroups();
     for(let materialIndex = 0; materialIndex < material.length; materialIndex += 1)geometry.addGroup(0, indexCount, materialIndex);
 }
+function $16cff2322f67c674$var$isToon(brushNameOrGuid) {
+    const normalized = $16cff2322f67c674$var$normalizeBrushName(brushNameOrGuid);
+    return normalized === "toon" || normalized === $16cff2322f67c674$export$6c8c313f844ab31d;
+}
 function $16cff2322f67c674$var$isTubeToonInverted(brushNameOrGuid) {
-    const normalized = String(brushNameOrGuid ?? "").replace(/^material_/, "").toLowerCase();
+    const normalized = $16cff2322f67c674$var$normalizeBrushName(brushNameOrGuid);
     return normalized === "tubetooninverted" || normalized === $16cff2322f67c674$export$c1bb71fdd9aa3dc9;
+}
+function $16cff2322f67c674$var$normalizeBrushName(brushNameOrGuid) {
+    return String(brushNameOrGuid ?? "").replace(/^material_/, "").toLowerCase();
 }
 function $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms) {
     const material = source.clone();
@@ -11599,13 +11624,12 @@ function $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms) {
 
 
 class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
-    constructor(parser, brushPath, isLegacy = false, options = {}){
+    constructor(parser, brushPath, isLegacy = false){
         this.name = "GOOGLE_tilt_brush_material";
         this.altName = "GOOGLE_tilt_brush_techniques";
         this.parser = parser;
         this.brushPath = brushPath;
         this.isLegacy = isLegacy;
-        this.enableMultipass = options.enableMultipass ?? false;
         // Quick repair of path if required
         if (this.brushPath.slice(this.brushPath.length - 1) !== "/") this.brushPath += "/";
         this.tiltShaderLoader = new (0, $4fdc68aa1ebb2033$export$bcc22bf437a07d8f)(parser.options.manager);
@@ -13508,7 +13532,7 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
             default:
                 console.warn(`Could not find brush with guid ${guidOrName}!`);
         }
-        if (this.enableMultipass && mesh.material?.uniforms) {
+        if (mesh.material?.uniforms) {
             const renderMaterial = (0, $16cff2322f67c674$export$2bd00b77fe2d55ec)(guidOrName, mesh.material);
             if (renderMaterial !== mesh.material) {
                 mesh.material = renderMaterial;
@@ -14415,5 +14439,5 @@ class $14e7a74c93f87da8$export$24723e25468f5bb7 {
 
 
 
-export {$4fdc68aa1ebb2033$export$bcc22bf437a07d8f as TiltShaderLoader, $16cff2322f67c674$export$341ae8ac0b7c3891 as applyTiltBrushRenderGroups, $16cff2322f67c674$export$2bd00b77fe2d55ec as createTiltBrushRenderMaterial, $16cff2322f67c674$export$c1bb71fdd9aa3dc9 as TUBE_TOON_INVERTED_BRUSH_GUID, $16cff2322f67c674$export$18e64de72c17bfe as TUBE_TOON_INVERTED_OUTLINE_SIZE, $e02d07ddc3ccd105$export$2b011a5b12963d65 as GLTFGoogleTiltBrushMaterialExtension, $14e7a74c93f87da8$export$24723e25468f5bb7 as GLTFGoogleTiltBrushTechniquesExtension};
+export {$4fdc68aa1ebb2033$export$bcc22bf437a07d8f as TiltShaderLoader, $16cff2322f67c674$export$341ae8ac0b7c3891 as applyTiltBrushRenderGroups, $16cff2322f67c674$export$2bd00b77fe2d55ec as createTiltBrushRenderMaterial, $16cff2322f67c674$export$6c8c313f844ab31d as TOON_BRUSH_GUID, $16cff2322f67c674$export$c1bb71fdd9aa3dc9 as TUBE_TOON_INVERTED_BRUSH_GUID, $16cff2322f67c674$export$18e64de72c17bfe as TUBE_TOON_INVERTED_OUTLINE_SIZE, $e02d07ddc3ccd105$export$2b011a5b12963d65 as GLTFGoogleTiltBrushMaterialExtension, $14e7a74c93f87da8$export$24723e25468f5bb7 as GLTFGoogleTiltBrushTechniquesExtension};
 //# sourceMappingURL=three-icosa.module.js.map

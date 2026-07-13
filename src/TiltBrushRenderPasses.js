@@ -2,9 +2,25 @@ import * as THREE from 'three';
 
 export const TUBE_TOON_INVERTED_BRUSH_GUID = '9871385a-df73-4396-9e33-31e4e4930b27';
 export const TUBE_TOON_INVERTED_OUTLINE_SIZE = 0.05;
+export const TOON_BRUSH_GUID = '4391385a-df73-4396-9e33-31e4e4930b27';
 
 export function createTiltBrushRenderMaterial(brushNameOrGuid, source, sharedUniforms = {}) {
-    if (!isTubeToonInverted(brushNameOrGuid) || !source?.uniforms) {
+    if (!source?.uniforms) {
+        return source;
+    }
+
+    if (isToon(brushNameOrGuid)) {
+        const surface = cloneWithSharedUniforms(source, sharedUniforms);
+        surface.side = THREE.FrontSide;
+        surface.uniforms.u_ToonOutlinePass = { value: false };
+
+        const outline = cloneWithSharedUniforms(source, sharedUniforms);
+        outline.side = THREE.BackSide;
+        outline.uniforms.u_ToonOutlinePass = { value: true };
+        return [surface, outline];
+    }
+
+    if (!isTubeToonInverted(brushNameOrGuid)) {
         return source;
     }
 
@@ -30,11 +46,20 @@ export function applyTiltBrushRenderGroups(geometry, indexCount, material) {
     }
 }
 
+function isToon(brushNameOrGuid) {
+    const normalized = normalizeBrushName(brushNameOrGuid);
+    return normalized === 'toon' || normalized === TOON_BRUSH_GUID;
+}
+
 function isTubeToonInverted(brushNameOrGuid) {
-    const normalized = String(brushNameOrGuid ?? '')
+    const normalized = normalizeBrushName(brushNameOrGuid);
+    return normalized === 'tubetooninverted' || normalized === TUBE_TOON_INVERTED_BRUSH_GUID;
+}
+
+function normalizeBrushName(brushNameOrGuid) {
+    return String(brushNameOrGuid ?? '')
         .replace(/^material_/, '')
         .toLowerCase();
-    return normalized === 'tubetooninverted' || normalized === TUBE_TOON_INVERTED_BRUSH_GUID;
 }
 
 function cloneWithSharedUniforms(source, sharedUniforms) {

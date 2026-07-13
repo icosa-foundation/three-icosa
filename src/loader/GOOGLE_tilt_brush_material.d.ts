@@ -5,14 +5,12 @@ export class GLTFGoogleTiltBrushMaterialExtension {
     constructor(
         parser: any,
         brushPath: string,
-        isLegacy?: boolean,
-        options?: { enableMultipass?: boolean }
+        isLegacy?: boolean
     );
     name: string;
     parser: any;
     brushPath: any;
     isLegacy: boolean;
-    enableMultipass: boolean;
     tiltShaderLoader: TiltShaderLoader;
     clock: THREE.Clock;
     beforeRoot(): null | undefined;

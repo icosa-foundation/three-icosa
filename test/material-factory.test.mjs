@@ -20,18 +20,30 @@ import {
     TiltShaderLoader
 } from '../dist/three-icosa.module.js';
 
-test( 'keeps render materials unchanged unless a supported pass is requested', () => {
+test( 'keeps brushes without material passes unchanged', () => {
     const source = new ShaderMaterial();
     assert.equal(createTiltBrushRenderMaterial('Flat', source), source);
 } );
 
-test( 'creates opt-in inverted Toon render passes', () => {
+test( 'creates Toon surface and outline material passes', () => {
     const source = new ShaderMaterial({ uniforms: { u_time: { value: 0 } } });
-    const materials = createTiltBrushRenderMaterial('TubeToonInverted', source);
+    const sharedTime = { value: 1.5 };
+    const materials = createTiltBrushRenderMaterial('Toon', source, { u_time: sharedTime });
+    assert.equal(materials.length, 2);
+    assert.deepEqual(materials.map(material => material.side), [FrontSide, BackSide]);
+    assert.deepEqual(materials.map(material => material.uniforms.u_ToonOutlinePass.value), [false, true]);
+    assert.ok(materials.every(material => material.uniforms.u_time === sharedTime));
+} );
+
+test( 'creates inverted Toon base and inflated-color material passes', () => {
+    const source = new ShaderMaterial({ uniforms: { u_time: { value: 0 } } });
+    const sharedTime = { value: 1.5 };
+    const materials = createTiltBrushRenderMaterial('TubeToonInverted', source, { u_time: sharedTime });
     assert.equal(materials.length, 2);
     assert.deepEqual(materials.map(material => material.side), [FrontSide, BackSide]);
     assert.deepEqual(materials.map(material => material.uniforms.u_TubeToonPass.value), [1, 2]);
     assert.deepEqual(materials.map(material => material.uniforms.u_TubeToonOutlineSize.value), [0.05, 0.05]);
+    assert.ok(materials.every(material => material.uniforms.u_time === sharedTime));
 
     const groups = [];
     const geometry = {

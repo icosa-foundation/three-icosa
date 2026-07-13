@@ -22,13 +22,12 @@ import {
 
 export class GLTFGoogleTiltBrushMaterialExtension {
 
-    constructor(parser, brushPath, isLegacy = false, options = {}) {
+    constructor(parser, brushPath, isLegacy = false) {
         this.name = "GOOGLE_tilt_brush_material";
         this.altName = "GOOGLE_tilt_brush_techniques"
         this.parser = parser;
         this.brushPath = brushPath;
         this.isLegacy = isLegacy;
-        this.enableMultipass = options.enableMultipass ?? false;
 
         // Quick repair of path if required
         if (this.brushPath.slice(this.brushPath.length - 1) !== "/") {
@@ -2239,7 +2238,7 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 console.warn(`Could not find brush with guid ${guidOrName}!`);
         }
 
-        if (this.enableMultipass && mesh.material?.uniforms) {
+        if (mesh.material?.uniforms) {
             const renderMaterial = createTiltBrushRenderMaterial(guidOrName, mesh.material);
             if (renderMaterial !== mesh.material) {
                 mesh.material = renderMaterial;

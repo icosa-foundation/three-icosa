@@ -2,6 +2,7 @@ import type { BufferGeometry, Material, ShaderMaterial } from 'three';
 
 export const TUBE_TOON_INVERTED_BRUSH_GUID: string;
 export const TUBE_TOON_INVERTED_OUTLINE_SIZE: number;
+export const TOON_BRUSH_GUID: string;
 
 export function createTiltBrushRenderMaterial(
     brushNameOrGuid: string,
