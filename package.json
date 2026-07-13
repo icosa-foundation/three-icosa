@@ -4,7 +4,7 @@
   "description": "Implements Tilt Brush/Open Brush related glTF extensions in three.js",
   "scripts": {
     "watch": "parcel watch",
-    "build": "parcel build --no-cache",
+    "build": "parcel build --no-cache && node scripts/copy-declarations.mjs",
     "test": "npm run build && node --test test/*.test.mjs"
   },
   "repository": {

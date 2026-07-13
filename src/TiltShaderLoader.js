@@ -56,11 +56,23 @@ export class TiltShaderLoader extends THREE.Loader {
 
         this.materialFactory = options.materialFactory || ((materialParams) =>
             new THREE.RawShaderMaterial(materialParams));
+        this.textureConfigurator = options.textureConfigurator;
         this.loadedMaterials = {};
     }
 
     createMaterial(materialParams, brushName) {
         return this.materialFactory(materialParams, brushName);
+    }
+
+    configureTexture(texture, brushName, uniformName, isFallback = false) {
+        if (this.textureConfigurator) {
+            this.textureConfigurator(texture, {
+                brushName,
+                uniformName,
+                isFallback
+            });
+        }
+        return texture;
     }
     
     async loadShaderIncludes(relativePath) {
@@ -120,8 +132,10 @@ export class TiltShaderLoader extends THREE.Loader {
         materialParams.fragmentShader = fragmentShaderText;
 
         if (materialParams.uniforms.u_MainTex) {
+            let isFallback = false;
             if (materialParams.uniforms.u_MainTex.value === null) {
                 materialParams.uniforms.u_MainTex.value = getDefaultWhiteTexture();
+                isFallback = true;
             } else if (typeof materialParams.uniforms.u_MainTex.value === 'string') {
                 const mainTex = await textureLoader.loadAsync(materialParams.uniforms.u_MainTex.value);
                 mainTex.name = `${brushName}_MainTex`;
@@ -135,11 +149,14 @@ export class TiltShaderLoader extends THREE.Loader {
             } else {
                 console.error(`[TiltShaderLoader] u_MainTex has unexpected type for ${brushName}:`, materialParams.uniforms.u_MainTex.value);
             }
+            this.configureTexture(materialParams.uniforms.u_MainTex.value, brushName, 'u_MainTex', isFallback);
         }
 
         if (materialParams.uniforms.u_BumpMap) {
+            let isFallback = false;
             if (materialParams.uniforms.u_BumpMap.value === null) {
                 materialParams.uniforms.u_BumpMap.value = getDefaultNormalTexture();
+                isFallback = true;
             } else if (typeof materialParams.uniforms.u_BumpMap.value === 'string') {
                 const bumpMap = await textureLoader.loadAsync(materialParams.uniforms.u_BumpMap.value);
                 bumpMap.name = `${brushName}_BumpMap`;
@@ -153,6 +170,7 @@ export class TiltShaderLoader extends THREE.Loader {
             } else {
                 console.error(`[TiltShaderLoader] u_MainTex has unexpected type for ${brushName}:`, materialParams.uniforms.u_MainTex.value);
             }
+            this.configureTexture(materialParams.uniforms.u_BumpMap.value, brushName, 'u_BumpMap', isFallback);
         }
 
         if (materialParams.uniforms.u_AlphaMask) {
@@ -162,6 +180,7 @@ export class TiltShaderLoader extends THREE.Loader {
             alphaMask.wrapT = THREE.RepeatWrapping;
             alphaMask.flipY = false;
             materialParams.uniforms.u_AlphaMask.value = alphaMask;
+            this.configureTexture(alphaMask, brushName, 'u_AlphaMask');
         }
 
         if (materialParams.uniforms.u_DisplaceTex) {
@@ -171,6 +190,7 @@ export class TiltShaderLoader extends THREE.Loader {
             displaceTex.wrapT = THREE.RepeatWrapping;
             displaceTex.flipY = false;
             materialParams.uniforms.u_DisplaceTex.value = displaceTex;
+            this.configureTexture(displaceTex, brushName, 'u_DisplaceTex');
         }
 
         if (materialParams.uniforms.u_SecondaryTex) {
@@ -180,6 +200,7 @@ export class TiltShaderLoader extends THREE.Loader {
             secondaryTex.wrapT = THREE.RepeatWrapping;
             secondaryTex.flipY = false;
             materialParams.uniforms.u_SecondaryTex.value = secondaryTex;
+            this.configureTexture(secondaryTex, brushName, 'u_SecondaryTex');
         }
 
         if (materialParams.uniforms.u_SpecTex) {
@@ -189,6 +210,7 @@ export class TiltShaderLoader extends THREE.Loader {
             specTex.wrapT = THREE.RepeatWrapping;
             specTex.flipY = false;
             materialParams.uniforms.u_SpecTex.value = specTex;
+            this.configureTexture(specTex, brushName, 'u_SpecTex');
         }
 
         // inject three.js lighting and fog uniforms

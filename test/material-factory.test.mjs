@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { RawShaderMaterial, ShaderMaterial } from 'three';
+import { RawShaderMaterial, ShaderMaterial, Texture } from 'three';
 import { TiltShaderLoader } from '../dist/three-icosa.module.js';
 
 test( 'uses RawShaderMaterial by default', () => {
@@ -24,6 +24,35 @@ test( 'uses an injected material factory', () => {
 
     assert.equal( material, expected );
     assert.equal( receivedBrushName, 'OilPaint' );
+} );
+
+test( 'allows callers to configure loaded textures', () => {
+    const texture = new Texture();
+    let receivedContext;
+    const loader = new TiltShaderLoader( undefined, {
+        textureConfigurator: ( receivedTexture, context ) => {
+            assert.equal( receivedTexture, texture );
+            receivedTexture.userData.configured = true;
+            receivedContext = context;
+        }
+    } );
+
+    const result = loader.configureTexture( texture, 'OilPaint', 'u_MainTex' );
+
+    assert.equal( result, texture );
+    assert.equal( texture.userData.configured, true );
+    assert.deepEqual( receivedContext, {
+        brushName: 'OilPaint',
+        uniformName: 'u_MainTex',
+        isFallback: false
+    } );
+} );
+
+test( 'keeps texture configuration optional', () => {
+    const texture = new Texture();
+    const loader = new TiltShaderLoader();
+
+    assert.equal( loader.configureTexture( texture, 'Flat', 'u_MainTex' ), texture );
 } );
 
 test( 'binds untextured experimental additive brushes independently', () => {

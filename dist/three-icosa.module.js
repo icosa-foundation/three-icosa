@@ -49,10 +49,19 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
     constructor(manager, options = {}){
         super(manager);
         this.materialFactory = options.materialFactory || ((materialParams)=>new $fugmd$RawShaderMaterial(materialParams));
+        this.textureConfigurator = options.textureConfigurator;
         this.loadedMaterials = {};
     }
     createMaterial(materialParams, brushName) {
         return this.materialFactory(materialParams, brushName);
+    }
+    configureTexture(texture, brushName, uniformName, isFallback = false) {
+        if (this.textureConfigurator) this.textureConfigurator(texture, {
+            brushName: brushName,
+            uniformName: uniformName,
+            isFallback: isFallback
+        });
+        return texture;
     }
     async loadShaderIncludes(relativePath) {
         const loader = new $fugmd$FileLoader(this.manager);
@@ -95,8 +104,11 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
         materialParams.vertexShader = vertexShaderText;
         materialParams.fragmentShader = fragmentShaderText;
         if (materialParams.uniforms.u_MainTex) {
-            if (materialParams.uniforms.u_MainTex.value === null) materialParams.uniforms.u_MainTex.value = $4fdc68aa1ebb2033$var$getDefaultWhiteTexture();
-            else if (typeof materialParams.uniforms.u_MainTex.value === "string") {
+            let isFallback = false;
+            if (materialParams.uniforms.u_MainTex.value === null) {
+                materialParams.uniforms.u_MainTex.value = $4fdc68aa1ebb2033$var$getDefaultWhiteTexture();
+                isFallback = true;
+            } else if (typeof materialParams.uniforms.u_MainTex.value === "string") {
                 const mainTex = await textureLoader.loadAsync(materialParams.uniforms.u_MainTex.value);
                 mainTex.name = `${brushName}_MainTex`;
                 mainTex.wrapS = $fugmd$RepeatWrapping;
@@ -106,10 +118,14 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
                 materialParams.uniforms.u_MainTex.value = mainTex;
             } else if (materialParams.uniforms.u_MainTex.value.isTexture) ;
             else console.error(`[TiltShaderLoader] u_MainTex has unexpected type for ${brushName}:`, materialParams.uniforms.u_MainTex.value);
+            this.configureTexture(materialParams.uniforms.u_MainTex.value, brushName, "u_MainTex", isFallback);
         }
         if (materialParams.uniforms.u_BumpMap) {
-            if (materialParams.uniforms.u_BumpMap.value === null) materialParams.uniforms.u_BumpMap.value = $4fdc68aa1ebb2033$var$getDefaultNormalTexture();
-            else if (typeof materialParams.uniforms.u_BumpMap.value === "string") {
+            let isFallback = false;
+            if (materialParams.uniforms.u_BumpMap.value === null) {
+                materialParams.uniforms.u_BumpMap.value = $4fdc68aa1ebb2033$var$getDefaultNormalTexture();
+                isFallback = true;
+            } else if (typeof materialParams.uniforms.u_BumpMap.value === "string") {
                 const bumpMap = await textureLoader.loadAsync(materialParams.uniforms.u_BumpMap.value);
                 bumpMap.name = `${brushName}_BumpMap`;
                 bumpMap.colorSpace = $fugmd$NoColorSpace; // Normal maps are data, not color
@@ -119,6 +135,7 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
                 materialParams.uniforms.u_BumpMap.value = bumpMap;
             } else if (materialParams.uniforms.u_BumpMap.value.isTexture) ;
             else console.error(`[TiltShaderLoader] u_MainTex has unexpected type for ${brushName}:`, materialParams.uniforms.u_MainTex.value);
+            this.configureTexture(materialParams.uniforms.u_BumpMap.value, brushName, "u_BumpMap", isFallback);
         }
         if (materialParams.uniforms.u_AlphaMask) {
             const alphaMask = await textureLoader.loadAsync(materialParams.uniforms.u_AlphaMask.value);
@@ -127,6 +144,7 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
             alphaMask.wrapT = $fugmd$RepeatWrapping;
             alphaMask.flipY = false;
             materialParams.uniforms.u_AlphaMask.value = alphaMask;
+            this.configureTexture(alphaMask, brushName, "u_AlphaMask");
         }
         if (materialParams.uniforms.u_DisplaceTex) {
             const displaceTex = await textureLoader.loadAsync(materialParams.uniforms.u_DisplaceTex.value);
@@ -135,6 +153,7 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
             displaceTex.wrapT = $fugmd$RepeatWrapping;
             displaceTex.flipY = false;
             materialParams.uniforms.u_DisplaceTex.value = displaceTex;
+            this.configureTexture(displaceTex, brushName, "u_DisplaceTex");
         }
         if (materialParams.uniforms.u_SecondaryTex) {
             const secondaryTex = await textureLoader.loadAsync(materialParams.uniforms.u_SecondaryTex.value);
@@ -143,6 +162,7 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
             secondaryTex.wrapT = $fugmd$RepeatWrapping;
             secondaryTex.flipY = false;
             materialParams.uniforms.u_SecondaryTex.value = secondaryTex;
+            this.configureTexture(secondaryTex, brushName, "u_SecondaryTex");
         }
         if (materialParams.uniforms.u_SpecTex) {
             const specTex = await textureLoader.loadAsync(materialParams.uniforms.u_SpecTex.value);
@@ -151,6 +171,7 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
             specTex.wrapT = $fugmd$RepeatWrapping;
             specTex.flipY = false;
             materialParams.uniforms.u_SpecTex.value = specTex;
+            this.configureTexture(specTex, brushName, "u_SpecTex");
         }
         // inject three.js lighting and fog uniforms
         for(var lightType in $fugmd$UniformsLib.lights)materialParams.uniforms[lightType] = $fugmd$UniformsLib.lights[lightType];
