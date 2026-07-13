@@ -1246,6 +1246,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
     },
     "Disco": {
         uniforms: {
+            u_isNewTiltExporter: {
+                value: false
+            },
             u_SceneLight_0_matrix: {
                 value: [
                     1,
@@ -1673,6 +1676,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
     },
     "Electricity": {
         uniforms: {
+            u_isNewTiltExporter: {
+                value: false
+            },
             u_time: {
                 value: new $fugmd$Vector4()
             },
@@ -2179,6 +2185,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
     },
     "HyperGrid": {
         uniforms: {
+            u_isNewTiltExporter: {
+                value: false
+            },
             u_SceneLight_0_matrix: {
                 value: [
                     1,
@@ -7126,6 +7135,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
     },
     "BubbleWand": {
         uniforms: {
+            u_isNewTiltExporter: {
+                value: false
+            },
             u_SceneLight_0_matrix: {
                 value: [
                     1,
@@ -8569,6 +8581,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
     },
     "KeijiroTube": {
         uniforms: {
+            u_isNewTiltExporter: {
+                value: false
+            },
             u_SceneLight_0_matrix: {
                 value: [
                     1,

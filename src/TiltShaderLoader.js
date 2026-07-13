@@ -944,6 +944,7 @@ const tiltBrushMaterialParams = {
     },
     "Disco" : {
         uniforms: {
+            u_isNewTiltExporter: { value: false },
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_time: { value: new THREE.Vector4() },
@@ -1074,6 +1075,7 @@ const tiltBrushMaterialParams = {
     },
     "Electricity" : {
         uniforms: {
+            u_isNewTiltExporter: { value: false },
             u_time: { value: new THREE.Vector4() },
             u_DisplacementIntensity: { value: 2.0 },
             u_DisplacementMod: { value: 1.0 },
@@ -1250,6 +1252,7 @@ const tiltBrushMaterialParams = {
     },
     "HyperGrid" : {
         uniforms: {
+            u_isNewTiltExporter: { value: false },
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_TintColor: { value: new THREE.Vector4(1, 1, 1, 1) },
@@ -2805,6 +2808,7 @@ const tiltBrushMaterialParams = {
     },
     "BubbleWand" : {
         uniforms: {
+            u_isNewTiltExporter: { value: false },
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_ambient_light_color: { value: new THREE.Vector4(0.3922, 0.3922, 0.3922, 1) },
@@ -3260,6 +3264,7 @@ const tiltBrushMaterialParams = {
     },
     "KeijiroTube" : {
         uniforms: {
+            u_isNewTiltExporter: { value: false },
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_ambient_light_color: { value: new THREE.Vector4(0.3922, 0.3922, 0.3922, 1) },
