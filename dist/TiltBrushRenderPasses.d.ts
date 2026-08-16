@@ -9,7 +9,8 @@ export const ELECTRICITY_DISPLACEMENT_MODS: readonly number[];
 export function createTiltBrushRenderMaterial(
     brushNameOrGuid: string,
     source: Material,
-    sharedUniforms?: Record<string, { value: unknown }>
+    sharedUniforms?: Record<string, { value: unknown }>,
+    options?: { electricityMultipass?: boolean }
 ): Material | ShaderMaterial[];
 
 export function applyTiltBrushRenderGroups(

@@ -19,6 +19,7 @@ import {
     applyTiltBrushRenderGroups,
     createTiltBrushRenderMaterial
 } from '../TiltBrushRenderPasses.js';
+import { prepareElectricityGeometry } from '../ElectricityGeometry.js';
 
 export class GLTFGoogleTiltBrushMaterialExtension {
 
@@ -182,6 +183,8 @@ export class GLTFGoogleTiltBrushMaterialExtension {
     }
 
     async replaceMaterial(mesh, guidOrName, isNewTiltExporter = false) {
+        let electricityMultipass = true;
+        let electricityHasBakedDisplacement = false;
 
         let renameAttribute = (mesh, oldName, newName) => {
             const attr = mesh.geometry.getAttribute(oldName);
@@ -572,7 +575,20 @@ export class GLTFGoogleTiltBrushMaterialExtension {
                 renameAttribute(mesh, "uv2", "a_texcoord2");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
+                const electricityLayout = prepareElectricityGeometry(mesh.geometry, isNewTiltExporter);
+                electricityMultipass = electricityLayout !== 'legacy'
+                    && electricityLayout !== 'unsupported';
+                electricityHasBakedDisplacement = electricityLayout === 'complete'
+                    || electricityLayout === 'reconstructed-baked';
+                if (electricityLayout.startsWith('reconstructed-')) {
+                    console.warn(`Reconstructed missing Electricity animation attributes (${electricityLayout})`, mesh.name);
+                } else if (electricityLayout === 'unsupported') {
+                    console.warn('Electricity animation attributes are incomplete and could not be reconstructed', mesh.name);
+                }
                 shader = await this.tiltShaderLoader.loadAsync("Electricity");
+                shader.uniforms.u_ElectricityHasBakedDisplacement = {
+                    value: electricityHasBakedDisplacement
+                };
                 mesh.material = shader;
                 mesh.material.name = "material_Electricity";
                 break;
@@ -2239,7 +2255,9 @@ export class GLTFGoogleTiltBrushMaterialExtension {
         }
 
         if (mesh.material?.uniforms) {
-            const renderMaterial = createTiltBrushRenderMaterial(guidOrName, mesh.material);
+            const renderMaterial = createTiltBrushRenderMaterial(guidOrName, mesh.material, {}, {
+                electricityMultipass
+            });
             if (renderMaterial !== mesh.material) {
                 mesh.material = renderMaterial;
                 applyTiltBrushRenderGroups(

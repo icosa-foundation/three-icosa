@@ -1,4 +1,4 @@
-import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrapping as $fugmd$MirroredRepeatWrapping, RepeatWrapping as $fugmd$RepeatWrapping, NearestFilter as $fugmd$NearestFilter, LinearFilter as $fugmd$LinearFilter, NearestMipmapNearestFilter as $fugmd$NearestMipmapNearestFilter, LinearMipmapLinearFilter as $fugmd$LinearMipmapLinearFilter, LinearMipmapNearestFilter as $fugmd$LinearMipmapNearestFilter, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, DoubleSide as $fugmd$DoubleSide, FrontSide as $fugmd$FrontSide, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, BackSide as $fugmd$BackSide, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4} from "three";
+import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrapping as $fugmd$MirroredRepeatWrapping, RepeatWrapping as $fugmd$RepeatWrapping, NearestFilter as $fugmd$NearestFilter, LinearFilter as $fugmd$LinearFilter, NearestMipmapNearestFilter as $fugmd$NearestMipmapNearestFilter, LinearMipmapLinearFilter as $fugmd$LinearMipmapLinearFilter, LinearMipmapNearestFilter as $fugmd$LinearMipmapNearestFilter, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, DoubleSide as $fugmd$DoubleSide, FrontSide as $fugmd$FrontSide, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, BackSide as $fugmd$BackSide, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4, Box3 as $fugmd$Box3} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -11547,15 +11547,23 @@ const $16cff2322f67c674$export$31cff25809951ff3 = [
     1.333,
     1.77
 ];
-function $16cff2322f67c674$export$2bd00b77fe2d55ec(brushNameOrGuid, source, sharedUniforms = {}) {
+function $16cff2322f67c674$export$2bd00b77fe2d55ec(brushNameOrGuid, source, sharedUniforms = {}, { electricityMultipass: electricityMultipass = true } = {}) {
     if (!source?.uniforms) return source;
-    if ($16cff2322f67c674$var$isElectricity(brushNameOrGuid)) return $16cff2322f67c674$export$31cff25809951ff3.map((mod)=>{
-        const material = $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms);
-        material.uniforms.u_DisplacementMod = {
-            value: mod
-        };
-        return material;
-    });
+    if ($16cff2322f67c674$var$isElectricity(brushNameOrGuid)) {
+        if (!electricityMultipass) {
+            source.uniforms.u_DisplacementMod = {
+                value: $16cff2322f67c674$export$31cff25809951ff3[0]
+            };
+            return source;
+        }
+        return $16cff2322f67c674$export$31cff25809951ff3.map((mod)=>{
+            const material = $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms);
+            material.uniforms.u_DisplacementMod = {
+                value: mod
+            };
+            return material;
+        });
+    }
     if ($16cff2322f67c674$var$isToon(brushNameOrGuid)) {
         const surface = $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms);
         surface.side = $fugmd$FrontSide;
@@ -11638,6 +11646,84 @@ function $16cff2322f67c674$var$cloneWithSharedUniforms(source, sharedUniforms) {
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+
+
+const $9cca52610279d71c$var$ENVELOPE_EPSILON = 1e-5;
+const $9cca52610279d71c$var$EDGE_U_EPSILON = 1e-5;
+function $9cca52610279d71c$export$521be1f26f566020(geometry, isNewTiltExporter) {
+    if (!isNewTiltExporter) return "legacy";
+    if (geometry.getAttribute("a_texcoord2")) return "complete";
+    const position = geometry.getAttribute("a_position") || geometry.getAttribute("position");
+    const uv0 = geometry.getAttribute("a_texcoord0") || geometry.getAttribute("uv");
+    if (!position || !uv0 || position.itemSize < 3 || uv0.itemSize < 1) return "unsupported";
+    const vertexCount = position.count;
+    const midpoint = new Float32Array(vertexCount * 2);
+    const midpointZAndWidth = new Float32Array(vertexCount * 2);
+    const paired = new Uint8Array(vertexCount);
+    const index = geometry.index;
+    const indexCount = index?.count ?? vertexCount;
+    const pairEdge = (a, b)=>{
+        if (a === b || paired[a] || paired[b]) return;
+        if (Math.abs(uv0.getX(a) - uv0.getX(b)) > $9cca52610279d71c$var$EDGE_U_EPSILON) return;
+        const ax = position.getX(a);
+        const ay = position.getY(a);
+        const az = position.getZ(a);
+        const bx = position.getX(b);
+        const by = position.getY(b);
+        const bz = position.getZ(b);
+        const mx = (ax + bx) * 0.5;
+        const my = (ay + by) * 0.5;
+        const mz = (az + bz) * 0.5;
+        const bakedHalfWidth = Math.hypot(ax - bx, ay - by, az - bz) * 0.5;
+        const envelope = Math.sin(uv0.getX(a) * Math.PI);
+        const envelopePow = 1 - Math.pow(1 - envelope, 10);
+        const widthiness = envelopePow > $9cca52610279d71c$var$ENVELOPE_EPSILON ? bakedHalfWidth / envelopePow / 0.02 : 0;
+        for (const vertex of [
+            a,
+            b
+        ]){
+            midpoint[vertex * 2] = mx;
+            midpoint[vertex * 2 + 1] = my;
+            midpointZAndWidth[vertex * 2] = mz;
+            midpointZAndWidth[vertex * 2 + 1] = widthiness;
+            paired[vertex] = 1;
+        }
+    };
+    for(let offset = 0; offset + 2 < indexCount; offset += 3){
+        const a = index ? index.getX(offset) : offset;
+        const b = index ? index.getX(offset + 1) : offset + 1;
+        const c = index ? index.getX(offset + 2) : offset + 2;
+        pairEdge(a, b);
+        pairEdge(b, c);
+        pairEdge(c, a);
+    }
+    let pairedCount = 0;
+    for (const value of paired)pairedCount += value;
+    if (pairedCount === 0) return "unsupported";
+    const existingUv1 = geometry.getAttribute("a_texcoord1");
+    const packedMidpoints = existingUv1 && existingUv1.itemSize >= 2 && $9cca52610279d71c$var$looksLikePackedMidpoints(existingUv1, midpoint, paired, position);
+    geometry.setAttribute("a_texcoord1", new $fugmd$BufferAttribute(midpoint, 2));
+    geometry.setAttribute("a_texcoord2", new $fugmd$BufferAttribute(midpointZAndWidth, 2));
+    return packedMidpoints ? "reconstructed-baked" : "reconstructed-unbaked";
+}
+function $9cca52610279d71c$var$looksLikePackedMidpoints(uv1, midpoint, paired, position) {
+    const bounds = new $fugmd$Box3().setFromBufferAttribute(position);
+    const tolerance = Math.max(bounds.getSize(new $fugmd$Vector3()).length() * 1e-4, 1e-5);
+    let compared = 0;
+    let error = 0;
+    for(let vertex = 0; vertex < position.count; vertex += 1){
+        if (!paired[vertex]) continue;
+        const expectedX = midpoint[vertex * 2];
+        const expectedY = midpoint[vertex * 2 + 1];
+        const actualX = uv1.getX(vertex);
+        const actualY = uv1.getY(vertex);
+        error += Math.abs(actualX - expectedX);
+        error += Math.min(Math.abs(actualY - expectedY), Math.abs(1 - actualY - expectedY));
+        compared += 2;
+    }
+    return compared > 0 && error / compared <= tolerance;
+}
 
 
 class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
@@ -11746,6 +11832,8 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
         return isTiltGltf;
     }
     async replaceMaterial(mesh, guidOrName, isNewTiltExporter = false) {
+        let electricityMultipass = true;
+        let electricityHasBakedDisplacement = false;
         let renameAttribute = (mesh, oldName, newName)=>{
             const attr = mesh.geometry.getAttribute(oldName);
             if (attr) {
@@ -12076,7 +12164,15 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 renameAttribute(mesh, "uv2", "a_texcoord2");
                 renameAttribute(mesh, "_tb_unity_texcoord_1", "a_texcoord1");
                 renameAttribute(mesh, "texcoord_1", "a_texcoord1");
+                const electricityLayout = (0, $9cca52610279d71c$export$521be1f26f566020)(mesh.geometry, isNewTiltExporter);
+                electricityMultipass = electricityLayout !== "legacy" && electricityLayout !== "unsupported";
+                electricityHasBakedDisplacement = electricityLayout === "complete" || electricityLayout === "reconstructed-baked";
+                if (electricityLayout.startsWith("reconstructed-")) console.warn(`Reconstructed missing Electricity animation attributes (${electricityLayout})`, mesh.name);
+                else if (electricityLayout === "unsupported") console.warn("Electricity animation attributes are incomplete and could not be reconstructed", mesh.name);
                 shader = await this.tiltShaderLoader.loadAsync("Electricity");
+                shader.uniforms.u_ElectricityHasBakedDisplacement = {
+                    value: electricityHasBakedDisplacement
+                };
                 mesh.material = shader;
                 mesh.material.name = "material_Electricity";
                 break;
@@ -13550,7 +13646,9 @@ class $e02d07ddc3ccd105$export$2b011a5b12963d65 {
                 console.warn(`Could not find brush with guid ${guidOrName}!`);
         }
         if (mesh.material?.uniforms) {
-            const renderMaterial = (0, $16cff2322f67c674$export$2bd00b77fe2d55ec)(guidOrName, mesh.material);
+            const renderMaterial = (0, $16cff2322f67c674$export$2bd00b77fe2d55ec)(guidOrName, mesh.material, {}, {
+                electricityMultipass: electricityMultipass
+            });
             if (renderMaterial !== mesh.material) {
                 mesh.material = renderMaterial;
                 (0, $16cff2322f67c674$export$341ae8ac0b7c3891)(mesh.geometry, mesh.geometry.index?.count ?? mesh.geometry.getAttribute("position")?.count ?? 0, renderMaterial);

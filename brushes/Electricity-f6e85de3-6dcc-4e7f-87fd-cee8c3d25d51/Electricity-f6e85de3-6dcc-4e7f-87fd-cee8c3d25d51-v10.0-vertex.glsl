@@ -39,6 +39,7 @@ uniform mat3 normalMatrix;
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform bool u_isNewTiltExporter;
+uniform bool u_ElectricityHasBakedDisplacement;
 
 uniform vec4 u_time;
 uniform float u_ScrollRate;
@@ -46,6 +47,7 @@ uniform vec3 u_ScrollDistance;
 uniform float u_ScrollJitterIntensity;
 uniform float u_ScrollJitterFrequency;
 uniform float u_DisplacementIntensity;
+uniform float u_DisplacementMod;
 
 float mod289(float x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -148,7 +150,7 @@ vec3 displacement(vec3 pos, float mod, float time) {
 void main() {
   float envelope = sin(a_texcoord0.x * 3.14159);
   float envelopePow = 1.0 - pow(1.0 - envelope, 10.0);
-  float mod = 1.0;
+  float mod = u_DisplacementMod;
   float time = u_time.w;
   vec3 worldPos = (modelMatrix * a_position).xyz;
 
@@ -162,6 +164,7 @@ void main() {
 
     if (widthiness_CS > 0.0) {
       vec3 dispVec = displacement(midpointPos_CS / widthiness_CS, mod, time);
+      dispVec = (modelMatrix * vec4(dispVec, 0.0)).xyz;
       worldPos += widthiness_CS * dispVec * u_DisplacementIntensity * envelopePow;
     }
   } else {
@@ -170,8 +173,13 @@ void main() {
 
     if (widthiness_CS > 0.0) {
       vec3 currentDispVec = displacement(midpointPos_CS / widthiness_CS, mod, time);
-      vec3 bakedDispVec = displacement(midpointPos_CS / widthiness_CS, mod, 0.0);
-      worldPos += widthiness_CS * (currentDispVec - bakedDispVec) * u_DisplacementIntensity * envelopePow;
+      currentDispVec = (modelMatrix * vec4(currentDispVec, 0.0)).xyz;
+      if (u_ElectricityHasBakedDisplacement) {
+        vec3 bakedDispVec = displacement(midpointPos_CS / widthiness_CS, 1.0, 0.0);
+        bakedDispVec = (modelMatrix * vec4(bakedDispVec, 0.0)).xyz;
+        worldPos -= widthiness_CS * bakedDispVec * 0.1 * envelopePow;
+      }
+      worldPos += widthiness_CS * currentDispVec * u_DisplacementIntensity * envelopePow;
     }
   }
 
