@@ -1688,6 +1688,7 @@ const tiltBrushMaterialParams = {
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_MainTex: { value: "Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336/Plasma-c33714d1-b2f9-412e-bd50-1884c9d46336-v10.0-MainTex.png" },
             u_MainTex_ST: { value: new THREE.Vector4(0.5, 1.0, 0.0, 0.0) },
+            u_isTiltInput: { value: false },
             u_time: { value: new THREE.Vector4() }
         },
         glslVersion: THREE.GLSL3,
