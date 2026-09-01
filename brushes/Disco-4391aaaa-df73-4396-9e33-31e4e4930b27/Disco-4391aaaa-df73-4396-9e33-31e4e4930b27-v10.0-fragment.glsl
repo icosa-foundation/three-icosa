@@ -54,7 +54,7 @@ in float f_fog_coord;
 vec3 computeLighting(vec3 diffuseColor, vec3 specularColor) {
   vec3 normal = normalize(v_normal);
 
-  vec3 facetedNormal = normalize(cross(dFdx(v_position), dFdy(v_position)));
+  vec3 facetedNormal = normalize(cross(dFdy(v_position), dFdx(v_position)));
 
   vec3 lightDir0 = normalize(v_light_dir_0);
   vec3 lightDir1 = normalize(v_light_dir_1);
@@ -70,7 +70,7 @@ vec3 computeLighting(vec3 diffuseColor, vec3 specularColor) {
 
   // Add a fake "disco ball" hot spot 
   float fakeLightIntensity = pow(abs(dot(facetedNormal, vec3(0.0, 1.0, 0.0))), 100.0) * 200.0;
-  vec3 fakeLight = specularColor * fakeLightIntensity;
+  vec3 fakeLight = v_color.rgb * fakeLightIntensity;
   return lightOut0 + lightOut1 + ambientOut + indirectSpecular + fakeLight;
 }
 
