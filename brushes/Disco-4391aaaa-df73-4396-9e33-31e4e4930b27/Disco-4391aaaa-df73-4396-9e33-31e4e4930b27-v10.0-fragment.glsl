@@ -25,6 +25,8 @@ uniform vec3 u_SpecColor;
 
 in vec4 v_color;
 in vec3 v_normal;
+in vec3 v_tangent;
+in vec3 v_binormal;
 in vec3 v_position;
 in vec3 v_light_dir_0;
 in vec3 v_light_dir_1;
@@ -52,20 +54,24 @@ in float f_fog_coord;
 
 
 vec3 computeLighting(vec3 diffuseColor, vec3 specularColor) {
-  vec3 normal = normalize(v_normal);
-
   vec3 facetedNormal = normalize(cross(dFdy(v_position), dFdx(v_position)));
+  vec3 unityFacetedNormal = vec3(-facetedNormal.x, -facetedNormal.y, facetedNormal.z);
+  vec3 tangentNormal = normalize(vec3(0.0, 0.0, 1.0)
+      - unityFacetedNormal * unityFacetedNormal.z);
+  vec3 surfaceNormal = normalize(v_tangent * tangentNormal.x
+      + v_binormal * tangentNormal.y + v_normal * tangentNormal.z);
 
   vec3 lightDir0 = normalize(v_light_dir_0);
   vec3 lightDir1 = normalize(v_light_dir_1);
   vec3 eyeDir = -normalize(v_position);
 
-  vec3 lightOut0 = SurfaceShaderSpecularGloss(facetedNormal, lightDir0, eyeDir,
+  vec3 lightOut0 = SurfaceShaderSpecularGloss(surfaceNormal, lightDir0, eyeDir,
       u_SceneLight_0_color.rgb, diffuseColor, specularColor, u_Shininess);
-  vec3 lightOut1 = ShShaderWithSpec(normal, lightDir1, u_SceneLight_1_color.rgb, diffuseColor, u_SpecColor);
+  vec3 lightOut1 = ShShaderWithSpec(surfaceNormal, lightDir1,
+      u_SceneLight_1_color.rgb, diffuseColor, u_SpecColor);
   vec3 ambientOut = diffuseColor * u_ambient_light_color.rgb;
 
-  vec3 indirectSpecular = IndirectSpecularApprox(facetedNormal, eyeDir, specularColor,
+  vec3 indirectSpecular = IndirectSpecularApprox(surfaceNormal, eyeDir, specularColor,
       u_Shininess, u_ambient_light_color.rgb * 0.2);
 
   // Add a fake "disco ball" hot spot 

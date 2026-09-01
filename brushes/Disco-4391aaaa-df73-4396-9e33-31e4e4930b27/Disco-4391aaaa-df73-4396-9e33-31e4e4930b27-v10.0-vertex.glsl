@@ -20,12 +20,15 @@
 
 in vec4 a_position;
 in vec3 a_normal;
+in vec4 a_tangent;
 in vec4 a_color;
 in vec3 a_texcoord0;
 in vec4 a_texcoord1;
 
 out vec4 v_color;
 out vec3 v_normal;  // Camera-space normal.
+out vec3 v_tangent;
+out vec3 v_binormal;
 out vec3 v_position;
 out vec2 v_texcoord0;
 out vec3 v_light_dir_0;  // Camera-space light direction, main light.
@@ -73,6 +76,8 @@ void main() {
   // Transform normal and tangent to view space
   vec3 normal = normalize(normalMatrix * a_normal);
   v_normal = normal;
+  v_tangent = normalize(normalMatrix * a_tangent.xyz);
+  v_binormal = normalize(cross(normal, v_tangent) * a_tangent.w);
   v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
   v_color = a_color;
