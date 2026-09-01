@@ -51,7 +51,7 @@ test( 'creates inverted Toon base and inflated-color material passes', () => {
     assert.equal(materials.length, 2);
     assert.deepEqual(materials.map(material => material.side), [FrontSide, BackSide]);
     assert.deepEqual(materials.map(material => material.uniforms.u_TubeToonPass.value), [1, 2]);
-    assert.deepEqual(materials.map(material => material.uniforms.u_TubeToonOutlineSize.value), [0.05, 0.05]);
+    assert.deepEqual(materials.map(material => material.uniforms.u_TubeToonOutlineSize.value), [0.005, 0.005]);
     assert.ok(materials.every(material => material.uniforms.u_time === sharedTime));
 
     const groups = [];

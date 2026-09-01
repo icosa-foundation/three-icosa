@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 export const TUBE_TOON_INVERTED_BRUSH_GUID = '9871385a-df73-4396-9e33-31e4e4930b27';
-export const TUBE_TOON_INVERTED_OUTLINE_SIZE = 0.05;
+export const TUBE_TOON_INVERTED_OUTLINE_SIZE = 0.005;
 export const TOON_BRUSH_GUID = '4391385a-df73-4396-9e33-31e4e4930b27';
 export const ELECTRICITY_BRUSH_GUID = 'f6e85de3-6dcc-4e7f-87fd-cee8c3d25d51';
 export const ELECTRICITY_DISPLACEMENT_MODS = [1, 1.333, 1.77];

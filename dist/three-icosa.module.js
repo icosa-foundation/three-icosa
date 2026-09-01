@@ -11612,7 +11612,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
 
 
 const $16cff2322f67c674$export$c1bb71fdd9aa3dc9 = "9871385a-df73-4396-9e33-31e4e4930b27";
-const $16cff2322f67c674$export$18e64de72c17bfe = 0.05;
+const $16cff2322f67c674$export$18e64de72c17bfe = 0.005;
 const $16cff2322f67c674$export$6c8c313f844ab31d = "4391385a-df73-4396-9e33-31e4e4930b27";
 const $16cff2322f67c674$export$898562a301a76693 = "f6e85de3-6dcc-4e7f-87fd-cee8c3d25d51";
 const $16cff2322f67c674$export$31cff25809951ff3 = [
