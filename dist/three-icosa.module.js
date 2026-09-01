@@ -10345,6 +10345,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_fogDensity: {
                 value: 0
             },
+            u_EmissionGain: {
+                value: 0.51785713
+            },
             u_time: {
                 value: new $fugmd$Vector4()
             }
