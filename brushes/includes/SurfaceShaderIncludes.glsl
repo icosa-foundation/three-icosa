@@ -163,3 +163,20 @@ vec3 LambertShader(vec3 normal, vec3 lightDir, vec3 lightColor, vec3 diffuseColo
     float NdotL = clamp(dot(normal, lightDir), 0.0, 1.0);
     return diffuseColor * lightColor * NdotL;
 }
+
+// Approximates Unity StandardSpecular indirect specular (BRDF1_Unity_PBS).
+// Unity samples a reflection probe; here we use envColor as a proxy.
+// Unity gamma formula: surfaceReduction * envColor * FresnelLerp(specColor, grazingTerm, NdotV)
+// where grazingTerm = saturate(smoothness + specularIntensity).
+vec3 IndirectSpecularApprox(vec3 normal, vec3 eyeDir, vec3 specularColor, float smoothness, vec3 envColor) {
+    float perceptualRoughness = 1.0 - smoothness;
+    float roughness = perceptualRoughness * perceptualRoughness;
+    // Unity gamma: 1 - 0.28 * roughness * perceptualRoughness
+    float surfaceReduction = 1.0 - 0.28 * roughness * perceptualRoughness;
+    float specularIntensity = clamp(max(max(specularColor.r, specularColor.g), specularColor.b), 0.0, 1.0);
+    float grazingTerm = clamp(smoothness + specularIntensity, 0.0, 1.0);
+    float NdotV = clamp(dot(normal, eyeDir), 0.0, 1.0);
+    float t = Pow5(1.0 - NdotV);
+    vec3 fresnelLerp = mix(specularColor, vec3(grazingTerm), t);
+    return surfaceReduction * envColor * fresnelLerp;
+}
