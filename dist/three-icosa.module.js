@@ -2140,6 +2140,15 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_ScrollJitterFrequency: {
                 value: 0.2
             },
+            u_SpreadRate: {
+                value: 1.539
+            },
+            u_GeniusParticlePreviewLifetime: {
+                value: 0.2
+            },
+            u_isTiltInput: {
+                value: false
+            },
             u_SceneLight_0_matrix: {
                 value: [
                     1,
@@ -2715,6 +2724,15 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
     },
     "Dots": {
         uniforms: {
+            u_time: {
+                value: new $fugmd$Vector4()
+            },
+            u_GeniusParticlePreviewLifetime: {
+                value: 0.2
+            },
+            u_isTiltInput: {
+                value: false
+            },
             u_SceneLight_0_matrix: {
                 value: [
                     1,
@@ -3037,6 +3055,15 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_ScrollJitterFrequency: {
                 value: 5
+            },
+            u_SpreadRate: {
+                value: 1.539
+            },
+            u_GeniusParticlePreviewLifetime: {
+                value: 0.2
+            },
+            u_isTiltInput: {
+                value: false
             },
             u_TintColor: {
                 value: new $fugmd$Vector4(1, 1, 1, 1)
@@ -4866,6 +4893,12 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_time: {
                 value: new $fugmd$Vector4()
             },
+            u_GeniusParticlePreviewLifetime: {
+                value: 0.2
+            },
+            u_isTiltInput: {
+                value: false
+            },
             u_SceneLight_0_matrix: {
                 value: [
                     1,
@@ -4939,6 +4972,15 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_ScrollJitterFrequency: {
                 value: 12
+            },
+            u_SpreadRate: {
+                value: 1.539
+            },
+            u_GeniusParticlePreviewLifetime: {
+                value: 0.2
+            },
+            u_isTiltInput: {
+                value: false
             },
             u_TintColor: {
                 value: new $fugmd$Vector4(1, 1, 1, 1)
@@ -5210,6 +5252,15 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_SparkleRate: {
                 value: 5.3
+            },
+            u_SpreadRate: {
+                value: 1.539
+            },
+            u_GeniusParticlePreviewLifetime: {
+                value: 0.2
+            },
+            u_isTiltInput: {
+                value: false
             },
             u_MainTex: {
                 value: "Stars-0eb4db27-3f82-408d-b5a1-19ebd7d5b711/Stars-0eb4db27-3f82-408d-b5a1-19ebd7d5b711-v10.0-MainTex.png"

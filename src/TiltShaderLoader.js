@@ -872,6 +872,9 @@ const tiltBrushMaterialParams = {
             u_ScrollRate: { value: 0.5 },
             u_ScrollJitterIntensity: { value: 0.02 },
             u_ScrollJitterFrequency: { value: 0.2 },
+            u_SpreadRate: { value: 1.539 },
+            u_GeniusParticlePreviewLifetime: { value: 0.2 },
+            u_isTiltInput: { value: false },
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_MainTex: { value: "Bubbles-89d104cd-d012-426b-b5b3-bbaee63ac43c/Bubbles-89d104cd-d012-426b-b5b3-bbaee63ac43c-v10.0-MainTex.png" },
@@ -1054,6 +1057,9 @@ const tiltBrushMaterialParams = {
     },
     "Dots" : {
         uniforms: {
+            u_time: { value: new THREE.Vector4() },
+            u_GeniusParticlePreviewLifetime: { value: 0.2 },
+            u_isTiltInput: { value: false },
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_MainTex: { value: "Dots-6a1cf9f9-032c-45ec-9b1d-a6680bee30f7/Dots-6a1cf9f9-032c-45ec-9b1d-a6680bee30f7-v10.0-MainTex.png" },
@@ -1161,6 +1167,9 @@ const tiltBrushMaterialParams = {
             u_ScrollDistance: { value: new THREE.Vector3(-0.2, 0.6, 0) },
             u_ScrollJitterIntensity: { value: 0.03 },
             u_ScrollJitterFrequency: { value: 5 },
+            u_SpreadRate: { value: 1.539 },
+            u_GeniusParticlePreviewLifetime: { value: 0.2 },
+            u_isTiltInput: { value: false },
             u_TintColor: { value: new THREE.Vector4(1, 1, 1, 1) },
             u_MainTex: { value: "Embers-02ffb866-7fb2-4d15-b761-1012cefb1360/Embers-02ffb866-7fb2-4d15-b761-1012cefb1360-v10.0-MainTex.png" },
             u_Cutoff: { value: 0.2 }
@@ -1742,6 +1751,8 @@ const tiltBrushMaterialParams = {
     "Smoke": {
         uniforms: {
             u_time: { value: new THREE.Vector4() },
+            u_GeniusParticlePreviewLifetime: { value: 0.2 },
+            u_isTiltInput: { value: false },
             u_SceneLight_0_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_TintColor: { value: new THREE.Vector4(1, 1, 1, 1) },
@@ -1764,6 +1775,9 @@ const tiltBrushMaterialParams = {
             u_ScrollDistance: { value: new THREE.Vector3(0, -0.3, 0) },
             u_ScrollJitterIntensity: { value: 0.01 },
             u_ScrollJitterFrequency: { value: 12 },
+            u_SpreadRate: { value: 1.539 },
+            u_GeniusParticlePreviewLifetime: { value: 0.2 },
+            u_isTiltInput: { value: false },
             u_TintColor: { value: new THREE.Vector4(1, 1, 1, 1) },
             u_MainTex: { value: "Snow-d902ed8b-d0d1-476c-a8de-878a79e3a34c/Snow-d902ed8b-d0d1-476c-a8de-878a79e3a34c-v10.0-MainTex.png" },
         },
@@ -1849,6 +1863,9 @@ const tiltBrushMaterialParams = {
             u_SceneLight_1_matrix: { value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
             u_time: { value: new THREE.Vector4() },
             u_SparkleRate: { value: 5.3 },
+            u_SpreadRate: { value: 1.539 },
+            u_GeniusParticlePreviewLifetime: { value: 0.2 },
+            u_isTiltInput: { value: false },
             u_MainTex: { value: "Stars-0eb4db27-3f82-408d-b5a1-19ebd7d5b711/Stars-0eb4db27-3f82-408d-b5a1-19ebd7d5b711-v10.0-MainTex.png" },
         },
         glslVersion: THREE.GLSL3,
