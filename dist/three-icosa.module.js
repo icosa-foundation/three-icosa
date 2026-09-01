@@ -3027,6 +3027,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_EmissionGain: {
                 value: 0.2
+            },
+            u_isTiltInput: {
+                value: false
             }
         },
         glslVersion: $fugmd$GLSL3,

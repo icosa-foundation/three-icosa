@@ -1148,7 +1148,8 @@ const tiltBrushMaterialParams = {
         uniforms: {
             u_time: { value: new THREE.Vector4() },
             u_DisplacementIntensity: { value: 2.0 },
-            u_EmissionGain: { value: 0.2 }
+            u_EmissionGain: { value: 0.2 },
+            u_isTiltInput: { value: false }
         },
         glslVersion: THREE.GLSL3,
         vertexShader: "Electricity-f6e85de3-6dcc-4e7f-87fd-cee8c3d25d51/Electricity-f6e85de3-6dcc-4e7f-87fd-cee8c3d25d51-v10.0-vertex.glsl",

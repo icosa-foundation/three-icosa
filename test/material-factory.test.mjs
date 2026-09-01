@@ -181,6 +181,7 @@ test( 'defaults mode-aware procedural brushes to legacy glTF UV input', () => {
 
     assert.equal( loader.lookupMaterialParams( 'Sparks' ).uniforms.u_isTiltInput.value, false );
     assert.equal( loader.lookupMaterialParams( 'Plasma' ).uniforms.u_isTiltInput.value, false );
+    assert.equal( loader.lookupMaterialParams( 'Electricity' ).uniforms.u_isTiltInput.value, false );
 } );
 
 test( 'binds untextured experimental additive brushes independently', () => {
