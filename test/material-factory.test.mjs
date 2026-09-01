@@ -96,11 +96,13 @@ test( 'applies authoritative required-brush culling by default', () => {
     const toon = loader.createMaterial( {}, 'Toon' );
     const dryBrush = loader.createMaterial( {}, 'DryBrush' );
     const digital = loader.createMaterial( {}, 'Digital' );
+    const race = loader.createMaterial( {}, 'Race' );
 
     assert.equal( flat.side, DoubleSide );
     assert.equal( toon.side, FrontSide );
     assert.equal( dryBrush.side, DoubleSide );
-    assert.equal( digital.side, FrontSide );
+    assert.equal( digital.side, DoubleSide );
+    assert.equal( race.side, DoubleSide );
 } );
 
 test( 'allows callers to configure loaded textures', () => {

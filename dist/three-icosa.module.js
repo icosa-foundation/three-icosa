@@ -282,10 +282,10 @@ const $893dd13f874e2f96$export$9ca3db12bec15353 = {
         "renderBackfaces": true
     },
     "Digital": {
-        "renderBackfaces": false
+        "renderBackfaces": true
     },
     "Race": {
-        "renderBackfaces": false
+        "renderBackfaces": true
     },
     "SmoothHull": {
         "renderBackfaces": false

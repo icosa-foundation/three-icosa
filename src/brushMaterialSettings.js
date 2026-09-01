@@ -266,10 +266,10 @@ export const brushMaterialSettings = {
         "renderBackfaces": true
     },
     "Digital": {
-        "renderBackfaces": false
+        "renderBackfaces": true
     },
     "Race": {
-        "renderBackfaces": false
+        "renderBackfaces": true
     },
     "SmoothHull": {
         "renderBackfaces": false
