@@ -170,6 +170,12 @@ test( 'keeps texture configuration optional', () => {
     assert.equal( loader.configureTexture( texture, 'Flat', 'u_MainTex' ), texture );
 } );
 
+test( 'loads the shared surface helpers for Leaves', () => {
+    const loader = new TiltShaderLoader();
+
+    assert.equal( loader.lookupMaterialParams( 'Leaves' ).isSurfaceShader, true );
+} );
+
 test( 'binds untextured experimental additive brushes independently', () => {
     const loader = new TiltShaderLoader();
 
