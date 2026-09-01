@@ -8475,7 +8475,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                 value: "WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7/WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7-v10.0-MainTex.png"
             },
             u_TintColor: {
-                value: new $fugmd$Vector4(0.5, 0.5, 0.5, 0.5)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             },
             u_Opacity: {
                 value: 1.0

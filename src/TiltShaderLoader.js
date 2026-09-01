@@ -2869,7 +2869,7 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
             u_MainTex: { value: "WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7/WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7-v10.0-MainTex.png" },
-            u_TintColor: { value: new THREE.Vector4(0.5, 0.5, 0.5, 0.5) },
+            u_TintColor: { value: new THREE.Vector4(1, 1, 1, 1) },
             u_Opacity: { value: 1.0 },
             u_isTiltInput: { value: false },
             u_time: { value: new THREE.Vector4() }
