@@ -69,7 +69,7 @@ void main() {
 
   gl_Position = projectionMatrix * modelViewMatrix * pos;
   f_fog_coord = gl_Position.z;
-  v_position = pos.xyz;
+  v_position = (modelViewMatrix * pos).xyz;
   // Transform normal and tangent to view space
   vec3 normal = normalize(normalMatrix * a_normal);
   v_normal = normal;

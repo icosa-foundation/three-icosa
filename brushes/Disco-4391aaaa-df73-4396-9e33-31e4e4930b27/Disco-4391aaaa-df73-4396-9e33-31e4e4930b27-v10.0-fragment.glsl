@@ -54,8 +54,7 @@ in float f_fog_coord;
 vec3 computeLighting(vec3 diffuseColor, vec3 specularColor) {
   vec3 normal = normalize(v_normal);
 
-  normal.x = dFdx(normal.x);
-  vec3 facetedNormal = normalize(cross(dFdy(v_position), dFdx(v_position)));
+  vec3 facetedNormal = normalize(cross(dFdx(v_position), dFdy(v_position)));
 
   vec3 lightDir0 = normalize(v_light_dir_0);
   vec3 lightDir1 = normalize(v_light_dir_1);
@@ -66,13 +65,13 @@ vec3 computeLighting(vec3 diffuseColor, vec3 specularColor) {
   vec3 lightOut1 = ShShaderWithSpec(normal, lightDir1, u_SceneLight_1_color.rgb, diffuseColor, u_SpecColor);
   vec3 ambientOut = diffuseColor * u_ambient_light_color.rgb;
 
+  vec3 indirectSpecular = IndirectSpecularApprox(facetedNormal, eyeDir, specularColor,
+      u_Shininess, u_ambient_light_color.rgb * 0.2);
+
   // Add a fake "disco ball" hot spot 
-  // Note that in the glsl version of this shader, the hot spot is broader in order to create
-  // additional highlights. Glsl does not support glossy environment specularity, so we need to compensate
-  // with more visual interest here to make up for it.
-  float fakeLightIntensity = pow( abs(dot( facetedNormal, vec3(0.0,1.0,0.0))), 10.0) * 20.;
+  float fakeLightIntensity = pow(abs(dot(facetedNormal, vec3(0.0, 1.0, 0.0))), 100.0) * 200.0;
   vec3 fakeLight = specularColor * fakeLightIntensity;
-  return (lightOut0 + lightOut1 + ambientOut + fakeLight);
+  return lightOut0 + lightOut1 + ambientOut + indirectSpecular + fakeLight;
 }
 
 void main() {
