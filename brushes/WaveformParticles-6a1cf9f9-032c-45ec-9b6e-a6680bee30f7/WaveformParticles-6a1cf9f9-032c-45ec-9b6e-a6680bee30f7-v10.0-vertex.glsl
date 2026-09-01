@@ -25,6 +25,7 @@ uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 uniform vec4 u_time;
+uniform bool u_isTiltInput;
 
 vec3 hash3(vec3 p) {
   p = vec3(dot(p, vec3(127.1, 311.7, 74.7)),
@@ -86,14 +87,20 @@ void main() {
   float release = clamp(lifetime * 0.1, 0.0, 1.0);
 
   vec3 localMidpointPos = a_position.xyz - perVertOffset;
+  vec3 noiseMidpointPos = u_isTiltInput
+    ? vec3(localMidpointPos.x, localMidpointPos.y, -localMidpointPos.z) * 10.0
+    : localMidpointPos;
 
   float t = lifetime;
   float d = 10.0 + a_color.g * 3.0;
   float freq = 1.5 + a_color.r;
-  vec3 p = localMidpointPos * freq + vec3(t);
+  vec3 p = noiseMidpointPos * freq + vec3(t);
 
   vec3 disp = vec3(curlX(p, d), curlY(p, d), curlZ(p, d));
-  localMidpointPos += release * disp * 10.0;
+  vec3 rendererDisp = u_isTiltInput
+    ? vec3(disp.x, disp.y, -disp.z)
+    : disp * 10.0;
+  localMidpointPos += release * rendererDisp;
 
   vec3 localPos = localMidpointPos + perVertOffset;
   vec4 worldPos = modelMatrix * vec4(localPos, 1.0);

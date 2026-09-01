@@ -2539,6 +2539,8 @@ const tiltBrushMaterialParams = {
             u_SpecColor: { value: new THREE.Vector3(0.5, 0.5, 0.5) },
             u_SpecularHighlights: { value: 1.0 },
             u_SpreadRate: { value: 1.25 },
+            u_GeniusParticlePreviewLifetime: { value: 0.2 },
+            u_isTiltInput: { value: false },
             u_SpreadSize: { value: 1.25 },
             u_SrcBlend: { value: 1.0 },
             u_TintColor: { value: new THREE.Vector4(1, 1, 1, 1) },
@@ -2869,6 +2871,7 @@ const tiltBrushMaterialParams = {
             u_MainTex: { value: "WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7/WaveformParticles-6a1cf9f9-032c-45ec-9b6e-a6680bee30f7-v10.0-MainTex.png" },
             u_TintColor: { value: new THREE.Vector4(0.5, 0.5, 0.5, 0.5) },
             u_Opacity: { value: 1.0 },
+            u_isTiltInput: { value: false },
             u_time: { value: new THREE.Vector4() }
         },
         glslVersion: THREE.GLSL3,
@@ -2904,6 +2907,7 @@ const tiltBrushMaterialParams = {
             u_Smoothness: { value: 0.078125 },
             u_Strength: { value: 0.5 },
             u_TintColor: { value: new THREE.Vector4(0.617647, 0.617647, 0.617647, 1) },
+            u_isTiltInput: { value: false },
             u_time: { value: new THREE.Vector4() }
         },
         isSurfaceShader: true,

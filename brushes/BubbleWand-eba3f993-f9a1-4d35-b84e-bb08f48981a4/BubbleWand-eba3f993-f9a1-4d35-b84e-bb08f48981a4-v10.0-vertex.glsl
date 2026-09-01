@@ -47,6 +47,7 @@ uniform float u_ScrollRate;
 uniform float u_ScrollJitterIntensity;
 uniform float u_ScrollJitterFrequency;
 uniform bool u_isNewTiltExporter;
+uniform bool u_isTiltInput;
 
 // Noise functions from Noise.cginc
 float mod289(float x) {
@@ -142,6 +143,10 @@ float curlZ(vec3 v, float d){
 }
 
 vec4 displace(vec4 pos, float timeOffset) {
+  if (u_isTiltInput) {
+    pos.xyz = vec3(pos.x, pos.y, -pos.z) * 10.0;
+  }
+
   float t = u_time.y * u_ScrollRate + timeOffset;
 
   pos.x += sin(t + u_time.y + pos.z * u_ScrollJitterFrequency) * u_ScrollJitterIntensity;
@@ -154,8 +159,10 @@ vec4 displace(vec4 pos, float timeOffset) {
   vec3 disp = vec3(1,0,0) * curlX(pos.xyz * freq + time, d);
   disp += vec3(0,1,0) * curlY(pos.xyz * freq + time, d);
   disp += vec3(0,0,1) * curlZ(pos.xyz * freq + time, d);
-  // Match Unity behavior (kDecimetersToWorldUnits = 1.0 for non-toolkit builds).
-  pos.xyz = u_ScrollJitterIntensity * disp;
+  vec3 displacement = u_ScrollJitterIntensity * disp;
+  pos.xyz = u_isTiltInput
+    ? vec3(displacement.x, displacement.y, -displacement.z) * 0.1
+    : displacement;
   return pos;
 }
 

@@ -7414,6 +7414,12 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_SpreadRate: {
                 value: 1.25
             },
+            u_GeniusParticlePreviewLifetime: {
+                value: 0.2
+            },
+            u_isTiltInput: {
+                value: false
+            },
             u_SpreadSize: {
                 value: 1.25
             },
@@ -8474,6 +8480,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_Opacity: {
                 value: 1.0
             },
+            u_isTiltInput: {
+                value: false
+            },
             u_time: {
                 value: new $fugmd$Vector4()
             }
@@ -8586,6 +8595,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_TintColor: {
                 value: new $fugmd$Vector4(0.617647, 0.617647, 0.617647, 1)
+            },
+            u_isTiltInput: {
+                value: false
             },
             u_time: {
                 value: new $fugmd$Vector4()
