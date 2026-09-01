@@ -2450,6 +2450,7 @@ const tiltBrushMaterialParams = {
             u_StretchDistortionExponent: { value: 1.73 },
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 },
+            u_isTiltInput: { value: false },
             u_time: { value: new THREE.Vector4() }
         },
         glslVersion: THREE.GLSL3,

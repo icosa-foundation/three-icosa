@@ -7129,6 +7129,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_ZWrite: {
                 value: 1.0
             },
+            u_isTiltInput: {
+                value: false
+            },
             u_time: {
                 value: new $fugmd$Vector4()
             }

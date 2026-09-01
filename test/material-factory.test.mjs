@@ -176,6 +176,12 @@ test( 'loads the shared surface helpers for Leaves', () => {
     assert.equal( loader.lookupMaterialParams( 'Leaves' ).isSurfaceShader, true );
 } );
 
+test( 'defaults Sparks to legacy glTF UV input', () => {
+    const loader = new TiltShaderLoader();
+
+    assert.equal( loader.lookupMaterialParams( 'Sparks' ).uniforms.u_isTiltInput.value, false );
+} );
+
 test( 'binds untextured experimental additive brushes independently', () => {
     const loader = new TiltShaderLoader();
 
