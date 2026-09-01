@@ -24,6 +24,7 @@ uniform vec4 u_ambient_light_color;
 uniform vec4 u_SceneLight_0_color;
 uniform vec4 u_SceneLight_1_color;
 
+uniform vec4 u_Color;
 uniform vec3 u_SpecColor;
 uniform float u_Shininess;
 uniform float u_Cutoff;
@@ -77,6 +78,7 @@ in float f_fog_coord;
 //
 
 vec3 computeLighting(vec3 normal) {
+    normal = normalize(normal);
     if (!gl_FrontFacing) {
         // Always use front-facing normal for double-sided surfaces.
         normal *= 1.0;
@@ -84,11 +86,13 @@ vec3 computeLighting(vec3 normal) {
     vec3 lightDir0 = normalize(v_light_dir_0);
     vec3 lightDir1 = normalize(v_light_dir_1);
     vec3 eyeDir = -normalize(v_position);
+    vec3 albedo = u_Color.rgb * v_color.rgb;
+    vec3 specColor = u_SpecColor * v_color.rgb;
 
     vec3 lightOut0 = SurfaceShaderSpecularGloss(normal, lightDir0, eyeDir, u_SceneLight_0_color.rgb,
-v_color.rgb, u_SpecColor, u_Shininess);
-    vec3 lightOut1 = ShShaderWithSpec(normal, lightDir1, u_SceneLight_1_color.rgb, v_color.rgb, u_SpecColor);
-    vec3 ambientOut = v_color.rgb * u_ambient_light_color.rgb;
+albedo, specColor, u_Shininess);
+    vec3 lightOut1 = ShShaderWithSpec(normal, lightDir1, u_SceneLight_1_color.rgb, albedo, specColor);
+    vec3 ambientOut = albedo * u_ambient_light_color.rgb;
 
     return (lightOut0 + lightOut1 + ambientOut);
 }
@@ -97,19 +101,18 @@ void main() {
 
     vec3 baseColor = v_color.xyz;
 
-    // Rim term in world space
+    // Rim term in camera space
     vec3 N = normalize(-v_normal);
-    vec3 V = normalize(cameraPosition - v_position);
+    vec3 V = -normalize(v_position);
     float rim = 1.0 - abs(dot(V, N));
     rim *= (1.0 - pow(rim, 5.0));
 
     // Thin-slit diffraction ramp lookup
-    vec2 diffUV = vec2(rim + u_time.y + N.y, rim + N.y);
+    vec2 diffUV = vec2(rim + u_time.x + N.y, rim + N.y);
     vec3 diffraction = texture(u_MainTex, diffUV).rgb;
 
     // Emission (matches Unity mix)
-    //vec3 emission = rim * (0.25 * diffraction * rim + 0.75 * diffraction * v_color.rgb);
-    vec3 emission = vec3(0,0,0);
+    vec3 emission = rim * (0.25 * diffraction * rim + 0.75 * diffraction * v_color.rgb);
 
     // Unfortunately, the compiler keeps optimizing the call to PerturbNormal into the branch below,
     // causing issues on some hardware/drivers. So we compute lighting just to discard it later.

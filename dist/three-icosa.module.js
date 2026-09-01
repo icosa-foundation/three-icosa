@@ -6534,7 +6534,13 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                 value: new $fugmd$Vector3(0.75, 0.75, 0.75)
             },
             u_SqueezeAmount: {
-                value: 0.473
+                value: 0.873
+            },
+            u_isTiltInput: {
+                value: false
+            },
+            u_isNewTiltExporter: {
+                value: false
             },
             u_Strength: {
                 value: 0.5

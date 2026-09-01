@@ -2260,7 +2260,9 @@ const tiltBrushMaterialParams = {
             u_Shininess: { value: 0.68 },
             u_Smoothness: { value: 0.078125 },
             u_SpecColor: { value: new THREE.Vector3(0.75, 0.75, 0.75) },
-            u_SqueezeAmount: { value: 0.473 },
+            u_SqueezeAmount: { value: 0.873 },
+            u_isTiltInput: { value: false },
+            u_isNewTiltExporter: { value: false },
             u_Strength: { value: 0.5 },
             u_TintColor: { value: new THREE.Vector4(0.617647, 0.617647, 0.617647, 1) }
         },
