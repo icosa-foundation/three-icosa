@@ -3838,6 +3838,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                 value: new $fugmd$Vector4(0.0010, 0.0078, 1024, 128)
             }
         },
+        isSurfaceShader: true,
         glslVersion: $fugmd$GLSL3,
         vertexShader: "Leaves-ea19de07-d0c0-4484-9198-18489a3c1487/Leaves-ea19de07-d0c0-4484-9198-18489a3c1487-v10.0-vertex.glsl",
         fragmentShader: "Leaves-ea19de07-d0c0-4484-9198-18489a3c1487/Leaves-ea19de07-d0c0-4484-9198-18489a3c1487-v10.0-fragment.glsl",
