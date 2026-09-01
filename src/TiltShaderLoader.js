@@ -3458,6 +3458,7 @@ const tiltBrushMaterialParams = {
             u_SceneLight_1_color: { value: new THREE.Vector4(0.4282, 0.4212, 0.3459, 1) },
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
+            u_EmissionGain: { value: 0.51785713 },
             u_time: { value: new THREE.Vector4() }
         },
         glslVersion: THREE.GLSL3,

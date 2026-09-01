@@ -62,18 +62,14 @@ vec4 GetWaveForm(vec2 texcoord){
   vec4 _Time = u_time;
 
   // Envelope
-  float envelope = sin(texcoord.x * 3.14159);
+  float envelope = 1.0;
 
   float waveform = .15 * sin(-30. * v_unbloomedColor.r * _Time.w + texcoord.x * 100. * v_unbloomedColor.r);
   waveform += .15 * sin(-40. * v_unbloomedColor.g * _Time.w + texcoord.x * 100. * v_unbloomedColor.g);
   waveform += .15 * sin(-50. * v_unbloomedColor.b * _Time.w + texcoord.x * 100. * v_unbloomedColor.b);
 
-  float pinch = (1. - envelope) * 40. + 20.;
-  float procedural_line = clamp(1. - pinch*abs(texcoord.y - .5 - waveform * envelope), 0., 1.);
-  vec4 color = vec4(1.);
-  color.rgb *= envelope * procedural_line;
-  color = v_color * color;
-  return color;
+  float procedural_line = abs(texcoord.y - 0.5) > waveform ? 0.0 : waveform;
+  return vec4(v_color.rgb * envelope * procedural_line * v_color.a, 1.0);
 }
 
 void main() {
