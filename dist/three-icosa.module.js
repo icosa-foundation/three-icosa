@@ -1314,19 +1314,12 @@ function $4fdc68aa1ebb2033$var$applyBrushTextureSettings(texture, brushName, uni
     texture.anisotropy = settings.anisotropy;
     texture.needsUpdate = true;
 }
-const $4fdc68aa1ebb2033$var$tiltBrushMaterialAliases = Object.freeze({
-    FlatDeprecated: "Flat"
-});
-function $4fdc68aa1ebb2033$var$resolveTiltBrushMaterialName(brushName) {
-    return $4fdc68aa1ebb2033$var$tiltBrushMaterialAliases[brushName] ?? brushName;
-}
 function $4fdc68aa1ebb2033$export$60287bc469e716bc(brushName) {
-    return Object.hasOwn($4fdc68aa1ebb2033$var$tiltBrushMaterialParams, $4fdc68aa1ebb2033$var$resolveTiltBrushMaterialName(brushName));
+    return Object.hasOwn($4fdc68aa1ebb2033$var$tiltBrushMaterialParams, brushName) && Object.hasOwn((0, $893dd13f874e2f96$export$9ca3db12bec15353), brushName);
 }
 function $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName) {
-    brushName = $4fdc68aa1ebb2033$var$resolveTiltBrushMaterialName(brushName);
+    if (!$4fdc68aa1ebb2033$export$60287bc469e716bc(brushName)) return undefined;
     const materialParams = $4fdc68aa1ebb2033$var$tiltBrushMaterialParams[brushName];
-    if (!materialParams) return undefined;
     const side = (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName] ? (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName].renderBackfaces ? $fugmd$DoubleSide : $fugmd$FrontSide : materialParams.side ?? $fugmd$FrontSide;
     const blending = materialParams.blending ?? $fugmd$NormalBlending;
     const blendSrc = materialParams.blendSrc ?? $fugmd$SrcAlphaFactor;
@@ -1419,7 +1412,6 @@ class $4fdc68aa1ebb2033$export$bcc22bf437a07d8f extends $fugmd$Loader {
     }
     async load(brushName, onLoad, onProgress, onError) {
         const scope = this;
-        brushName = $4fdc68aa1ebb2033$var$resolveTiltBrushMaterialName(brushName);
         const isAlreadyLoaded = this.loadedMaterials[brushName];
         if (isAlreadyLoaded !== undefined) {
             onLoad(scope.parse(isAlreadyLoaded));

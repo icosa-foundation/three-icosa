@@ -48,22 +48,14 @@ function applyBrushTextureSettings(texture, brushName, uniformName) {
     texture.needsUpdate = true;
 }
 
-const tiltBrushMaterialAliases = Object.freeze({
-    FlatDeprecated: 'Flat'
-});
-
-function resolveTiltBrushMaterialName(brushName) {
-    return tiltBrushMaterialAliases[brushName] ?? brushName;
-}
-
 export function hasTiltBrushMaterial(brushName) {
-    return Object.hasOwn(tiltBrushMaterialParams, resolveTiltBrushMaterialName(brushName));
+    return Object.hasOwn(tiltBrushMaterialParams, brushName) &&
+        Object.hasOwn(brushMaterialSettings, brushName);
 }
 
 export function getTiltBrushMaterialRenderState(brushName) {
-    brushName = resolveTiltBrushMaterialName(brushName);
+    if (!hasTiltBrushMaterial(brushName)) return undefined;
     const materialParams = tiltBrushMaterialParams[brushName];
-    if (!materialParams) return undefined;
 
     const side = brushMaterialSettings[brushName]
         ? (brushMaterialSettings[brushName].renderBackfaces ? THREE.DoubleSide : THREE.FrontSide)
@@ -178,7 +170,6 @@ export class TiltShaderLoader extends THREE.Loader {
     
     async load(brushName, onLoad, onProgress, onError ) {
         const scope = this;
-        brushName = resolveTiltBrushMaterialName(brushName);
 
         const isAlreadyLoaded = this.loadedMaterials[brushName];
         

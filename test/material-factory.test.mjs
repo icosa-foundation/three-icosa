@@ -118,13 +118,9 @@ test( 'applies authoritative required-brush culling by default', () => {
 
 test( 'exposes authoritative brush availability and complete render state', () => {
     assert.equal( hasTiltBrushMaterial( 'Digital' ), true );
-    assert.equal( hasTiltBrushMaterial( 'FlatDeprecated' ), true );
+    assert.equal( hasTiltBrushMaterial( 'FlatDeprecated' ), false );
     assert.equal( hasTiltBrushMaterial( 'NotABrush' ), false );
     assert.equal( getTiltBrushMaterialRenderState( 'NotABrush' ), undefined );
-    assert.deepEqual(
-        getTiltBrushMaterialRenderState( 'FlatDeprecated' ),
-        getTiltBrushMaterialRenderState( 'Flat' )
-    );
 
     assert.deepEqual( getTiltBrushMaterialRenderState( 'Digital' ), {
         side: DoubleSide,
