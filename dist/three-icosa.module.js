@@ -4256,6 +4256,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
                     1
                 ]
             },
+            u_ambient_light_color: {
+                value: new $fugmd$Vector4(0.3922, 0.3922, 0.3922, 1)
+            },
             u_SceneLight_0_color: {
                 value: new $fugmd$Vector4(0.7780, 0.8157, 0.9914, 1)
             },

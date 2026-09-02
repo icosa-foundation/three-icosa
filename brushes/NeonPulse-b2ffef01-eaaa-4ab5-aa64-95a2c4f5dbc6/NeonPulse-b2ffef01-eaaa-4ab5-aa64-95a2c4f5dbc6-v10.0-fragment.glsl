@@ -28,7 +28,7 @@ uniform vec3 u_SpecColor;
 uniform float u_Shininess;
 uniform sampler2D u_MainTex;
 uniform vec4 u_time;
-uniform float _EmissionGain;
+uniform float u_EmissionGain;
 
 in vec4 v_color;
 in vec3 v_normal;
@@ -45,7 +45,9 @@ in vec2 v_texcoord0;
 
 
 vec3 computeLighting() {
-  vec3 normal = normalize(v_normal);
+  // The Unity-to-Three handedness reflection reverses the surface-facing
+  // normal used by Unity's WorldNormalVector rim calculation.
+  vec3 normal = normalize(-v_normal);
   if (!gl_FrontFacing) {
     // Always use front-facing normal for double-sided surfaces.
     normal *= -1.0;
@@ -61,14 +63,18 @@ vec3 computeLighting() {
       diffuse, spec, smoothness);
   vec3 lightOut1 = ShShaderWithSpec(normal, lightDir1, u_SceneLight_1_color.rgb, diffuse, spec);
   vec3 ambientOut = vec3(0.0,0.0,0.0);
+  vec3 indirectSpecular = IndirectSpecularApprox(normal, eyeDir, spec,
+      smoothness, u_ambient_light_color.rgb * 0.27);
 
-  return (lightOut0 + lightOut1 + ambientOut);
+  return (lightOut0 + lightOut1 + ambientOut + indirectSpecular);
 }
 
 vec4 bloomColor(vec4 color, float gain) {
-   color = pow(color, vec4(2.2,2.2,2.2,2.2));
-   color.rgb *= 80.0 * exp(gain * 10.0);
-   return color;
+  float cmin = length(color.rgb) * 0.05;
+  color.rgb = max(color.rgb, vec3(cmin));
+  color = pow(color, vec4(2.2));
+  color.rgb *= 2.0 * exp(gain * 10.0);
+  return color;
 }
 
 void main() {
@@ -78,13 +84,12 @@ void main() {
   uv.x = mod( abs(uv.x), 1.0);
   float neon = pow(10.0 * clamp(.2 - uv.x,0.0,1.0), 5.0);
   neon = clamp(neon,0.0,1.0);
-  vec4 bloom = bloomColor(v_color, _EmissionGain);
+  vec4 bloom = bloomColor(v_color, u_EmissionGain);
 
   vec3 eyeDir = -normalize(v_position);
   vec3 normal = normalize(v_normal);
-  float NdotV = abs(dot(normal, eyeDir));
-  bloom *= pow(NdotV,2.0);
-  bloom *= NdotV;
+  float NdotV = clamp(dot(normal, eyeDir), 0.0, 1.0);
+  bloom *= pow(NdotV, 5.0);
 
   fragColor.rgb += neon * bloom.rgb;
   fragColor.a = 1.0;

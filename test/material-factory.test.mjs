@@ -198,6 +198,13 @@ test( 'uses the serialized opaque DanceFloor material values', () => {
     assert.equal( params.depthWrite, true );
 } );
 
+test( 'uses the serialized NeonPulse emission and ambient lighting values', () => {
+    const uniforms = new TiltShaderLoader().lookupMaterialParams( 'NeonPulse' ).uniforms;
+
+    assert.equal( uniforms.u_EmissionGain.value, 0.5 );
+    assert.deepEqual( uniforms.u_ambient_light_color.value.toArray(), [ 0.3922, 0.3922, 0.3922, 1 ] );
+} );
+
 test( 'binds untextured experimental additive brushes independently', () => {
     const loader = new TiltShaderLoader();
 
