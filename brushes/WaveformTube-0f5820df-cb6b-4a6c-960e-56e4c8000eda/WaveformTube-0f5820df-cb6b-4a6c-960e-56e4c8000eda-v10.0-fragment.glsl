@@ -18,7 +18,6 @@ precision mediump float;
 out vec4 fragColor;
 
 uniform float u_Speed;
-uniform float u_EmissionGain;
 uniform sampler2D u_MainTex;
 uniform vec4 u_time;
 

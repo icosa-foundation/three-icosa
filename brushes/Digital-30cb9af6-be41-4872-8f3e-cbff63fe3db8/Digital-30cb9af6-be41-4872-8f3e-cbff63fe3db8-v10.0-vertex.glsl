@@ -13,20 +13,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-precision mediump float;
+in vec4 a_position;
+in vec4 a_color;
+in vec2 a_texcoord0;
 
-out vec4 fragColor;
+out vec4 v_color;
+out vec2 v_st;
 
-in vec4 v_color;
-in vec2 v_texcoord0;
-uniform sampler2D u_MainTex;
-uniform bool u_isTiltInput;
-uniform vec4 u_TintColor;
-uniform float u_EmissionGain;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
 
 void main() {
-  // This should be in the vertex shader
-
-  vec4 color = 2.0 * v_color * u_TintColor * texture(u_MainTex, v_texcoord0);
-  fragColor = u_isTiltInput ? vec4(color.rgb * color.a, 1.0) : color;
+  gl_Position = projectionMatrix * modelViewMatrix * a_position;
+  v_color = a_color;
+  v_st = a_texcoord0;
+  v_st.x *= 5.0;
+  v_st *= 5.0;
 }

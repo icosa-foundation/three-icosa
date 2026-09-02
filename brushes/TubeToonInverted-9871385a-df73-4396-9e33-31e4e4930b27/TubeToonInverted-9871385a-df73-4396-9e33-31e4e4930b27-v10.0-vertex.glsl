@@ -34,9 +34,17 @@ uniform mat4 projectionMatrix;
 uniform mat3 normalMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
+uniform highp float u_TubeToonPass;
+uniform highp float u_TubeToonOutlineSize;
 
 void main() {
-  gl_Position = projectionMatrix * modelViewMatrix * a_position;
+  vec4 position = a_position;
+  if (u_TubeToonPass > 1.5) {
+    float normalScale = length(mat3(modelViewMatrix) * a_normal);
+    float localOutline = u_TubeToonOutlineSize / max(normalScale, 1e-6);
+    position.xyz += a_normal * localOutline;
+  }
+  gl_Position = projectionMatrix * modelViewMatrix * position;
   f_fog_coord = gl_Position.z;
   // Transform normal and tangent to view space
   vec3 normal = normalize(normalMatrix * a_normal);
@@ -48,9 +56,13 @@ void main() {
   v_normal = normal;
   v_tangent = tangent;
   v_bitangent = bitangent;
-  v_position = (modelViewMatrix * a_position).xyz;
+  v_position = (modelViewMatrix * position).xyz;
   v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
   v_color = a_color;
+  if (u_TubeToonPass > 0.5) {
+    v_color.a = 1.0;
+    v_color.rgb += a_normal.y * 0.2;
+  }
   v_texcoord0 = a_texcoord0;
 }

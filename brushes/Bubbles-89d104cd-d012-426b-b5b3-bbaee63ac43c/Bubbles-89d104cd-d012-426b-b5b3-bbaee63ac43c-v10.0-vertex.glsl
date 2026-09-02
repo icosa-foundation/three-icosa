@@ -39,6 +39,9 @@ uniform vec4 u_time;
 uniform float u_ScrollRate;
 uniform float u_ScrollJitterIntensity;
 uniform float u_ScrollJitterFrequency;
+uniform float u_SpreadRate;
+uniform float u_GeniusParticlePreviewLifetime;
+uniform bool u_isTiltInput;
 
 // -------------------------------------------------------------------------
 // Particle utilities (from Particles.cginc)
@@ -46,20 +49,60 @@ uniform float u_ScrollJitterFrequency;
 
 const float kRecipSquareRootOfTwo = 0.70710678;
 
+float GetParticleSizeAdjust(float birthTime) {
+  if (birthTime < 0.0) {
+    float life01 = clamp(
+      (u_time.y - abs(birthTime)) / u_GeniusParticlePreviewLifetime,
+      0.0,
+      1.0
+    );
+    return 1.0 - life01 * life01;
+  }
+  return 1.0;
+}
+
+float GetParticleHalfSize(vec3 corner, vec3 center, float birthTime) {
+  float adjust = u_isTiltInput ? GetParticleSizeAdjust(birthTime) : 1.0;
+  return length(corner - center) * kRecipSquareRootOfTwo * adjust;
+}
+
+float SpreadProgress(float birthTime) {
+  float age = max(0.0, abs(u_time.y) - abs(birthTime));
+  return 1.0 - exp(-u_SpreadRate * age);
+}
+
 vec3 recreateCorner(vec3 center, float corner, float rotation, float size) {
   float c = cos(rotation);
   float s = sin(rotation);
 
-  vec3 up = vec3(s, c, 0);
-  vec3 right = vec3(c, -s, 0);
+  if (!u_isTiltInput) {
+    vec3 up = vec3(s, c, 0.0);
+    vec3 right = vec3(c, -s, 0.0);
+    float fUp = float(corner == 0.0 || corner == 1.0) * 2.0 - 1.0;
+    float fRight = float(corner == 0.0 || corner == 2.0) * 2.0 - 1.0;
+    center = (modelViewMatrix * vec4(center, 1.0)).xyz;
+    center += fRight * right * size;
+    center += fUp * up * size;
+    return (inverse(modelViewMatrix) * vec4(center, 1.0)).xyz;
+  }
 
-  float fUp = float(corner == 0. || corner == 1.) * 2.0 - 1.0;
-  float fRight = float(corner == 0. || corner == 2.) * 2.0 - 1.0;
+  mat4 cameraToObject = inverse(modelViewMatrix);
+  vec3 upIsh = (cameraToObject * vec4(0.0, 1.0, 0.0, 0.0)).xyz;
+  vec3 cameraPosition = (cameraToObject * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
+  vec3 forward = center - cameraPosition;
+  vec3 right = normalize(cross(upIsh, forward));
+  vec3 up = normalize(cross(forward, right));
 
-  center = (modelViewMatrix * vec4(center, 1.0)).xyz;
-  center += fRight * right * size;
-  center += fUp * up * size;
-  return (inverse(modelViewMatrix) * vec4(center, 1.0)).xyz;
+  vec2 quadPosition = size * vec2(
+    float(corner == 1.0 || corner == 3.0) * 2.0 - 1.0,
+    float(corner == 2.0 || corner == 3.0) * 2.0 - 1.0
+  );
+  vec2 rotatedPosition = vec2(
+    c * quadPosition.x - s * quadPosition.y,
+    s * quadPosition.x + c * quadPosition.y
+  );
+
+  return center + right * rotatedPosition.x + up * rotatedPosition.y;
 }
 
 vec4 OrientParticle(vec3 center, float halfSize, float vertexId, float rotation) {
@@ -181,12 +224,14 @@ vec3 computeDisplacement(vec3 seed, float timeOffset) {
 // -------------------------------------------------------------------------
 
 void main() {
-  // Get particle half size from corner/center distance
-  float halfSize = length(a_position.xyz - a_normal) * kRecipSquareRootOfTwo;
+  float birthTime = a_texcoord0.w;
+  float halfSize = GetParticleHalfSize(a_position.xyz, a_normal, birthTime);
+  float spreadProgress = u_isTiltInput ? SpreadProgress(birthTime) : 1.0;
   float rotation = a_texcoord0.z;
 
-  // Center is stored in a_normal (particle center)
-  vec3 center = a_normal;
+  // Particles are authored with their stroke origin in texcoord1 and settle
+  // toward their final center over their lifetime.
+  vec3 center = u_isTiltInput ? mix(a_texcoord1.xyz, a_normal, spreadProgress) : a_normal;
 
   // Orient particle to face camera (in object space)
   vec4 pos = OrientParticle(center, halfSize, float(gl_VertexID), rotation);
@@ -196,11 +241,18 @@ void main() {
   vec3 worldPos = (modelMatrix * pos).xyz;
   vec3 worldCenter = (modelMatrix * vec4(center, 1.0)).xyz;
 
-  // Scale seed to decimeters (Unity units) for correct noise sampling,
-  // then scale result back to meters (web units).
-  // Unity geometry is in decimeters; exported GLTF geometry is in meters (10x smaller).
-  vec3 seedDecimeters = worldCenter * 10.0;
-  vec3 displacement = computeDisplacement(seedDecimeters, 1.0) * 0.1;
+  // Evaluate the Unity-space noise before reflecting its result back to Three's
+  // right-handed coordinates. Stroke geometry remains in Open Brush canvas units.
+  vec3 displacement;
+  if (u_isTiltInput) {
+    vec3 unityCenter = vec3(worldCenter.x, worldCenter.y, -worldCenter.z) * 10.0;
+    vec3 unityDisplacement = computeDisplacement(unityCenter, 1.0);
+    displacement = spreadProgress * 0.1 * vec3(
+      unityDisplacement.x, unityDisplacement.y, -unityDisplacement.z
+    );
+  } else {
+    displacement = computeDisplacement(worldCenter * 10.0, 1.0) * 0.1;
+  }
   worldPos += displacement;
 
   gl_Position = projectionMatrix * viewMatrix * vec4(worldPos, 1.0);

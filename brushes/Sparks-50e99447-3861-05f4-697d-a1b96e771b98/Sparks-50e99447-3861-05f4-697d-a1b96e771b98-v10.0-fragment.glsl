@@ -21,6 +21,7 @@ uniform float u_StretchDistortionExponent;
 uniform float u_NumSides;
 uniform float u_Speed;
 uniform vec4 u_time;
+uniform bool u_isTiltInput;
 
 in vec4 v_color;
 in vec2 v_texcoord0;
@@ -43,7 +44,10 @@ void main() {
   float u = uv.x * u_scale - t;
 
   // Row-based random offset so strips don't animate together
-  float row_id = floor(uv.y * u_NumSides);
+  // Open Brush's live Tilt mesh uses Unity's bottom-left UV convention. Its
+  // legacy glTF exporter writes UVs in glTF's top-left convention instead.
+  float row_v = u_isTiltInput ? 1.0 - uv.y : uv.y;
+  float row_id = floor(row_v * u_NumSides);
   float r = rand_1_05(row_id);
   u += r * u_scale;
   u = mod(u, u_scale);
@@ -58,6 +62,8 @@ void main() {
   float bloom = exp(u_EmissionGain * 5.0) * (1.0 - v_texcoord0.x);
   vec4 color = v_color * tex * bloom;
 
-  // Additive output
-  fragColor = vec4(color.rgb, color.a);
+  // Open Brush applies encodeHdr(color.rgb * color.a). The post-effects-disabled
+  // reference uses the non-emulated HDR variant, which retains RGB and sets alpha
+  // to one for its Blend One One pass.
+  fragColor = vec4(color.rgb * color.a, 1.0);
 }

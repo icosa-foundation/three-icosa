@@ -22,9 +22,10 @@ in vec2 v_texcoord0;
 uniform sampler2D u_MainTex;
 uniform vec4 u_TintColor;
 uniform float u_EmissionGain;
+uniform bool u_isTiltInput;
 
 void main() {
 
   vec4 color = 2.0 * v_color * u_TintColor * texture(u_MainTex, v_texcoord0);
-  fragColor = vec4(color.rgb * color.a, 1.0); 
+  fragColor = u_isTiltInput ? color : vec4(color.rgb * color.a, 1.0);
 }

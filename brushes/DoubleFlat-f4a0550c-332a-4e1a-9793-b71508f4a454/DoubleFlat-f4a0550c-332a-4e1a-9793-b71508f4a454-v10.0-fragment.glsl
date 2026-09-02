@@ -53,6 +53,10 @@ vec3 computeLighting() {
 }
 
 void main() {
-    fragColor.rgb = ApplyFog(computeLighting(), f_fog_coord);
+    vec4 mainTex = texture(u_MainTex, v_texcoord0);
+    if (mainTex.a * v_color.a < u_Cutoff) {
+        discard;
+    }
+    fragColor.rgb = ApplyFog(computeLighting() * mainTex.rgb, f_fog_coord);
     fragColor.a = 1.0;
 }

@@ -40,6 +40,7 @@ uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform bool u_isNewTiltExporter;
 uniform bool u_ElectricityHasBakedDisplacement;
+uniform bool u_isTiltInput;
 
 uniform vec4 u_time;
 uniform float u_ScrollRate;
@@ -147,6 +148,10 @@ vec3 displacement(vec3 pos, float mod, float time) {
   return disp * 3.0 + disp2 * 7.0;
 }
 
+vec3 tiltBasis(vec3 value) {
+  return u_isTiltInput ? value * vec3(1.0, 1.0, -1.0) : value;
+}
+
 void main() {
   float envelope = sin(a_texcoord0.x * 3.14159);
   float envelopePow = 1.0 - pow(1.0 - envelope, 10.0);
@@ -163,7 +168,7 @@ void main() {
     worldPos = vec4(modelMatrix * vec4(worldPos, 1.0)).xyz;
 
     if (widthiness_CS > 0.0) {
-      vec3 dispVec = displacement(midpointPos_CS / widthiness_CS, mod, time);
+      vec3 dispVec = tiltBasis(displacement(tiltBasis(midpointPos_CS / widthiness_CS), mod, time));
       dispVec = (modelMatrix * vec4(dispVec, 0.0)).xyz;
       worldPos += widthiness_CS * dispVec * u_DisplacementIntensity * envelopePow;
     }
@@ -172,10 +177,10 @@ void main() {
     float widthiness_CS = a_texcoord2.y;
 
     if (widthiness_CS > 0.0) {
-      vec3 currentDispVec = displacement(midpointPos_CS / widthiness_CS, mod, time);
+      vec3 currentDispVec = tiltBasis(displacement(tiltBasis(midpointPos_CS / widthiness_CS), mod, time));
       currentDispVec = (modelMatrix * vec4(currentDispVec, 0.0)).xyz;
       if (u_ElectricityHasBakedDisplacement) {
-        vec3 bakedDispVec = displacement(midpointPos_CS / widthiness_CS, 1.0, 0.0);
+        vec3 bakedDispVec = tiltBasis(displacement(tiltBasis(midpointPos_CS / widthiness_CS), 1.0, 0.0));
         bakedDispVec = (modelMatrix * vec4(bakedDispVec, 0.0)).xyz;
         worldPos -= widthiness_CS * bakedDispVec * 0.1 * envelopePow;
       }
@@ -186,7 +191,6 @@ void main() {
   gl_Position = projectionMatrix * viewMatrix * vec4(worldPos, 1.0);
   v_position = (viewMatrix * vec4(worldPos, 1.0)).xyz;
   v_color = a_color;
-  v_color += v_color * (1.0 - envelopePow);
   v_texcoord0 = a_texcoord0;
 
   vec3 normal = normalize(normalMatrix * a_normal);

@@ -36,8 +36,12 @@ in vec3 v_position;
 // limitations under the License.
 
 in float f_fog_coord;
+uniform highp float u_TubeToonPass;
 
 void main() {
-  fragColor.rgb = ApplyFog(v_color.rgb, f_fog_coord);
+  bool blackPass = u_TubeToonPass > 0.5 && u_TubeToonPass < 1.5;
+  fragColor.rgb = blackPass
+    ? vec3(0.0)
+    : ApplyFog(v_color.rgb, f_fog_coord);
   fragColor.a = 1.0;
 }

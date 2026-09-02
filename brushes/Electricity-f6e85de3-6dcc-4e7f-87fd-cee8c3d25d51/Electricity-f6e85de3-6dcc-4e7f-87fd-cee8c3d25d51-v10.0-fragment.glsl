@@ -43,7 +43,7 @@ vec4 bloomColor(vec4 color, float gain) {
 
 void main() {
   vec4 color = bloomColor(v_color, u_EmissionGain);
-  float procedural = ( abs(v_texcoord0.y - 0.5) < .2 ) ? 2. : 0.;
-  vec4 c = color + color * procedural;
-  fragColor = c * c.a;
+  float procedural = (abs(v_texcoord0.y - 0.5) < 0.1) ? 3.0 : 1.0;
+  vec3 unencoded = color.rgb * (procedural * procedural);
+  fragColor = vec4(unencoded, 1.0);
 }
