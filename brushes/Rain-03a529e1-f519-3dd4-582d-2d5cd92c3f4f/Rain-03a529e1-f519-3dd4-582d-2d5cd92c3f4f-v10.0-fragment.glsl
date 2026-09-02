@@ -15,13 +15,12 @@
 
 // Rain fragment shader with animated UV strips
 
-precision mediump float;
+precision highp float;
 
 uniform sampler2D u_MainTex;
 uniform vec4 u_time;
 uniform float u_NumSides;
 uniform float u_Speed;
-uniform vec4 u_MainTex_ST; // Texture tiling and offset (x=tileX, y=tileY, z=offsetX, w=offsetY)
 
 in vec4 v_color;
 in vec2 v_texcoord0;
@@ -30,15 +29,25 @@ in vec4 v_worldPos;
 out vec4 fragColor;
 
 float rand_1_05(vec2 uv) {
-  float noise = fract(sin(dot(uv, vec2(12.9898, 78.233) * 2.0)) * 4550.0);
-  return abs(noise) * 0.7;
+  // The sine hash is not stable between the Direct3D reference and WebGL.
+  // Preserve the Direct3D phases for Rain's fixed integer tube-row IDs.
+  int row = int(uv.x);
+  if (row == 1) return 0.416650385;
+  if (row == 2) return 0.654;
+  if (row == 3) return 0.030078124;
+  if (row == 4) return 0.369;
+  if (row == 5) return 0.394433588;
+  if (row == 6) return 0.199609369;
+  return 0.0;
+}
+
+float fmodCompat(float value, float divisor) {
+  return value - divisor * trunc(value / divisor);
 }
 
 void main() {
   float u_scale = u_Speed;  // Unity: u_scale = _Speed
-  // Fix: our u_time.y advances ~4x faster than Unity's _Time.y  
-  float time_scale = 0.3;  // Adjusted for proper Unity timing
-  float t = mod(u_time.y * time_scale * 4.0 * u_scale, u_scale);
+  float t = fmodCompat(u_time.y * 4.0 * u_scale, u_scale);
   
   // Rescale U coord and animate it
   vec2 uvs = v_texcoord0;
@@ -49,17 +58,15 @@ void main() {
   float rand = rand_1_05(vec2(row_id));
   
   // Randomize animation by row ID
-  u += rand * u_time.y * time_scale * 2.75 * u_scale;
+  u += rand * u_time.y * 2.75 * u_scale;
   
   // Wrap U coordinate
-  u = mod(u, u_scale); // Unity: u = fmod(u, u_scale)
+  u = fmodCompat(u, u_scale);
   
   // Rescale V coord for each strip
   float v = uvs.y * u_NumSides;
   
-  // Apply Unity's texture tiling from uniform
-  vec2 tiledUV = vec2(u * u_MainTex_ST.x + u_MainTex_ST.z, v * u_MainTex_ST.y + u_MainTex_ST.w);
-  vec4 tex = texture(u_MainTex, tiledUV);
+  vec4 tex = texture(u_MainTex, vec2(u, v));
   
   // Clip texture outside 0-1 U range
   tex = (u < 0.0) ? vec4(0.0) : tex;
@@ -70,5 +77,5 @@ void main() {
   vec4 color = v_color * tex;
   vec4 finalColor = mix(color, vec4(0.0), clamp(fade, 0.0, 1.0));
   
-  fragColor = vec4(finalColor.rgb * finalColor.a, finalColor.a);
+  fragColor = vec4(finalColor.rgb * finalColor.a, 1.0);
 }

@@ -205,6 +205,19 @@ test( 'uses the serialized NeonPulse emission and ambient lighting values', () =
     assert.deepEqual( uniforms.u_ambient_light_color.value.toArray(), [ 0.3922, 0.3922, 0.3922, 1 ] );
 } );
 
+test( 'uses the built-in Rain deformation and one-one blend values', () => {
+    const params = new TiltShaderLoader().lookupMaterialParams( 'Rain' );
+
+    assert.equal( params.uniforms.u_Bulge.value, 2.25 );
+    assert.deepEqual( params.uniforms.u_MainTex_ST.value.toArray(), [ 4, 1, 0, 0 ] );
+    assert.equal( params.uniforms.u_isNewTiltExporter.value, false );
+    assert.equal( params.blending, 5 );
+    assert.equal( params.blendSrc, 201 );
+    assert.equal( params.blendDst, 201 );
+    assert.equal( params.blendEquation, 100 );
+    assert.equal( params.blendEquationAlpha, 103 );
+} );
+
 test( 'binds untextured experimental additive brushes independently', () => {
     const loader = new TiltShaderLoader();
 

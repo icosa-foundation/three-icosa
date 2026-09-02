@@ -2319,7 +2319,8 @@ const tiltBrushMaterialParams = {
             u_UVSec: { value: 0.0 },
             u_ZWrite: { value: 1.0 },
             u_time: { value: new THREE.Vector4() },
-            u_Bulge: { value: 2.25 }
+            u_Bulge: { value: 2.25 },
+            u_isNewTiltExporter: { value: false }
         },
         glslVersion: THREE.GLSL3,
         vertexShader: "Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f/Rain-03a529e1-f519-3dd4-582d-2d5cd92c3f4f-v10.0-vertex.glsl",
@@ -2329,7 +2330,13 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: false,
         depthTest: true,
-        blending: 2
+        blending: 5,
+        blendDstAlpha: 201,
+        blendDst: 201,
+        blendEquationAlpha: 103,
+        blendEquation: 100,
+        blendSrcAlpha: 201,
+        blendSrc: 201
     },
     "DryBrush" : {
         uniforms: {

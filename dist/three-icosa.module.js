@@ -6718,6 +6718,9 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_Bulge: {
                 value: 2.25
+            },
+            u_isNewTiltExporter: {
+                value: false
             }
         },
         glslVersion: $fugmd$GLSL3,
@@ -6728,7 +6731,13 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: false,
         depthTest: true,
-        blending: 2
+        blending: 5,
+        blendDstAlpha: 201,
+        blendDst: 201,
+        blendEquationAlpha: 103,
+        blendEquation: 100,
+        blendSrcAlpha: 201,
+        blendSrc: 201
     },
     "DryBrush": {
         uniforms: {

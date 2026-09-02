@@ -43,14 +43,19 @@ uniform mat4 modelMatrix;
 
 uniform float u_Bulge;
 uniform vec4 u_time;
+uniform vec4 u_MainTex_ST;
+uniform bool u_isNewTiltExporter;
 
 void main() {
   vec4 vertex = a_position;
   
-  // Inflate the tube outward using radius from texcoord.z
-  // Reduced from Unity's 2.25 for better proportions
   float radius = a_texcoord0.z;
-  vertex.xyz += a_normal * 1.5 * radius;
+  // Current UnityGLTF drops the third component of TEXCOORD_0. Tilt and
+  // legacy glTF retain the authored per-vertex radius.
+  if (u_isNewTiltExporter && radius <= 0.000001) {
+    radius = 0.05;
+  }
+  vertex.xyz += a_normal * u_Bulge * radius;
   
   vec4 worldPos = modelMatrix * vertex;
   
@@ -70,6 +75,7 @@ void main() {
   v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
   v_color = a_color;
-  v_texcoord0 = a_texcoord0.xy;
+  // Unity's TRANSFORM_TEX runs in the vertex shader before Rain animates U.
+  v_texcoord0 = a_texcoord0.xy * u_MainTex_ST.xy + u_MainTex_ST.zw;
   v_worldPos = worldPos;
 }
