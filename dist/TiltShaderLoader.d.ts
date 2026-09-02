@@ -23,11 +23,13 @@ export interface TiltShaderLoaderOptions {
 
 export interface TiltBrushMaterialRenderState {
     side: THREE.Side;
+    doubleSided: boolean;
     transparent: boolean;
     depthWrite: boolean;
     depthTest: boolean;
     depthFunc: THREE.DepthModes;
     blending: THREE.Blending;
+    additive: boolean;
     blendSrc: THREE.BlendingSrcFactor;
     blendDst: THREE.BlendingDstFactor;
     blendEquation: THREE.BlendingEquation;

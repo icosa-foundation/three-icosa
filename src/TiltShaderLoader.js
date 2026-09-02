@@ -56,17 +56,24 @@ export function getTiltBrushMaterialRenderState(brushName) {
     const materialParams = tiltBrushMaterialParams[brushName];
     if (!materialParams) return undefined;
 
+    const side = brushMaterialSettings[brushName]
+        ? (brushMaterialSettings[brushName].renderBackfaces ? THREE.DoubleSide : THREE.FrontSide)
+        : (materialParams.side ?? THREE.FrontSide);
+    const blending = materialParams.blending ?? THREE.NormalBlending;
+    const blendSrc = materialParams.blendSrc ?? THREE.SrcAlphaFactor;
+    const blendDst = materialParams.blendDst ?? THREE.OneMinusSrcAlphaFactor;
     return Object.freeze({
-        side: brushMaterialSettings[brushName]
-            ? (brushMaterialSettings[brushName].renderBackfaces ? THREE.DoubleSide : THREE.FrontSide)
-            : (materialParams.side ?? THREE.FrontSide),
+        side,
+        doubleSided: side === THREE.DoubleSide,
         transparent: materialParams.transparent ?? false,
         depthWrite: materialParams.depthWrite ?? true,
         depthTest: materialParams.depthTest ?? true,
         depthFunc: materialParams.depthFunc ?? THREE.LessEqualDepth,
-        blending: materialParams.blending ?? THREE.NormalBlending,
-        blendSrc: materialParams.blendSrc ?? THREE.SrcAlphaFactor,
-        blendDst: materialParams.blendDst ?? THREE.OneMinusSrcAlphaFactor,
+        blending,
+        additive: blending === THREE.AdditiveBlending ||
+            (blending === THREE.CustomBlending && blendSrc === THREE.OneFactor && blendDst === THREE.OneFactor),
+        blendSrc,
+        blendDst,
         blendEquation: materialParams.blendEquation ?? THREE.AddEquation,
         blendSrcAlpha: materialParams.blendSrcAlpha ?? null,
         blendDstAlpha: materialParams.blendDstAlpha ?? null,
@@ -75,7 +82,7 @@ export function getTiltBrushMaterialRenderState(brushName) {
 }
 
 export function isTiltBrushMaterialDoubleSided(brushName) {
-    return getTiltBrushMaterialRenderState(brushName)?.side === THREE.DoubleSide;
+    return getTiltBrushMaterialRenderState(brushName)?.doubleSided === true;
 }
 
 function applyBrushMaterialSettings(materialParams, brushName) {

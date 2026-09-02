@@ -1,4 +1,4 @@
-import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrapping as $fugmd$MirroredRepeatWrapping, RepeatWrapping as $fugmd$RepeatWrapping, NearestFilter as $fugmd$NearestFilter, LinearFilter as $fugmd$LinearFilter, NearestMipmapNearestFilter as $fugmd$NearestMipmapNearestFilter, LinearMipmapLinearFilter as $fugmd$LinearMipmapLinearFilter, LinearMipmapNearestFilter as $fugmd$LinearMipmapNearestFilter, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, DoubleSide as $fugmd$DoubleSide, FrontSide as $fugmd$FrontSide, LessEqualDepth as $fugmd$LessEqualDepth, NormalBlending as $fugmd$NormalBlending, SrcAlphaFactor as $fugmd$SrcAlphaFactor, OneMinusSrcAlphaFactor as $fugmd$OneMinusSrcAlphaFactor, AddEquation as $fugmd$AddEquation, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, BackSide as $fugmd$BackSide, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4, Box3 as $fugmd$Box3} from "three";
+import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrapping as $fugmd$MirroredRepeatWrapping, RepeatWrapping as $fugmd$RepeatWrapping, NearestFilter as $fugmd$NearestFilter, LinearFilter as $fugmd$LinearFilter, NearestMipmapNearestFilter as $fugmd$NearestMipmapNearestFilter, LinearMipmapLinearFilter as $fugmd$LinearMipmapLinearFilter, LinearMipmapNearestFilter as $fugmd$LinearMipmapNearestFilter, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, DoubleSide as $fugmd$DoubleSide, FrontSide as $fugmd$FrontSide, NormalBlending as $fugmd$NormalBlending, SrcAlphaFactor as $fugmd$SrcAlphaFactor, OneMinusSrcAlphaFactor as $fugmd$OneMinusSrcAlphaFactor, LessEqualDepth as $fugmd$LessEqualDepth, AdditiveBlending as $fugmd$AdditiveBlending, CustomBlending as $fugmd$CustomBlending, OneFactor as $fugmd$OneFactor, AddEquation as $fugmd$AddEquation, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, BackSide as $fugmd$BackSide, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4, Box3 as $fugmd$Box3} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -1320,15 +1320,21 @@ function $4fdc68aa1ebb2033$export$60287bc469e716bc(brushName) {
 function $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName) {
     const materialParams = $4fdc68aa1ebb2033$var$tiltBrushMaterialParams[brushName];
     if (!materialParams) return undefined;
+    const side = (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName] ? (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName].renderBackfaces ? $fugmd$DoubleSide : $fugmd$FrontSide : materialParams.side ?? $fugmd$FrontSide;
+    const blending = materialParams.blending ?? $fugmd$NormalBlending;
+    const blendSrc = materialParams.blendSrc ?? $fugmd$SrcAlphaFactor;
+    const blendDst = materialParams.blendDst ?? $fugmd$OneMinusSrcAlphaFactor;
     return Object.freeze({
-        side: (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName] ? (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName].renderBackfaces ? $fugmd$DoubleSide : $fugmd$FrontSide : materialParams.side ?? $fugmd$FrontSide,
+        side: side,
+        doubleSided: side === $fugmd$DoubleSide,
         transparent: materialParams.transparent ?? false,
         depthWrite: materialParams.depthWrite ?? true,
         depthTest: materialParams.depthTest ?? true,
         depthFunc: materialParams.depthFunc ?? $fugmd$LessEqualDepth,
-        blending: materialParams.blending ?? $fugmd$NormalBlending,
-        blendSrc: materialParams.blendSrc ?? $fugmd$SrcAlphaFactor,
-        blendDst: materialParams.blendDst ?? $fugmd$OneMinusSrcAlphaFactor,
+        blending: blending,
+        additive: blending === $fugmd$AdditiveBlending || blending === $fugmd$CustomBlending && blendSrc === $fugmd$OneFactor && blendDst === $fugmd$OneFactor,
+        blendSrc: blendSrc,
+        blendDst: blendDst,
         blendEquation: materialParams.blendEquation ?? $fugmd$AddEquation,
         blendSrcAlpha: materialParams.blendSrcAlpha ?? null,
         blendDstAlpha: materialParams.blendDstAlpha ?? null,
@@ -1336,7 +1342,7 @@ function $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName) {
     });
 }
 function $4fdc68aa1ebb2033$export$d56127dccb5abc11(brushName) {
-    return $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName)?.side === $fugmd$DoubleSide;
+    return $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName)?.doubleSided === true;
 }
 function $4fdc68aa1ebb2033$var$applyBrushMaterialSettings(materialParams, brushName) {
     const settings = (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName];

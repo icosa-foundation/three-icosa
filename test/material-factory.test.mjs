@@ -123,11 +123,13 @@ test( 'exposes authoritative brush availability and complete render state', () =
 
     assert.deepEqual( getTiltBrushMaterialRenderState( 'Digital' ), {
         side: DoubleSide,
+        doubleSided: true,
         transparent: true,
         depthWrite: false,
         depthTest: true,
         depthFunc: LessDepth,
         blending: AdditiveBlending,
+        additive: true,
         blendSrc: SrcAlphaFactor,
         blendDst: OneMinusSrcAlphaFactor,
         blendEquation: AddEquation,
