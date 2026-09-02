@@ -5,7 +5,8 @@
   "scripts": {
     "watch": "parcel watch",
     "build": "parcel build --no-cache && node scripts/copy-declarations.mjs",
-    "test": "npm run build && node --test test/*.test.mjs"
+    "test": "npm run build && node --test test/*.test.mjs",
+    "check:dist": "git diff --exit-code -- dist/three-icosa.module.js dist/three-icosa.module.js.map dist/index.d.ts dist/TiltShaderLoader.d.ts dist/TiltBrushRenderPasses.d.ts"
   },
   "repository": {
     "type": "git",
