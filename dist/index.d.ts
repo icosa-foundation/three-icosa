@@ -1,4 +1,9 @@
-export { isTiltBrushMaterialDoubleSided, TiltShaderLoader } from "./TiltShaderLoader";
+export {
+  getTiltBrushMaterialRenderState,
+  hasTiltBrushMaterial,
+  isTiltBrushMaterialDoubleSided,
+  TiltShaderLoader,
+} from "./TiltShaderLoader";
 export {
   applyTiltBrushRenderGroups,
   createTiltBrushRenderMaterial,
@@ -9,6 +14,7 @@ export {
   TUBE_TOON_INVERTED_OUTLINE_SIZE,
 } from "./TiltBrushRenderPasses";
 export type {
+  TiltBrushMaterialRenderState,
   TiltMaterialFactory,
   TiltShaderLoaderOptions,
   TiltTextureConfigurator,

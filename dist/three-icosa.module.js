@@ -1,4 +1,4 @@
-import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrapping as $fugmd$MirroredRepeatWrapping, RepeatWrapping as $fugmd$RepeatWrapping, NearestFilter as $fugmd$NearestFilter, LinearFilter as $fugmd$LinearFilter, NearestMipmapNearestFilter as $fugmd$NearestMipmapNearestFilter, LinearMipmapLinearFilter as $fugmd$LinearMipmapLinearFilter, LinearMipmapNearestFilter as $fugmd$LinearMipmapNearestFilter, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, DoubleSide as $fugmd$DoubleSide, FrontSide as $fugmd$FrontSide, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, BackSide as $fugmd$BackSide, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4, Box3 as $fugmd$Box3} from "three";
+import {ClampToEdgeWrapping as $fugmd$ClampToEdgeWrapping, MirroredRepeatWrapping as $fugmd$MirroredRepeatWrapping, RepeatWrapping as $fugmd$RepeatWrapping, NearestFilter as $fugmd$NearestFilter, LinearFilter as $fugmd$LinearFilter, NearestMipmapNearestFilter as $fugmd$NearestMipmapNearestFilter, LinearMipmapLinearFilter as $fugmd$LinearMipmapLinearFilter, LinearMipmapNearestFilter as $fugmd$LinearMipmapNearestFilter, SRGBColorSpace as $fugmd$SRGBColorSpace, NoColorSpace as $fugmd$NoColorSpace, DoubleSide as $fugmd$DoubleSide, FrontSide as $fugmd$FrontSide, LessEqualDepth as $fugmd$LessEqualDepth, NormalBlending as $fugmd$NormalBlending, SrcAlphaFactor as $fugmd$SrcAlphaFactor, OneMinusSrcAlphaFactor as $fugmd$OneMinusSrcAlphaFactor, AddEquation as $fugmd$AddEquation, DataTexture as $fugmd$DataTexture, RGBAFormat as $fugmd$RGBAFormat, UnsignedByteType as $fugmd$UnsignedByteType, RawShaderMaterial as $fugmd$RawShaderMaterial, FileLoader as $fugmd$FileLoader, TextureLoader as $fugmd$TextureLoader, UniformsLib as $fugmd$UniformsLib, Loader as $fugmd$Loader, GLSL3 as $fugmd$GLSL3, Vector4 as $fugmd$Vector4, Vector3 as $fugmd$Vector3, BackSide as $fugmd$BackSide, Clock as $fugmd$Clock, BufferAttribute as $fugmd$BufferAttribute, Matrix4 as $fugmd$Matrix4, Box3 as $fugmd$Box3} from "three";
 
 // Copyright 2021-2022 Icosa Gallery
 //
@@ -1314,8 +1314,29 @@ function $4fdc68aa1ebb2033$var$applyBrushTextureSettings(texture, brushName, uni
     texture.anisotropy = settings.anisotropy;
     texture.needsUpdate = true;
 }
+function $4fdc68aa1ebb2033$export$60287bc469e716bc(brushName) {
+    return Object.hasOwn($4fdc68aa1ebb2033$var$tiltBrushMaterialParams, brushName);
+}
+function $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName) {
+    const materialParams = $4fdc68aa1ebb2033$var$tiltBrushMaterialParams[brushName];
+    if (!materialParams) return undefined;
+    return Object.freeze({
+        side: (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName] ? (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName].renderBackfaces ? $fugmd$DoubleSide : $fugmd$FrontSide : materialParams.side ?? $fugmd$FrontSide,
+        transparent: materialParams.transparent ?? false,
+        depthWrite: materialParams.depthWrite ?? true,
+        depthTest: materialParams.depthTest ?? true,
+        depthFunc: materialParams.depthFunc ?? $fugmd$LessEqualDepth,
+        blending: materialParams.blending ?? $fugmd$NormalBlending,
+        blendSrc: materialParams.blendSrc ?? $fugmd$SrcAlphaFactor,
+        blendDst: materialParams.blendDst ?? $fugmd$OneMinusSrcAlphaFactor,
+        blendEquation: materialParams.blendEquation ?? $fugmd$AddEquation,
+        blendSrcAlpha: materialParams.blendSrcAlpha ?? null,
+        blendDstAlpha: materialParams.blendDstAlpha ?? null,
+        blendEquationAlpha: materialParams.blendEquationAlpha ?? null
+    });
+}
 function $4fdc68aa1ebb2033$export$d56127dccb5abc11(brushName) {
-    return (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName]?.renderBackfaces === true;
+    return $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName)?.side === $fugmd$DoubleSide;
 }
 function $4fdc68aa1ebb2033$var$applyBrushMaterialSettings(materialParams, brushName) {
     const settings = (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName];
@@ -14664,5 +14685,5 @@ class $14e7a74c93f87da8$export$24723e25468f5bb7 {
 
 
 
-export {$4fdc68aa1ebb2033$export$d56127dccb5abc11 as isTiltBrushMaterialDoubleSided, $4fdc68aa1ebb2033$export$bcc22bf437a07d8f as TiltShaderLoader, $16cff2322f67c674$export$341ae8ac0b7c3891 as applyTiltBrushRenderGroups, $16cff2322f67c674$export$2bd00b77fe2d55ec as createTiltBrushRenderMaterial, $16cff2322f67c674$export$898562a301a76693 as ELECTRICITY_BRUSH_GUID, $16cff2322f67c674$export$31cff25809951ff3 as ELECTRICITY_DISPLACEMENT_MODS, $16cff2322f67c674$export$6c8c313f844ab31d as TOON_BRUSH_GUID, $16cff2322f67c674$export$c1bb71fdd9aa3dc9 as TUBE_TOON_INVERTED_BRUSH_GUID, $16cff2322f67c674$export$18e64de72c17bfe as TUBE_TOON_INVERTED_OUTLINE_SIZE, $e02d07ddc3ccd105$export$2b011a5b12963d65 as GLTFGoogleTiltBrushMaterialExtension, $14e7a74c93f87da8$export$24723e25468f5bb7 as GLTFGoogleTiltBrushTechniquesExtension};
+export {$4fdc68aa1ebb2033$export$98da5a8f4bc3a29e as getTiltBrushMaterialRenderState, $4fdc68aa1ebb2033$export$60287bc469e716bc as hasTiltBrushMaterial, $4fdc68aa1ebb2033$export$d56127dccb5abc11 as isTiltBrushMaterialDoubleSided, $4fdc68aa1ebb2033$export$bcc22bf437a07d8f as TiltShaderLoader, $16cff2322f67c674$export$341ae8ac0b7c3891 as applyTiltBrushRenderGroups, $16cff2322f67c674$export$2bd00b77fe2d55ec as createTiltBrushRenderMaterial, $16cff2322f67c674$export$898562a301a76693 as ELECTRICITY_BRUSH_GUID, $16cff2322f67c674$export$31cff25809951ff3 as ELECTRICITY_DISPLACEMENT_MODS, $16cff2322f67c674$export$6c8c313f844ab31d as TOON_BRUSH_GUID, $16cff2322f67c674$export$c1bb71fdd9aa3dc9 as TUBE_TOON_INVERTED_BRUSH_GUID, $16cff2322f67c674$export$18e64de72c17bfe as TUBE_TOON_INVERTED_OUTLINE_SIZE, $e02d07ddc3ccd105$export$2b011a5b12963d65 as GLTFGoogleTiltBrushMaterialExtension, $14e7a74c93f87da8$export$24723e25468f5bb7 as GLTFGoogleTiltBrushTechniquesExtension};
 //# sourceMappingURL=three-icosa.module.js.map

@@ -21,6 +21,25 @@ export interface TiltShaderLoaderOptions {
     textureConfigurator?: TiltTextureConfigurator;
 }
 
+export interface TiltBrushMaterialRenderState {
+    side: THREE.Side;
+    transparent: boolean;
+    depthWrite: boolean;
+    depthTest: boolean;
+    depthFunc: THREE.DepthModes;
+    blending: THREE.Blending;
+    blendSrc: THREE.BlendingSrcFactor;
+    blendDst: THREE.BlendingDstFactor;
+    blendEquation: THREE.BlendingEquation;
+    blendSrcAlpha: THREE.BlendingSrcFactor | null;
+    blendDstAlpha: THREE.BlendingDstFactor | null;
+    blendEquationAlpha: THREE.BlendingEquation | null;
+}
+
+export function hasTiltBrushMaterial(brushName: string): boolean;
+export function getTiltBrushMaterialRenderState(
+    brushName: string,
+): Readonly<TiltBrushMaterialRenderState> | undefined;
 export function isTiltBrushMaterialDoubleSided(brushName: string): boolean;
 
 export class TiltShaderLoader extends THREE.Loader<any, string> {

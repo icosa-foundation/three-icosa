@@ -1,23 +1,30 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
+    AddEquation,
+    AdditiveBlending,
     BackSide,
     ClampToEdgeWrapping,
     DoubleSide,
     FrontSide,
     LinearFilter,
     LinearMipmapNearestFilter,
+    LessDepth,
     NoColorSpace,
+    OneMinusSrcAlphaFactor,
     RawShaderMaterial,
     RepeatWrapping,
     ShaderMaterial,
     SRGBColorSpace,
+    SrcAlphaFactor,
     Texture
 } from 'three';
-import { isTiltBrushMaterialDoubleSided } from '../src/TiltShaderLoader.js';
 import {
     applyTiltBrushRenderGroups,
     createTiltBrushRenderMaterial,
+    getTiltBrushMaterialRenderState,
+    hasTiltBrushMaterial,
+    isTiltBrushMaterialDoubleSided,
     TiltShaderLoader
 } from '../dist/three-icosa.module.js';
 
@@ -107,6 +114,27 @@ test( 'applies authoritative required-brush culling by default', () => {
     assert.equal( isTiltBrushMaterialDoubleSided( 'Digital' ), true );
     assert.equal( isTiltBrushMaterialDoubleSided( 'Race' ), true );
     assert.equal( isTiltBrushMaterialDoubleSided( 'SmoothHull' ), false );
+} );
+
+test( 'exposes authoritative brush availability and complete render state', () => {
+    assert.equal( hasTiltBrushMaterial( 'Digital' ), true );
+    assert.equal( hasTiltBrushMaterial( 'NotABrush' ), false );
+    assert.equal( getTiltBrushMaterialRenderState( 'NotABrush' ), undefined );
+
+    assert.deepEqual( getTiltBrushMaterialRenderState( 'Digital' ), {
+        side: DoubleSide,
+        transparent: true,
+        depthWrite: false,
+        depthTest: true,
+        depthFunc: LessDepth,
+        blending: AdditiveBlending,
+        blendSrc: SrcAlphaFactor,
+        blendDst: OneMinusSrcAlphaFactor,
+        blendEquation: AddEquation,
+        blendSrcAlpha: null,
+        blendDstAlpha: null,
+        blendEquationAlpha: null
+    } );
 } );
 
 test( 'allows callers to configure loaded textures', () => {

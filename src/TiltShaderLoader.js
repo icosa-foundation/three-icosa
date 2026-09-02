@@ -48,8 +48,34 @@ function applyBrushTextureSettings(texture, brushName, uniformName) {
     texture.needsUpdate = true;
 }
 
+export function hasTiltBrushMaterial(brushName) {
+    return Object.hasOwn(tiltBrushMaterialParams, brushName);
+}
+
+export function getTiltBrushMaterialRenderState(brushName) {
+    const materialParams = tiltBrushMaterialParams[brushName];
+    if (!materialParams) return undefined;
+
+    return Object.freeze({
+        side: brushMaterialSettings[brushName]
+            ? (brushMaterialSettings[brushName].renderBackfaces ? THREE.DoubleSide : THREE.FrontSide)
+            : (materialParams.side ?? THREE.FrontSide),
+        transparent: materialParams.transparent ?? false,
+        depthWrite: materialParams.depthWrite ?? true,
+        depthTest: materialParams.depthTest ?? true,
+        depthFunc: materialParams.depthFunc ?? THREE.LessEqualDepth,
+        blending: materialParams.blending ?? THREE.NormalBlending,
+        blendSrc: materialParams.blendSrc ?? THREE.SrcAlphaFactor,
+        blendDst: materialParams.blendDst ?? THREE.OneMinusSrcAlphaFactor,
+        blendEquation: materialParams.blendEquation ?? THREE.AddEquation,
+        blendSrcAlpha: materialParams.blendSrcAlpha ?? null,
+        blendDstAlpha: materialParams.blendDstAlpha ?? null,
+        blendEquationAlpha: materialParams.blendEquationAlpha ?? null
+    });
+}
+
 export function isTiltBrushMaterialDoubleSided(brushName) {
-    return brushMaterialSettings[brushName]?.renderBackfaces === true;
+    return getTiltBrushMaterialRenderState(brushName)?.side === THREE.DoubleSide;
 }
 
 function applyBrushMaterialSettings(materialParams, brushName) {
