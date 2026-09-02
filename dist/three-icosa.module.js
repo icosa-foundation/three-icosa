@@ -1314,10 +1314,13 @@ function $4fdc68aa1ebb2033$var$applyBrushTextureSettings(texture, brushName, uni
     texture.anisotropy = settings.anisotropy;
     texture.needsUpdate = true;
 }
+function $4fdc68aa1ebb2033$export$d56127dccb5abc11(brushName) {
+    return (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName]?.renderBackfaces === true;
+}
 function $4fdc68aa1ebb2033$var$applyBrushMaterialSettings(materialParams, brushName) {
     const settings = (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName];
     if (!settings) return;
-    materialParams.side = settings.renderBackfaces ? $fugmd$DoubleSide : $fugmd$FrontSide;
+    materialParams.side = $4fdc68aa1ebb2033$export$d56127dccb5abc11(brushName) ? $fugmd$DoubleSide : $fugmd$FrontSide;
 }
 // Cached default textures to prevent creating multiple instances
 let $4fdc68aa1ebb2033$var$defaultWhiteTexture = null;
@@ -14661,5 +14664,5 @@ class $14e7a74c93f87da8$export$24723e25468f5bb7 {
 
 
 
-export {$4fdc68aa1ebb2033$export$bcc22bf437a07d8f as TiltShaderLoader, $16cff2322f67c674$export$341ae8ac0b7c3891 as applyTiltBrushRenderGroups, $16cff2322f67c674$export$2bd00b77fe2d55ec as createTiltBrushRenderMaterial, $16cff2322f67c674$export$898562a301a76693 as ELECTRICITY_BRUSH_GUID, $16cff2322f67c674$export$31cff25809951ff3 as ELECTRICITY_DISPLACEMENT_MODS, $16cff2322f67c674$export$6c8c313f844ab31d as TOON_BRUSH_GUID, $16cff2322f67c674$export$c1bb71fdd9aa3dc9 as TUBE_TOON_INVERTED_BRUSH_GUID, $16cff2322f67c674$export$18e64de72c17bfe as TUBE_TOON_INVERTED_OUTLINE_SIZE, $e02d07ddc3ccd105$export$2b011a5b12963d65 as GLTFGoogleTiltBrushMaterialExtension, $14e7a74c93f87da8$export$24723e25468f5bb7 as GLTFGoogleTiltBrushTechniquesExtension};
+export {$4fdc68aa1ebb2033$export$d56127dccb5abc11 as isTiltBrushMaterialDoubleSided, $4fdc68aa1ebb2033$export$bcc22bf437a07d8f as TiltShaderLoader, $16cff2322f67c674$export$341ae8ac0b7c3891 as applyTiltBrushRenderGroups, $16cff2322f67c674$export$2bd00b77fe2d55ec as createTiltBrushRenderMaterial, $16cff2322f67c674$export$898562a301a76693 as ELECTRICITY_BRUSH_GUID, $16cff2322f67c674$export$31cff25809951ff3 as ELECTRICITY_DISPLACEMENT_MODS, $16cff2322f67c674$export$6c8c313f844ab31d as TOON_BRUSH_GUID, $16cff2322f67c674$export$c1bb71fdd9aa3dc9 as TUBE_TOON_INVERTED_BRUSH_GUID, $16cff2322f67c674$export$18e64de72c17bfe as TUBE_TOON_INVERTED_OUTLINE_SIZE, $e02d07ddc3ccd105$export$2b011a5b12963d65 as GLTFGoogleTiltBrushMaterialExtension, $14e7a74c93f87da8$export$24723e25468f5bb7 as GLTFGoogleTiltBrushTechniquesExtension};
 //# sourceMappingURL=three-icosa.module.js.map

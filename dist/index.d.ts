@@ -1,4 +1,4 @@
-export { TiltShaderLoader } from "./TiltShaderLoader";
+export { isTiltBrushMaterialDoubleSided, TiltShaderLoader } from "./TiltShaderLoader";
 export {
   applyTiltBrushRenderGroups,
   createTiltBrushRenderMaterial,
