@@ -14,6 +14,7 @@ import {
     SRGBColorSpace,
     Texture
 } from 'three';
+import { isTiltBrushMaterialDoubleSided } from '../src/TiltShaderLoader.js';
 import {
     applyTiltBrushRenderGroups,
     createTiltBrushRenderMaterial,
@@ -103,6 +104,9 @@ test( 'applies authoritative required-brush culling by default', () => {
     assert.equal( dryBrush.side, DoubleSide );
     assert.equal( digital.side, DoubleSide );
     assert.equal( race.side, DoubleSide );
+    assert.equal( isTiltBrushMaterialDoubleSided( 'Digital' ), true );
+    assert.equal( isTiltBrushMaterialDoubleSided( 'Race' ), true );
+    assert.equal( isTiltBrushMaterialDoubleSided( 'SmoothHull' ), false );
 } );
 
 test( 'allows callers to configure loaded textures', () => {

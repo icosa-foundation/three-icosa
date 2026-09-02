@@ -48,10 +48,14 @@ function applyBrushTextureSettings(texture, brushName, uniformName) {
     texture.needsUpdate = true;
 }
 
+export function isTiltBrushMaterialDoubleSided(brushName) {
+    return brushMaterialSettings[brushName]?.renderBackfaces === true;
+}
+
 function applyBrushMaterialSettings(materialParams, brushName) {
     const settings = brushMaterialSettings[brushName];
     if (!settings) return;
-    materialParams.side = settings.renderBackfaces ? THREE.DoubleSide : THREE.FrontSide;
+    materialParams.side = isTiltBrushMaterialDoubleSided(brushName) ? THREE.DoubleSide : THREE.FrontSide;
 }
 
 // Cached default textures to prevent creating multiple instances

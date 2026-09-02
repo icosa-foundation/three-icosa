@@ -21,6 +21,8 @@ export interface TiltShaderLoaderOptions {
     textureConfigurator?: TiltTextureConfigurator;
 }
 
+export function isTiltBrushMaterialDoubleSided(brushName: string): boolean;
+
 export class TiltShaderLoader extends THREE.Loader<any, string> {
     constructor(manager?: THREE.LoadingManager, options?: TiltShaderLoaderOptions);
     materialFactory: TiltMaterialFactory;
