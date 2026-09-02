@@ -1314,11 +1314,24 @@ function $4fdc68aa1ebb2033$var$applyBrushTextureSettings(texture, brushName, uni
     texture.anisotropy = settings.anisotropy;
     texture.needsUpdate = true;
 }
-function $4fdc68aa1ebb2033$export$60287bc469e716bc(brushName) {
-    return Object.hasOwn($4fdc68aa1ebb2033$var$tiltBrushMaterialParams, brushName) && Object.hasOwn((0, $893dd13f874e2f96$export$9ca3db12bec15353), brushName);
+function $4fdc68aa1ebb2033$var$getTiltBrushMaterialGuid(brushName) {
+    return $4fdc68aa1ebb2033$var$tiltBrushMaterialGuidOverrides[brushName] ?? $4fdc68aa1ebb2033$var$tiltBrushMaterialGuids[brushName];
 }
-function $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName) {
-    if (!$4fdc68aa1ebb2033$export$60287bc469e716bc(brushName)) return undefined;
+// These exported shaders come from revisions that Open Brush marks as
+// superseded. They implement the canonical brush GUID listed here.
+const $4fdc68aa1ebb2033$var$tiltBrushMaterialGuidOverrides = Object.freeze({
+    Ink: "f5c336cf-5108-4b40-ade9-c687504385ab",
+    DuctTape: "d0262945-853c-4481-9cbd-88586bed93cb",
+    Paper: "f1114e2e-eb8d-4fde-915a-6e653b54e9f5",
+    Splatter: "8dc4a70c-d558-4efd-a5ed-d4e860f40dc3",
+    Gouache: "1b897b7e-9b76-425a-b031-a867c48df409"
+});
+function $4fdc68aa1ebb2033$export$60287bc469e716bc(brushName, brushGuid) {
+    if (!Object.hasOwn($4fdc68aa1ebb2033$var$tiltBrushMaterialParams, brushName) || !Object.hasOwn((0, $893dd13f874e2f96$export$9ca3db12bec15353), brushName)) return false;
+    return brushGuid === undefined || $4fdc68aa1ebb2033$var$getTiltBrushMaterialGuid(brushName) === brushGuid;
+}
+function $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName, brushGuid) {
+    if (!$4fdc68aa1ebb2033$export$60287bc469e716bc(brushName, brushGuid)) return undefined;
     const materialParams = $4fdc68aa1ebb2033$var$tiltBrushMaterialParams[brushName];
     const side = (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName] ? (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName].renderBackfaces ? $fugmd$DoubleSide : $fugmd$FrontSide : materialParams.side ?? $fugmd$FrontSide;
     const blending = materialParams.blending ?? $fugmd$NormalBlending;
@@ -1341,8 +1354,8 @@ function $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName) {
         blendEquationAlpha: materialParams.blendEquationAlpha ?? null
     });
 }
-function $4fdc68aa1ebb2033$export$d56127dccb5abc11(brushName) {
-    return $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName)?.doubleSided === true;
+function $4fdc68aa1ebb2033$export$d56127dccb5abc11(brushName, brushGuid) {
+    return $4fdc68aa1ebb2033$export$98da5a8f4bc3a29e(brushName, brushGuid)?.doubleSided === true;
 }
 function $4fdc68aa1ebb2033$var$applyBrushMaterialSettings(materialParams, brushName) {
     const settings = (0, $893dd13f874e2f96$export$9ca3db12bec15353)[brushName];
@@ -11671,6 +11684,10 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         blending: 0
     }
 };
+const $4fdc68aa1ebb2033$var$tiltBrushMaterialGuids = Object.freeze(Object.fromEntries(Object.entries($4fdc68aa1ebb2033$var$tiltBrushMaterialParams).map(([brushName, materialParams])=>[
+        brushName,
+        typeof materialParams.vertexShader === "string" ? materialParams.vertexShader.match(/[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}/)?.[0] : undefined
+    ])));
 
 
 

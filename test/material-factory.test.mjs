@@ -118,6 +118,22 @@ test( 'applies authoritative required-brush culling by default', () => {
 
 test( 'exposes authoritative brush availability and complete render state', () => {
     assert.equal( hasTiltBrushMaterial( 'Digital' ), true );
+    assert.equal(
+        hasTiltBrushMaterial( 'Digital', '30cb9af6-be41-4872-8f3e-cbff63fe3db8' ),
+        true
+    );
+    assert.equal(
+        hasTiltBrushMaterial( 'Digital', '00000000-0000-0000-0000-000000000000' ),
+        false
+    );
+    assert.equal(
+        hasTiltBrushMaterial( 'Ink', 'f5c336cf-5108-4b40-ade9-c687504385ab' ),
+        true
+    );
+    assert.equal(
+        hasTiltBrushMaterial( 'Ink', 'c0012095-3ffd-4040-8ee1-fc180d346eaa' ),
+        false
+    );
     assert.equal( hasTiltBrushMaterial( 'FlatDeprecated' ), false );
     assert.equal( hasTiltBrushMaterial( 'NotABrush' ), false );
     assert.equal( getTiltBrushMaterialRenderState( 'NotABrush' ), undefined );

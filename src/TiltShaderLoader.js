@@ -48,13 +48,28 @@ function applyBrushTextureSettings(texture, brushName, uniformName) {
     texture.needsUpdate = true;
 }
 
-export function hasTiltBrushMaterial(brushName) {
-    return Object.hasOwn(tiltBrushMaterialParams, brushName) &&
-        Object.hasOwn(brushMaterialSettings, brushName);
+function getTiltBrushMaterialGuid(brushName) {
+    return tiltBrushMaterialGuidOverrides[brushName] ?? tiltBrushMaterialGuids[brushName];
 }
 
-export function getTiltBrushMaterialRenderState(brushName) {
-    if (!hasTiltBrushMaterial(brushName)) return undefined;
+// These exported shaders come from revisions that Open Brush marks as
+// superseded. They implement the canonical brush GUID listed here.
+const tiltBrushMaterialGuidOverrides = Object.freeze({
+    Ink: 'f5c336cf-5108-4b40-ade9-c687504385ab',
+    DuctTape: 'd0262945-853c-4481-9cbd-88586bed93cb',
+    Paper: 'f1114e2e-eb8d-4fde-915a-6e653b54e9f5',
+    Splatter: '8dc4a70c-d558-4efd-a5ed-d4e860f40dc3',
+    Gouache: '1b897b7e-9b76-425a-b031-a867c48df409'
+});
+
+export function hasTiltBrushMaterial(brushName, brushGuid) {
+    if (!Object.hasOwn(tiltBrushMaterialParams, brushName) ||
+        !Object.hasOwn(brushMaterialSettings, brushName)) return false;
+    return brushGuid === undefined || getTiltBrushMaterialGuid(brushName) === brushGuid;
+}
+
+export function getTiltBrushMaterialRenderState(brushName, brushGuid) {
+    if (!hasTiltBrushMaterial(brushName, brushGuid)) return undefined;
     const materialParams = tiltBrushMaterialParams[brushName];
 
     const side = brushMaterialSettings[brushName]
@@ -82,8 +97,8 @@ export function getTiltBrushMaterialRenderState(brushName) {
     });
 }
 
-export function isTiltBrushMaterialDoubleSided(brushName) {
-    return getTiltBrushMaterialRenderState(brushName)?.doubleSided === true;
+export function isTiltBrushMaterialDoubleSided(brushName, brushGuid) {
+    return getTiltBrushMaterialRenderState(brushName, brushGuid)?.doubleSided === true;
 }
 
 function applyBrushMaterialSettings(materialParams, brushName) {
@@ -3915,4 +3930,13 @@ const tiltBrushMaterialParams = {
         depthTest: true,
         blending: 0
     }
-}
+};
+
+const tiltBrushMaterialGuids = Object.freeze(Object.fromEntries(
+    Object.entries(tiltBrushMaterialParams).map(([brushName, materialParams]) => [
+        brushName,
+        typeof materialParams.vertexShader === 'string'
+            ? materialParams.vertexShader.match(/[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}/)?.[0]
+            : undefined
+    ])
+));

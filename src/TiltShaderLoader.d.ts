@@ -38,11 +38,15 @@ export interface TiltBrushMaterialRenderState {
     blendEquationAlpha: THREE.BlendingEquation | null;
 }
 
-export function hasTiltBrushMaterial(brushName: string): boolean;
+export function hasTiltBrushMaterial(brushName: string, brushGuid?: string): boolean;
 export function getTiltBrushMaterialRenderState(
     brushName: string,
+    brushGuid?: string,
 ): Readonly<TiltBrushMaterialRenderState> | undefined;
-export function isTiltBrushMaterialDoubleSided(brushName: string): boolean;
+export function isTiltBrushMaterialDoubleSided(
+    brushName: string,
+    brushGuid?: string,
+): boolean;
 
 export class TiltShaderLoader extends THREE.Loader<any, string> {
     constructor(manager?: THREE.LoadingManager, options?: TiltShaderLoaderOptions);
