@@ -187,6 +187,7 @@ test( 'defaults mode-aware procedural brushes to legacy glTF UV input', () => {
     assert.equal( loader.lookupMaterialParams( 'MylarTube' ).uniforms.u_isTiltInput.value, false );
     assert.equal( loader.lookupMaterialParams( 'MylarTube' ).uniforms.u_isNewTiltExporter.value, false );
     assert.equal( loader.lookupMaterialParams( 'DanceFloor' ).uniforms.u_isNewTiltExporter.value, false );
+    assert.equal( loader.lookupMaterialParams( 'HyperGrid' ).uniforms.u_isNewTiltExporter.value, false );
 } );
 
 test( 'uses the serialized opaque DanceFloor material values', () => {

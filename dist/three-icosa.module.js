@@ -3579,6 +3579,15 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             },
             u_MainTex: {
                 value: "HyperGrid-6a1cf9f9-032c-45ec-9b6e-a6680bee32e9/HyperGrid-6a1cf9f9-032c-45ec-9b6e-a6680bee32e9-v10.0-MainTex.png"
+            },
+            u_Opacity: {
+                value: 1.0
+            },
+            u_isNewTiltExporter: {
+                value: false
+            },
+            u_time: {
+                value: new $fugmd$Vector4()
             }
         },
         glslVersion: $fugmd$GLSL3,

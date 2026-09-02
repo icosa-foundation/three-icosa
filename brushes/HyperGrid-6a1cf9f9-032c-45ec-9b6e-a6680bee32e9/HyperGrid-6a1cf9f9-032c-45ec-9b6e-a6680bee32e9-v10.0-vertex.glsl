@@ -53,9 +53,13 @@ void main() {
 
 
 	if (!u_isNewTiltExporter) {
-	  // Quantize vertices
-	  float q = (1. / size) * .5;
-	  worldPos.xyz = ceil(worldPos.xyz * q) / q;
+	  float lifetime = u_time.y - a_texcoord1.w;
+	  float release = clamp(lifetime, 0.0, 1.0);
+	  float q = (1.0 / size) * 0.5;
+	  q += 5.0 * clamp(1.0 - release * 10.0, 0.0, 1.0);
+	  // Open Brush quantizes before its +Z axis is reflected into Three.js.
+	  worldPos.xy = ceil(worldPos.xy * q) / q;
+	  worldPos.z = floor(worldPos.z * q) / q;
 	}
 
   gl_Position = projectionMatrix * viewMatrix * worldPos;

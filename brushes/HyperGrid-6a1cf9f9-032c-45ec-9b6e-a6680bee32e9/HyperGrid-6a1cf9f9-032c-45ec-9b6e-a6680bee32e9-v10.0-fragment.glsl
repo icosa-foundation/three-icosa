@@ -26,7 +26,9 @@ in vec2 v_texcoord0;
 uniform vec4 u_TintColor;
 
 uniform sampler2D u_MainTex;
+uniform float u_Opacity;
 
 void main() {
-  fragColor = v_color * u_TintColor * texture(u_MainTex, v_texcoord0).w;
+  vec4 c = v_color * u_TintColor * texture(u_MainTex, v_texcoord0);
+  fragColor = vec4(c.rgb * c.a, 1.0) * u_Opacity;
 }
