@@ -2937,8 +2937,9 @@ const tiltBrushMaterialParams = {
             u_fogColor: { value: new THREE.Vector3(0.0196, 0.0196, 0.0196) },
             u_fogDensity: { value: 0 },
             u_time: { value: new THREE.Vector4() },
+            u_isNewTiltExporter: { value: false },
             u_MainTex: { value: "DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9/DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9-v10.0-MainTex.png" },
-            u_TintColor: { value: new THREE.Vector4(0.5, 0.5, 0.5, 0.5) }
+            u_TintColor: { value: new THREE.Vector4(1, 1, 1, 1) }
         },
         glslVersion: THREE.GLSL3,
         vertexShader: "DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9/DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9-v10.0-vertex.glsl",
@@ -2948,7 +2949,7 @@ const tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true,
         depthTest: true,
-        blending: 5,
+        blending: 0,
         blendDstAlpha: 201,
         blendDst: 201,
         blendEquationAlpha: 103,

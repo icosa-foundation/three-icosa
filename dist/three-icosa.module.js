@@ -8690,11 +8690,14 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
             u_time: {
                 value: new $fugmd$Vector4()
             },
+            u_isNewTiltExporter: {
+                value: false
+            },
             u_MainTex: {
                 value: "DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9/DanceFloor-6a1cf9f9-032c-45ec-311e-a6680bee32e9-v10.0-MainTex.png"
             },
             u_TintColor: {
-                value: new $fugmd$Vector4(0.5, 0.5, 0.5, 0.5)
+                value: new $fugmd$Vector4(1, 1, 1, 1)
             }
         },
         glslVersion: $fugmd$GLSL3,
@@ -8705,7 +8708,7 @@ const $4fdc68aa1ebb2033$var$tiltBrushMaterialParams = {
         depthFunc: 2,
         depthWrite: true,
         depthTest: true,
-        blending: 5,
+        blending: 0,
         blendDstAlpha: 201,
         blendDst: 201,
         blendEquationAlpha: 103,

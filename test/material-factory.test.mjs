@@ -186,6 +186,15 @@ test( 'defaults mode-aware procedural brushes to legacy glTF UV input', () => {
     assert.equal( loader.lookupMaterialParams( 'Electricity' ).uniforms.u_isTiltInput.value, false );
     assert.equal( loader.lookupMaterialParams( 'MylarTube' ).uniforms.u_isTiltInput.value, false );
     assert.equal( loader.lookupMaterialParams( 'MylarTube' ).uniforms.u_isNewTiltExporter.value, false );
+    assert.equal( loader.lookupMaterialParams( 'DanceFloor' ).uniforms.u_isNewTiltExporter.value, false );
+} );
+
+test( 'uses the serialized opaque DanceFloor material values', () => {
+    const params = new TiltShaderLoader().lookupMaterialParams( 'DanceFloor' );
+
+    assert.deepEqual( params.uniforms.u_TintColor.value.toArray(), [ 1, 1, 1, 1 ] );
+    assert.equal( params.blending, 0 );
+    assert.equal( params.depthWrite, true );
 } );
 
 test( 'binds untextured experimental additive brushes independently', () => {

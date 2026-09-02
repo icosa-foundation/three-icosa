@@ -32,25 +32,33 @@ out vec3 v_light_dir_1;
 out float f_fog_coord;
 
 uniform mat4 modelViewMatrix;
+uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 uniform mat3 normalMatrix;
 uniform mat4 u_SceneLight_0_matrix;
 uniform mat4 u_SceneLight_1_matrix;
 uniform vec4 u_time;
+uniform bool u_isNewTiltExporter;
 
 void  main() {
-  vec4 worldPos = a_position;
-  
-  // Create per-quad variation using hash of quad index
-  int quadIndex = gl_VertexID / 4;
-  float hash = fract(sin(float(quadIndex) * 12.9898) * 43758.5453);
-  float fakeCreationTime = a_timestamp + hash * 2.0;  // Add 0-2 second offset per quad
-  float lifetime = u_time.y - fakeCreationTime;
-  
-  // Add vertex displacement along normals (Unity: worldPos.xyz += v.normal * pow(fmod(lifetime,1),3) * .1)
-  worldPos.xyz += a_normal * pow(mod(lifetime, 1.0), 3.0) * 0.1;
-  
-  gl_Position = projectionMatrix * modelViewMatrix * worldPos;
+  vec4 worldPos = modelMatrix * a_position;
+  float lifetime = u_time.y - a_texcoord1.w;
+  float lifetimePhase = pow(mod(lifetime, 1.0), 3.0);
+
+  // Open Brush quantizes on a 0.2-unit grid. Renderer input is converted
+  // from Open Brush decimeters to meters, so the equivalent grid is 0.02 m.
+  // Current UnityGLTF output has already had this bake applied.
+  if (!u_isNewTiltExporter) {
+    float q = 50.0;
+    // The renderer reflects Open Brush's +Z axis. Preserve Unity's ceil by
+    // using floor on the reflected renderer Z coordinate.
+    worldPos.xy = ceil(worldPos.xy * q) / q;
+    worldPos.z = floor(worldPos.z * q) / q;
+  }
+  worldPos.xyz += a_normal * lifetimePhase * 0.01;
+
+  gl_Position = projectionMatrix * viewMatrix * worldPos;
   f_fog_coord = gl_Position.z;
   // Transform normal and tangent to view space
   vec3 normal = normalize(normalMatrix * a_normal);
@@ -62,13 +70,13 @@ void  main() {
   v_normal = normal;
   v_tangent = tangent;
   v_bitangent = bitangent;
-  v_position = (modelViewMatrix * worldPos).xyz;
+  v_position = (viewMatrix * worldPos).xyz;
   v_light_dir_0 = mat3(u_SceneLight_0_matrix) * vec3(0, 0, 1);
   v_light_dir_1 = mat3(u_SceneLight_1_matrix) * vec3(0, 0, 1);
   
   // Color animation (Unity: v.color.xyz = pow(fmod(lifetime,1),3) * v.color.xyz)
   vec4 animatedColor = a_color;
-  animatedColor.xyz = pow(mod(lifetime, 1.0), 3.0) * a_color.xyz;
+  animatedColor.xyz = lifetimePhase * a_color.xyz;
   
   // Additional Unity color processing: o.color = 2 * v.color + v.color.yzxw * _BeatOutput.x
   // Skip the _BeatOutput part (audio reactive), but apply the 2x multiplier
